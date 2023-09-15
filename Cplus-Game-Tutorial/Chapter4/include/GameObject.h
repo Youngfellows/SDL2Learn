@@ -6,6 +6,7 @@
 #include	<string>
 #include	<vector>
 
+
 namespace Dungeon
 {
 	class GameObject
@@ -38,7 +39,7 @@ namespace Dungeon
 		std::vector<class Component*>	mComponents;	//!<	组件数组
 
 	private:
-		class Game*						mGame;			//!<	Game对象
+		class Game* mGame;			//!<	Game对象
 		State							mState;			//!<	物体当前状态
 	};
 }

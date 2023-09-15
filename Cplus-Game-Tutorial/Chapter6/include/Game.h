@@ -6,6 +6,8 @@
 #include	<string>
 #include	<vector>
 #include	<unordered_map>
+#include <iostream>
+#include <algorithm>
 
 struct SDL_Window;
 struct SDL_Renderer;

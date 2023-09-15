@@ -6,6 +6,7 @@
 #include	<string>
 #include	<vector>
 
+
 namespace Dungeon
 {
 	class Component
@@ -23,10 +24,10 @@ namespace Dungeon
 		int					GetUpdateOrder() const;
 		void				SetUpdateOrder(int order);
 		//! 游戏物体的get
-		class GameObject*	GetGameObject();
+		class GameObject* GetGameObject();
 
 	protected:
-		class GameObject*	mGameObject;		//!<	自身附着的游戏物体
+		class GameObject* mGameObject;		//!<	自身附着的游戏物体
 		int					mUpdateOrder;		//!<	更新顺序
 	};
 }

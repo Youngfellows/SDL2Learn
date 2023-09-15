@@ -46,7 +46,7 @@ namespace Dungeon
 		}
 
 		//! game对象的get
-		Game*		GetGame() const;
+		Game* GetGame() const;
 		//! 物体状态的get和set
 		State		GetState() const;
 		void		SetState(State state);
@@ -64,7 +64,7 @@ namespace Dungeon
 		std::vector<class Component*>	mComponents;	//!<	组件数组
 
 	private:
-		Game*							mGame;			//!<	Game对象
+		Game* mGame;			//!<	Game对象
 		State							mState;			//!<	物体当前状态
 		Vector2							mPosition;		//!<	位置坐标
 		Vector2							mScale;			//!<	缩放

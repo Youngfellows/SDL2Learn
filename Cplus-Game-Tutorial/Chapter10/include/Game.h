@@ -6,6 +6,8 @@
 #include	<string>
 #include	<vector>
 #include	<unordered_map>
+#include <iostream>
+#include <algorithm>
 
 struct SDL_Window;
 struct SDL_Renderer;
@@ -65,13 +67,13 @@ namespace Dungeon
 
 		std::unordered_map<std::string, SDL_Texture*> mTextures;	//!<	存放贴图的容器
 
-		SDL_Window*		mWindow;		//!<	窗口
-		SDL_Renderer*	mRenderer;		//!<	渲染器
+		SDL_Window* mWindow;		//!<	窗口
+		SDL_Renderer* mRenderer;		//!<	渲染器
 		bool			mIsRunning;		//!<	运行状态
 		bool			mIsUpdating;	//!<	是否在更新状态
 
-		Player*			mPlayer;		//!<	玩家角色
-		Dungeon*		mDungeon;		//!<	地牢对象
+		Player* mPlayer;		//!<	玩家角色
+		Dungeon* mDungeon;		//!<	地牢对象
 	};
 }
 

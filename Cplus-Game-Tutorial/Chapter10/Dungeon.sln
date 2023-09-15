@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.6.33829.357
+VisualStudioVersion = 17.7.34003.232
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Dungeon", "Dungeon.vcxproj", "{8660EE29-0FD6-44C2-96BC-A2DD9524273C}"
 EndProject
@@ -26,6 +26,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {4DE7E3DD-6C93-47FB-9C75-38FCE7B7801A}
+		SolutionGuid = {EC5E209F-B11D-4E5F-93EA-3F2B02550B41}
 	EndGlobalSection
 EndGlobal

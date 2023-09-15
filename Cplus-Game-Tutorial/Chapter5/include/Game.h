@@ -5,6 +5,8 @@
 
 #include	<string>
 #include	<vector>
+#include <iostream>
+#include <algorithm>
 
 namespace Dungeon
 {
@@ -44,12 +46,12 @@ namespace Dungeon
 		std::vector<class GameObject*> mGameObjects;		//!<	游戏物体容器
 		std::vector<class GameObject*> mPendingObjects;		//!<	等待状态的游戏物体容器
 
-		struct SDL_Window*		mWindow;		//!<	窗口
-		struct SDL_Renderer*	mRenderer;		//!<	渲染器
+		struct SDL_Window* mWindow;		//!<	窗口
+		struct SDL_Renderer* mRenderer;		//!<	渲染器
 		bool					mIsRunning;		//!<	运行状态
 		bool					mIsUpdating;	//!<	是否在更新状态
 
-		struct SDL_Texture*		mTexture;		//!<	图片
+		struct SDL_Texture* mTexture;		//!<	图片
 	};
 }
 
