@@ -74,7 +74,7 @@
     <IncludePath>..\SDL2-2.28.3-SDK-x64\include\SDL;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>D:\StudyCode2021\SDL2Learn\WinSDL2Learn\Day01\SDL2-2.28.3-SDK-x86\include\SDL;$(IncludePath)</IncludePath>
+    <IncludePath>..\SDL2-2.28.3-SDK-x86\include\SDL;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
