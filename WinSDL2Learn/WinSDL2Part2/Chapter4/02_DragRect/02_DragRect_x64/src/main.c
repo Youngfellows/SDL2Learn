@@ -9,12 +9,13 @@
 
 #define RECTSHAPE_COUNT 3
 
-SDL_Renderer* renderer;
-SDL_Window* window;
-RectShape* first;
-RectShape* last;
+SDL_Renderer *renderer;
+SDL_Window *window;
+RectShape *first;
+RectShape *last;
 
-int main(int argc, char* argv[]) {
+int main(int argc, char *argv[])
+{
 	if (SDL_Init(SDL_INIT_VIDEO)) {
 		SDL_Log("Can not init video, %s", SDL_GetError());
 		return 1;
@@ -45,9 +46,9 @@ int main(int argc, char* argv[]) {
 	addRectShape(RectShape_Create(200, 0, 80, 60, 0xff0000ff));
 	event_loop();
 
-	RectShape* item = first;
+	RectShape *item = first;
 	while (item != NULL) {
-		RectShape* current = item;
+		RectShape *current = item;
 		item = item->next;
 		RectShape_Destroy(current);
 	}
@@ -60,11 +61,12 @@ int main(int argc, char* argv[]) {
 }
 
 
-void draw() {
+void draw()
+{
 	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 	SDL_RenderClear(renderer);
 
-	RectShape* item = first;
+	RectShape *item = first;
 	while (item != NULL) {
 		RectShape_Draw(item, renderer);
 		item = item->next;
@@ -73,7 +75,8 @@ void draw() {
 	SDL_RenderPresent(renderer);
 }
 
-void addRectShape(struct RectShape* rectShape) {
+void addRectShape(struct RectShape *rectShape)
+{
 	if (last != NULL) {
 		last->next = rectShape;
 		rectShape->pre = last;
@@ -85,8 +88,9 @@ void addRectShape(struct RectShape* rectShape) {
 	}
 }
 
-void event_loop() {
-	RectShape* item;
+void event_loop()
+{
+	RectShape *item;
 
 	while (1) {
 		uint32_t begin = SDL_GetTicks();

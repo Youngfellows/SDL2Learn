@@ -2,7 +2,7 @@
 #define DRAGRECT_H
 
 void draw();
-void addRectShape(struct RectShape* rectShape);
+void addRectShape(struct RectShape *rectShape);
 void event_loop();
 
 
