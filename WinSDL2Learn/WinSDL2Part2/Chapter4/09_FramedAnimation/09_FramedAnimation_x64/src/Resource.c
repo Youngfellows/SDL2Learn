@@ -8,21 +8,24 @@
 
 struct SDL_Texture *walkTexture;
 
-int Resource_Load(SDL_Renderer *renderer) {
+int Resource_Load(SDL_Renderer *renderer)
+{
 
-    walkTexture = IMG_LoadTexture(renderer, "./resources/walk.png");
-    if (walkTexture == NULL) {
-        SDL_Log("Can not load texture, %s", IMG_GetError());
-        return 1;
-    }
-    return 0;
+	walkTexture = IMG_LoadTexture(renderer, "./resources/walk.png");
+	if (walkTexture == NULL) {
+		SDL_Log("Can not load texture, %s", IMG_GetError());
+		return 1;
+	}
+	return 0;
 }
 
 
-struct SDL_Texture *Resource_GetWalkTexture() {
-    return walkTexture;
+struct SDL_Texture *Resource_GetWalkTexture()
+{
+	return walkTexture;
 }
 
-void Resource_Unload() {
-    SDL_DestroyTexture(walkTexture);
+void Resource_Unload()
+{
+	SDL_DestroyTexture(walkTexture);
 }

@@ -2,22 +2,24 @@
 #include <SDL2/SDL.h>
 #include "PlaySound.h"
 
-typedef struct {
-	Uint8* sound;
+typedef struct
+{
+	Uint8 *sound;
 	Uint32 soundLen;
 	Uint32 soundPos;
 	int completed;
 } SoundInfo;
 
 
-int main(int argc, char* argv[]) {
+int main(int argc, char *argv[])
+{
 	if (SDL_Init(SDL_INIT_AUDIO)) {
 		SDL_Log("%s", SDL_GetError());
 		return 1;
 	}
 
 	SDL_AudioSpec spec;
-	Uint8* sound;
+	Uint8 *sound;
 	Uint32 soundLen;
 	if (SDL_LoadWAV("./resources/sound.wav", &spec, &sound, &soundLen) == NULL) {
 		SDL_Log("%s", SDL_GetError());
@@ -53,8 +55,9 @@ int main(int argc, char* argv[]) {
 	return 0;
 }
 
-void SDLCALL audioCallback(void* userdata, Uint8* stream, int len) {
-	SoundInfo* si = (SoundInfo*)userdata;
+void SDLCALL audioCallback(void *userdata, Uint8 *stream, int len)
+{
+	SoundInfo *si = (SoundInfo *)userdata;
 
 	Uint32 remaining = si->soundLen - si->soundPos;
 	if (remaining > len) {

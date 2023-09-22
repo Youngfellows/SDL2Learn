@@ -6,10 +6,11 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
-SDL_Surface* cursorSurface;
-SDL_Cursor* cursor;
+SDL_Surface *cursorSurface;
+SDL_Cursor *cursor;
 
-int Resource_Load(SDL_Renderer* renderer) {
+int Resource_Load(SDL_Renderer *renderer)
+{
 	cursorSurface = IMG_Load("./resources/cursor.png");
 	if (cursorSurface == NULL) {
 		SDL_Log("Can not load cursor, %s", IMG_GetError());
@@ -19,15 +20,18 @@ int Resource_Load(SDL_Renderer* renderer) {
 	return 0;
 }
 
-SDL_Surface* Resource_GetCursorSurface() {
+SDL_Surface *Resource_GetCursorSurface()
+{
 	return cursorSurface;
 }
 
-SDL_Cursor* Resource_GetCursor() {
+SDL_Cursor *Resource_GetCursor()
+{
 	return cursor;
 }
 
-void Resource_Unload() {
+void Resource_Unload()
+{
 	SDL_FreeCursor(cursor);
 	SDL_FreeSurface(cursorSurface);
 }

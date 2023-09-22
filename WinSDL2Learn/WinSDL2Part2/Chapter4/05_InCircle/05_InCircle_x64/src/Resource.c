@@ -8,19 +8,22 @@
 
 SDL_Texture *eyeTexture;
 
-int Resource_Load(SDL_Renderer *renderer) {
-    eyeTexture = IMG_LoadTexture(renderer, "./resources/eye.png");
-    if (eyeTexture == NULL) {
-        SDL_Log("Can not load texture, %s", IMG_GetError());
-        return 1;
-    }
-    return 0;
+int Resource_Load(SDL_Renderer *renderer)
+{
+	eyeTexture = IMG_LoadTexture(renderer, "./resources/eye.png");
+	if (eyeTexture == NULL) {
+		SDL_Log("Can not load texture, %s", IMG_GetError());
+		return 1;
+	}
+	return 0;
 }
 
-struct SDL_Texture *Resource_GetEyeTexture() {
-    return eyeTexture;
+struct SDL_Texture *Resource_GetEyeTexture()
+{
+	return eyeTexture;
 }
 
-void Resource_Unload() {
-    SDL_DestroyTexture(eyeTexture);
+void Resource_Unload()
+{
+	SDL_DestroyTexture(eyeTexture);
 }
