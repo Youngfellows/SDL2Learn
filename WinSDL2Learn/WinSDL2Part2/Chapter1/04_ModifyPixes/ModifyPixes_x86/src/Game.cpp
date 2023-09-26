@@ -99,6 +99,12 @@ namespace Dungeon
 		SDL_FillRect(mSurface, &rect, 0xffffffff);//ARGB
 		SDL_Rect redRect = { 0,0,100,100 };
 		SDL_FillRect(mSurface, &redRect, 0xffff0000);
+
+		for (int i = 0; i < 200; i++)
+		{
+			((uint32_t *)(mSurface->pixels))[WIDTH * 50 + 50 + i] = 0xff0000ff;
+		}
+
 		SDL_UpdateWindowSurface(mWindow);
 	}
 }
