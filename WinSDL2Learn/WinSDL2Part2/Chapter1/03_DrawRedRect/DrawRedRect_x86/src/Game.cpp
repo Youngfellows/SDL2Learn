@@ -3,7 +3,10 @@
 
 namespace Dungeon
 {
-	Game::Game() : mWindow(nullptr), mIsRunning(true)
+#define WIDTH 400
+#define HEIGHT 300
+
+	Game::Game() : mWindow(nullptr), mIsRunning(true), mSurface(nullptr)
 	{
 
 	}
@@ -18,12 +21,21 @@ namespace Dungeon
 		}
 
 		// 窗口初始化
-		mWindow = SDL_CreateWindow("Dungeon", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 400, 300, SDL_WINDOW_SHOWN);
+		mWindow = SDL_CreateWindow("Dungeon", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, SDL_WINDOW_SHOWN);
 		if (!mWindow)
 		{
 			SDL_Log("窗口初始化失败: %s", SDL_GetError());
 			return false;
 		}
+
+		// Surface 初始化
+		mSurface = SDL_GetWindowSurface(mWindow);
+		if (!mSurface)
+		{
+			SDL_Log("获取窗口Surface失败: %s", SDL_GetError());
+			return false;
+		}
+
 		return true;
 	}
 
@@ -62,11 +74,15 @@ namespace Dungeon
 
 	void Game::Update()
 	{
-
+		SDL_Delay(16);
 	}
 
 	void Game::Draw()
 	{
-
+		SDL_Rect rect = { 0,0,WIDTH,HEIGHT };
+		SDL_FillRect(mSurface, &rect, 0xffffffff);//ARGB
+		SDL_Rect redRect = { 0,0,100,100 };
+		SDL_FillRect(mSurface, &redRect, 0xffff0000);
+		SDL_UpdateWindowSurface(mWindow);
 	}
 }

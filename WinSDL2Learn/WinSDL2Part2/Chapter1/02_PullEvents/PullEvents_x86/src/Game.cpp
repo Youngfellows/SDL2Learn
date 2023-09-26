@@ -3,6 +3,10 @@
 
 namespace Dungeon
 {
+#define WIDTH 600
+#define HEIGHT 500
+#define FRAMERATE 60
+
 	Game::Game() : mWindow(nullptr), mIsRunning(true)
 	{
 
@@ -18,7 +22,7 @@ namespace Dungeon
 		}
 
 		// 窗口初始化
-		mWindow = SDL_CreateWindow("Dungeon", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 400, 300, SDL_WINDOW_SHOWN);
+		mWindow = SDL_CreateWindow("Dungeon", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, SDL_WINDOW_SHOWN);
 		if (!mWindow)
 		{
 			SDL_Log("窗口初始化失败: %s", SDL_GetError());
@@ -37,9 +41,20 @@ namespace Dungeon
 	{
 		while (mIsRunning)
 		{
-			Event();
-			Update();
+			uint32_t begin = SDL_GetTicks();
+
 			Draw();
+			Event();
+
+			long current = SDL_GetTicks();
+			long cost = current - begin;
+			long frame = 1000 / FRAMERATE;//每一帧多长时间
+			long delay = frame - cost;
+			//SDL_Log("delay=%ld", delay);
+			if (delay > 0)
+			{
+				Update(delay);
+			}
 		}
 	}
 
@@ -60,9 +75,12 @@ namespace Dungeon
 		}
 	}
 
-	void Game::Update()
+	void Game::Update(long delay)
 	{
-
+		if (delay > 0)
+		{
+			SDL_Delay(delay);
+		}
 	}
 
 	void Game::Draw()

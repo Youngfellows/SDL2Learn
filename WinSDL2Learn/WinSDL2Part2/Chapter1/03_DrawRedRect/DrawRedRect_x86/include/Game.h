@@ -8,6 +8,7 @@ namespace Dungeon
 	private:
 		class SDL_Window *mWindow;//!< 先声明 *mWindow，窗口
 		bool mIsRunning;//!< 运行状态
+		class SDL_Surface *mSurface;
 
 	public:
 		//! 构造函数
@@ -27,7 +28,7 @@ namespace Dungeon
 		void Event();
 
 		//! 更新各种状态
-		void Update(long delay);
+		void Update();
 
 		//! 渲染
 		void Draw();
