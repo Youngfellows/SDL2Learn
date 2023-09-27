@@ -1,4 +1,5 @@
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 #include "Game.h"
 
 namespace Dungeon
@@ -7,7 +8,7 @@ namespace Dungeon
 #define HEIGHT 500
 #define FRAMERATE 60
 
-	Game::Game() : mWindow(nullptr), mIsRunning(true), mSurface(nullptr), x(0), mIsRebound(false)
+	Game::Game() : mWindow(nullptr), mIsRunning(true), mScreen(nullptr), mImage(nullptr)
 	{
 
 	}
@@ -29,11 +30,19 @@ namespace Dungeon
 			return false;
 		}
 
-		//初始化Surface
-		mSurface = SDL_GetWindowSurface(mWindow);
-		if (!mSurface)
+		//Screen Surface 初始化
+		mScreen = SDL_GetWindowSurface(mWindow);
+		if (!mScreen)
 		{
-			SDL_Log("初始化Surface失败: %s", SDL_GetError());
+			SDL_Log("初始化Screen Surface失败: %s", SDL_GetError());
+			return false;
+		}
+
+		//初始化图片
+		mImage = IMG_Load("./resources/cat.jpg");
+		if (!mImage)
+		{
+			SDL_Log("初始化图片资源失败: %s", SDL_GetError());
 			return false;
 		}
 		return true;
@@ -41,6 +50,7 @@ namespace Dungeon
 
 	void Game::Shutdown()
 	{
+		SDL_FreeSurface(mImage);
 		SDL_DestroyWindowSurface(mWindow);
 		SDL_DestroyWindow(mWindow);
 		SDL_Quit();
@@ -94,31 +104,8 @@ namespace Dungeon
 
 	void Game::Draw()
 	{
-		if (x >= (WIDTH - 100))
-		{
-			mIsRebound = true;
-		}
-		else if (x <= 0)
-		{
-			mIsRebound = false;
-		}
-
-		SDL_Log("mIsRebound=%d", mIsRebound);
-
-		if (!mIsRebound)
-		{
-			x++;
-		}
-		else
-		{
-			x--;
-		}
-
-		SDL_Log("x=%d", x);
-		SDL_Rect rect = { 0,0,WIDTH,HEIGHT };
-		SDL_FillRect(mSurface, &rect, 0xffffffff);//ARGB
-		SDL_Rect redRect = { x,0,100,100 };
-		SDL_FillRect(mSurface, &redRect, 0xffff0000);
+		SDL_Rect src = { 0,0,mImage->w,mImage->h };
+		SDL_BlitSurface(mImage, &src, mScreen, &src);
 		SDL_UpdateWindowSurface(mWindow);
 	}
 }
