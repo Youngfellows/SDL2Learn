@@ -10,10 +10,11 @@
 #define HEIGHT 300
 #define FRAMERATE 60
 
-SDL_Renderer* renderer;
-SDL_Window* window;
+SDL_Renderer *renderer;
+SDL_Window *window;
 
-int main(int argc, char* argv[]) {
+int main(int argc, char *argv[])
+{
 	if (SDL_Init(SDL_INIT_VIDEO)) {
 		SDL_Log("Can not init video, %s", SDL_GetError());
 		return 1;
@@ -48,7 +49,8 @@ int main(int argc, char* argv[]) {
 	return 0;
 }
 
-void draw() {
+void draw()
+{
 	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 	SDL_RenderClear(renderer);
 
@@ -63,7 +65,8 @@ void draw() {
 	SDL_RenderPresent(renderer);
 }
 
-void event_loop() {
+void event_loop()
+{
 	while (1) {
 		uint32_t begin = SDL_GetTicks();
 		draw();
@@ -85,6 +88,7 @@ void event_loop() {
 	}
 }
 
-void em_loop() {
+void em_loop()
+{
 	draw();
 }
