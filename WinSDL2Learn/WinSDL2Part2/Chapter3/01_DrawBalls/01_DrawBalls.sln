@@ -5,6 +5,8 @@ VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DrawBalls_x64", "DrawBalls_x64\DrawBalls_x64.vcxproj", "{3DCF6D29-E94D-4FA7-8DC3-787EA2558A01}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DrawBalls_x86", "DrawBalls_x86\DrawBalls_x86.vcxproj", "{C9CF4531-8F54-4F46-BB9D-6A7787590939}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{3DCF6D29-E94D-4FA7-8DC3-787EA2558A01}.Release|x64.Build.0 = Release|x64
 		{3DCF6D29-E94D-4FA7-8DC3-787EA2558A01}.Release|x86.ActiveCfg = Release|Win32
 		{3DCF6D29-E94D-4FA7-8DC3-787EA2558A01}.Release|x86.Build.0 = Release|Win32
+		{C9CF4531-8F54-4F46-BB9D-6A7787590939}.Debug|x64.ActiveCfg = Debug|x64
+		{C9CF4531-8F54-4F46-BB9D-6A7787590939}.Debug|x64.Build.0 = Debug|x64
+		{C9CF4531-8F54-4F46-BB9D-6A7787590939}.Debug|x86.ActiveCfg = Debug|Win32
+		{C9CF4531-8F54-4F46-BB9D-6A7787590939}.Debug|x86.Build.0 = Debug|Win32
+		{C9CF4531-8F54-4F46-BB9D-6A7787590939}.Release|x64.ActiveCfg = Release|x64
+		{C9CF4531-8F54-4F46-BB9D-6A7787590939}.Release|x64.Build.0 = Release|x64
+		{C9CF4531-8F54-4F46-BB9D-6A7787590939}.Release|x86.ActiveCfg = Release|Win32
+		{C9CF4531-8F54-4F46-BB9D-6A7787590939}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
