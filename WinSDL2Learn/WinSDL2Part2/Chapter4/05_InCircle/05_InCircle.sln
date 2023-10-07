@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "05_InCircle_x64", "05_InCircle_x64\05_InCircle_x64.vcxproj", "{5AFF143F-BA39-490C-BE5C-B8E4B6CD857F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "InCircle_x64", "InCircle_x64\InCircle_x64.vcxproj", "{5AFF143F-BA39-490C-BE5C-B8E4B6CD857F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_FollowCursor_x64", "04_FollowCursor_x64\04_FollowCursor_x64.vcxproj", "{D1DC32CD-E3AF-488C-BD32-F41C821582FF}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FollowCursor_x64", "FollowCursor_x64\FollowCursor_x64.vcxproj", "{D1DC32CD-E3AF-488C-BD32-F41C821582FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
