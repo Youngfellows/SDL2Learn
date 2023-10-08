@@ -5,6 +5,8 @@ VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DragRect_x64", "DragRect_x64\DragRect_x64.vcxproj", "{C3EEAD61-98B0-49C7-9A02-27D648060125}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DragRect_x64_2", "DragRect_x64_2\DragRect_x64_2.vcxproj", "{BA5783A3-274C-44D4-BC76-9019F4EF8B75}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{C3EEAD61-98B0-49C7-9A02-27D648060125}.Release|x64.Build.0 = Release|x64
 		{C3EEAD61-98B0-49C7-9A02-27D648060125}.Release|x86.ActiveCfg = Release|Win32
 		{C3EEAD61-98B0-49C7-9A02-27D648060125}.Release|x86.Build.0 = Release|Win32
+		{BA5783A3-274C-44D4-BC76-9019F4EF8B75}.Debug|x64.ActiveCfg = Debug|x64
+		{BA5783A3-274C-44D4-BC76-9019F4EF8B75}.Debug|x64.Build.0 = Debug|x64
+		{BA5783A3-274C-44D4-BC76-9019F4EF8B75}.Debug|x86.ActiveCfg = Debug|Win32
+		{BA5783A3-274C-44D4-BC76-9019F4EF8B75}.Debug|x86.Build.0 = Debug|Win32
+		{BA5783A3-274C-44D4-BC76-9019F4EF8B75}.Release|x64.ActiveCfg = Release|x64
+		{BA5783A3-274C-44D4-BC76-9019F4EF8B75}.Release|x64.Build.0 = Release|x64
+		{BA5783A3-274C-44D4-BC76-9019F4EF8B75}.Release|x86.ActiveCfg = Release|Win32
+		{BA5783A3-274C-44D4-BC76-9019F4EF8B75}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
