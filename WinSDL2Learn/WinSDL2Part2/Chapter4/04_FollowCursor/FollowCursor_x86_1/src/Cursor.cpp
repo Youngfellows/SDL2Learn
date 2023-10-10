@@ -24,6 +24,20 @@ namespace Dungeon
 		return nullptr;
 	}
 
+	/*
+	* 这种方式不能赋值displayObject,只是局部变量
+	*/
+	SDL_bool Cursor::Cursor_Create(DisplayObject *displayObject, float x, float y, float w, float h)
+	{
+		displayObject = new DisplayObject();
+		if (displayObject->DisplayObject_Create(x, y, w, h,
+			&Cursor_OnDraw, &Cursor_OnMouseMove))
+		{
+			return SDL_TRUE;
+		}
+		return SDL_TRUE;
+	}
+
 	void Cursor::Cursor_Destory(DisplayObject *displayObject)
 	{
 		displayObject->DisplayObject_Destory();

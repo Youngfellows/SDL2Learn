@@ -45,11 +45,17 @@ namespace Dungeon
 
 		//加载自定义鼠标光标
 		Cursor *cursor = new Cursor();
-		mDisplayObject = cursor->Cursor_Create(0, 0, 20, 20);
+		mDisplayObject = cursor->Cursor_Create(0, 0, 20, 20);//方式1
 		if (!mDisplayObject)
 		{
 			return false;
 		}
+
+		/*
+		if (!cursor->Cursor_Create(mDisplayObject, 0, 0, 30, 30))//方式2,这种方式不能赋值mDisplayObject,只是局部变量
+		{
+			return false;
+		}*/
 
 		//关闭默认光标
 		SDL_ShowCursor(SDL_DISABLE);
