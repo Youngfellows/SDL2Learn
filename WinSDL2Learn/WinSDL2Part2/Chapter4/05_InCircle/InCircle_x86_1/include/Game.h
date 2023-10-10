@@ -1,7 +1,9 @@
 #ifndef _DUNGEON_GAME_H_
 #define _DUNGEON_GAME_H_
 
-#include <SDL2/SDL.h>
+#include "SDL2/SDL.h"
+#include "Eyeball.h"
+#include "Resource.h"
 
 namespace Dungeon
 {
@@ -11,6 +13,10 @@ namespace Dungeon
 		SDL_Window *mWindow;//!< 先声明 *mWindow，窗口
 		bool mIsRunning;//!< 运行状态
 		SDL_Renderer *mRenderer;
+		Resource *mResource;
+		Eyeball *mEyeball;
+		DisplayObject *mLeftEye;
+		DisplayObject *mRightEye;
 
 	public:
 		//! 构造函数
@@ -34,6 +40,14 @@ namespace Dungeon
 
 		//! 渲染
 		void Draw();
+
+		// ! 创建组件(眼球)
+		SDL_bool CreateComponents();
+
+		// ! 释放组件(眼球)
+		void FreeComponents();
+
+		void ProcessMouseEvent(SDL_Event *event);
 	};
 }
 
