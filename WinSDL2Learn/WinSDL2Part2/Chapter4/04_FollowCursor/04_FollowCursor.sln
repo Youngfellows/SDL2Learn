@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FollowCursor_x64", "FollowC
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FollowCursor_x86", "FollowCursor_x86\FollowCursor_x86.vcxproj", "{EEB820EC-B0CC-431A-B9B8-3B4EE06351F4}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FollowCursor_x86_1", "FollowCursor_x86_1\FollowCursor_x86_1.vcxproj", "{5B154E33-F26C-4381-85A5-F366084E58E0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{EEB820EC-B0CC-431A-B9B8-3B4EE06351F4}.Release|x64.Build.0 = Release|x64
 		{EEB820EC-B0CC-431A-B9B8-3B4EE06351F4}.Release|x86.ActiveCfg = Release|Win32
 		{EEB820EC-B0CC-431A-B9B8-3B4EE06351F4}.Release|x86.Build.0 = Release|Win32
+		{5B154E33-F26C-4381-85A5-F366084E58E0}.Debug|x64.ActiveCfg = Debug|x64
+		{5B154E33-F26C-4381-85A5-F366084E58E0}.Debug|x64.Build.0 = Debug|x64
+		{5B154E33-F26C-4381-85A5-F366084E58E0}.Debug|x86.ActiveCfg = Debug|Win32
+		{5B154E33-F26C-4381-85A5-F366084E58E0}.Debug|x86.Build.0 = Debug|Win32
+		{5B154E33-F26C-4381-85A5-F366084E58E0}.Release|x64.ActiveCfg = Release|x64
+		{5B154E33-F26C-4381-85A5-F366084E58E0}.Release|x64.Build.0 = Release|x64
+		{5B154E33-F26C-4381-85A5-F366084E58E0}.Release|x86.ActiveCfg = Release|Win32
+		{5B154E33-F26C-4381-85A5-F366084E58E0}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
