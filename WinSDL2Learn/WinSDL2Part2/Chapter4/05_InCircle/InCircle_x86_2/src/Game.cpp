@@ -7,7 +7,8 @@ namespace Dungeon
 #define WINDOW_WIDTH 500
 #define FRAMERATE 60
 
-	Game::Game() : mWindow(nullptr), mIsRunning(true), mRenderer(nullptr)
+	Game::Game() : mWindow(nullptr), mIsRunning(true), mRenderer(nullptr),
+		mResource(nullptr), mLeftEye(nullptr), mRightEye(nullptr)
 	{
 
 	}
@@ -37,11 +38,23 @@ namespace Dungeon
 			return false;
 		}
 
+		// 加载图片资源
+		mResource = new Resource();
+		if (!mResource->Resource_Load(mRenderer))
+		{
+			return false;
+		}
+		CreateComponents();
 		return true;
 	}
 
 	void Game::Shutdown()
 	{
+		FreeComponents();
+		if (mResource)
+		{
+			mResource->Resource_Unload();
+		}
 		SDL_DestroyRenderer(mRenderer);
 		SDL_DestroyWindow(mWindow);
 		SDL_Quit();
@@ -79,6 +92,9 @@ namespace Dungeon
 			case SDL_QUIT:// 退出事件，按下窗口的叉
 				mIsRunning = false;
 				break;
+			case SDL_MOUSEMOTION:
+				ProcessMouseEvent(&event);
+				break;
 			default:
 				break;
 			}
@@ -97,7 +113,52 @@ namespace Dungeon
 	{
 		SDL_SetRenderDrawColor(mRenderer, 255, 255, 255, 2555);
 		SDL_RenderClear(mRenderer);
+		if (mLeftEye)
+		{
+			mLeftEye->DisplayObject_Draw(mResource, mRenderer);//绘制左眼
+		}
+		if (mRightEye)
+		{
+			mRightEye->DisplayObject_Draw(mResource, mRenderer);//绘制右眼
+		}
 
 		SDL_RenderPresent(mRenderer);
+	}
+
+	SDL_bool Game::CreateComponents()
+	{
+		Eyeball *leftEyeball = new Eyeball();
+		Eyeball *rightEyeball = new Eyeball();
+		mLeftEye = leftEyeball->Eyeball_Create(100, 100);
+		mRightEye = rightEyeball->Eyeball_Create(160, 100);
+		if (!mLeftEye || !mRightEye)
+		{
+			return SDL_FALSE;
+		}
+		return SDL_TRUE;
+	}
+
+	void Game::FreeComponents()
+	{
+		if (mLeftEye)
+		{
+			mLeftEye->DisplayObject_Destory();
+		}
+		if (mRightEye)
+		{
+			mRightEye->DisplayObject_Destory();
+		}
+	}
+
+	void Game::ProcessMouseEvent(SDL_Event *event)
+	{
+		if (mLeftEye)
+		{
+			mLeftEye->DisplayObject_OnMouseMove(event);
+		}
+		if (mRightEye)
+		{
+			mRightEye->DisplayObject_OnMouseMove(event);
+		}
 	}
 }

@@ -132,11 +132,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\Config.h" />
+    <ClInclude Include="include\DisplayObject.h" />
+    <ClInclude Include="include\Eyeball.h" />
+    <ClInclude Include="include\EyeballData.h" />
     <ClInclude Include="include\Game.h" />
+    <ClInclude Include="include\Resource.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\DisplayObject.cpp" />
+    <ClCompile Include="src\Eyeball.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\Resource.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
