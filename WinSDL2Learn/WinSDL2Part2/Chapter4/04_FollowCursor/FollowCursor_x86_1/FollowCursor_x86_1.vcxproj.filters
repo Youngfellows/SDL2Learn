@@ -27,6 +27,9 @@
     <ClInclude Include="include\Cursor.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="include\CursorData.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Game.cpp">

@@ -2,7 +2,8 @@
 
 namespace Dungeon
 {
-	DisplayObject::DisplayObject() :mDest(nullptr), OnDraw(nullptr), OnMouseMove(nullptr)
+	DisplayObject::DisplayObject() :subClass(nullptr),
+		OnDraw(nullptr), OnMouseMove(nullptr), OnDestroy(nullptr)
 	{
 
 	}
@@ -12,22 +13,18 @@ namespace Dungeon
 
 	}
 
-	SDL_bool DisplayObject::DisplayObject_Create(float x, float y, float w, float h,
+	SDL_bool DisplayObject::DisplayObject_Create(
 		DisplayObject_OnDrawCallback onDrawCallback,
-		DisplayObject_OnMouseMoveCallback onMouseMoveCallback)
+		DisplayObject_OnMouseMoveCallback onMouseMoveCallback,
+		DisplayObject_OnDestroyCallback onDestroyCallback)
 	{
 		this->OnDraw = onDrawCallback;//设置回调函数OnDraw
 		this->OnMouseMove = onMouseMoveCallback;//设置回调函数OnMouseMove
-		this->mDest = (struct SDL_FRect *)malloc(sizeof(struct SDL_FRect));
-		if (!mDest)
+		this->OnDestroy = onDestroyCallback;//设置回调函数OnDestroy
+		if (!OnDraw || !OnMouseMove || !OnDestroy)
 		{
 			return SDL_FALSE;
 		}
-		mDest->x = x;
-		mDest->y = y;
-		mDest->w = w;
-		mDest->h = h;
-
 		return SDL_TRUE;
 	}
 
@@ -49,9 +46,9 @@ namespace Dungeon
 
 	void DisplayObject::DisplayObject_Destory()
 	{
-		if (mDest)
+		if (OnDestroy)
 		{
-			free(mDest);
+			OnDestroy(this);//调用回调函数OnDestroy
 		}
 	}
 }

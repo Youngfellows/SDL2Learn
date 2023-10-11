@@ -15,7 +15,7 @@ namespace Dungeon
 		bool mIsRunning;//!< 运行状态
 		SDL_Renderer *mRenderer;
 		Resource *mResource;
-		DisplayObject *mDisplayObject;
+		DisplayObject *mCursor;
 
 	public:
 		//! 构造函数
@@ -39,6 +39,18 @@ namespace Dungeon
 
 		//! 渲染
 		void Draw();
+
+		//! 创建组件
+		SDL_bool CreateComponents();
+
+		//! 释放组件资源
+		void FreeComponents();
+
+		//! 绘制组件
+		void DrawComponents();
+
+		//! 处理鼠标移动事件
+		void ProcessMouseMoveEvent(SDL_Event *event);
 	};
 }
 

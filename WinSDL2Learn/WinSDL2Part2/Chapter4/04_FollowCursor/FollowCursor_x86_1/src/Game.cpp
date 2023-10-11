@@ -6,7 +6,7 @@ namespace Dungeon
 #define HEIGHT 500
 #define FRAMERATE 60
 
-	Game::Game() : mWindow(nullptr), mIsRunning(true), mRenderer(nullptr), mResource(nullptr), mDisplayObject(nullptr)
+	Game::Game() : mWindow(nullptr), mIsRunning(true), mRenderer(nullptr), mResource(nullptr), mCursor(nullptr)
 	{
 
 	}
@@ -44,18 +44,10 @@ namespace Dungeon
 		}
 
 		//加载自定义鼠标光标
-		Cursor *cursor = new Cursor();
-		mDisplayObject = cursor->Cursor_Create(0, 0, 20, 20);//方式1
-		if (!mDisplayObject)
+		if (!CreateComponents())
 		{
 			return false;
 		}
-
-		/*
-		if (!cursor->Cursor_Create(mDisplayObject, 0, 0, 30, 30))//方式2,这种方式不能赋值mDisplayObject,只是局部变量
-		{
-			return false;
-		}*/
 
 		//关闭默认光标
 		SDL_ShowCursor(SDL_DISABLE);
@@ -65,10 +57,7 @@ namespace Dungeon
 
 	void Game::Shutdown()
 	{
-		if (mDisplayObject)
-		{
-			mDisplayObject->DisplayObject_Destory();
-		}
+		FreeComponents();
 		if (mResource)
 		{
 			mResource->Resource_Unload();
@@ -111,7 +100,7 @@ namespace Dungeon
 				mIsRunning = false;
 				break;
 			case SDL_MOUSEMOTION:
-				mDisplayObject->DisplayObject_OnMouseMove(&event);
+				ProcessMouseMoveEvent(&event);
 				break;
 			default:
 				break;
@@ -131,7 +120,50 @@ namespace Dungeon
 	{
 		SDL_SetRenderDrawColor(mRenderer, 255, 255, 255, 255);
 		SDL_RenderClear(mRenderer);
-		mDisplayObject->DisplayObject_Draw(mResource, mRenderer);//绘制指定要鼠标光标
+		DrawComponents();
 		SDL_RenderPresent(mRenderer);
 	}
+
+
+	SDL_bool Game::CreateComponents()
+	{
+
+		Cursor *cursor = new Cursor();
+		mCursor = cursor->Cursor_Create(0, 0, 20, 20);//方式1
+		if (!mCursor)
+		{
+			return SDL_FALSE;
+		}
+		/*
+		if (!cursor->Cursor_Create(mDisplayObject, 0, 0, 30, 30))//方式2,这种方式不能赋值mDisplayObject,只是局部变量
+		{
+			return false;
+		}*/
+		return SDL_TRUE;
+	}
+
+	void Game::FreeComponents()
+	{
+		if (mCursor)
+		{
+			mCursor->DisplayObject_Destory();
+		}
+	}
+
+	void Game::DrawComponents()
+	{
+		if (mCursor)
+		{
+			mCursor->DisplayObject_Draw(mResource, mRenderer);//绘制指定要鼠标光标
+		}
+	}
+
+	void Game::ProcessMouseMoveEvent(SDL_Event *event)
+	{
+		if (mCursor)
+		{
+			mCursor->DisplayObject_OnMouseMove(event);
+		}
+	}
+
 }
