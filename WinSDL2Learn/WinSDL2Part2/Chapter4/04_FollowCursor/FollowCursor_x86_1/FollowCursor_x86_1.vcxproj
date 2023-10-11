@@ -132,6 +132,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\Config.h" />
     <ClInclude Include="include\Cursor.h" />
     <ClInclude Include="include\CursorData.h" />
     <ClInclude Include="include\DisplayObject.h" />

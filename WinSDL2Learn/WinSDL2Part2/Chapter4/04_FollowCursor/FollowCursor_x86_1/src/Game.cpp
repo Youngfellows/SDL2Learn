@@ -1,11 +1,8 @@
 #include "Game.h"
+#include "Config.h"
 
 namespace Dungeon
 {
-#define WIDTH 600
-#define HEIGHT 500
-#define FRAMERATE 60
-
 	Game::Game() : mWindow(nullptr), mIsRunning(true), mRenderer(nullptr), mResource(nullptr), mCursor(nullptr)
 	{
 
@@ -21,7 +18,7 @@ namespace Dungeon
 		}
 
 		// 窗口初始化
-		mWindow = SDL_CreateWindow("Dungeon", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, SDL_WINDOW_SHOWN);
+		mWindow = SDL_CreateWindow("Dungeon", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN);
 		if (!mWindow)
 		{
 			SDL_Log("Can not create window: %s", SDL_GetError());
@@ -127,18 +124,12 @@ namespace Dungeon
 
 	SDL_bool Game::CreateComponents()
 	{
-
 		Cursor *cursor = new Cursor();
-		mCursor = cursor->Cursor_Create(0, 0, 20, 20);//方式1
+		mCursor = cursor->Cursor_Create(0, 0, CURSOR_DEST_RECT_WIDTH, CURSOR_DEST_RECT_HEIGHT);
 		if (!mCursor)
 		{
 			return SDL_FALSE;
 		}
-		/*
-		if (!cursor->Cursor_Create(mDisplayObject, 0, 0, 30, 30))//方式2,这种方式不能赋值mDisplayObject,只是局部变量
-		{
-			return false;
-		}*/
 		return SDL_TRUE;
 	}
 
