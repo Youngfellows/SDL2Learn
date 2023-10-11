@@ -137,6 +137,8 @@
     <ClInclude Include="include\CursorData.h" />
     <ClInclude Include="include\DisplayObject.h" />
     <ClInclude Include="include\Game.h" />
+    <ClInclude Include="include\RectInRect.h" />
+    <ClInclude Include="include\RectInRectData.h" />
     <ClInclude Include="include\Resource.h" />
   </ItemGroup>
   <ItemGroup>
@@ -144,6 +146,7 @@
     <ClCompile Include="src\DisplayObject.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\RectInRect.cpp" />
     <ClCompile Include="src\Resource.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

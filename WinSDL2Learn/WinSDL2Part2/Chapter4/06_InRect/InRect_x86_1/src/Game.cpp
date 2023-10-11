@@ -1,11 +1,13 @@
 #include "Game.h"
 #include "Config.h"
+#include "Cursor.h"
+#include "RectInRect.h"
 
 
 namespace Dungeon
 {
 	Game::Game() : mWindow(nullptr), mIsRunning(true), mRenderer(nullptr),
-		mCursor(nullptr), mResource(nullptr)
+		mCursor(nullptr), mResource(nullptr), mRectInRect(nullptr)
 	{
 
 	}
@@ -119,6 +121,10 @@ namespace Dungeon
 		{
 			mCursor->DisplayObject_Draw(mResource, mRenderer);//绘制光标
 		}
+		if (mRectInRect)
+		{
+			mRectInRect->DisplayObject_Draw(mResource, mRenderer);//绘制带滑块的内部矩形
+		}
 		SDL_RenderPresent(mRenderer);
 	}
 
@@ -131,6 +137,15 @@ namespace Dungeon
 		{
 			return SDL_FALSE;
 		}
+
+		//带滑块的内部矩形
+		RectInRect *rectInRect = new RectInRect();
+		mRectInRect = rectInRect->RectInRect_Create(100, 100);
+		if (!mRectInRect)
+		{
+			return SDL_FALSE;
+		}
+
 		return SDL_TRUE;
 	}
 
@@ -140,6 +155,10 @@ namespace Dungeon
 		{
 			mCursor->DisplayObject_Destory();
 		}
+		if (mRectInRect)
+		{
+			mRectInRect->DisplayObject_Destory();
+		}
 	}
 
 	void Game::ProcessMouseMoveEvent(SDL_Event *event)
@@ -147,6 +166,10 @@ namespace Dungeon
 		if (mCursor)
 		{
 			mCursor->DisplayObject_OnMouseMove(event);//鼠标光标移动事件处理
+		}
+		if (mRectInRect)
+		{
+			mRectInRect->DisplayObject_OnMouseMove(event);//带滑块的内部矩形鼠标移动事件处理
 		}
 	}
 }

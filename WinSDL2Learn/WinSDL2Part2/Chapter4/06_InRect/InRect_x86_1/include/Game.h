@@ -3,7 +3,6 @@
 
 #include <SDL2/SDL.h>
 #include "Resource.h"
-#include "Cursor.h"
 #include "DisplayObject.h"
 
 namespace Dungeon
@@ -16,6 +15,7 @@ namespace Dungeon
 		SDL_Renderer *mRenderer;
 		Resource *mResource;
 		DisplayObject *mCursor;//光标
+		DisplayObject *mRectInRect;//内部矩形
 
 	public:
 		//! 构造函数

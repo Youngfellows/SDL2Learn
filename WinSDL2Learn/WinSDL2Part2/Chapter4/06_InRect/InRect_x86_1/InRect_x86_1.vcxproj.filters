@@ -33,6 +33,12 @@
     <ClInclude Include="include\CursorData.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="include\RectInRectData.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\RectInRect.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Game.cpp">
@@ -48,6 +54,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\Cursor.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RectInRect.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
