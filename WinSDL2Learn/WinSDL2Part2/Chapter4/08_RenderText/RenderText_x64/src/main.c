@@ -1,7 +1,10 @@
+#define _CRT_SECURE_NO_WARNINGS
+
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include "Text.h"
+
 
 #define WIDTH 400
 #define HEIGHT 300
@@ -45,7 +48,8 @@ void event_loop()
 			case SDL_MOUSEBUTTONUP:
 				clickCount++;
 				char buf[16];
-				sprintf_s(buf, "Count: %d", clickCount);
+				//sprintf_s(buf, "Count: %d", clickCount);
+				sprintf(buf,"Count: %d",clickCount);
 				TextSet(text, buf);
 				break;
 			case SDL_QUIT:
