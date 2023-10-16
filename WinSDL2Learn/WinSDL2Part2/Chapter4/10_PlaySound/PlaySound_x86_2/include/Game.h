@@ -3,6 +3,7 @@
 
 #include <SDL2/SDL.h>
 #include "DisplayObject.h"
+#include "AudioPlayer.h"
 
 namespace Dungeon
 {
@@ -19,6 +20,7 @@ namespace Dungeon
 		DisplayObject *mButtonReStartText;
 		DisplayObject *mTipText;
 		int mClickCount;
+		AudioPlayer *mAudioPlayer;
 
 	public:
 		//! ¹¹Ôìº¯Êý

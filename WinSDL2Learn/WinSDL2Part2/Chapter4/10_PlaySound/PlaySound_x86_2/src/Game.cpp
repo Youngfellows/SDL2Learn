@@ -4,6 +4,7 @@
 #include "Config.h"
 #include "Text.h"
 #include <stdio.h>
+#include "AudioPlayerCallback.h"
 
 namespace Dungeon
 {
@@ -14,7 +15,8 @@ namespace Dungeon
 		mButtonStopText(nullptr),
 		mButtonReStartText(nullptr),
 		mTipText(nullptr),
-		mClickCount(0)
+		mClickCount(0),
+		mAudioPlayer(mAudioPlayer)
 	{
 
 	}
@@ -175,6 +177,18 @@ namespace Dungeon
 			return SDL_FALSE;
 		}
 
+		//³õÊ¼»¯Audio²¥·ÅÆ÷
+		mAudioPlayer = new AudioPlayer();
+		mAudioPlayer->SetAudioPlayerCallback(&AudioPlayerCallback::OnStartCallback,
+			&AudioPlayerCallback::OnPauseCallback,
+			&AudioPlayerCallback::OnStopCallback,
+			&AudioPlayerCallback::OnReleaseCallback,
+			&AudioPlayerCallback::OnCompleteCallback);
+		if (!mAudioPlayer->InitAudio())
+		{
+			return SDL_FALSE;
+		}
+
 		return SDL_TRUE;
 	}
 
@@ -262,6 +276,13 @@ namespace Dungeon
 							{
 								mTipText->TextSet(msg);
 							}
+							if (mAudioPlayer)
+							{
+								if (mAudioPlayer->Create(SOUND_FILE_NAME))
+								{
+									mAudioPlayer->Start();
+								}
+							}
 						}
 						else
 						{
@@ -293,6 +314,10 @@ namespace Dungeon
 							if (mTipText)
 							{
 								mTipText->TextSet(msg);
+							}
+							if (mAudioPlayer)
+							{
+								mAudioPlayer->Pause();
 							}
 						}
 						else
@@ -326,6 +351,10 @@ namespace Dungeon
 							{
 								mTipText->TextSet(msg);
 							}
+							if (mAudioPlayer)
+							{
+								mAudioPlayer->ReStart();
+							}
 						}
 						else
 						{
@@ -358,6 +387,10 @@ namespace Dungeon
 							if (mTipText)
 							{
 								mTipText->TextSet(msg);
+							}
+							if (mAudioPlayer)
+							{
+								mAudioPlayer->Stop();
 							}
 						}
 						else

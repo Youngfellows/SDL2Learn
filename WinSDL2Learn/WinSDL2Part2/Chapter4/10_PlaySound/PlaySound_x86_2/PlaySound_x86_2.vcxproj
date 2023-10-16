@@ -132,12 +132,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\AudioPlayer.h" />
+    <ClInclude Include="include\AudioPlayerCallback.h" />
     <ClInclude Include="include\Config.h" />
     <ClInclude Include="include\DisplayObject.h" />
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\Text.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\AudioPlayer.cpp" />
+    <ClCompile Include="src\AudioPlayerCallback.cpp" />
     <ClCompile Include="src\DisplayObject.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\Main.cpp" />

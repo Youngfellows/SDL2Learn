@@ -11,6 +11,8 @@ namespace Dungeon
 #define PT_SIZE_20 20 //字体大小20榜
 #define PT_SIZE_32 32 //字体大小32榜
 #define PT_SIZE_40 40 //字体大小40榜
+
+#define SOUND_FILE_NAME "./resources/sound.wav"
 }
 
 #endif // !_DUNGEON_CONFIG_H_

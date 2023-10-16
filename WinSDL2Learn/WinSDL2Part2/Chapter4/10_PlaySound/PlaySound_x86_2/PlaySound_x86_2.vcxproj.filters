@@ -27,6 +27,12 @@
     <ClInclude Include="include\Text.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="include\AudioPlayer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AudioPlayerCallback.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\DisplayObject.cpp">
@@ -39,6 +45,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\Text.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AudioPlayer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AudioPlayerCallback.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
