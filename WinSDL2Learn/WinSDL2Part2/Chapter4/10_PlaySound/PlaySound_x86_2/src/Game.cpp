@@ -106,6 +106,8 @@ namespace Dungeon
 			default:
 				break;
 			}
+			//获取播放器状态
+			//AudioPlayerState();//有bug
 		}
 	}
 
@@ -247,6 +249,20 @@ namespace Dungeon
 		if (mTipText)
 		{
 			mTipText->Draw(mRenderer);
+		}
+	}
+
+	void  Game::AudioPlayerState()
+	{
+		if (mAudioPlayer)
+		{
+			SDL_bool isPlaying = mAudioPlayer->IsPlaying();
+			SDL_bool isComplete = mAudioPlayer->IsCompleted();
+			SDL_Log("isPlaying:%d,isComplete:%d", isPlaying, isComplete);
+			if (!isPlaying && isComplete)
+			{
+				mAudioPlayer->ReStart();
+			}
 		}
 	}
 

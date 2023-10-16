@@ -56,6 +56,8 @@ namespace Dungeon
 		 
 		//! 处理鼠标事件
 		void ProcessMouseDownEvent(SDL_Event *event);
+
+		void AudioPlayerState();
 	};
 }
 

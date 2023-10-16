@@ -256,6 +256,15 @@ namespace Dungeon
 		return SDL_FALSE;
 	}
 
+	SDL_bool AudioPlayer::IsCompleted()
+	{
+		if (mSoundInfo)
+		{
+			return mSoundInfo->completed;
+		}
+		return SDL_TRUE;
+	}
+
 	void AudioPlayer::Destory()
 	{
 		if (OnRelease)

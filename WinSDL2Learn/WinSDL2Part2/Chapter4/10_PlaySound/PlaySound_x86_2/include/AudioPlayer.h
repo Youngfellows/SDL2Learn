@@ -61,6 +61,7 @@ namespace Dungeon
 		void Stop();
 		SDL_bool IsPlaying();
 		SDL_bool InitAudio();
+		SDL_bool IsCompleted();
 
 	private:
 		void Destory();
