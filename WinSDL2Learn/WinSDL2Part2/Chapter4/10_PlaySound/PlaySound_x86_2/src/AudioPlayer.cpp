@@ -119,8 +119,8 @@ namespace Dungeon
 		{
 			soundInfo->soundPos = 0;
 			soundInfo->completed = SDL_TRUE;//播放完成
-			SDL_PauseAudioDevice(soundInfo->device, SDL_TRUE);//暂停
 			soundInfo->state = IDLE;
+			SDL_PauseAudioDevice(soundInfo->device, SDL_TRUE);//暂停
 			SDL_Log("AudioCallback Already Play completed");
 		}
 	}
@@ -143,14 +143,14 @@ namespace Dungeon
 					OnStart(this);//回调开始
 				}
 				//产生一个阻塞的效果
-				/*while (1)
+				while (1)
 				{
-					SDL_Log("xxxxxxxxxxx");
+					SDL_Log("111111111111");
 					if (mSoundInfo->completed)
 					{
-					
+						SDL_Log("222222222222");
 						goto GO_TO_COMPLETE;//1. goto 到播放完成
-						//break;
+						break;
 					}
 
 					//if (暂停播放)
@@ -161,30 +161,32 @@ namespace Dungeon
 
 					if (mSoundInfo->state==STOP)
 					{
+						SDL_Log("33333333333");
 						goto GO_TO_STOP;//3. goto 到停止播放
 						break;
 					}
 					SDL_Delay(100);
 				}
-				*/
+				
 			}
 		}
 
-		//GO_TO_COMPLETE:
-		//	SDL_Log("GO_TO_COMPLETE");
-		//	if (mSoundInfo)
-		//	{
-		//		mSoundInfo->state = IDLE;
-		//	}
-		//	CloseDevice();//关闭资源
-		//	if (OnComplete)
-		//	{
-		//		OnComplete(this);
-		//	}
+		GO_TO_COMPLETE:
+			SDL_Log("GO_TO_COMPLETE");
+			if (mSoundInfo)
+			{
+				mSoundInfo->state = IDLE;
+			}
+			if (OnComplete)
+			{
+				OnComplete(this);
+			}
+			return;
 
-		//GO_TO_STOP:
-		//	SDL_Log("GO_TO_STOP");
-		//	Destory(); 
+		GO_TO_STOP:
+			SDL_Log("GO_TO_STOP");
+			Destory(); 
+			return;
 	}
 
 	void AudioPlayer::Pause()

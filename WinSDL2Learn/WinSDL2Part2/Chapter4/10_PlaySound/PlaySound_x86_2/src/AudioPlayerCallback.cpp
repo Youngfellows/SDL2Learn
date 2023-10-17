@@ -16,22 +16,22 @@ namespace Dungeon
 
 	void AudioPlayerCallback::OnStartCallback(AudioPlayer *audioPlayer)
 	{
-		SDL_Log("OnStart");
+		SDL_Log("OnStartCallback");
 	}
 
 	void AudioPlayerCallback::OnStopCallback(AudioPlayer *audioPlayer)
 	{
-		SDL_Log("OnStop");
+		SDL_Log("OnStopCallback");
 	}
 
 	void AudioPlayerCallback::OnPauseCallback(AudioPlayer *audioPlayer)
 	{
-		SDL_Log("OnPause");
+		SDL_Log("OnPauseCallback");
 	}
 
 	void AudioPlayerCallback::OnReleaseCallback(AudioPlayer *audioPlayer)
 	{
-		SDL_Log("OnDestory");
+		SDL_Log("OnReleaseCallback");
 
 	}
 
@@ -41,5 +41,6 @@ namespace Dungeon
 		{
 			audioPlayer->ReStart();
 		}*/
+		SDL_Log("OnCompleteCallback");
 	}
 }
