@@ -14,6 +14,15 @@ namespace Dungeon
 
 	}
 
+	void AudioPlayerCallback::OnCreateCallback(AudioPlayer *audioPlayer)
+	{
+		SDL_Log("OnCreateCallback --->>>");
+		if (audioPlayer)
+		{
+			audioPlayer->Start();//创建成功并播放
+		}
+	}
+
 	void AudioPlayerCallback::OnStartCallback(AudioPlayer *audioPlayer)
 	{
 		SDL_Log("OnStartCallback");
@@ -37,10 +46,15 @@ namespace Dungeon
 
 	void AudioPlayerCallback::OnCompleteCallback(AudioPlayer *audioPlayer)
 	{
-		/*if (audioPlayer)
-		{
-			audioPlayer->ReStart();
-		}*/
 		SDL_Log("OnCompleteCallback");
+		if (audioPlayer)
+		{
+			audioPlayer->ReStart();//播放结束,重新播放
+		}
+	}
+
+	void AudioPlayerCallback::OnProgressCallbacc(AudioPlayer *audioPlayer, int len, int pos)
+	{
+		SDL_Log("OnProgressCallbacc,len:%d,pos:%d", len, pos);
 	}
 }

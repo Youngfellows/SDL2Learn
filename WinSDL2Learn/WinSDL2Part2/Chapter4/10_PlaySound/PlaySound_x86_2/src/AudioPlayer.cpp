@@ -1,4 +1,5 @@
 #include "AudioPlayer.h"
+#include "Config.h"
 
 namespace Dungeon
 {
@@ -11,17 +12,28 @@ namespace Dungeon
 	{
 	}
 
-	void AudioPlayer::SetAudioPlayerCallback(OnStartCallback onStartCallback,
+	/*
+	* 设置回调函数
+	*/
+	void AudioPlayer::SetAudioPlayerCallback(
+		OnCreateCallback onCreateCallback,
+		OnStartCallback onStartCallback,
 		OnPauseCallback onPauseCallback,
 		OnStopCallback onStopCallback,
 		OnReleaseCallback onReleaseCallback,
-		OnCompleteCallback onCompleteCallback)
+		OnCompleteCallback onCompleteCallback,
+		OnProgressCallback onProgressCallback)
 	{
-		this->OnStart = onStartCallback;
-		this->OnStop = onStopCallback;
-		this->OnPause = onPauseCallback;
-		this->OnRelease = onReleaseCallback;
-		this->OnComplete = onCompleteCallback;
+		if (mSoundInfo)
+		{
+			mSoundInfo->OnCreate = onCreateCallback;
+			mSoundInfo->OnStart = onStartCallback;
+			mSoundInfo->OnStop = onStopCallback;
+			mSoundInfo->OnPause = onPauseCallback;
+			mSoundInfo->OnComplete = onCompleteCallback;
+			mSoundInfo->OnRelease = onReleaseCallback;
+			mSoundInfo->OnProgress = onProgressCallback;
+		}
 	}
 
 	SDL_bool AudioPlayer::InitAudio()
@@ -32,6 +44,16 @@ namespace Dungeon
 			SDL_Log("Can not init audio: %s", SDL_GetError());
 			return SDL_FALSE;
 		}
+
+		// 动态申请内存
+		this->mSoundInfo = (SoundInfo *)malloc(sizeof(SoundInfo));
+		if (!mSoundInfo)
+		{
+			return SDL_FALSE;
+		}
+		mSoundInfo->sound = nullptr;
+		mSoundInfo->file = nullptr;
+		mSoundInfo->flag = nullptr;
 		return SDL_TRUE;
 	}
 
@@ -40,56 +62,103 @@ namespace Dungeon
 	*/
 	SDL_bool AudioPlayer::Create(const char *file)
 	{
-		if (IsPlaying())
-		{
-			Stop();
-		}
-
-		SDL_AudioSpec audioSpec;
-		Uint8 *sound;
-		Uint32 soundLen;
-
-		// 加载音频资源
-		if (!SDL_LoadWAV(file, &audioSpec, &sound, &soundLen))
-		{
-			SDL_Log("Can not load audio: %s", SDL_GetError());
-			return SDL_FALSE;
-		}
-		audioSpec.callback = &AudioCallback;//设置回调函数
-
-		//动态申请内存
-	/*	if (this->mSoundInfo)
-		{
-			free(mSoundInfo);
-		}*/
-		this->mSoundInfo = (SoundInfo *)malloc(sizeof(SoundInfo));
 		if (!mSoundInfo)
 		{
+			SDL_Log("Can not create audio player");
 			return SDL_FALSE;
 		}
+		//动态申请内存
 		mSoundInfo->file = (char *)malloc(sizeof(char) * SDL_strlen(file) + 1);
 		if (mSoundInfo->file)
 		{
 			SDL_strlcpy(mSoundInfo->file, file, SDL_strlen(file) + 1);
 		}
-		mSoundInfo->sound = sound;
-		mSoundInfo->soundLen = soundLen;
-		mSoundInfo->soundPos = 0;
-		mSoundInfo->completed = SDL_FALSE;
-		mSoundInfo->device = 0;
-		mSoundInfo->state = IDLE;
-		audioSpec.userdata = mSoundInfo;//设置数据
-
-		//打开设备开始播放
-		SDL_AudioDeviceID device = SDL_OpenAudioDevice(nullptr,
-			SDL_FALSE, &audioSpec, nullptr, 0);
-		if (!device)
+		mSoundInfo->flag = (char *)malloc(sizeof(char) * SDL_strlen(FLAG_CREATE_AUDIO_PLAYER) + 1);
+		if (mSoundInfo->flag)
 		{
-			SDL_Log("Can not open audio device: %s", SDL_GetError());
-			SDL_FreeWAV(sound);
-			return SDL_FALSE;
+			SDL_strlcpy(mSoundInfo->flag, FLAG_CREATE_AUDIO_PLAYER, SDL_strlen(FLAG_CREATE_AUDIO_PLAYER) + 1);
 		}
-		mSoundInfo->device = device;
+	
+		//启动线程,创建线程并执行
+		AudioPlayer *userData = this;
+		SDL_Thread *audioThread = SDL_CreateThread(&ThreadCallback, "Audio_Player_Thread", (void *)userData);
+		if (!audioThread)
+		{
+			SDL_Log("Create:: Thread Failed: %s", SDL_GetError());
+		}
+		else
+		{
+			//int status;
+			SDL_Log("Create:: Thread Success");
+			//SDL_WaitThread(audioThread, &status);//等待子线程结束
+			//SDL_Log("Thread Return Value:%d", status);
+			//SDL_DetachThread(audioThread);//子线程自己运行,不影响主线程执行
+			SDL_Log("Create:: Detach Audio Thread");
+		}
+	}
+
+	/*
+	* 线程回调函数
+	*/
+	int SDLCALL AudioPlayer::ThreadCallback(void *userdata)
+	{
+		SDL_Log("ThreadCallback:%s", "Thread Run");
+		AudioPlayer *audioPlayer = (AudioPlayer *)userdata;
+		if (audioPlayer)
+		{
+			SoundInfo *soundInfo = audioPlayer->mSoundInfo;
+			if (soundInfo)
+			{
+				//SDL_Log("ThreadCallback:%s", "Thread Run 111");
+				//Create创建播放器
+				if (SDL_strcmp(soundInfo->flag, FLAG_CREATE_AUDIO_PLAYER) == 0)
+				{
+					//SDL_Log("ThreadCallback:%s", "Thread Run 2222");
+					if (audioPlayer->IsPlaying())
+					{
+						audioPlayer->Stop();
+					}
+
+					SDL_AudioSpec audioSpec;
+					Uint8 *sound;
+					Uint32 soundLen;
+
+					// 加载音频资源
+					if (!SDL_LoadWAV(soundInfo->file, &audioSpec, &sound, &soundLen))
+					{
+						SDL_Log("Can not load audio: %s", SDL_GetError());
+						return SDL_FALSE;
+					}
+					audioSpec.callback = &AudioCallback;//设置回调函数
+
+					//动态申请内存
+					soundInfo->sound = sound;
+					soundInfo->soundLen = soundLen;
+					soundInfo->soundPos = 0;
+					soundInfo->completed = SDL_FALSE;
+					soundInfo->device = 0;
+					soundInfo->state = IDLE;
+					//audioSpec.userdata = mSoundInfo;//设置数据
+					audioSpec.userdata = audioPlayer;//设置回调数据
+
+					//打开设备开始播放
+					SDL_AudioDeviceID device = SDL_OpenAudioDevice(nullptr,
+						SDL_FALSE, &audioSpec, nullptr, 0);
+					if (!device)
+					{
+						SDL_Log("Can not open audio device: %s", SDL_GetError());
+						SDL_FreeWAV(sound);
+						return SDL_FALSE;
+					}
+					soundInfo->device = device;
+					SDL_Log("ThreadCallback: %s", "Create Audio Player");
+					if (soundInfo->OnCreate)
+					{
+						soundInfo->OnCreate(audioPlayer);
+					}
+				}
+			}
+		}
 	}
 
 	/*
@@ -98,7 +167,12 @@ namespace Dungeon
 	void SDLCALL AudioPlayer::AudioCallback(void *userdata, Uint8 *stream, int len)
 	{
 		SDL_Log("AudioCallback len:%d", len);
-		SoundInfo *soundInfo = (SoundInfo *)userdata;
+		AudioPlayer *audioPlayer = (AudioPlayer *)userdata;
+		if (!audioPlayer)
+		{
+			return;
+		}
+		SoundInfo *soundInfo = audioPlayer->mSoundInfo;
 		if (!soundInfo->completed)
 		{
 			Uint32 remaining = soundInfo->soundLen - soundInfo->soundPos;//剩余多少没有读取完
@@ -106,6 +180,10 @@ namespace Dungeon
 			{
 				SDL_memcpy(stream, soundInfo->sound + soundInfo->soundPos, len);
 				soundInfo->soundPos += len;//更新已经播放长度
+				if (soundInfo->OnProgress)
+				{
+					soundInfo->OnProgress(audioPlayer, soundInfo->soundLen, soundInfo->soundPos);
+				}
 			}
 			else
 			{
@@ -117,11 +195,13 @@ namespace Dungeon
 		}
 		else
 		{
-			soundInfo->soundPos = 0;
-			soundInfo->completed = SDL_TRUE;//播放完成
 			soundInfo->state = IDLE;
 			SDL_PauseAudioDevice(soundInfo->device, SDL_TRUE);//暂停
 			SDL_Log("AudioCallback Already Play completed");
+			if (soundInfo->OnComplete)
+			{
+				soundInfo->OnComplete(audioPlayer);
+			}
 		}
 	}
 
@@ -133,60 +213,16 @@ namespace Dungeon
 		if (mSoundInfo)
 		{
 			mSoundInfo->completed = SDL_FALSE;
-
 			if (mSoundInfo->device)
 			{
 				SDL_PauseAudioDevice(mSoundInfo->device, SDL_FALSE);//不暂停
 				mSoundInfo->state = PLAYING;
-				if (OnStart)
+				if (mSoundInfo->OnStart)
 				{
-					OnStart(this);//回调开始
+					mSoundInfo->OnStart(this);//回调OnStarCallback
 				}
-				//产生一个阻塞的效果
-				while (1)
-				{
-					SDL_Log("111111111111");
-					if (mSoundInfo->completed)
-					{
-						SDL_Log("222222222222");
-						goto GO_TO_COMPLETE;//1. goto 到播放完成
-						break;
-					}
-
-					//if (暂停播放)
-					//{
-					//	//2. goto 到暂停播放
-					//	break;
-					//}
-
-					if (mSoundInfo->state==STOP)
-					{
-						SDL_Log("33333333333");
-						goto GO_TO_STOP;//3. goto 到停止播放
-						break;
-					}
-					SDL_Delay(100);
-				}
-				
 			}
 		}
-
-		GO_TO_COMPLETE:
-			SDL_Log("GO_TO_COMPLETE");
-			if (mSoundInfo)
-			{
-				mSoundInfo->state = IDLE;
-			}
-			if (OnComplete)
-			{
-				OnComplete(this);
-			}
-			return;
-
-		GO_TO_STOP:
-			SDL_Log("GO_TO_STOP");
-			Destory(); 
-			return;
 	}
 
 	void AudioPlayer::Pause()
@@ -197,9 +233,9 @@ namespace Dungeon
 			{
 				SDL_PauseAudioDevice(mSoundInfo->device, SDL_TRUE);//暂停
 				mSoundInfo->state = PAUSE;
-				if (OnPause)
+				if (mSoundInfo->OnPause)
 				{
-					OnPause(this);
+					mSoundInfo->OnPause(this);
 				}
 			}
 		}
@@ -210,13 +246,6 @@ namespace Dungeon
 	*/
 	void AudioPlayer::ReStart()
 	{
-		/*if (mSoundInfo)
-		{
-			if (Create(mSoundInfo->file))
-			{
-				Start();
-			}
-		}*/
 		Start();
 	}
 
@@ -232,12 +261,14 @@ namespace Dungeon
 			{
 				SDL_PauseAudioDevice(mSoundInfo->device, SDL_TRUE);//暂停
 			}
+			mSoundInfo->soundPos = 0;
+			mSoundInfo->completed = SDL_TRUE;//播放完成
+			if (mSoundInfo->OnStop)
+			{
+				mSoundInfo->OnStop(this);
+			}
 		}
-		Destory();
-		if (OnStop)
-		{
-			OnStop(nullptr);
-		}
+		//Destory();
 	}
 
 	void AudioPlayer::CloseDevice()
@@ -246,8 +277,15 @@ namespace Dungeon
 		{
 			if (mSoundInfo->device)
 			{
-				SDL_CloseAudioDevice(mSoundInfo->device);//关闭声卡
-				SDL_FreeWAV(mSoundInfo->sound);//释放内存
+				if (mSoundInfo->device)
+				{
+					SDL_CloseAudioDevice(mSoundInfo->device);//关闭声卡
+				}
+				if (mSoundInfo->sound)
+				{
+					SDL_Log("sound:%p", mSoundInfo->sound);
+					SDL_FreeWAV(mSoundInfo->sound);//释放内存
+				}
 			}
 		}
 	}
@@ -281,14 +319,21 @@ namespace Dungeon
 
 	void AudioPlayer::Destory()
 	{
-		if (OnRelease)
-		{
-			OnRelease(this);
-		}
 		if (mSoundInfo)
 		{
+			if (mSoundInfo->OnRelease)
+			{
+				mSoundInfo->OnRelease(this);
+			}
 			CloseDevice();
-			free(mSoundInfo->file);
+			if (mSoundInfo->flag)
+			{
+				free(mSoundInfo->flag);
+			}
+			if (mSoundInfo->file)
+			{
+				free(mSoundInfo->file);
+			}
 			free(mSoundInfo);
 		}
 	}

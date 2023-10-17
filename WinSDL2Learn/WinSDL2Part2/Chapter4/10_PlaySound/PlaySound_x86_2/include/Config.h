@@ -13,6 +13,11 @@ namespace Dungeon
 #define PT_SIZE_40 40 //×ÖÌå´óÐ¡40°ñ
 
 #define SOUND_FILE_NAME "./resources/sound.wav"
+#define FLAG_CREATE_AUDIO_PLAYER "CreateAudioPlayer"
+#define FLAG_CREATE_AUDIO_PLAYER "StartAudioPlayer"
+#define FLAG_CREATE_AUDIO_PLAYER "StopAudioPlayer"
+#define FLAG_CREATE_AUDIO_PLAYER "PauseAudioPlayer"
+#define FLAG_CREATE_AUDIO_PLAYER "ReleaseAudioPlayer"
 }
 
 #endif // !_DUNGEON_CONFIG_H_

@@ -107,7 +107,7 @@ namespace Dungeon
 				break;
 			}
 			//获取播放器状态
-			//AudioPlayerState();//有bug
+			AudioPlayerState();//有bug
 		}
 	}
 
@@ -181,16 +181,18 @@ namespace Dungeon
 
 		//初始化Audio播放器
 		mAudioPlayer = new AudioPlayer();
-		mAudioPlayer->SetAudioPlayerCallback(&AudioPlayerCallback::OnStartCallback,
-			&AudioPlayerCallback::OnPauseCallback,
-			&AudioPlayerCallback::OnStopCallback,
-			&AudioPlayerCallback::OnReleaseCallback,
-			&AudioPlayerCallback::OnCompleteCallback);
 		if (!mAudioPlayer->InitAudio())
 		{
 			return SDL_FALSE;
 		}
-
+		mAudioPlayer->SetAudioPlayerCallback(
+			&AudioPlayerCallback::OnCreateCallback,
+			&AudioPlayerCallback::OnStartCallback,
+			&AudioPlayerCallback::OnPauseCallback,
+			&AudioPlayerCallback::OnStopCallback,
+			&AudioPlayerCallback::OnReleaseCallback,
+			&AudioPlayerCallback::OnCompleteCallback,
+			&AudioPlayerCallback::OnProgressCallbacc);
 		return SDL_TRUE;
 	}
 
@@ -219,6 +221,10 @@ namespace Dungeon
 		if (mTipText)
 		{
 			mTipText->Destroy();
+		}
+		if (mAudioPlayer)
+		{
+			mAudioPlayer->Destory();
 		}
 	}
 
@@ -258,11 +264,7 @@ namespace Dungeon
 		{
 			SDL_bool isPlaying = mAudioPlayer->IsPlaying();
 			SDL_bool isComplete = mAudioPlayer->IsCompleted();
-			SDL_Log("isPlaying:%d,isComplete:%d", isPlaying, isComplete);
-			if (!isPlaying && isComplete)
-			{
-				mAudioPlayer->ReStart();
-			}
+			SDL_Log("AudioPlayerState:: isPlaying:%d,isComplete:%d", isPlaying, isComplete);
 		}
 	}
 
@@ -294,10 +296,7 @@ namespace Dungeon
 							}
 							if (mAudioPlayer)
 							{
-								if (mAudioPlayer->Create(SOUND_FILE_NAME))
-								{
-									mAudioPlayer->Start();
-								}
+								mAudioPlayer->Create(SOUND_FILE_NAME);//创建播放器并播放
 							}
 						}
 						else
