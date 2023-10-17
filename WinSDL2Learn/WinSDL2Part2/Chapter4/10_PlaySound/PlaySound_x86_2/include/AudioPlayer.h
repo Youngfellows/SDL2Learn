@@ -5,6 +5,14 @@
 
 namespace Dungeon
 {
+	typedef enum Mode
+	{
+		DEFAULT,//单次播放
+		SINGLE_LOOP,//单曲循环
+		LIST_LOOP,//列表循环
+		RANDOM//随机播放
+	}Mode;
+
 	typedef	enum PlayerState
 	{
 		IDLE,//空闲状态
@@ -31,6 +39,8 @@ namespace Dungeon
 
 	class AudioPlayer
 	{
+   	
+
 	private:
 		SoundInfo *mSoundInfo;//音频信息结构体
 		typedef void (*OnStartCallback)(AudioPlayer *audioPlayer);//函数回调 ->> 开始播放
@@ -38,11 +48,12 @@ namespace Dungeon
 		typedef void (*OnStopCallback)(AudioPlayer *audioPlayer);
 		typedef void (*OnReleaseCallback)(AudioPlayer *audioPlayer);
 		typedef void (*OnCompleteCallback)(AudioPlayer *audioPlayer);
+
 		OnStartCallback OnStart;
 		OnPauseCallback OnPause;
 		OnStopCallback OnStop;
 		OnReleaseCallback OnRelease;
-		OnCompleteCallback OnComplete;
+	    OnCompleteCallback OnComplete;
 
 	public:
 		AudioPlayer();

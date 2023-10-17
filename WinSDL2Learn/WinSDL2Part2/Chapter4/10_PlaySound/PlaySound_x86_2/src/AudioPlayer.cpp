@@ -40,6 +40,11 @@ namespace Dungeon
 	*/
 	SDL_bool AudioPlayer::Create(const char *file)
 	{
+		if (IsPlaying())
+		{
+			Stop();
+		}
+
 		SDL_AudioSpec audioSpec;
 		Uint8 *sound;
 		Uint32 soundLen;
@@ -140,10 +145,12 @@ namespace Dungeon
 				//产生一个阻塞的效果
 				/*while (1)
 				{
+					SDL_Log("xxxxxxxxxxx");
 					if (mSoundInfo->completed)
 					{
-						//break;
+					
 						goto GO_TO_COMPLETE;//1. goto 到播放完成
+						//break;
 					}
 
 					//if (暂停播放)
@@ -154,29 +161,30 @@ namespace Dungeon
 
 					if (mSoundInfo->state==STOP)
 					{
-						//break;
 						goto GO_TO_STOP;//3. goto 到停止播放
+						break;
 					}
 					SDL_Delay(100);
-				}*/
+				}
+				*/
 			}
 		}
 
-		/*GO_TO_COMPLETE:
-			SDL_Log("GO_TO_COMPLETE");
-			if (mSoundInfo)
-			{
-				mSoundInfo->state = IDLE;
-			}
-			CloseDevice();//关闭资源
-			if (OnComplete)
-			{
-				OnComplete(this);
-			}
+		//GO_TO_COMPLETE:
+		//	SDL_Log("GO_TO_COMPLETE");
+		//	if (mSoundInfo)
+		//	{
+		//		mSoundInfo->state = IDLE;
+		//	}
+		//	CloseDevice();//关闭资源
+		//	if (OnComplete)
+		//	{
+		//		OnComplete(this);
+		//	}
 
-		GO_TO_STOP:
-			SDL_Log("GO_TO_STOP");
-			Destory(); */
+		//GO_TO_STOP:
+		//	SDL_Log("GO_TO_STOP");
+		//	Destory(); 
 	}
 
 	void AudioPlayer::Pause()
@@ -224,6 +232,10 @@ namespace Dungeon
 			}
 		}
 		Destory();
+		if (OnStop)
+		{
+			OnStop(nullptr);
+		}
 	}
 
 	void AudioPlayer::CloseDevice()
@@ -233,7 +245,7 @@ namespace Dungeon
 			if (mSoundInfo->device)
 			{
 				SDL_CloseAudioDevice(mSoundInfo->device);//关闭声卡
-				SDL_FreeWAV(mSoundInfo->sound);//是否内存
+				SDL_FreeWAV(mSoundInfo->sound);//释放内存
 			}
 		}
 	}

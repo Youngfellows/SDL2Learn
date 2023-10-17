@@ -37,9 +37,9 @@ namespace Dungeon
 
 	void AudioPlayerCallback::OnCompleteCallback(AudioPlayer *audioPlayer)
 	{
-		if (audioPlayer)
+		/*if (audioPlayer)
 		{
 			audioPlayer->ReStart();
-		}
+		}*/
 	}
 }
