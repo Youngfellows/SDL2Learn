@@ -156,9 +156,11 @@ namespace Dungeon
 					{
 						soundInfo->OnCreate(audioPlayer);
 					}
+					return SDL_TRUE;
 				}
 			}
 		}
+		return SDL_FALSE;
 	}
 
 	/*
