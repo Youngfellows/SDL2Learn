@@ -18,10 +18,10 @@
     <ClInclude Include="include\Config.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="include\Game.h">
+    <ClInclude Include="include\DisplayObject.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="include\DisplayObject.h">
+    <ClInclude Include="include\Game.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="include\MovableRectangle.h">
@@ -29,13 +29,16 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\DisplayObject.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
     <ClCompile Include="src\Game.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\Main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\DisplayObject.cpp">
+    <ClCompile Include="src\MovableRectangle.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

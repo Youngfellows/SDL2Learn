@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{ef6a56cc-44cd-4325-9875-4fc88a0e5df1}</ProjectGuid>
-    <RootNamespace>DisplayObjectBaseWindowx86</RootNamespace>
+    <ProjectGuid>{ee7afb58-4e83-4a93-992f-89c8e0cfedfd}</ProjectGuid>
+    <RootNamespace>MovableRectanglex86</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -141,6 +141,7 @@
     <ClCompile Include="src\DisplayObject.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\MovableRectangle.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
