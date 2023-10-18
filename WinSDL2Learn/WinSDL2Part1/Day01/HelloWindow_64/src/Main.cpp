@@ -1,20 +1,25 @@
 #include <iostream>
-#include <SDL.h>
+#include <SDL2/SDL.h>
 
 using namespace std;
 
 #define WIDTH 550
 #define HEIGHT 400
 
-void draw(SDL_Renderer* renderer) {
+void draw(SDL_Renderer *renderer)
+{
 	SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 	SDL_Rect rect = { 0, 0, 100, 100 };
 	SDL_RenderFillRect(renderer, &rect);
 }
 
-int main(int argc, char* argv[]) {
-	SDL_Window* win;
-	SDL_Renderer* renderer;
+/*
+* SDL入门使用
+*/
+int main(int argc, char *argv[])
+{
+	SDL_Window *win;
+	SDL_Renderer *renderer;
 	if (SDL_Init(SDL_INIT_VIDEO)) {
 		SDL_Log("Unable to init SLD: %s", SDL_GetError());
 		return 1;
