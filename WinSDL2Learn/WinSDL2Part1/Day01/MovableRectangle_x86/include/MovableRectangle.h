@@ -31,6 +31,7 @@ namespace Dungeon
 		DisplayObject *Create(float x, float y, float w, float h,
 			int color, int borderColor, int borderSize);
 		static void OnDrawCallback(DisplayObject *self, SDL_Renderer *renderer);
+		static void OnDrawCallback2(void *userdata, SDL_Renderer *renderer);
 		static void OnMouseMoveCallback(DisplayObject *self, SDL_Event *event);
 		static void OnScanCodeLeftDownCallback(DisplayObject *self);
 		static void OnScanCodeRightDownCallback(DisplayObject *self);

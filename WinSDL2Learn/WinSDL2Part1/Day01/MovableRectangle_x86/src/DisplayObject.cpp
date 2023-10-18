@@ -59,6 +59,18 @@ namespace Dungeon
 		}
 	}
 
+	void DisplayObject::Draw2(SDL_Renderer *renderer)
+	{
+		if (OnCallback)
+		{
+			if (OnCallback->OnDraw2)
+			{
+				// 注意一定要传递subClass
+				OnCallback->OnDraw2(subClass, renderer);
+			}
+		}
+	}
+
 	void DisplayObject::MouseMove(SDL_Event *event)
 	{
 		if (OnCallback)

@@ -57,6 +57,7 @@ namespace Dungeon
 		if (callbackData)
 		{
 			callbackData->OnDraw = &OnDrawCallback;
+			callbackData->OnDraw2 = &OnDrawCallback2;
 			callbackData->OnMouseMove = &OnMouseMoveCallback;
 			callbackData->OnScanCodeLeftKeyDown = &OnScanCodeLeftDownCallback;
 			callbackData->OnScanCodeRightKeyDown = &OnScanCodeRightDownCallback;
@@ -72,7 +73,46 @@ namespace Dungeon
 
 	void MovableRectangle::OnDrawCallback(DisplayObject *self, SDL_Renderer *renderer)
 	{
+		//SDL_Log("MovableRectangle::OnDrawCallback");
 		MovableRectangle *rect = (MovableRectangle *)self->GetSubClass();//注意,一定要获取subClass
+		if (rect)
+		{
+			RectangleData *data = rect->mRectangleData;
+			//RectangleData *data = rect->GetRectangleData();
+			if (data)
+			{
+				//绘制边框,ARGB格式颜色0xff00ffff
+				Uint8 bRed = (data->borderColor & 0x00ff0000) >> 16;
+				Uint8 bGreen = (data->borderColor & 0x0000ff00) >> 8;
+				Uint8 bBlue = data->borderColor & 0x000000ff;
+				Uint8 bAlpha = (data->borderColor & 0xff000000) >> 24;
+				SDL_SetRenderDrawColor(renderer, bRed, bGreen, bBlue, bAlpha);
+				SDL_RenderFillRectF(renderer, data->dest);
+
+				//暂时不知道如何设置线宽,采用叠加的方式来实现了
+				//绘制矩形,ARGB格式颜色0xff00ffff 
+				Uint8 red = (data->color & 0x00ff0000) >> 16;
+				Uint8 green = (data->color & 0x0000ff00) >> 8;
+				Uint8 blue = data->color & 0x000000ff;
+				Uint8 alpha = (data->color & 0xff000000) >> 24;
+
+				float x = data->dest->x + data->borderSize;
+				float y = data->dest->y + data->borderSize;
+				float w = data->dest->w - 2 * data->borderSize;
+				float h = data->dest->h - 2 * data->borderSize;
+
+				SDL_FRect rect = { x,y,w,h };
+				SDL_SetRenderDrawColor(renderer, red, green, blue, alpha);
+				SDL_RenderFillRectF(renderer, &rect);
+			}
+		}
+	}
+
+
+	void MovableRectangle::OnDrawCallback2(void *userdata, SDL_Renderer *renderer)
+	{
+		//SDL_Log("MovableRectangle::OnDrawCallback2");
+		MovableRectangle *rect = (MovableRectangle *)userdata;//注意,一定要获取subClass
 		if (rect)
 		{
 			RectangleData *data = rect->mRectangleData;

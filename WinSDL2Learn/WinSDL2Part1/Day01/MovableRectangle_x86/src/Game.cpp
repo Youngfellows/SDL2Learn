@@ -130,7 +130,9 @@ namespace Dungeon
 	{
 		if (mMovableRectangle)
 		{
+			// 两种方式回调都可以
 			mMovableRectangle->Draw(mRenderer);
+			//mMovableRectangle->Draw2(mRenderer);
 		}
 	}
 
