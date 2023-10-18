@@ -41,6 +41,12 @@ namespace Dungeon
 			return false;
 		}
 
+		// 创建绘制组件
+		if (!CreateComponents())
+		{
+			return false;
+		}
+
 		return true;
 	}
 
@@ -101,8 +107,68 @@ namespace Dungeon
 		//绘制白色背景
 		SDL_SetRenderDrawColor(mRenderer, 255, 255, 255, 255);
 		SDL_RenderClear(mRenderer);
-
+		DrawComponents();//绘制组件
 		SDL_RenderPresent(mRenderer);
+	}
+
+	SDL_bool Game::CreateComponents()
+	{
+		return SDL_TRUE;
+	}
+
+	void Game::DrawComponents()
+	{
+
+	}
+
+	void Game::FreeComponents()
+	{
+
+	}
+
+	void Game::MouseMoveEvent(SDL_Event *event)
+	{
+
+	}
+
+	void Game::MouseLeftDownEvent(SDL_Event *event)
+	{
+
+	}
+
+	void Game::MouseRightDownEvent(SDL_Event *event)
+	{
+
+	}
+
+	void Game::MouseLeftUpEvent(SDL_Event *event)
+	{
+
+	}
+
+	void Game::MouseRightUpEvent(SDL_Event *event)
+	{
+
+	}
+
+	void Game::ScanCodeLeftDownEvent()
+	{
+
+	}
+
+	void Game::ScanCodeRightDownEvent()
+	{
+
+	}
+
+	void Game::ScanCodeLeftUpEvent()
+	{
+
+	}
+
+	void Game::ScanCodeRightUpEvent()
+	{
+
 	}
 
 }
