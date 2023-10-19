@@ -77,7 +77,7 @@ namespace Dungeon
 		FreeComponents();
 		SDL_DestroyRenderer(mRenderer);
 		SDL_DestroyWindow(mWindow);
-		SDL_Quit();	
+		SDL_Quit();
 	}
 
 	void Game::Event()
@@ -90,6 +90,15 @@ namespace Dungeon
 			{
 			case SDL_QUIT:// 退出事件，按下窗口的叉
 				mIsRunning = false;
+				break;
+			case SDL_MOUSEMOTION:
+				MouseMoveEvent(&event);
+				break;
+			case SDL_MOUSEBUTTONDOWN:
+				MouseLeftDownEvent(&event);
+				break;
+			case SDL_MOUSEBUTTONUP:
+				MouseLeftUpEvent(&event);
 				break;
 			default:
 				break;
@@ -117,8 +126,11 @@ namespace Dungeon
 	SDL_bool Game::CreateComponents()
 	{
 		MovableRectangle *rect = new MovableRectangle();
-		this->mMovableRectangle = rect->Create(100, 100, DEST_RECT_WIDTH, DEST_RECT_HEIGHT,
-			RECT_FILL_COLOR, RECT_BORDER_COLOR, PT_SIZE_10);
+		this->mMovableRectangle = rect->Create(
+			100, 100, INNER_RECT_REST_WIDTH, INNER_RECT_REST_HEIGHT,
+			INNER_RECT_FILL_COLOR, INNER_RECT_BORDER_COLOR, PT_SIZE_10,
+			OUTER_RECT_REST_WIDTH, OUTER_RECT_REST_HEIGHT);
+
 		if (!mMovableRectangle)
 		{
 			return SDL_FALSE;
@@ -149,12 +161,18 @@ namespace Dungeon
 
 	void Game::MouseMoveEvent(SDL_Event *event)
 	{
-
+		if (mMovableRectangle)
+		{
+			mMovableRectangle->MouseMove(event);
+		}
 	}
 
 	void Game::MouseLeftDownEvent(SDL_Event *event)
 	{
-
+		if (mMovableRectangle)
+		{
+			mMovableRectangle->MouseLeftDown(event);
+		}
 	}
 
 	void Game::MouseRightDownEvent(SDL_Event *event)
@@ -164,7 +182,10 @@ namespace Dungeon
 
 	void Game::MouseLeftUpEvent(SDL_Event *event)
 	{
-
+		if (mMovableRectangle)
+		{
+			mMovableRectangle->MouseLeftUp(event);
+		}
 	}
 
 	void Game::MouseRightUpEvent(SDL_Event *event)
