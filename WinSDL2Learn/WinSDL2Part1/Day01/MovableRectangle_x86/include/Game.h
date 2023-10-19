@@ -29,10 +29,8 @@ namespace Dungeon
 		void DrawComponents();//绘制组件
 		void FreeComponents();//释放组件资源
 		void MouseMoveEvent(SDL_Event *event);//光标移动事件
-		void MouseLeftDownEvent(SDL_Event *event);//鼠标左键按下事件
-		void MouseRightDownEvent(SDL_Event *event);//鼠标右键按下事件
-		void MouseLeftUpEvent(SDL_Event *event);//鼠标左键松开事件
-		void MouseRightUpEvent(SDL_Event *event);//鼠标右键松开事件
+		void MouseDownEvent(SDL_Event *event);//鼠标键按下事件
+		void MouseUpEvent(SDL_Event *event);//鼠标键松开事件
 		void ScanCodeLeftDownEvent();//按下方向左键
 		void ScanCodeRightDownEvent();//按下方向右键
 		void ScanCodeLeftUpEvent();//松开方向左键

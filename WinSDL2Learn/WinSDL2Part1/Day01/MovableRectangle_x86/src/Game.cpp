@@ -95,10 +95,10 @@ namespace Dungeon
 				MouseMoveEvent(&event);
 				break;
 			case SDL_MOUSEBUTTONDOWN:
-				MouseLeftDownEvent(&event);
+				MouseDownEvent(&event);
 				break;
 			case SDL_MOUSEBUTTONUP:
-				MouseLeftUpEvent(&event);
+				MouseUpEvent(&event);
 				break;
 			default:
 				break;
@@ -167,30 +167,20 @@ namespace Dungeon
 		}
 	}
 
-	void Game::MouseLeftDownEvent(SDL_Event *event)
+	void Game::MouseDownEvent(SDL_Event *event)
 	{
 		if (mMovableRectangle)
 		{
-			mMovableRectangle->MouseLeftDown(event);
+			mMovableRectangle->MouseDown(event);
 		}
 	}
 
-	void Game::MouseRightDownEvent(SDL_Event *event)
-	{
-
-	}
-
-	void Game::MouseLeftUpEvent(SDL_Event *event)
+	void Game::MouseUpEvent(SDL_Event *event)
 	{
 		if (mMovableRectangle)
 		{
-			mMovableRectangle->MouseLeftUp(event);
+			mMovableRectangle->MouseUp(event);
 		}
-	}
-
-	void Game::MouseRightUpEvent(SDL_Event *event)
-	{
-
 	}
 
 	void Game::ScanCodeLeftDownEvent()

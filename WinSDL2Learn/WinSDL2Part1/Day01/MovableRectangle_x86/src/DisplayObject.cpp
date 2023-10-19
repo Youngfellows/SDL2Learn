@@ -14,10 +14,8 @@ namespace Dungeon
 		{
 			OnCallback->OnDraw = nullptr;
 			OnCallback->OnMouseMove = nullptr;
-			OnCallback->OnMouseLeftDown = nullptr;
-			OnCallback->OnMouseRightDown = nullptr;
-			OnCallback->OnMouseLeftUp = nullptr;
-			OnCallback->OnMouseRightUp = nullptr;
+			OnCallback->OnMouseDown = nullptr;
+			OnCallback->OnMouseUp = nullptr;
 			OnCallback->OnScanCodeLeftKeyDown = nullptr;
 			OnCallback->OnScanCodeRightKeyDown = nullptr;
 			OnCallback->OnScanCodeLeftKeyUp = nullptr;
@@ -82,46 +80,25 @@ namespace Dungeon
 		}
 	}
 
-	void DisplayObject::MouseLeftDown(SDL_Event *event)
+	void DisplayObject::MouseDown(SDL_Event *event)
 	{
 		if (OnCallback)
 		{
-			if (OnCallback->OnMouseLeftDown)
+			if (OnCallback->OnMouseDown)
 			{
-				OnCallback->OnMouseLeftDown(this, event);
+				OnCallback->OnMouseDown(this, event);
 			}
 		}
 	}
 
-	void DisplayObject::MouseRightDown(SDL_Event *event)
-	{
-		if (OnCallback)
-		{
-			if (OnCallback->OnMouseRightDown)
-			{
-				OnCallback->OnMouseRightDown(this, event);
-			}
-		}
-	}
 
-	void DisplayObject::MouseLeftUp(SDL_Event *event)
+	void DisplayObject::MouseUp(SDL_Event *event)
 	{
 		if (OnCallback)
 		{
-			if (OnCallback->OnMouseLeftUp)
+			if (OnCallback->OnMouseUp)
 			{
-				OnCallback->OnMouseLeftUp(this, event);
-			}
-		}
-	}
-
-	void DisplayObject::MouseRightUp(SDL_Event *event)
-	{
-		if (OnCallback)
-		{
-			if (OnCallback->OnMouseRightUp)
-			{
-				OnCallback->OnMouseRightUp(this, event);
+				OnCallback->OnMouseUp(this, event);
 			}
 		}
 	}

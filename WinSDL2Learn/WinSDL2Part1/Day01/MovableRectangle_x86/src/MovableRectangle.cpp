@@ -81,8 +81,8 @@ namespace Dungeon
 			callbackData->OnDraw = &OnDrawCallback;
 			callbackData->OnDraw2 = &OnDrawCallback2;
 			callbackData->OnMouseMove = &OnMouseMoveCallback;
-			callbackData->OnMouseLeftDown = &OnMouseLeftDownCallback;
-			callbackData->OnMouseLeftUp = &OnMouseLeftUpCallback;
+			callbackData->OnMouseDown = &OnMouseDownCallback;
+			callbackData->OnMouseUp = &OnMouseUpCallback;
 			callbackData->OnScanCodeLeftKeyDown = &OnScanCodeLeftDownCallback;
 			callbackData->OnScanCodeLeftKeyUp = &OnScanCodeLeftUpCallback;
 			callbackData->OnDestory = &OnDestoryCallback;
@@ -176,7 +176,7 @@ namespace Dungeon
 		}
 	}
 
-	void MovableRectangle::OnMouseLeftDownCallback(DisplayObject *self, SDL_Event *event)
+	void MovableRectangle::OnMouseDownCallback(DisplayObject *self, SDL_Event *event)
 	{
 		MovableRectangle *rect = (MovableRectangle *)self->GetSubClass();//注意,一定要获取subClass
 		if (rect)
@@ -199,7 +199,7 @@ namespace Dungeon
 		}
 	}
 
-	void MovableRectangle::OnMouseLeftUpCallback(DisplayObject *self, SDL_Event *event)
+	void MovableRectangle::OnMouseUpCallback(DisplayObject *self, SDL_Event *event)
 	{
 		MovableRectangle *rect = (MovableRectangle *)self->GetSubClass();//注意,一定要获取subClass
 		if (rect)

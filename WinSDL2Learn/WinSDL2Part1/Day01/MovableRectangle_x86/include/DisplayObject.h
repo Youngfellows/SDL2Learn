@@ -10,18 +10,16 @@ namespace Dungeon
 	//函数指针,定义回调函数
 	typedef void (*OnDrawCallback)(DisplayObject *self, SDL_Renderer *renderer);//绘制
 	typedef void (*OnMouseMoveCallback)(DisplayObject *self, SDL_Event *event);//光标移动
-	typedef void (*OnMouseLeftDownCallback)(DisplayObject *self, SDL_Event *event);//鼠标左键按下
-	typedef void (*OnMouseRightDownCallback)(DisplayObject *slef, SDL_Event *event);//鼠标右键按下
-	typedef void (*OnMouseLeftUpCallback)(DisplayObject *self, SDL_Event *event);//鼠标左键松开
-	typedef void (*OnMouseRightUpCallback)(DisplayObject *self, SDL_Event *event);//鼠标右键松开
+	typedef void (*OnMouseDownCallback)(DisplayObject *self, SDL_Event *event);//鼠标键按下
+	typedef void (*OnMouseUpCallback)(DisplayObject *self, SDL_Event *event);//鼠标键松开
 	typedef void (*OnScanCodeLeftKeyDownCallback)(DisplayObject *self);//按下方向左键
 	typedef void (*OnScanCodeRightKeyDownCallback)(DisplayObject *self);//按下方向右键
 	typedef void (*OnScanCodeLeftKeyUpCallback)(DisplayObject *self);//松开方向左键
 	typedef void (*OnScanCodeRightKeyUpCallback)(DisplayObject *self);//松开方向右键
 	typedef void (*OnDestoryCallback)(DisplayObject *self);//释放资源
-	
+
 	//绘制,还可以采用传递void *方式定义接口,一点都不耦合
-	typedef void (*OnDrawCallback2)(void *userdata,SDL_Renderer *renderer);
+	typedef void (*OnDrawCallback2)(void *userdata, SDL_Renderer *renderer);
 
 
 	//回调函数接口结构体
@@ -30,10 +28,8 @@ namespace Dungeon
 		OnDrawCallback OnDraw;
 		OnDrawCallback2 OnDraw2;
 		OnMouseMoveCallback OnMouseMove;
-		OnMouseLeftDownCallback OnMouseLeftDown;
-		OnMouseRightDownCallback OnMouseRightDown;
-		OnMouseLeftUpCallback OnMouseLeftUp;
-		OnMouseRightUpCallback OnMouseRightUp;
+		OnMouseDownCallback OnMouseDown;
+		OnMouseUpCallback OnMouseUp;
 		OnScanCodeLeftKeyDownCallback OnScanCodeLeftKeyDown;
 		OnScanCodeRightKeyDownCallback OnScanCodeRightKeyDown;
 		OnScanCodeLeftKeyUpCallback OnScanCodeLeftKeyUp;
@@ -56,10 +52,8 @@ namespace Dungeon
 		void Draw(SDL_Renderer *renderer);//绘制
 		void Draw2(SDL_Renderer *renderer);//绘制
 		void MouseMove(SDL_Event *event);//光标移动
-		void MouseLeftDown(SDL_Event *event);//鼠标左键按下
-		void MouseRightDown(SDL_Event *event);//鼠标右键按下
-		void MouseLeftUp(SDL_Event *event);//鼠标左键松开
-		void MouseRightUp(SDL_Event *event);//鼠标右键松开
+		void MouseDown(SDL_Event *event);//鼠标键按下
+		void MouseUp(SDL_Event *event);//鼠标键松开
 		void ScanCodeLeftKeyDown();//按下方向左键
 		void ScanCodeRightKeyDown();//按下方向右键
 		void ScanCodeLeftKeyUp();//松开方向左键

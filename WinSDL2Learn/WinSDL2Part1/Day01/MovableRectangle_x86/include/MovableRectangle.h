@@ -36,8 +36,8 @@ namespace Dungeon
 		static void OnDrawCallback(DisplayObject *self, SDL_Renderer *renderer);
 		static void OnDrawCallback2(void *userdata, SDL_Renderer *renderer);
 		static void OnMouseMoveCallback(DisplayObject *self, SDL_Event *event);
-		static void OnMouseLeftDownCallback(DisplayObject *self, SDL_Event *event);
-		static void OnMouseLeftUpCallback(DisplayObject *self, SDL_Event *event);
+		static void OnMouseDownCallback(DisplayObject *self, SDL_Event *event);
+		static void OnMouseUpCallback(DisplayObject *self, SDL_Event *event);
 		static void OnScanCodeLeftDownCallback(DisplayObject *self);
 		static void OnScanCodeLeftUpCallback(DisplayObject *self);
 		static void OnDestoryCallback(DisplayObject *self);
