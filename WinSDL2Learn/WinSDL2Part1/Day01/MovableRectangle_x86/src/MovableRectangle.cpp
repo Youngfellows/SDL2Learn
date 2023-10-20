@@ -95,7 +95,7 @@ namespace Dungeon
 		return this->mRectangleData;
 	}
 
-	void MovableRectangle::OnDrawCallback(DisplayObject *self, SDL_Renderer *renderer)
+	void MovableRectangle::OnDrawCallback(DisplayObject *self, Resource *resource, SDL_Renderer *renderer)
 	{
 		//SDL_Log("MovableRectangle::OnDrawCallback");
 		MovableRectangle *rect = (MovableRectangle *)self->GetSubClass();//注意,一定要获取subClass
@@ -139,7 +139,7 @@ namespace Dungeon
 	}
 
 
-	void MovableRectangle::OnDrawCallback2(void *userdata, SDL_Renderer *renderer)
+	void MovableRectangle::OnDrawCallback2(void *userdata, Resource *resource, SDL_Renderer *renderer)
 	{
 		//SDL_Log("MovableRectangle::OnDrawCallback2");
 		MovableRectangle *rect = (MovableRectangle *)userdata;//注意,一定要获取subClass
@@ -231,42 +231,44 @@ namespace Dungeon
 
 				SDL_FRect *inner = data->dest;
 				SDL_FPoint *point = data->point;
+				SDL_Log("Move Rectangle,point(%f,%f),curPoint(%f,%f)",
+					point->x, point->y, curPoint.x, curPoint.y);
+
 				if (SDL_PointInFRect(&curPoint, inner))
 				{
-					SDL_Log("Drag Inner Rectangle,point(%f,%f),curPoint(%f,%f)",
-						point->x, point->y, curPoint.x, curPoint.y);
+					SDL_Log("Move Inner Rectangle");
+				}
 
+				// 可拖动
+				SDL_bool enableDrag = data->enableDrag;
+				if (enableDrag)
+				{
 					float dx = curPoint.x - point->x;
 					float dy = curPoint.y - point->y;
 					SDL_Log("Drag Inner Rectangle,dx:%f,dy:%f,enableDrag:%d", dx, dy, data->enableDrag);
 
-					// 可拖动
-					SDL_bool enableDrag = data->enableDrag;
-					if (enableDrag)
+					inner->x += dx;//更新矩形位置
+					inner->y += dy;
+
+					point->x = curPoint.x;//更新点坐标
+					point->y = curPoint.y;
+
+					//限定可拖动边界
+					if (inner->x < data->boundary->x)
 					{
-						inner->x += dx;//更新矩形位置
-						inner->y += dy;
-
-						point->x = curPoint.x;//更新点坐标
-						point->y = curPoint.y;
-
-						//限定可拖动边界
-						if (inner->x < data->boundary->x)
-						{
-							inner->x = data->boundary->x;//限定左边界
-						}
-						if (inner->x > data->boundary->x + (data->boundary->w - inner->w))
-						{
-							inner->x = data->boundary->x + (data->boundary->w - inner->w);//限定右边界
-						}
-						if (inner->y < data->boundary->y)
-						{
-							inner->y = data->boundary->y;//限定左边界
-						}
-						if (inner->y > data->boundary->y + (data->boundary->h - inner->h))
-						{
-							inner->y = data->boundary->y + (data->boundary->h - inner->h);//限定右边界
-						}
+						inner->x = data->boundary->x;//限定左边界
+					}
+					if (inner->x > data->boundary->x + (data->boundary->w - inner->w))
+					{
+						inner->x = data->boundary->x + (data->boundary->w - inner->w);//限定右边界
+					}
+					if (inner->y < data->boundary->y)
+					{
+						inner->y = data->boundary->y;//限定左边界
+					}
+					if (inner->y > data->boundary->y + (data->boundary->h - inner->h))
+					{
+						inner->y = data->boundary->y + (data->boundary->h - inner->h);//限定右边界
 					}
 				}
 			}

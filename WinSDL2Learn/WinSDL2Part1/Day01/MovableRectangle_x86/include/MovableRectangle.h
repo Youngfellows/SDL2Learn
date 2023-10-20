@@ -32,9 +32,9 @@ namespace Dungeon
 		MovableRectangle();
 		~MovableRectangle();
 		DisplayObject *Create(float x, float y, float w, float h,
-			int color, int borderColor, int borderSize,float bWidth,float bHeight);
-		static void OnDrawCallback(DisplayObject *self, SDL_Renderer *renderer);
-		static void OnDrawCallback2(void *userdata, SDL_Renderer *renderer);
+			int color, int borderColor, int borderSize, float bWidth, float bHeight);
+		static void OnDrawCallback(DisplayObject *self, Resource *resource, SDL_Renderer *renderer);
+		static void OnDrawCallback2(void *userdata, Resource *resource, SDL_Renderer *renderer);
 		static void OnMouseMoveCallback(DisplayObject *self, SDL_Event *event);
 		static void OnMouseDownCallback(DisplayObject *self, SDL_Event *event);
 		static void OnMouseUpCallback(DisplayObject *self, SDL_Event *event);

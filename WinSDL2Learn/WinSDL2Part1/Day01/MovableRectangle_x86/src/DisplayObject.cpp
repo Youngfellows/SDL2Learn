@@ -45,26 +45,26 @@ namespace Dungeon
 		return this->OnCallback;
 	}
 
-	void DisplayObject::Draw(SDL_Renderer *renderer)
+	void DisplayObject::Draw(Resource *resource, SDL_Renderer *renderer)
 	{
 		if (OnCallback)
 		{
 			if (OnCallback->OnDraw)
 			{
 				// 注意一定要传递
-				OnCallback->OnDraw(this, renderer);
+				OnCallback->OnDraw(this, resource, renderer);
 			}
 		}
 	}
 
-	void DisplayObject::Draw2(SDL_Renderer *renderer)
+	void DisplayObject::Draw2(Resource *resource, SDL_Renderer *renderer)
 	{
 		if (OnCallback)
 		{
 			if (OnCallback->OnDraw2)
 			{
 				// 注意一定要传递subClass
-				OnCallback->OnDraw2(subClass, renderer);
+				OnCallback->OnDraw2(subClass, resource, renderer);
 			}
 		}
 	}

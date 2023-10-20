@@ -27,6 +27,9 @@
     <ClInclude Include="include\MovableRectangle.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="include\Resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\DisplayObject.cpp">
@@ -39,6 +42,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\MovableRectangle.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Resource.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

@@ -91,14 +91,20 @@ namespace Dungeon
 			case SDL_QUIT:// 退出事件，按下窗口的叉
 				mIsRunning = false;
 				break;
-			case SDL_MOUSEMOTION:
+			case SDL_MOUSEMOTION://鼠标移动事件
 				MouseMoveEvent(&event);
 				break;
-			case SDL_MOUSEBUTTONDOWN:
+			case SDL_MOUSEBUTTONDOWN://鼠标按下事件
 				MouseDownEvent(&event);
 				break;
-			case SDL_MOUSEBUTTONUP:
+			case SDL_MOUSEBUTTONUP://鼠标松开事件
 				MouseUpEvent(&event);
+				break;
+			case SDL_KEYDOWN://键盘按下事件
+				KeyDownEvent(&event);
+				break;
+			case SDL_KEYUP://键盘松开事件
+				KeyUpEvent(&event);
 				break;
 			default:
 				break;
@@ -143,8 +149,8 @@ namespace Dungeon
 		if (mMovableRectangle)
 		{
 			// 两种方式回调都可以
-			mMovableRectangle->Draw(mRenderer);
-			//mMovableRectangle->Draw2(mRenderer);
+			mMovableRectangle->Draw(nullptr, mRenderer);
+			//mMovableRectangle->Draw2(nullptr,mRenderer);
 		}
 	}
 
@@ -169,6 +175,19 @@ namespace Dungeon
 
 	void Game::MouseDownEvent(SDL_Event *event)
 	{
+		SDL_MouseButtonEvent mouseButtonEvent = event->button;//鼠标按钮事件
+		Uint8 button = mouseButtonEvent.button;
+		switch (button)
+		{
+		case SDL_BUTTON_LEFT:
+			SDL_Log("Down mouse left button");
+			break;
+		case SDL_BUTTON_RIGHT:
+			SDL_Log("Down mouse right button");
+			break;
+		default:
+			break;
+		}
 		if (mMovableRectangle)
 		{
 			mMovableRectangle->MouseDown(event);
@@ -177,9 +196,70 @@ namespace Dungeon
 
 	void Game::MouseUpEvent(SDL_Event *event)
 	{
+		SDL_MouseButtonEvent mouseButtonEvent = event->button;//鼠标按钮事件
+		Uint8 button = mouseButtonEvent.button;
+		switch (button)
+		{
+		case SDL_BUTTON_LEFT:
+			SDL_Log("Up mouse left button");
+			break;
+		case SDL_BUTTON_RIGHT:
+			SDL_Log("Up mouse right button");
+			break;
+		default:
+			break;
+		}
 		if (mMovableRectangle)
 		{
 			mMovableRectangle->MouseUp(event);
+		}
+	}
+
+	void Game::KeyDownEvent(SDL_Event *event)
+	{
+		SDL_Keycode keycode = event->key.keysym.sym;
+		SDL_Scancode scancode = event->key.keysym.scancode;
+		SDL_Log("KeyDown,keycode:%d,%c,scancode:%d", keycode, keycode, scancode);
+		switch (scancode)
+		{
+		case SDL_SCANCODE_LEFT://左方向键
+			SDL_Log("keydown left key");
+			break;
+		case SDL_SCANCODE_RIGHT://右方向键
+			SDL_Log("keydown right key");
+			break;
+		case SDL_SCANCODE_DOWN://上方向键
+			SDL_Log("keydown down key");
+			break;
+		case SDL_SCANCODE_UP://下方向键
+			SDL_Log("keydown up ke");
+			break;
+		default:
+			break;
+		}
+	}
+
+	void Game::KeyUpEvent(SDL_Event *event)
+	{
+		SDL_Keycode keycode = event->key.keysym.sym;
+		SDL_Scancode scancode = event->key.keysym.scancode;
+		SDL_Log("KeyUp,keycode:%d,%c,scancode:%d", keycode, keycode, scancode);
+		switch (scancode)
+		{
+		case SDL_SCANCODE_LEFT://左方向键
+			SDL_Log("keyup left key");
+			break;
+		case SDL_SCANCODE_RIGHT://右方向键
+			SDL_Log("keyup right key");
+			break;
+		case SDL_SCANCODE_DOWN://上方向键
+			SDL_Log("keyup down key");
+			break;
+		case SDL_SCANCODE_UP://下方向键
+			SDL_Log("keyup up ke");
+			break;
+		default:
+			break;
 		}
 	}
 

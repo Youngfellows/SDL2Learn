@@ -31,6 +31,8 @@ namespace Dungeon
 		void MouseMoveEvent(SDL_Event *event);//光标移动事件
 		void MouseDownEvent(SDL_Event *event);//鼠标键按下事件
 		void MouseUpEvent(SDL_Event *event);//鼠标键松开事件
+		void KeyDownEvent(SDL_Event *event);//处理按键按下事件
+		void KeyUpEvent(SDL_Event *event);//处理按键松开事件
 		void ScanCodeLeftDownEvent();//按下方向左键
 		void ScanCodeRightDownEvent();//按下方向右键
 		void ScanCodeLeftUpEvent();//松开方向左键
