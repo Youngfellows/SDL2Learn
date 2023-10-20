@@ -17,13 +17,16 @@ namespace Dungeon
 	public:
 		Resource();
 		~Resource();
-		SDL_bool LoadCursor(const char *file, SDL_Renderer *renderer);
-		SDL_bool LoadBackground(const char *file, SDL_Renderer *renderer);
+		SDL_bool load(SDL_Renderer *renderer);
 		SDL_Texture *GetCursorTexture();
 		SDL_Surface *GetCursorSurface();
 		SDL_Cursor *GetCursor();
 		SDL_Texture *GetBackgroundTexture();
 		void Unload();
+
+	private:
+		SDL_bool LoadCursor(const char *file, SDL_Renderer *renderer);
+		SDL_bool LoadBackground(const char *file, SDL_Renderer *renderer);
 	};
 }
 #endif // !_DUNGEON_RESOURCE_H_

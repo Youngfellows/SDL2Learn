@@ -22,6 +22,13 @@ namespace Dungeon
 #define PT_SIZE_10 10 //大小10pt
 #define PT_SIZE_20 20 //大小20pt
 #define SPEED 5 //滚动速度
+
+#define CURSOR_DEST_RECT_WIDTH 20 //光标宽
+#define CURSOR_DEST_RECT_HEIGHT 20 //光标高
+#define CURSOR_FILE_NAME "./resources/cursor.png" //光标资源
+
+#define BACKGROUND_FILE_NAME "./resources/bg_volcano.png" //背景图
+
 }
 
 #endif // !_DUNGEON_CONFIG_H_

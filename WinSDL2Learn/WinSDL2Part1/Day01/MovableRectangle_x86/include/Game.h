@@ -3,6 +3,7 @@
 
 #include "SDL2/SDL.h"
 #include "DisplayObject.h"
+#include "Resource.h"
 
 namespace Dungeon
 {
@@ -12,7 +13,9 @@ namespace Dungeon
 		SDL_Window *mWindow;//Window窗口
 		bool mIsRunning;
 		SDL_Renderer *mRenderer;
+		Resource *mResource;//资源
 		DisplayObject *mMovableRectangle;//可以的矩形组件
+		DisplayObject *mCursor;//光标
 
 	public:
 		Game();

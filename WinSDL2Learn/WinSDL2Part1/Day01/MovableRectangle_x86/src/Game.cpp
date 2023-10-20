@@ -1,11 +1,13 @@
 #include "Game.h"
 #include "Config.h"
 #include "MovableRectangle.h"
+#include "Cursor.h"
 
 namespace Dungeon
 {
 	Game::Game() :mIsRunning(true), mWindow(nullptr),
-		mRenderer(nullptr), mMovableRectangle(nullptr)
+		mRenderer(nullptr), mMovableRectangle(nullptr),
+		mResource(nullptr), mCursor(nullptr)
 	{
 	}
 
@@ -43,11 +45,21 @@ namespace Dungeon
 			return false;
 		}
 
+		// 加载资源
+		mResource = new Resource();
+		if (!mResource->load(mRenderer))
+		{
+			return false;
+		}
+
 		// 创建绘制组件
 		if (!CreateComponents())
 		{
 			return false;
 		}
+
+		// 禁用默认光标
+		SDL_ShowCursor(SDL_DISABLE);
 
 		return true;
 	}
@@ -74,6 +86,12 @@ namespace Dungeon
 	void Game::Shutdown()
 	{
 		SDL_Log("Game:: Shutdown");
+		if (mResource)
+		{
+			mResource->Unload();
+			delete mResource;
+			mResource = nullptr;
+		}
 		FreeComponents();
 		SDL_DestroyRenderer(mRenderer);
 		SDL_DestroyWindow(mWindow);
@@ -134,6 +152,7 @@ namespace Dungeon
 
 	SDL_bool Game::CreateComponents()
 	{
+		// 创建可移动组件
 		MovableRectangle *rect = new MovableRectangle();
 		this->mMovableRectangle = rect->Create(
 			100, 100, INNER_RECT_REST_WIDTH, INNER_RECT_REST_HEIGHT,
@@ -144,6 +163,15 @@ namespace Dungeon
 		{
 			return SDL_FALSE;
 		}
+
+		// 创建光标组件
+		Cursor *cursor = new Cursor();
+		mCursor = cursor->Create(0, 0, CURSOR_DEST_RECT_WIDTH, CURSOR_DEST_RECT_HEIGHT);
+		if (!mCursor)
+		{
+			return SDL_FALSE;
+		}
+
 		return SDL_TRUE;
 	}
 
@@ -154,6 +182,10 @@ namespace Dungeon
 			// 两种方式回调都可以
 			mMovableRectangle->Draw(nullptr, mRenderer);
 			//mMovableRectangle->Draw2(nullptr,mRenderer);
+		}
+		if (mCursor)
+		{
+			mCursor->Draw(mResource, mRenderer);//绘制光标
 		}
 	}
 
@@ -166,13 +198,23 @@ namespace Dungeon
 			delete mMovableRectangle;
 			mMovableRectangle = nullptr;
 		}
+		if (mCursor)
+		{
+			mCursor->Destory();
+			delete mCursor;
+			mCursor = nullptr;
+		}
 	}
 
 	void Game::MouseMoveEvent(SDL_Event *event)
 	{
 		if (mMovableRectangle)
 		{
-			mMovableRectangle->MouseMove(event);
+			mMovableRectangle->MouseMove(event);//可拖动矩形处理鼠标移动事件
+		}
+		if (mCursor)
+		{
+			mCursor->MouseMove(event);//光标处理鼠标移动时间
 		}
 	}
 

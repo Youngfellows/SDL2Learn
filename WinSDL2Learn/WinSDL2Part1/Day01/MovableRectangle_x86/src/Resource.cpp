@@ -1,5 +1,5 @@
 #include "Resource.h"
-
+#include "Config.h"
 
 namespace Dungeon
 {
@@ -12,6 +12,21 @@ namespace Dungeon
 	Resource::~Resource()
 	{
 		Unload();
+	}
+
+	SDL_bool  Resource::load(SDL_Renderer *renderer)
+	{
+		// 加载光标资源
+		if (!LoadCursor(CURSOR_FILE_NAME, renderer))
+		{
+			return SDL_FALSE;
+		}
+		//加载背景图
+		if (!LoadBackground(BACKGROUND_FILE_NAME, renderer))
+		{
+			return SDL_FALSE;
+		}
+		return SDL_TRUE;
 	}
 
 	SDL_bool Resource::LoadCursor(const char *file, SDL_Renderer *renderer)
