@@ -15,6 +15,7 @@ namespace Dungeon
 		SDL_FPoint *point;//上一次光标位置
 		SDL_FRect *boundary;//边界
 		SDL_bool enableDrag;//是否可拖动
+		float speed;//滚动速度
 	}RectangleData;
 }
 
@@ -32,14 +33,17 @@ namespace Dungeon
 		MovableRectangle();
 		~MovableRectangle();
 		DisplayObject *Create(float x, float y, float w, float h,
-			int color, int borderColor, int borderSize, float bWidth, float bHeight);
+			int color, int borderColor, int borderSize, float bWidth, float bHeight, float speed);
 		static void OnDrawCallback(DisplayObject *self, Resource *resource, SDL_Renderer *renderer);
 		static void OnDrawCallback2(void *userdata, Resource *resource, SDL_Renderer *renderer);
 		static void OnMouseMoveCallback(DisplayObject *self, SDL_Event *event);
 		static void OnMouseDownCallback(DisplayObject *self, SDL_Event *event);
 		static void OnMouseUpCallback(DisplayObject *self, SDL_Event *event);
+		static void OnMouseWheelScrollCallback(DisplayObject *self, SDL_Event *event);
 		static void OnScanCodeLeftDownCallback(DisplayObject *self);
-		static void OnScanCodeLeftUpCallback(DisplayObject *self);
+		static void OnScanCodeRightDownCallback(DisplayObject *self);
+		static void OnScanCodeUpDownCallback(DisplayObject *self);
+		static void OnScanCodeDownDownCallback(DisplayObject *self);
 		static void OnDestoryCallback(DisplayObject *self);
 		RectangleData *GetRectangleData();
 	};

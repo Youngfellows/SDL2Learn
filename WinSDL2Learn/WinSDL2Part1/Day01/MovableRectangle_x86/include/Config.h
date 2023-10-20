@@ -21,6 +21,7 @@ namespace Dungeon
 
 #define PT_SIZE_10 10 //大小10pt
 #define PT_SIZE_20 20 //大小20pt
+#define SPEED 5 //滚动速度
 }
 
 #endif // !_DUNGEON_CONFIG_H_

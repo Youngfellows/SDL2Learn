@@ -31,12 +31,17 @@ namespace Dungeon
 		void MouseMoveEvent(SDL_Event *event);//光标移动事件
 		void MouseDownEvent(SDL_Event *event);//鼠标键按下事件
 		void MouseUpEvent(SDL_Event *event);//鼠标键松开事件
+		void MouseWheelEvent(SDL_Event *event);//鼠标滚轮事件
 		void KeyDownEvent(SDL_Event *event);//处理按键按下事件
 		void KeyUpEvent(SDL_Event *event);//处理按键松开事件
-		void ScanCodeLeftDownEvent();//按下方向左键
-		void ScanCodeRightDownEvent();//按下方向右键
-		void ScanCodeLeftUpEvent();//松开方向左键
-		void ScanCodeRightUpEvent();//松开方向右键
+		void ScanCodeLeftKeyDownEvent();//按下方向左键
+		void ScanCodeRightKeyDownEvent();//按下方向右键
+		void ScanCodeLeftKeyUpEvent();//松开方向左键
+		void ScanCodeRightKeyUpEvent();//松开方向右键
+		void ScanCodeUpKeyDownEvent();//按下方向上键
+		void ScanCodeDownKeyDownEvent();//按下方向下键
+		void ScanCodeUpKeyUpEvent();//松开方向上键
+		void ScanCodeDownKeyUpEvent();//松开方向下键
 	};
 }
 #endif // !_DUNGEON_GAME_H_

@@ -16,10 +16,15 @@ namespace Dungeon
 			OnCallback->OnMouseMove = nullptr;
 			OnCallback->OnMouseDown = nullptr;
 			OnCallback->OnMouseUp = nullptr;
+			OnCallback->OnMouseWheel = nullptr;
 			OnCallback->OnScanCodeLeftKeyDown = nullptr;
 			OnCallback->OnScanCodeRightKeyDown = nullptr;
 			OnCallback->OnScanCodeLeftKeyUp = nullptr;
 			OnCallback->OnScanCodeRightKeyUp = nullptr;
+			OnCallback->OnScanCodeUpKeyDown = nullptr;
+			OnCallback->OnScanCodeDownKeyDown = nullptr;
+			OnCallback->OnScanCodeUpKeyUp = nullptr;
+			OnCallback->OnScanCodeDownKeyUp = nullptr;
 			OnCallback->OnDestory = nullptr;
 		}
 	}
@@ -103,6 +108,17 @@ namespace Dungeon
 		}
 	}
 
+	void DisplayObject::MouseWheelScroll(SDL_Event *event)
+	{
+		if (OnCallback)
+		{
+			if (OnCallback->OnMouseWheel)
+			{
+				OnCallback->OnMouseWheel(this, event);
+			}
+		}
+	}
+
 	void DisplayObject::ScanCodeLeftKeyDown()
 	{
 		if (OnCallback)
@@ -143,6 +159,50 @@ namespace Dungeon
 			if (OnCallback->OnScanCodeRightKeyUp)
 			{
 				OnCallback->OnScanCodeRightKeyUp(this);
+			}
+		}
+	}
+
+	void DisplayObject::ScanCodeUpKeyDown()
+	{
+		if (OnCallback)
+		{
+			if (OnCallback->OnScanCodeUpKeyDown)
+			{
+				OnCallback->OnScanCodeUpKeyDown(this);
+			}
+		}
+	}
+
+	void DisplayObject::ScanCodeDownKeyDown()
+	{
+		if (OnCallback)
+		{
+			if (OnCallback->OnScanCodeDownKeyDown)
+			{
+				OnCallback->OnScanCodeDownKeyDown(this);
+			}
+		}
+	}
+
+	void DisplayObject::ScanCodeUpKeyUp()
+	{
+		if (OnCallback)
+		{
+			if (OnCallback->OnScanCodeUpKeyUp)
+			{
+				OnCallback->OnScanCodeUpKeyUp(this);
+			}
+		}
+	}
+
+	void DisplayObject::ScanCodeDownKeyUp()
+	{
+		if (OnCallback)
+		{
+			if (OnCallback->OnScanCodeDownKeyUp)
+			{
+				OnCallback->OnScanCodeDownKeyUp(this);
 			}
 		}
 	}

@@ -20,7 +20,7 @@ namespace Dungeon
 	}
 
 	DisplayObject *MovableRectangle::Create(float x, float y, float w, float h,
-		int color, int borderColor, int borderSize, float bWidth, float bHeight)
+		int color, int borderColor, int borderSize, float bWidth, float bHeight, float speed)
 	{
 		//动态申请内存
 		this->mRectangleData = (RectangleData *)malloc(sizeof(RectangleData));
@@ -43,6 +43,7 @@ namespace Dungeon
 		mRectangleData->borderColor = borderColor;
 		mRectangleData->borderSize = borderSize;
 		mRectangleData->enableDrag = SDL_FALSE;
+		mRectangleData->speed = speed;
 
 		mRectangleData->point = (SDL_FPoint *)malloc(sizeof(SDL_FPoint));
 		if (!mRectangleData->point)
@@ -83,8 +84,11 @@ namespace Dungeon
 			callbackData->OnMouseMove = &OnMouseMoveCallback;
 			callbackData->OnMouseDown = &OnMouseDownCallback;
 			callbackData->OnMouseUp = &OnMouseUpCallback;
+			callbackData->OnMouseWheel = &OnMouseWheelScrollCallback;
 			callbackData->OnScanCodeLeftKeyDown = &OnScanCodeLeftDownCallback;
-			callbackData->OnScanCodeLeftKeyUp = &OnScanCodeLeftUpCallback;
+			callbackData->OnScanCodeRightKeyDown = &OnScanCodeRightDownCallback;
+			callbackData->OnScanCodeUpKeyDown = &OnScanCodeUpDownCallback;
+			callbackData->OnScanCodeDownKeyDown = &OnScanCodeDownDownCallback;
 			callbackData->OnDestory = &OnDestoryCallback;
 		}
 		return displayObject;
@@ -99,6 +103,14 @@ namespace Dungeon
 	{
 		//SDL_Log("MovableRectangle::OnDrawCallback");
 		MovableRectangle *rect = (MovableRectangle *)self->GetSubClass();//注意,一定要获取subClass
+		OnDrawCallback2(rect, resource, renderer);
+	}
+
+
+	void MovableRectangle::OnDrawCallback2(void *userdata, Resource *resource, SDL_Renderer *renderer)
+	{
+		//SDL_Log("MovableRectangle::OnDrawCallback2");
+		MovableRectangle *rect = (MovableRectangle *)userdata;//注意,一定要获取subClass
 		if (rect)
 		{
 			RectangleData *data = rect->mRectangleData;
@@ -138,44 +150,6 @@ namespace Dungeon
 		}
 	}
 
-
-	void MovableRectangle::OnDrawCallback2(void *userdata, Resource *resource, SDL_Renderer *renderer)
-	{
-		//SDL_Log("MovableRectangle::OnDrawCallback2");
-		MovableRectangle *rect = (MovableRectangle *)userdata;//注意,一定要获取subClass
-		if (rect)
-		{
-			RectangleData *data = rect->mRectangleData;
-			//RectangleData *data = rect->GetRectangleData();
-			if (data)
-			{
-				//绘制边框,ARGB格式颜色0xff00ffff
-				Uint8 bRed = (data->borderColor & 0x00ff0000) >> 16;
-				Uint8 bGreen = (data->borderColor & 0x0000ff00) >> 8;
-				Uint8 bBlue = data->borderColor & 0x000000ff;
-				Uint8 bAlpha = (data->borderColor & 0xff000000) >> 24;
-				SDL_SetRenderDrawColor(renderer, bRed, bGreen, bBlue, bAlpha);
-				SDL_RenderFillRectF(renderer, data->dest);
-
-				//暂时不知道如何设置线宽,采用叠加的方式来实现了
-				//绘制矩形,ARGB格式颜色0xff00ffff 
-				Uint8 red = (data->color & 0x00ff0000) >> 16;
-				Uint8 green = (data->color & 0x0000ff00) >> 8;
-				Uint8 blue = data->color & 0x000000ff;
-				Uint8 alpha = (data->color & 0xff000000) >> 24;
-
-				float x = data->dest->x + data->borderSize;
-				float y = data->dest->y + data->borderSize;
-				float w = data->dest->w - 2 * data->borderSize;
-				float h = data->dest->h - 2 * data->borderSize;
-
-				SDL_FRect rect = { x,y,w,h };
-				SDL_SetRenderDrawColor(renderer, red, green, blue, alpha);
-				SDL_RenderFillRectF(renderer, &rect);
-			}
-		}
-	}
-
 	void MovableRectangle::OnMouseDownCallback(DisplayObject *self, SDL_Event *event)
 	{
 		MovableRectangle *rect = (MovableRectangle *)self->GetSubClass();//注意,一定要获取subClass
@@ -209,7 +183,55 @@ namespace Dungeon
 			if (data)
 			{
 				data->enableDrag = SDL_FALSE;//不可以拖动
+			}
+		}
+	}
 
+	void MovableRectangle::OnMouseWheelScrollCallback(DisplayObject *self, SDL_Event *event)
+	{
+		MovableRectangle *rect = (MovableRectangle *)self->GetSubClass();//注意,一定要获取subClass
+		if (rect)
+		{
+			RectangleData *data = rect->mRectangleData;
+			//RectangleData *data = rect->GetRectangleData();
+			if (data)
+			{
+				SDL_MouseWheelEvent wheel = event->wheel;
+				SDL_Log("x:%d", wheel.x);
+				SDL_Log("y:%d", wheel.y);//y为负:向下滚动, y为正:向上滚动
+				SDL_Log("preciseX:%f", wheel.preciseX);
+				SDL_Log("preciseY:%f", wheel.preciseY);//preciseY为负:向下滚动, preciseY为正:向上滚动
+				SDL_Log("mouseX:%d", wheel.mouseX);
+				SDL_Log("mouseY:%d", wheel.mouseY);
+				SDL_Log("direction:%d", wheel.direction);
+
+				//光标在范围内才可以滚动
+				SDL_FPoint mousePoint = { wheel.mouseX,wheel.mouseY };
+				if (SDL_PointInFRect(&mousePoint, data->boundary))
+				{
+					SDL_Log("Inner Scroll Wheel");
+					SDL_FRect *inner = data->dest;
+
+					//更新位置
+					float preciseY = wheel.preciseY;
+					if (preciseY < 0) //向下滚动
+					{
+						inner->y += data->speed;
+					}
+					else //向上滚动
+					{
+						inner->y -= data->speed;
+					}
+					//限定可拖动边界
+					if (inner->y < data->boundary->y)
+					{
+						inner->y = data->boundary->y;//限定上边界
+					}
+					if (inner->y > data->boundary->y + (data->boundary->h - inner->h))
+					{
+						inner->y = data->boundary->y + (data->boundary->h - inner->h);//限定下边界
+					}
+				}
 			}
 		}
 	}
@@ -264,11 +286,11 @@ namespace Dungeon
 					}
 					if (inner->y < data->boundary->y)
 					{
-						inner->y = data->boundary->y;//限定左边界
+						inner->y = data->boundary->y;//限定上边界
 					}
 					if (inner->y > data->boundary->y + (data->boundary->h - inner->h))
 					{
-						inner->y = data->boundary->y + (data->boundary->h - inner->h);//限定右边界
+						inner->y = data->boundary->y + (data->boundary->h - inner->h);//限定下边界
 					}
 				}
 			}
@@ -284,12 +306,19 @@ namespace Dungeon
 			//RectangleData *data = rect->GetRectangleData();
 			if (data)
 			{
-
+				//向左边更新x位置
+				SDL_FRect *inner = data->dest;
+				SDL_FRect *boundary = data->boundary;
+				inner->x -= data->speed;
+				if (inner->x < boundary->x)
+				{
+					inner->x = boundary->x;
+				}
 			}
 		}
 	}
 
-	void MovableRectangle::OnScanCodeLeftUpCallback(DisplayObject *self)
+	void MovableRectangle::OnScanCodeRightDownCallback(DisplayObject *self)
 	{
 		MovableRectangle *rect = (MovableRectangle *)self->GetSubClass();//注意,一定要获取subClass
 		if (rect)
@@ -298,7 +327,57 @@ namespace Dungeon
 			//RectangleData *data = rect->GetRectangleData();
 			if (data)
 			{
+				//向右边更新x位置
+				SDL_FRect *inner = data->dest;
+				SDL_FRect *boundary = data->boundary;
+				inner->x += data->speed;
+				if (inner->x > boundary->x + boundary->w - inner->w)
+				{
+					inner->x = boundary->x + boundary->w - inner->w;
+				}
+			}
+		}
+	}
 
+	void MovableRectangle::OnScanCodeUpDownCallback(DisplayObject *self)
+	{
+		MovableRectangle *rect = (MovableRectangle *)self->GetSubClass();//注意,一定要获取subClass
+		if (rect)
+		{
+			RectangleData *data = rect->mRectangleData;
+			//RectangleData *data = rect->GetRectangleData();
+			if (data)
+			{
+				//向上边更新y位置
+				SDL_FRect *inner = data->dest;
+				SDL_FRect *boundary = data->boundary;
+				inner->y -= data->speed;
+				if (inner->y < boundary->y)
+				{
+					inner->y = boundary->y;
+				}
+			}
+		}
+	}
+
+	void MovableRectangle::OnScanCodeDownDownCallback(DisplayObject *self)
+	{
+		SDL_Log("down ...");
+		MovableRectangle *rect = (MovableRectangle *)self->GetSubClass();//注意,一定要获取subClass
+		if (rect)
+		{
+			RectangleData *data = rect->mRectangleData;
+			//RectangleData *data = rect->GetRectangleData();
+			if (data)
+			{
+				//向下边更新y位置
+				SDL_FRect *inner = data->dest;
+				SDL_FRect *boundary = data->boundary;
+				inner->y += data->speed;
+				if (inner->y > boundary->y + boundary->h - inner->h)
+				{
+					inner->y = boundary->y + boundary->h - inner->h;
+				}
 			}
 		}
 	}

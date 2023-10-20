@@ -100,6 +100,9 @@ namespace Dungeon
 			case SDL_MOUSEBUTTONUP://鼠标松开事件
 				MouseUpEvent(&event);
 				break;
+			case SDL_MOUSEWHEEL://鼠标滚轮事件
+				MouseWheelEvent(&event);
+				break;
 			case SDL_KEYDOWN://键盘按下事件
 				KeyDownEvent(&event);
 				break;
@@ -135,7 +138,7 @@ namespace Dungeon
 		this->mMovableRectangle = rect->Create(
 			100, 100, INNER_RECT_REST_WIDTH, INNER_RECT_REST_HEIGHT,
 			INNER_RECT_FILL_COLOR, INNER_RECT_BORDER_COLOR, PT_SIZE_10,
-			OUTER_RECT_REST_WIDTH, OUTER_RECT_REST_HEIGHT);
+			OUTER_RECT_REST_WIDTH, OUTER_RECT_REST_HEIGHT, SPEED);
 
 		if (!mMovableRectangle)
 		{
@@ -215,6 +218,15 @@ namespace Dungeon
 		}
 	}
 
+	void Game::MouseWheelEvent(SDL_Event *event)
+	{
+		SDL_Log("Mouse whell scroll");
+		if (mMovableRectangle)
+		{
+			mMovableRectangle->MouseWheelScroll(event);
+		}
+	}
+
 	void Game::KeyDownEvent(SDL_Event *event)
 	{
 		SDL_Keycode keycode = event->key.keysym.sym;
@@ -222,17 +234,21 @@ namespace Dungeon
 		SDL_Log("KeyDown,keycode:%d,%c,scancode:%d", keycode, keycode, scancode);
 		switch (scancode)
 		{
-		case SDL_SCANCODE_LEFT://左方向键
+		case SDL_SCANCODE_LEFT://按下左方向键
 			SDL_Log("keydown left key");
+			ScanCodeLeftKeyDownEvent();
 			break;
-		case SDL_SCANCODE_RIGHT://右方向键
+		case SDL_SCANCODE_RIGHT://按下右方向键
 			SDL_Log("keydown right key");
+			ScanCodeRightKeyDownEvent();
 			break;
-		case SDL_SCANCODE_DOWN://上方向键
+		case SDL_SCANCODE_DOWN://按下下方向键
 			SDL_Log("keydown down key");
+			ScanCodeDownKeyDownEvent();
 			break;
-		case SDL_SCANCODE_UP://下方向键
-			SDL_Log("keydown up ke");
+		case SDL_SCANCODE_UP://按下上方向键
+			SDL_Log("keydown up key");
+			ScanCodeUpKeyDownEvent();
 			break;
 		default:
 			break;
@@ -246,41 +262,89 @@ namespace Dungeon
 		SDL_Log("KeyUp,keycode:%d,%c,scancode:%d", keycode, keycode, scancode);
 		switch (scancode)
 		{
-		case SDL_SCANCODE_LEFT://左方向键
+		case SDL_SCANCODE_LEFT://松开左方向键
 			SDL_Log("keyup left key");
+			ScanCodeLeftKeyUpEvent();
 			break;
-		case SDL_SCANCODE_RIGHT://右方向键
+		case SDL_SCANCODE_RIGHT://松开右方向键
 			SDL_Log("keyup right key");
+			ScanCodeRightKeyUpEvent();
 			break;
-		case SDL_SCANCODE_DOWN://上方向键
+		case SDL_SCANCODE_DOWN://松开下方向键
 			SDL_Log("keyup down key");
+			ScanCodeDownKeyUpEvent();
 			break;
-		case SDL_SCANCODE_UP://下方向键
-			SDL_Log("keyup up ke");
+		case SDL_SCANCODE_UP://松开上方向键
+			SDL_Log("keyup up key");
+			ScanCodeUpKeyUpEvent();
 			break;
 		default:
 			break;
 		}
 	}
 
-	void Game::ScanCodeLeftDownEvent()
+	void Game::ScanCodeLeftKeyDownEvent()
 	{
-
+		if (mMovableRectangle)
+		{
+			mMovableRectangle->ScanCodeLeftKeyDown();
+		}
 	}
 
-	void Game::ScanCodeRightDownEvent()
+	void Game::ScanCodeRightKeyDownEvent()
 	{
-
+		if (mMovableRectangle)
+		{
+			mMovableRectangle->ScanCodeRightKeyDown();
+		}
 	}
 
-	void Game::ScanCodeLeftUpEvent()
+	void Game::ScanCodeLeftKeyUpEvent()
 	{
-
+		if (mMovableRectangle)
+		{
+			mMovableRectangle->ScanCodeLeftKeyUp();
+		}
 	}
 
-	void Game::ScanCodeRightUpEvent()
+	void Game::ScanCodeRightKeyUpEvent()
 	{
+		if (mMovableRectangle)
+		{
+			mMovableRectangle->ScanCodeRightKeyUp();
+		}
+	}
 
+	void Game::ScanCodeUpKeyDownEvent()
+	{
+		if (mMovableRectangle)
+		{
+			mMovableRectangle->ScanCodeUpKeyDown();
+		}
+	}
+
+	void Game::ScanCodeDownKeyDownEvent()
+	{
+		if (mMovableRectangle)
+		{
+			mMovableRectangle->ScanCodeDownKeyDown();
+		}
+	}
+
+	void Game::ScanCodeUpKeyUpEvent()
+	{
+		if (mMovableRectangle)
+		{
+			mMovableRectangle->ScanCodeUpKeyUp();
+		}
+	}
+
+	void Game::ScanCodeDownKeyUpEvent()
+	{
+		if (mMovableRectangle)
+		{
+			mMovableRectangle->ScanCodeDownKeyUp();
+		}
 	}
 
 }
