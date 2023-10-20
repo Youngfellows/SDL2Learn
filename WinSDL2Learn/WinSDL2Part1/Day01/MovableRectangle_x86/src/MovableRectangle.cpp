@@ -141,10 +141,10 @@ namespace Dungeon
 				if (data->isBorder)
 				{
 					// SDL_RenderDrawRectF(renderer, &rect);//带边框的矩形,有个问题,不能设置边框大小
-					// 绘制边框
 					SDL_SetRenderDrawColor(renderer, bRed, bGreen, bBlue, bAlpha);
 					SDL_RenderFillRectF(renderer, data->dest);
 
+					// 绘制边框
 					float x = data->dest->x + data->borderSize;
 					float y = data->dest->y + data->borderSize;
 					float w = data->dest->w - 2 * data->borderSize;
