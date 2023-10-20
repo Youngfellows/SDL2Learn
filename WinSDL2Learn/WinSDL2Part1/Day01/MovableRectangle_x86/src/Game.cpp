@@ -2,12 +2,13 @@
 #include "Config.h"
 #include "MovableRectangle.h"
 #include "Cursor.h"
+#include "Background.h"
 
 namespace Dungeon
 {
 	Game::Game() :mIsRunning(true), mWindow(nullptr),
 		mRenderer(nullptr), mMovableRectangle(nullptr),
-		mResource(nullptr), mCursor(nullptr)
+		mResource(nullptr), mCursor(nullptr), mBackground(nullptr)
 	{
 	}
 
@@ -155,9 +156,9 @@ namespace Dungeon
 		// 创建可移动组件
 		MovableRectangle *rect = new MovableRectangle();
 		this->mMovableRectangle = rect->Create(
-			100, 100, INNER_RECT_REST_WIDTH, INNER_RECT_REST_HEIGHT,
-			INNER_RECT_FILL_COLOR, INNER_RECT_BORDER_COLOR, PT_SIZE_10,
-			OUTER_RECT_REST_WIDTH, OUTER_RECT_REST_HEIGHT, SPEED);
+			START_X_POSITION, START_Y_POSITION, INNER_RECT_DEST_WIDTH, INNER_RECT_DEST_HEIGHT,
+			INNER_RECT_FILL_COLOR, SDL_TRUE, INNER_RECT_BORDER_COLOR, PT_SIZE_5,
+			BACKGROUND_RECT_DEST_WIDTH, BACKGROUND_RECT_DEST_HEIGHT, SPEED);
 
 		if (!mMovableRectangle)
 		{
@@ -172,17 +173,33 @@ namespace Dungeon
 			return SDL_FALSE;
 		}
 
+		// 创建背景组件
+		Background *background = new Background();
+		mBackground = background->Create(START_X_POSITION, START_Y_POSITION, BACKGROUND_RECT_DEST_WIDTH,
+			BACKGROUND_RECT_DEST_HEIGHT, BACKGROUND_RECT_FILL_COLOR, SDL_TRUE,
+			BACKGROUND_RECT_BORDER_COLOR, PT_SIZE_20);
+		if (!mBackground)
+		{
+			return SDL_FALSE;
+		}
+
 		return SDL_TRUE;
 	}
 
 	void Game::DrawComponents()
 	{
+		if (mBackground)
+		{
+			mBackground->Draw(mResource, mRenderer);
+		}
+
 		if (mMovableRectangle)
 		{
 			// 两种方式回调都可以
-			mMovableRectangle->Draw(nullptr, mRenderer);
+			mMovableRectangle->Draw(mResource, mRenderer);
 			//mMovableRectangle->Draw2(nullptr,mRenderer);
 		}
+
 		if (mCursor)
 		{
 			mCursor->Draw(mResource, mRenderer);//绘制光标
@@ -203,6 +220,12 @@ namespace Dungeon
 			mCursor->Destory();
 			delete mCursor;
 			mCursor = nullptr;
+		}
+		if (mBackground)
+		{
+			mBackground->Destory();
+			delete mBackground;
+			mBackground = nullptr;
 		}
 	}
 

@@ -16,6 +16,7 @@ namespace Dungeon
 		Resource *mResource;//资源
 		DisplayObject *mMovableRectangle;//可以的矩形组件
 		DisplayObject *mCursor;//光标
+		DisplayObject *mBackground;//游戏背景
 
 	public:
 		Game();

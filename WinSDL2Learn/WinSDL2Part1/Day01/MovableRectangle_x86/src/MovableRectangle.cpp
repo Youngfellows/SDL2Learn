@@ -20,7 +20,7 @@ namespace Dungeon
 	}
 
 	DisplayObject *MovableRectangle::Create(float x, float y, float w, float h,
-		int color, int borderColor, int borderSize, float bWidth, float bHeight, float speed)
+		int color, SDL_bool isBorder, int borderColor, int borderSize, float bWidth, float bHeight, float speed)
 	{
 		//动态申请内存
 		this->mRectangleData = (RectangleData *)malloc(sizeof(RectangleData));
@@ -44,6 +44,8 @@ namespace Dungeon
 		mRectangleData->borderSize = borderSize;
 		mRectangleData->enableDrag = SDL_FALSE;
 		mRectangleData->speed = speed;
+		mRectangleData->isBorder = isBorder;
+		mRectangleData->direction = DIRECTION_NONE;
 
 		mRectangleData->point = (SDL_FPoint *)malloc(sizeof(SDL_FPoint));
 		if (!mRectangleData->point)
@@ -118,16 +120,15 @@ namespace Dungeon
 			if (data)
 			{
 				// 测试绘制外边框
-				SDL_SetRenderDrawColor(renderer, 128, 223, 88, 255);
-				SDL_RenderFillRectF(renderer, data->boundary);
+				/*SDL_SetRenderDrawColor(renderer, 128, 223, 88, 255);
+				SDL_RenderFillRectF(renderer, data->boundary);*/
 
 				//绘制边框,ARGB格式颜色0xff00ffff
 				Uint8 bRed = (data->borderColor & 0x00ff0000) >> 16;
 				Uint8 bGreen = (data->borderColor & 0x0000ff00) >> 8;
 				Uint8 bBlue = data->borderColor & 0x000000ff;
 				Uint8 bAlpha = (data->borderColor & 0xff000000) >> 24;
-				SDL_SetRenderDrawColor(renderer, bRed, bGreen, bBlue, bAlpha);
-				SDL_RenderFillRectF(renderer, data->dest);
+
 
 				//暂时不知道如何设置线宽,采用叠加的方式来实现了
 				//绘制矩形,ARGB格式颜色0xff00ffff 
@@ -136,16 +137,86 @@ namespace Dungeon
 				Uint8 blue = data->color & 0x000000ff;
 				Uint8 alpha = (data->color & 0xff000000) >> 24;
 
-				float x = data->dest->x + data->borderSize;
-				float y = data->dest->y + data->borderSize;
-				float w = data->dest->w - 2 * data->borderSize;
-				float h = data->dest->h - 2 * data->borderSize;
+				//有边框
+				if (data->isBorder)
+				{
+					// SDL_RenderDrawRectF(renderer, &rect);//带边框的矩形,有个问题,不能设置边框大小
+					// 绘制边框
+					SDL_SetRenderDrawColor(renderer, bRed, bGreen, bBlue, bAlpha);
+					SDL_RenderFillRectF(renderer, data->dest);
 
-				SDL_FRect rect = { x,y,w,h };
-				SDL_SetRenderDrawColor(renderer, red, green, blue, alpha);
-				SDL_RenderFillRectF(renderer, &rect);
-				//SDL_RenderDrawRectF(renderer, &rect);//带边框的矩形,有个问题,不能设置边框大小
+					float x = data->dest->x + data->borderSize;
+					float y = data->dest->y + data->borderSize;
+					float w = data->dest->w - 2 * data->borderSize;
+					float h = data->dest->h - 2 * data->borderSize;
 
+					// 绘制填充色
+					SDL_FRect rect = { x,y,w,h };
+					SDL_SetRenderDrawColor(renderer, red, green, blue, alpha);
+					SDL_RenderFillRectF(renderer, &rect);
+
+					// 绘制图片
+					if (resource)
+					{
+						//SDL_RenderCopyF(renderer, resource->GetPlayerTexture(), nullptr, &rect);
+						//SDL_RenderCopyExF(renderer, resource->GetPlayerTexture(), nullptr, &rect,180,nullptr,SDL_FLIP_NONE);
+						SDL_RenderCopyExF(renderer, resource->GetPlayerTexture(), nullptr, &rect, 90, nullptr, SDL_FLIP_HORIZONTAL);
+						//SDL_RenderCopyExF(renderer, resource->GetPlayerTexture(), nullptr, &rect, 0, nullptr, SDL_FLIP_VERTICAL);
+
+						//获取朝向
+						Direction direction = data->direction;
+						switch (direction)
+						{
+						case DIRECTION_LEFT:
+							SDL_RenderCopyExF(renderer, resource->GetPlayerTexture(), nullptr, &rect, 0, nullptr, SDL_FLIP_HORIZONTAL);
+							break;
+						case DIRECTION_RIGHT:
+							SDL_RenderCopyExF(renderer, resource->GetPlayerTexture(), nullptr, &rect, 0, nullptr, SDL_FLIP_NONE);
+							break;
+						case DIRECTION_UP:
+							SDL_RenderCopyExF(renderer, resource->GetPlayerTexture(), nullptr, &rect, -90, nullptr, SDL_FLIP_NONE);
+							break;
+						case DIRECTION_DOWN:
+							SDL_RenderCopyExF(renderer, resource->GetPlayerTexture(), nullptr, &rect, 90, nullptr, SDL_FLIP_NONE);
+							break;
+						default:
+							SDL_RenderCopyExF(renderer, resource->GetPlayerTexture(), nullptr, &rect, 0, nullptr, SDL_FLIP_NONE);
+							break;
+						}
+					}
+				}
+				else
+				{
+					// 绘制填充色
+					SDL_SetRenderDrawColor(renderer, red, green, blue, alpha);
+					SDL_RenderFillRectF(renderer, data->dest);
+
+					// 绘制图片
+					if (resource)
+					{
+						//SDL_RenderCopyF(renderer, resource->GetPlayerTexture(), nullptr, data->dest);
+						//获取朝向
+						Direction direction = data->direction;
+						switch (direction)
+						{
+						case DIRECTION_LEFT:
+							SDL_RenderCopyExF(renderer, resource->GetPlayerTexture(), nullptr, data->dest, 0, nullptr, SDL_FLIP_HORIZONTAL);
+							break;
+						case DIRECTION_RIGHT:
+							SDL_RenderCopyExF(renderer, resource->GetPlayerTexture(), nullptr, data->dest, 0, nullptr, SDL_FLIP_NONE);
+							break;
+						case DIRECTION_UP:
+							SDL_RenderCopyExF(renderer, resource->GetPlayerTexture(), nullptr, data->dest, -90, nullptr, SDL_FLIP_NONE);
+							break;
+						case DIRECTION_DOWN:
+							SDL_RenderCopyExF(renderer, resource->GetPlayerTexture(), nullptr, data->dest, 90, nullptr, SDL_FLIP_NONE);
+							break;
+						default:
+							SDL_RenderCopyExF(renderer, resource->GetPlayerTexture(), nullptr, data->dest, 0, nullptr, SDL_FLIP_NONE);
+							break;
+						}
+					}
+				}
 			}
 		}
 	}
@@ -314,6 +385,8 @@ namespace Dungeon
 				{
 					inner->x = boundary->x;
 				}
+				data->direction = DIRECTION_LEFT;
+				//data->direction = Direction::DIRECTION_LEFT;
 			}
 		}
 	}
@@ -335,6 +408,7 @@ namespace Dungeon
 				{
 					inner->x = boundary->x + boundary->w - inner->w;
 				}
+				data->direction = DIRECTION_RIGHT;
 			}
 		}
 	}
@@ -356,6 +430,7 @@ namespace Dungeon
 				{
 					inner->y = boundary->y;
 				}
+				data->direction = DIRECTION_UP;
 			}
 		}
 	}
@@ -378,6 +453,7 @@ namespace Dungeon
 				{
 					inner->y = boundary->y + boundary->h - inner->h;
 				}
+				data->direction = DIRECTION_DOWN;
 			}
 		}
 	}

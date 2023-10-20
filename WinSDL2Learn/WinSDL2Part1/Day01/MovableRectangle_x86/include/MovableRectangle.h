@@ -6,6 +6,15 @@
 
 namespace Dungeon
 {
+	typedef	enum Direction
+	{
+		DIRECTION_NONE,//默认朝向
+		DIRECTION_LEFT,//向左
+		DIRECTION_RIGHT,//向右
+		DIRECTION_UP,//向上
+		DIRECTION_DOWN,//向下
+	} Direction;
+
 	typedef struct RectangleData
 	{
 		SDL_FRect *dest;//要绘制的目标矩形位置
@@ -16,6 +25,8 @@ namespace Dungeon
 		SDL_FRect *boundary;//边界
 		SDL_bool enableDrag;//是否可拖动
 		float speed;//滚动速度
+		SDL_bool isBorder;//是否有边框
+		Direction direction;//朝向
 	}RectangleData;
 }
 
@@ -33,7 +44,7 @@ namespace Dungeon
 		MovableRectangle();
 		~MovableRectangle();
 		DisplayObject *Create(float x, float y, float w, float h,
-			int color, int borderColor, int borderSize, float bWidth, float bHeight, float speed);
+			int color, SDL_bool isBorder, int borderColor, int borderSize, float bWidth, float bHeight, float speed);
 		static void OnDrawCallback(DisplayObject *self, Resource *resource, SDL_Renderer *renderer);
 		static void OnDrawCallback2(void *userdata, Resource *resource, SDL_Renderer *renderer);
 		static void OnMouseMoveCallback(DisplayObject *self, SDL_Event *event);

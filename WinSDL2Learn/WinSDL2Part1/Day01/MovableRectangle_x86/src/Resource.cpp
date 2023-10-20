@@ -5,7 +5,7 @@ namespace Dungeon
 {
 	Resource::Resource() :
 		mCursorTexture(nullptr), mCursorSurface(nullptr), mCursor(nullptr),
-		mBackgroundTexture(nullptr)
+		mBackgroundTexture(nullptr), mPlayerTexture(nullptr)
 	{
 	}
 
@@ -23,6 +23,11 @@ namespace Dungeon
 		}
 		//加载背景图
 		if (!LoadBackground(BACKGROUND_FILE_NAME, renderer))
+		{
+			return SDL_FALSE;
+		}
+		//加载玩家
+		if (!LoadPlayer(PLAYER_FILE_NAME, renderer))
 		{
 			return SDL_FALSE;
 		}
@@ -64,6 +69,17 @@ namespace Dungeon
 		return SDL_TRUE;
 	}
 
+	SDL_bool Resource::LoadPlayer(const char *file, SDL_Renderer *renderer)
+	{
+		mPlayerTexture = IMG_LoadTexture(renderer, file);
+		if (!mPlayerTexture)
+		{
+			SDL_Log("Can not load player image: %s", SDL_GetError());
+			return SDL_FALSE;
+		}
+		return SDL_TRUE;
+	}
+
 	SDL_Surface *Resource::GetCursorSurface()
 	{
 		return this->mCursorSurface;
@@ -82,6 +98,11 @@ namespace Dungeon
 	SDL_Texture *Resource::GetBackgroundTexture()
 	{
 		return this->mBackgroundTexture;
+	}
+
+	SDL_Texture *Resource::GetPlayerTexture()
+	{
+		return this->mPlayerTexture;
 	}
 
 	void Resource::Unload()
@@ -105,6 +126,11 @@ namespace Dungeon
 		{
 			SDL_FreeSurface(mCursorSurface);
 			mCursorSurface = nullptr;
+		}
+		if (mPlayerTexture)
+		{
+			SDL_DestroyTexture(mPlayerTexture);
+			mPlayerTexture = nullptr;
 		}
 	}
 }

@@ -33,6 +33,9 @@
     <ClInclude Include="include\Cursor.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="include\Background.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\DisplayObject.cpp">
@@ -51,6 +54,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\Cursor.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Background.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
