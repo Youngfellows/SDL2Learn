@@ -3,12 +3,14 @@
 #include "Player.h"
 #include "Cursor.h"
 #include "Background.h"
+#include "Mine.h"
 
 namespace Dungeon
 {
 	Game::Game() :mIsRunning(true), mWindow(nullptr),
 		mRenderer(nullptr), mPlayer(nullptr),
-		mResource(nullptr), mCursor(nullptr), mBackground(nullptr)
+		mResource(nullptr), mCursor(nullptr), mBackground(nullptr),
+		mMine(nullptr)
 	{
 	}
 
@@ -183,6 +185,15 @@ namespace Dungeon
 			return SDL_FALSE;
 		}
 
+		// 创建雷组件
+		Mine *mine = new Mine();
+		mMine = mine->Create(START_X_POSITION, START_Y_POSITION,
+			MINE_FIELD_WIDTH, MINE_FIELD_HEIGHT, MINE_SIZE, MINE_DEST_RECT_WIDTH,
+			MINE_DEST_RECT_HEIGHT);
+		if (!mMine)
+		{
+			return SDL_FALSE;
+		}
 		return SDL_TRUE;
 	}
 
@@ -191,6 +202,11 @@ namespace Dungeon
 		if (mBackground)
 		{
 			mBackground->Draw(mResource, mRenderer);
+		}
+
+		if (mMine)
+		{
+			mMine->Draw(mResource, mRenderer);//绘制雷
 		}
 
 		if (mPlayer)
@@ -226,6 +242,12 @@ namespace Dungeon
 			mBackground->Destory();
 			delete mBackground;
 			mBackground = nullptr;
+		}
+		if (mMine)
+		{
+			mMine->Destory();
+			delete mMine;
+			mMine = nullptr;
 		}
 	}
 

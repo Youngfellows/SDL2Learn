@@ -14,9 +14,10 @@ namespace Dungeon
 		bool mIsRunning;
 		SDL_Renderer *mRenderer;
 		Resource *mResource;//资源
-		DisplayObject *mPlayer;//可以的矩形组件
+		DisplayObject *mPlayer;//玩家,可移动矩形组件
 		DisplayObject *mCursor;//光标
 		DisplayObject *mBackground;//游戏背景
+		DisplayObject *mMine;//雷
 
 	public:
 		Game();

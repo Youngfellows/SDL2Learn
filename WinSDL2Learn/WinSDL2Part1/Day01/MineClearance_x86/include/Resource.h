@@ -14,6 +14,7 @@ namespace Dungeon
 		SDL_Texture *mCursorTexture;//鼠标资源
 		SDL_Texture *mBackgroundTexture;//背景资源
 		SDL_Texture *mPlayerTexture;//玩家
+		SDL_Texture *mMineTexture;//雷
 
 	public:
 		Resource();
@@ -24,12 +25,14 @@ namespace Dungeon
 		SDL_Cursor *GetCursor();
 		SDL_Texture *GetBackgroundTexture();
 		SDL_Texture *GetPlayerTexture();
+		SDL_Texture *GetMineTexture();
 		void Unload();
 
 	private:
 		SDL_bool LoadCursor(const char *file, SDL_Renderer *renderer);
 		SDL_bool LoadBackground(const char *file, SDL_Renderer *renderer);
 		SDL_bool LoadPlayer(const char *file, SDL_Renderer *renderer);
+		SDL_bool LoadMine(const char *file, SDL_Renderer *renderer);
 	};
 }
 #endif // !_DUNGEON_RESOURCE_H_

@@ -5,7 +5,7 @@ namespace Dungeon
 {
 	Resource::Resource() :
 		mCursorTexture(nullptr), mCursorSurface(nullptr), mCursor(nullptr),
-		mBackgroundTexture(nullptr), mPlayerTexture(nullptr)
+		mBackgroundTexture(nullptr), mPlayerTexture(nullptr), mMineTexture(nullptr)
 	{
 	}
 
@@ -28,6 +28,11 @@ namespace Dungeon
 		}
 		//加载玩家
 		if (!LoadPlayer(PLAYER_FILE_NAME, renderer))
+		{
+			return SDL_FALSE;
+		}
+		//加载雷
+		if (!LoadMine(MINE_FILE_NAME, renderer))
 		{
 			return SDL_FALSE;
 		}
@@ -80,6 +85,25 @@ namespace Dungeon
 		return SDL_TRUE;
 	}
 
+	SDL_bool Resource::LoadMine(const char *file, SDL_Renderer *renderer)
+	{
+		SDL_Surface *mineSurface = SDL_LoadBMP(file);
+		if (!mineSurface)
+		{
+			SDL_Log("Can not load mine image: %s", SDL_GetError());
+			return SDL_FALSE;
+		}
+		//mMineTexture = IMG_LoadTexture(renderer, file);
+		mMineTexture = SDL_CreateTextureFromSurface(renderer, mineSurface);
+		SDL_FreeSurface(mineSurface);
+		if (!mMineTexture)
+		{
+			SDL_Log("Can not create mine texture: %s", SDL_GetError());
+			return SDL_FALSE;
+		}
+		return SDL_TRUE;
+	}
+
 	SDL_Surface *Resource::GetCursorSurface()
 	{
 		return this->mCursorSurface;
@@ -103,6 +127,11 @@ namespace Dungeon
 	SDL_Texture *Resource::GetPlayerTexture()
 	{
 		return this->mPlayerTexture;
+	}
+
+	SDL_Texture *Resource::GetMineTexture()
+	{
+		return this->mMineTexture;
 	}
 
 	void Resource::Unload()
@@ -131,6 +160,11 @@ namespace Dungeon
 		{
 			SDL_DestroyTexture(mPlayerTexture);
 			mPlayerTexture = nullptr;
+		}
+		if (mMineTexture)
+		{
+			SDL_DestroyTexture(mMineTexture);
+			mMineTexture = nullptr;
 		}
 	}
 }
