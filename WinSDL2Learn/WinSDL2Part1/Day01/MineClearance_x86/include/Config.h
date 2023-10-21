@@ -9,15 +9,15 @@ namespace Dungeon
 #define WINDOW_TITLE "Dungeon" //Window窗口title
 
 #define START_X_POSITION 50 //绘制开始X位置
-#define START_Y_POSITION 50 //绘制开始Y位置
+#define START_Y_POSITION 25 //绘制开始Y位置
 
-#define INNER_RECT_DEST_WIDTH 100 //矩形宽
-#define INNER_RECT_DEST_HEIGHT INNER_RECT_DEST_WIDTH //矩形高
+#define INNER_RECT_DEST_WIDTH 50 //玩家宽
+#define INNER_RECT_DEST_HEIGHT INNER_RECT_DEST_WIDTH //玩家高
 #define INNER_RECT_BORDER_COLOR 0xffff0000 //矩形边框颜色
 #define INNER_RECT_FILL_COLOR 0xff0000ff //矩形填充颜色
 
-#define BACKGROUND_RECT_DEST_WIDTH 400 //矩形宽
-#define BACKGROUND_RECT_DEST_HEIGHT 300 //矩形高
+#define BACKGROUND_RECT_DEST_WIDTH 500 //矩形宽
+#define BACKGROUND_RECT_DEST_HEIGHT 350 //矩形高
 #define BACKGROUND_RECT_BORDER_COLOR 0xff239344 //矩形边框颜色
 #define BACKGROUND_RECT_FILL_COLOR 0xFFFFB900 //矩形填充颜色
 
@@ -34,7 +34,7 @@ namespace Dungeon
 #define PLAYER_FILE_NAME "./resources/player.png"
 
 	//Minefield
-#define MINE_SIZE 10 //地雷数量
+#define MINE_SIZE 20 //地雷数量
 #define MINE_FIELD_WIDTH BACKGROUND_RECT_DEST_WIDTH //雷场宽
 #define MINE_FIELD_HEIGHT BACKGROUND_RECT_DEST_HEIGHT //雷场高
 #define MINE_DEST_RECT_WIDTH 20 //雷宽

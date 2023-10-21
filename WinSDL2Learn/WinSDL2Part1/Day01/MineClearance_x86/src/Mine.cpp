@@ -136,6 +136,8 @@ namespace Dungeon
 				{
 					MineData *mineData = *(minefieldData->mines + i);
 					SDL_FRect *dest = mineData->dest;
+
+					//有bug,必须要4个点中的一个碰到才可以,所以不能把玩家做得太大了
 					if (SDL_PointInFRect(&lTPoint, dest)
 						|| SDL_PointInFRect(&rTPoint, dest)
 						|| SDL_PointInFRect(&lBPoint, dest)

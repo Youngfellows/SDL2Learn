@@ -93,6 +93,7 @@ namespace Dungeon
 			callbackData->OnScanCodeRightKeyDown = &OnScanCodeRightDownCallback;
 			callbackData->OnScanCodeUpKeyDown = &OnScanCodeUpDownCallback;
 			callbackData->OnScanCodeDownKeyDown = &OnScanCodeDownDownCallback;
+			callbackData->OnPlayerMove = &SetPlayerMoveCallback;//一定要设置位置更新回调函数
 			callbackData->OnDestory = &OnDestoryCallback;
 		}
 		return displayObject;
