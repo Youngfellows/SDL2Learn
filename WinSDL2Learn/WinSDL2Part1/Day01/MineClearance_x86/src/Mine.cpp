@@ -117,6 +117,9 @@ namespace Dungeon
 		}
 	}
 
+	/*
+	* 逻辑:直线上的点触到雷,雷就消失
+	*/
 	void Mine::OnPlayerPosChangeCallback(DisplayObject *self, SDL_FRect *position)
 	{
 		Mine *mine = (Mine *)self->GetSubClass();
@@ -130,6 +133,8 @@ namespace Dungeon
 				SDL_FPoint rTPoint = { position->x + position->w,position->y };
 				SDL_FPoint lBPoint = { position->x,position->y + position->h };
 				SDL_FPoint rBPoint = { position->x + position->w,position->y + position->h };
+				int xSize = (int)position->w;//x方向的点数
+				int ySize = (int)position->w;//y方向的点数
 
 				int size = minefieldData->size;
 				for (int i = 0; i < size; i++)
@@ -137,15 +142,79 @@ namespace Dungeon
 					MineData *mineData = *(minefieldData->mines + i);
 					SDL_FRect *dest = mineData->dest;
 
-					//有bug,必须要4个点中的一个碰到才可以,所以不能把玩家做得太大了
-					if (SDL_PointInFRect(&lTPoint, dest)
-						|| SDL_PointInFRect(&rTPoint, dest)
-						|| SDL_PointInFRect(&lBPoint, dest)
-						|| SDL_PointInFRect(&rBPoint, dest))
+					////有bug,必须要4个点中的一个碰到才可以,所以不能把玩家做得太大了
+					//if (SDL_PointInFRect(&lTPoint, dest)
+					//	|| SDL_PointInFRect(&rTPoint, dest)
+					//	|| SDL_PointInFRect(&lBPoint, dest)
+					//	|| SDL_PointInFRect(&rBPoint, dest))
+					//{
+					//	mineData->visible = SDL_FALSE;
+					//}
+
+					SDL_FPoint *lPoints = (SDL_FPoint *)malloc(sizeof(SDL_FPoint) * ySize);
+					SDL_FPoint *tPoints = (SDL_FPoint *)malloc(sizeof(SDL_FPoint) * xSize);
+					SDL_FPoint *rPoints = (SDL_FPoint *)malloc(sizeof(SDL_FPoint) * ySize);
+					SDL_FPoint *bPoints = (SDL_FPoint *)malloc(sizeof(SDL_FPoint) * xSize);
+
+					if (lPoints)	//左边线
 					{
-						mineData->visible = SDL_FALSE;
+						for (int i = 0; i < ySize; i++)
+						{
+							//lPoints[i].x = position->x;
+							(*(lPoints + i)).x = position->x;
+							(*(lPoints + i)).y = position->y + i;
+							if (SDL_PointInFRect(lPoints, dest))//直线上的点触到雷
+							{
+								mineData->visible = SDL_FALSE;
+							}
+						}
+						free(lPoints);//释放内存
 					}
 
+					if (tPoints)//上边线
+					{
+						for (int i = 0; i < xSize; i++)
+						{
+							//lPoints[i].x = position->x;
+							(*(tPoints + i)).x = position->x + i;
+							(*(tPoints + i)).y = position->y;
+
+							if (SDL_PointInFRect(tPoints, dest))//直线上的点触到雷
+							{
+								mineData->visible = SDL_FALSE;
+							}
+						}
+						free(tPoints);//释放内存
+					}
+
+					if (rPoints)//右边线
+					{
+						for (int i = 0; i < ySize; i++)
+						{
+							//lPoints[i].x = position->x;
+							(*(rPoints + i)).x = position->x + position->w;
+							(*(rPoints + i)).y = position->y + i;
+							if (SDL_PointInFRect(rPoints, dest))//直线上的点触到雷
+							{
+								mineData->visible = SDL_FALSE;
+							}
+						}
+						free(rPoints);//释放内存
+					}
+					if (bPoints)//底边线
+					{
+						for (int i = 0; i < xSize; i++)
+						{
+							//lPoints[i].x = position->x;
+							(*(bPoints + i)).x = position->x + i;
+							(*(bPoints + i)).y = position->y + position->h;
+							if (SDL_PointInFRect(bPoints, dest))//直线上的点触到雷
+							{
+								mineData->visible = SDL_FALSE;
+							}
+						}
+						free(bPoints);//释放内存
+					}
 				}
 			}
 		}
