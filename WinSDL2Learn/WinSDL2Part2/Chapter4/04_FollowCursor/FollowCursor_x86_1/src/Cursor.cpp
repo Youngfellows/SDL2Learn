@@ -14,7 +14,7 @@ namespace Dungeon
 
 	DisplayObject *Cursor::Cursor_Create(float x, float y, float w, float h)
 	{
-		//¶¯Ì¬ÉêÇëÄÚ´æ
+		//ï¿½ï¿½Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½Ú´ï¿½
 		mCursorData = (CursorData *)malloc(sizeof(CursorData));
 		if (!mCursorData)
 		{
@@ -37,7 +37,7 @@ namespace Dungeon
 		{
 			return nullptr;
 		}
-		displayObject->subClass = this;//ÉèÖÃÒªÏÔÊ¾¶ÔÏó,Ïàµ±ÓÚ·ºÐÍ
+		displayObject->subClass = this;//ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½,ï¿½àµ±ï¿½Ú·ï¿½ï¿½ï¿½
 
 		return displayObject;
 	}
@@ -57,7 +57,7 @@ namespace Dungeon
 	}
 
 	/*
-	* ÊµÏÖ»Øµ÷º¯ÊýOnDraw
+	* Êµï¿½Ö»Øµï¿½ï¿½ï¿½ï¿½ï¿½OnDraw
 	*/
 	void Cursor::Cursor_OnDrawCallback(DisplayObject *self, Resource *resource, SDL_Renderer *renderer)
 	{
@@ -74,7 +74,7 @@ namespace Dungeon
 
 
 	/*
-	* ÊµÏÖ»Øµ÷º¯ÊýOnMouseMove
+	* Êµï¿½Ö»Øµï¿½ï¿½ï¿½ï¿½ï¿½OnMouseMove
 	*/
 	void Cursor::Cursor_OnMouseMoveCallback(DisplayObject *self, SDL_Event *event)
 	{
