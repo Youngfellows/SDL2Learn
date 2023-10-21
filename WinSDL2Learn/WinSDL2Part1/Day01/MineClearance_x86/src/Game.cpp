@@ -194,6 +194,8 @@ namespace Dungeon
 		{
 			return SDL_FALSE;
 		}
+		// 设置玩家位置更新回调,重要
+		mPlayer->SetOnPlayerMoveCallback(mMine, &Mine::OnPlayerPosChangeCallback);
 		return SDL_TRUE;
 	}
 

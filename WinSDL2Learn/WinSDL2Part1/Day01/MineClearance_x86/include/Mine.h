@@ -42,6 +42,7 @@ namespace Dungeon
 		~Mine();
 		DisplayObject *Create(float x, float y, float w, float h, int size,
 			float mineWidth, float mineHeight);
+		static void OnPlayerPosChangeCallback(DisplayObject *self, SDL_FRect *position);//回调玩家位置
 		static void OnDrawCallback(DisplayObject *self, Resource *resource,
 			SDL_Renderer *renderer);//绘制回调
 		static void OnDestoryCallback(DisplayObject *self);

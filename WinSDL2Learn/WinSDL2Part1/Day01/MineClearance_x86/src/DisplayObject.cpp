@@ -25,6 +25,7 @@ namespace Dungeon
 			OnCallback->OnScanCodeDownKeyDown = nullptr;
 			OnCallback->OnScanCodeUpKeyUp = nullptr;
 			OnCallback->OnScanCodeDownKeyUp = nullptr;
+			OnCallback->OnPlayerMove = nullptr;
 			OnCallback->OnDestory = nullptr;
 		}
 	}
@@ -203,6 +204,18 @@ namespace Dungeon
 			if (OnCallback->OnScanCodeDownKeyUp)
 			{
 				OnCallback->OnScanCodeDownKeyUp(this);
+			}
+		}
+	}
+
+	void DisplayObject::SetOnPlayerMoveCallback(DisplayObject *mine,
+		OnPlayerPosChangeCallback onPlayerPosChangeCallback)
+	{
+		if (OnCallback)
+		{
+			if (OnCallback->OnPlayerMove)
+			{
+				OnCallback->OnPlayerMove(this, mine, onPlayerPosChangeCallback);
 			}
 		}
 	}

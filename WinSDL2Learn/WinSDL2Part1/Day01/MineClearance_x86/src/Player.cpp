@@ -46,6 +46,8 @@ namespace Dungeon
 		mPlayerData->speed = speed;
 		mPlayerData->isBorder = isBorder;
 		mPlayerData->direction = DIRECTION_NONE;
+		mPlayerData->mine = nullptr;
+		mPlayerData->OnPlayerPosChange = nullptr;
 
 		mPlayerData->point = (SDL_FPoint *)malloc(sizeof(SDL_FPoint));
 		if (!mPlayerData->point)
@@ -101,6 +103,21 @@ namespace Dungeon
 		return this->mPlayerData;
 	}
 
+	/*
+	* 设置玩家位置更新回调
+	*/
+	void Player::SetPlayerMoveCallback(DisplayObject *self, DisplayObject *mine,
+		OnPlayerPosChangeCallback onPosChangeCallback)
+	{
+		Player *player = (Player *)self->GetSubClass();//注意,一定要获取subClass
+		PlayerData *playerData = player->mPlayerData;
+		if (playerData)
+		{
+			playerData->mine = mine;//设置要通知的对象
+			playerData->OnPlayerPosChange = onPosChangeCallback;//设置回调函数
+		}
+	}
+
 	void Player::OnDrawCallback(DisplayObject *self, Resource *resource, SDL_Renderer *renderer)
 	{
 		//SDL_Log("MovableRectangle::OnDrawCallback");
@@ -119,6 +136,12 @@ namespace Dungeon
 			//RectangleData *data = rect->GetRectangleData();
 			if (data)
 			{
+				//把当前位置通知出去
+				if (data->mine && data->OnPlayerPosChange)
+				{
+					data->OnPlayerPosChange(data->mine, data->dest);//回调
+				}
+
 				// 测试绘制外边框
 				/*SDL_SetRenderDrawColor(renderer, 128, 223, 88, 255);
 				SDL_RenderFillRectF(renderer, data->boundary);*/

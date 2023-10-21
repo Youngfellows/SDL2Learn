@@ -27,6 +27,8 @@ namespace Dungeon
 		float speed;//滚动速度
 		SDL_bool isBorder;//是否有边框
 		Direction direction;//朝向
+		DisplayObject *mine;//雷对象
+		OnPlayerPosChangeCallback OnPlayerPosChange;//更新位置回调函数
 	}PlayerData;
 }
 
@@ -45,6 +47,8 @@ namespace Dungeon
 		~Player();
 		DisplayObject *Create(float x, float y, float w, float h,
 			int color, SDL_bool isBorder, int borderColor, int borderSize, float bWidth, float bHeight, float speed);
+		static void SetPlayerMoveCallback(DisplayObject *self, DisplayObject *mine,
+			OnPlayerPosChangeCallback onPosChangeCallback);//位置更新回调函数
 		static void OnDrawCallback(DisplayObject *self, Resource *resource, SDL_Renderer *renderer);
 		static void OnDrawCallback2(void *userdata, Resource *resource, SDL_Renderer *renderer);
 		static void OnMouseMoveCallback(DisplayObject *self, SDL_Event *event);

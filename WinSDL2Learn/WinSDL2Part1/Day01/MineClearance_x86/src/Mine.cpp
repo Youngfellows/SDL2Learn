@@ -117,6 +117,38 @@ namespace Dungeon
 		}
 	}
 
+	void Mine::OnPlayerPosChangeCallback(DisplayObject *self, SDL_FRect *position)
+	{
+		Mine *mine = (Mine *)self->GetSubClass();
+		if (mine)
+		{
+			MinefieldData *minefieldData = mine->mMinefieldData;//获取雷场
+			if (minefieldData)
+			{
+				//获取玩家的4个点位置坐标
+				SDL_FPoint lTPoint = { position->x,position->y };
+				SDL_FPoint rTPoint = { position->x + position->w,position->y };
+				SDL_FPoint lBPoint = { position->x,position->y + position->h };
+				SDL_FPoint rBPoint = { position->x + position->w,position->y + position->h };
+
+				int size = minefieldData->size;
+				for (int i = 0; i < size; i++)
+				{
+					MineData *mineData = *(minefieldData->mines + i);
+					SDL_FRect *dest = mineData->dest;
+					if (SDL_PointInFRect(&lTPoint, dest)
+						|| SDL_PointInFRect(&rTPoint, dest)
+						|| SDL_PointInFRect(&lBPoint, dest)
+						|| SDL_PointInFRect(&rBPoint, dest))
+					{
+						mineData->visible = SDL_FALSE;
+					}
+
+				}
+			}
+		}
+	}
+
 	void Mine::OnDrawCallback(DisplayObject *self, Resource *resource, SDL_Renderer *renderer)
 	{
 		Mine *mine = (Mine *)self->GetSubClass();//获取数据
@@ -130,11 +162,12 @@ namespace Dungeon
 				{
 					//绘制地雷
 					MineData *mineData = *(minefieldData->mines + i);
-					SDL_FRect *dest = mineData->dest;
-					if (resource && renderer)
+					if (mineData->visible && resource && renderer)
 					{
+						SDL_FRect *dest = mineData->dest;
 						SDL_RenderCopyF(renderer, resource->GetMineTexture(), nullptr, dest);
 					}
+
 				}
 			}
 		}
@@ -158,7 +191,10 @@ namespace Dungeon
 				for (int i = 0; i < size; i++)
 				{
 					MineData *mineData = *(mines + i);
-					free(mineData->dest);
+					if (mineData->dest)
+					{
+						free(mineData->dest);
+					}
 					free(mineData);
 				}
 				free(mines);

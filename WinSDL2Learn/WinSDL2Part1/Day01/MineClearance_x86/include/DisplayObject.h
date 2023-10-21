@@ -22,8 +22,9 @@ namespace Dungeon
 	typedef void (*OnScanCodeDownKeyDownCallback)(DisplayObject *self);//按下方向下键
 	typedef void (*OnScanCodeUpKeyUpCallback)(DisplayObject *self);//松开方向上键
 	typedef void (*OnScanCodeDownKeyUpCallback)(DisplayObject *self);//松开方向下键
-
 	typedef void (*OnDestoryCallback)(DisplayObject *self);//释放资源
+	typedef void (*OnPlayerPosChangeCallback)(DisplayObject *mine, SDL_FRect *position);//通知玩家位置更新了
+	typedef void (*OnPlayerMoveCallback)(DisplayObject *self, DisplayObject *mine, OnPlayerPosChangeCallback onPosChangeCallback);
 
 	//绘制,还可以采用传递void *方式定义接口,一点都不耦合
 	typedef void (*OnDrawCallback2)(void *userdata, Resource *resource, SDL_Renderer *renderer);
@@ -46,6 +47,7 @@ namespace Dungeon
 		OnScanCodeDownKeyDownCallback OnScanCodeDownKeyDown;
 		OnScanCodeUpKeyUpCallback OnScanCodeUpKeyUp;
 		OnScanCodeDownKeyUpCallback OnScanCodeDownKeyUp;
+		OnPlayerMoveCallback OnPlayerMove;
 		OnDestoryCallback OnDestory;
 	}OnCallbackData;
 
@@ -75,6 +77,8 @@ namespace Dungeon
 		void ScanCodeDownKeyDown();//按下方向下键
 		void ScanCodeUpKeyUp();//松开方向上键
 		void ScanCodeDownKeyUp();//松开方向下键
+		void SetOnPlayerMoveCallback(DisplayObject *mine,
+			OnPlayerPosChangeCallback onPlayerPosChangeCallback);//设置回调函数
 		void Destory();//释放资源
 	};
 }
