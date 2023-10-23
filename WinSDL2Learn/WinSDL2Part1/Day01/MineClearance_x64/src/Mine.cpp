@@ -1,4 +1,6 @@
 #include "Mine.h"
+#include "Text.h"
+#include "Config.h"
 
 namespace Dungeon
 {
@@ -39,6 +41,9 @@ namespace Dungeon
 		{
 			return nullptr;
 		}
+		mMinefieldData->mStartText = nullptr;
+		mMinefieldData->mMsgText = nullptr;
+
 		//为数组元素赋值
 		for (int i = 0; i < mMinefieldData->size; i++)
 		{
@@ -163,9 +168,12 @@ namespace Dungeon
 							//lPoints[i].x = position->x;
 							(*(lPoints + i)).x = position->x;
 							(*(lPoints + i)).y = position->y + i;
-							if (SDL_PointInFRect(lPoints, dest))//直线上的点触到雷
+							if (mineData->visible && SDL_PointInFRect(lPoints, dest))//直线上的点触到雷
 							{
 								mineData->visible = SDL_FALSE;
+								minefieldData->amount++;
+								SDL_Log("Left touch mine");
+								break;
 							}
 						}
 						free(lPoints);//释放内存
@@ -179,9 +187,12 @@ namespace Dungeon
 							(*(tPoints + i)).x = position->x + i;
 							(*(tPoints + i)).y = position->y;
 
-							if (SDL_PointInFRect(tPoints, dest))//直线上的点触到雷
+							if (mineData->visible && SDL_PointInFRect(tPoints, dest))//直线上的点触到雷
 							{
 								mineData->visible = SDL_FALSE;
+								minefieldData->amount++;
+								SDL_Log("Top touch mine");
+								break;
 							}
 						}
 						free(tPoints);//释放内存
@@ -194,9 +205,12 @@ namespace Dungeon
 							//lPoints[i].x = position->x;
 							(*(rPoints + i)).x = position->x + position->w;
 							(*(rPoints + i)).y = position->y + i;
-							if (SDL_PointInFRect(rPoints, dest))//直线上的点触到雷
+							if (mineData->visible && SDL_PointInFRect(rPoints, dest))//直线上的点触到雷
 							{
 								mineData->visible = SDL_FALSE;
+								minefieldData->amount++;
+								SDL_Log("Right touch mine");
+								break;
 							}
 						}
 						free(rPoints);//释放内存
@@ -208,12 +222,47 @@ namespace Dungeon
 							//lPoints[i].x = position->x;
 							(*(bPoints + i)).x = position->x + i;
 							(*(bPoints + i)).y = position->y + position->h;
-							if (SDL_PointInFRect(bPoints, dest))//直线上的点触到雷
+							if (mineData->visible && SDL_PointInFRect(bPoints, dest))//直线上的点触到雷
 							{
 								mineData->visible = SDL_FALSE;
+								minefieldData->amount++;
+								SDL_Log("Bottom touch mine");
+								break;
 							}
 						}
 						free(bPoints);//释放内存
+					}
+
+					//设置提示
+					if (minefieldData->amount == minefieldData->size)
+					{
+						//SDL_Log("%s", GAME_OVER_TEXT);
+						
+						DisplayObject *msgTextObj = minefieldData->mMsgText;
+						if (msgTextObj)
+						{
+							Text *msgText = (Text *)msgTextObj->GetSubClass();
+							if (msgText)
+							{
+								char msg[256];
+								sprintf(msg, "%s %d", GAME_OVER_TEXT, minefieldData->amount);
+								msgText->TextSet(msg);
+							}
+						}
+					}
+					else
+					{
+						DisplayObject *msgTextObj = minefieldData->mMsgText;
+						if (msgTextObj)
+						{
+							Text *msgText = (Text *)msgTextObj->GetSubClass();
+							if (msgText)
+							{
+								char msg[256];
+								sprintf(msg, "%s %d", ELIMINATE_TEXT, minefieldData->amount);
+								msgText->TextSet(msg);
+							}
+						}
 					}
 				}
 			}
@@ -238,7 +287,6 @@ namespace Dungeon
 						SDL_FRect *dest = mineData->dest;
 						SDL_RenderCopyF(renderer, resource->GetMineTexture(), nullptr, dest);
 					}
-
 				}
 			}
 		}
@@ -251,7 +299,19 @@ namespace Dungeon
 
 	void Mine::OnTextClickCallback(DisplayObject *self)
 	{
-		SDL_Log(" Mine::OnTextClickCallback:: Click Start Button");	
+		SDL_Log(" Mine::OnTextClickCallback:: Click Start Button");
+	}
+
+	/*
+	* 直接方式设置对象
+	*/
+	void Mine::SetTextComponents(DisplayObject *starText, DisplayObject *msgText)
+	{
+		if (this->mMinefieldData)
+		{
+			mMinefieldData->mStartText = starText;
+			mMinefieldData->mMsgText = msgText;
+		}
 	}
 
 	void Mine::OnDestoryCallback(DisplayObject *self)

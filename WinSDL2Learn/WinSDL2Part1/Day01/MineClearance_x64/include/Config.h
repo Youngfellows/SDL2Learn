@@ -3,7 +3,7 @@
 
 namespace Dungeon
 {
-#define WINDOW_WIDTH 700 //Window窗口宽
+#define WINDOW_WIDTH 800 //Window窗口宽
 #define WINDOW_HEIGHT 400 //Window窗口高
 #define FRAMERATE 60 //每1秒帧数
 #define WINDOW_TITLE "Dungeon" //Window窗口title
@@ -44,8 +44,15 @@ namespace Dungeon
 
 #define FONT_FINE_NAME "./resources/padmaa.ttf" //字体
 #define START_TEXT "Start" //开始游戏
+#define ELIMINATE_TEXT "Sliminate:" //开始游戏
+#define GAME_OVER_TEXT "Game Over:" //游戏结束
 #define COLOR_START_TEXT 0xff239344 //字体颜色
 #define COLOR_MSG_TEXT 0xFFCB95F7 //字体颜色
+
+#define START_TEXT_X_POSITION START_X_POSITION + MINE_FIELD_WIDTH  + 10//绘制开始X位置
+#define START_TEXT_Y_POSITION START_Y_POSITION //绘制开始Y位置
+#define MSG_TEXT_X_POSITION START_X_POSITION + MINE_FIELD_WIDTH + 10//绘制开始X位置
+#define MSG_TEXT_Y_POSITION START_Y_POSITION + 30 //绘制开始Y位置
 }
 
 #endif // !_DUNGEON_CONFIG_H_

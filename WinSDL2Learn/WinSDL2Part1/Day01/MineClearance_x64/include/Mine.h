@@ -1,6 +1,8 @@
+
 #ifndef _DUNGEON_MINE_H_
 #define _DUNGEON_MINE_H_
 
+#define _CRT_SECURE_NO_WARNINGS
 #include <cstdlib>
 #include <ctime>
 #include "SDL2/SDL.h"
@@ -27,6 +29,8 @@ namespace Dungeon
 		MineData **mines;//要显示的雷个数
 		int amount;//扫掉的雷个数
 		int size;//累总数
+		DisplayObject *mStartText;
+		DisplayObject *mMsgText;
 	}MinefieldData;
 }
 
@@ -48,6 +52,7 @@ namespace Dungeon
 		static void OnDestoryCallback(DisplayObject *self);
 		static void OnPlayerMoveCallback(void *position);//玩家移动回调
 		static void OnTextClickCallback(DisplayObject *self);//按钮点击回调
+		void SetTextComponents(DisplayObject *starText, DisplayObject *msgText);
 
 	private:
 		void CreateMins();//创建地雷
