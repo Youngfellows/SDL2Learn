@@ -140,6 +140,7 @@
     <ClInclude Include="include\Mine.h" />
     <ClInclude Include="include\Player.h" />
     <ClInclude Include="include\Resource.h" />
+    <ClInclude Include="include\Text.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Background.cpp" />
@@ -150,6 +151,7 @@
     <ClCompile Include="src\Mine.cpp" />
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\Resource.cpp" />
+    <ClCompile Include="src\Text.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

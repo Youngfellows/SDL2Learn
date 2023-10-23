@@ -10,23 +10,23 @@
 namespace Dungeon
 {
 	/*
-	* µØÀ×Êı¾İ
+	* åœ°é›·æ•°æ®
 	*/
 	typedef struct MineData
 	{
-		SDL_FRect *dest;//ÏÔÊ¾Î»ÖÃ
-		SDL_bool visible;//ÊÇ·ñ¿É¼û
+		SDL_FRect *dest;//æ˜¾ç¤ºä½ç½®
+		SDL_bool visible;//æ˜¯å¦å¯è§
 	};
 
 	/*
-	* À×³¡Êı¾İ
+	* é›·åœºæ•°æ®
 	*/
 	typedef struct MinefieldData
 	{
-		SDL_FRect *boundry;//À×³¡±ß½ç
-		MineData **mines;//ÒªÏÔÊ¾µÄÀ×¸öÊı
-		int amount;//É¨µôµÄÀ×¸öÊı
-		int size;//ÀÛ×ÜÊı
+		SDL_FRect *boundry;//é›·åœºè¾¹ç•Œ
+		MineData **mines;//è¦æ˜¾ç¤ºçš„é›·ä¸ªæ•°
+		int amount;//æ‰«æ‰çš„é›·ä¸ªæ•°
+		int size;//ç´¯æ€»æ•°
 	}MinefieldData;
 }
 
@@ -42,14 +42,15 @@ namespace Dungeon
 		~Mine();
 		DisplayObject *Create(float x, float y, float w, float h, int size,
 			float mineWidth, float mineHeight);
-		static void OnPlayerPosChangeCallback(DisplayObject *self, SDL_FRect *position);//»Øµ÷Íæ¼ÒÎ»ÖÃ
+		static void OnPlayerPosChangeCallback(DisplayObject *self, SDL_FRect *position);//å›è°ƒç©å®¶ä½ç½®
 		static void OnDrawCallback(DisplayObject *self, Resource *resource,
-			SDL_Renderer *renderer);//»æÖÆ»Øµ÷
+			SDL_Renderer *renderer);//ç»˜åˆ¶å›è°ƒ
 		static void OnDestoryCallback(DisplayObject *self);
-		static void OnPlayerMoveCallback(void *position);//Íæ¼ÒÒÆ¶¯»Øµ÷
+		static void OnPlayerMoveCallback(void *position);//ç©å®¶ç§»åŠ¨å›è°ƒ
+		static void OnTextClickCallback(DisplayObject *self);//æŒ‰é’®ç‚¹å‡»å›è°ƒ
 
 	private:
-		void CreateMins();//´´½¨µØÀ×
+		void CreateMins();//åˆ›å»ºåœ°é›·
 	};
 
 }

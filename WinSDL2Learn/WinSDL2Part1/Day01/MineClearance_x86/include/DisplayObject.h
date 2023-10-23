@@ -25,6 +25,7 @@ namespace Dungeon
 	typedef void (*OnDestoryCallback)(DisplayObject *self);//释放资源
 	typedef void (*OnPlayerPosChangeCallback)(DisplayObject *mine, SDL_FRect *position);//通知玩家位置更新了
 	typedef void (*OnPlayerMoveCallback)(DisplayObject *self, DisplayObject *mine, OnPlayerPosChangeCallback onPosChangeCallback);
+	typedef void (*OnTextClickCallback)(DisplayObject *self);//文本点击事件回调
 
 	//绘制,还可以采用传递void *方式定义接口,一点都不耦合
 	typedef void (*OnDrawCallback2)(void *userdata, Resource *resource, SDL_Renderer *renderer);

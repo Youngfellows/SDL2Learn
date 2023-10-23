@@ -2,6 +2,7 @@
 #define _DUNGEON_GAME_H_
 
 #include "SDL2/SDL.h"
+#include "SDL2/SDL_ttf.h"
 #include "DisplayObject.h"
 #include "Resource.h"
 
@@ -18,6 +19,8 @@ namespace Dungeon
 		DisplayObject *mCursor;//光标
 		DisplayObject *mBackground;//游戏背景
 		DisplayObject *mMine;//雷
+		DisplayObject *mStartText;//开始文本
+		DisplayObject *mMsgText;//消息文本
 
 	public:
 		Game();

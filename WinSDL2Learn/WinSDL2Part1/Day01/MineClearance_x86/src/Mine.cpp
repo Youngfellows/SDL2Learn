@@ -14,7 +14,7 @@ namespace Dungeon
 	DisplayObject *Mine::Create(float x, float y, float w, float h, int size,
 		float mineWidth, float mineHeight)
 	{
-		//¶¯Ì¬ÉêÇëÄÚ´æ
+		//åŠ¨æ€ç”³è¯·å†…å­˜
 		this->mMinefieldData = (MinefieldData *)malloc(sizeof(MinefieldData));
 		if (!mMinefieldData)
 		{
@@ -33,13 +33,13 @@ namespace Dungeon
 		mMinefieldData->boundry->w = w;
 		mMinefieldData->boundry->h = h;
 
-		//´´½¨Êı×é,³¤¶ÈÎªsize
+		//åˆ›å»ºæ•°ç»„,é•¿åº¦ä¸ºsize
 		mMinefieldData->mines = (MineData **)malloc(sizeof(MineData *) * mMinefieldData->size);
 		if (!mMinefieldData->mines)
 		{
 			return nullptr;
 		}
-		//ÎªÊı×éÔªËØ¸³Öµ
+		//ä¸ºæ•°ç»„å…ƒç´ èµ‹å€¼
 		for (int i = 0; i < mMinefieldData->size; i++)
 		{
 			MineData *mineData = (MineData *)malloc(sizeof(MineData));
@@ -48,8 +48,8 @@ namespace Dungeon
 				SDL_Log("mineData is null");
 				return nullptr;
 			}
-			//mMinefieldData->mines[i] = mineData;//Í¨¹ı½Ç±êÎªÔªËØ¸³Öµ,±£´æµÄÊÇµØÖ·
-			*((mMinefieldData->mines) + i) = mineData;//Í¨¹ıÖ¸ÕëÎªÔªËØ¸³Öµ,±£´æµÄÊÇµØÖ·
+			//mMinefieldData->mines[i] = mineData;//é€šè¿‡è§’æ ‡ä¸ºå…ƒç´ èµ‹å€¼,ä¿å­˜çš„æ˜¯åœ°å€
+			*((mMinefieldData->mines) + i) = mineData;//é€šè¿‡æŒ‡é’ˆä¸ºå…ƒç´ èµ‹å€¼,ä¿å­˜çš„æ˜¯åœ°å€
 			mineData->visible = SDL_TRUE;
 			mineData->dest = (SDL_FRect *)malloc(sizeof(SDL_FRect));
 			if (!mineData->dest)
@@ -60,13 +60,13 @@ namespace Dungeon
 			mineData->dest->h = mineHeight;
 		}
 
-		//´´½¨µØÀ×Êı¾İ
+		//åˆ›å»ºåœ°é›·æ•°æ®
 		CreateMins();
 
-		//´´½¨ÒªÏÔÊ¾¶ÔÏó
+		//åˆ›å»ºè¦æ˜¾ç¤ºå¯¹è±¡
 		DisplayObject *displayObject = new DisplayObject();
-		displayObject->SetSubClass(this);//ÉèÖÃÒªÏÔÊ¾¶ÔÏó
-		OnCallbackData *onCallback = displayObject->GetOnCallback();//ÉèÖÃ»Øµ÷º¯Êı
+		displayObject->SetSubClass(this);//è®¾ç½®è¦æ˜¾ç¤ºå¯¹è±¡
+		OnCallbackData *onCallback = displayObject->GetOnCallback();//è®¾ç½®å›è°ƒå‡½æ•°
 		if (onCallback)
 		{
 			onCallback->OnDraw = &OnDrawCallback;
@@ -77,7 +77,7 @@ namespace Dungeon
 	}
 
 	/*
-	* Éú³ÉÎ»ÖÃËæ»úµÄµØÀ×
+	* ç”Ÿæˆä½ç½®éšæœºçš„åœ°é›·
 	*/
 	void Mine::CreateMins()
 	{
@@ -85,14 +85,14 @@ namespace Dungeon
 		{
 			if (mMinefieldData->mines)
 			{
-				//ÒªÈ¡µÃ[a,b]µÄËæ»úÕûÊı£º(rand()%(b-a+1))+a;
-				//ÒªÈ¡µÃ0~1Ö®¼äµÄ¸¡µãÊı£ºrand() / double(RAND_MAX)
+				//è¦å–å¾—[a,b]çš„éšæœºæ•´æ•°ï¼š(rand()%(b-a+1))+a;
+				//è¦å–å¾—0~1ä¹‹é—´çš„æµ®ç‚¹æ•°ï¼šrand() / double(RAND_MAX)
 
 
 				int size = mMinefieldData->size;
 				for (int i = 0; i < size; i++)
 				{
-					MineData *mineData = *(mMinefieldData->mines + i);//»ñÈ¡±£´æµÄµØÖ·,Í¨¹ıÖ¸Õë·½Ê½
+					MineData *mineData = *(mMinefieldData->mines + i);//è·å–ä¿å­˜çš„åœ°å€,é€šè¿‡æŒ‡é’ˆæ–¹å¼
 					SDL_FRect *dest = mineData->dest;
 					if (dest)
 					{
@@ -106,7 +106,7 @@ namespace Dungeon
 						float x = (float)((rand() % (x2 - x1 + 1)) + x1);
 						float y = (float)((rand() % (y2 - y1 + 1)) + y1);
 						SDL_Log("x:%f,y:%f", x, y);
-						//MineData *mineData = mMinefieldData->mines[i];//»ñÈ¡±£´æµÄµØÖ·,Í¨¹ıË÷Òı·½Ê½
+						//MineData *mineData = mMinefieldData->mines[i];//è·å–ä¿å­˜çš„åœ°å€,é€šè¿‡ç´¢å¼•æ–¹å¼
 
 
 						mineData->dest->x = x;
@@ -118,23 +118,23 @@ namespace Dungeon
 	}
 
 	/*
-	* Âß¼­:Ö±ÏßÉÏµÄµã´¥µ½À×,À×¾ÍÏûÊ§
+	* é€»è¾‘:ç›´çº¿ä¸Šçš„ç‚¹è§¦åˆ°é›·,é›·å°±æ¶ˆå¤±
 	*/
 	void Mine::OnPlayerPosChangeCallback(DisplayObject *self, SDL_FRect *position)
 	{
 		Mine *mine = (Mine *)self->GetSubClass();
 		if (mine)
 		{
-			MinefieldData *minefieldData = mine->mMinefieldData;//»ñÈ¡À×³¡
+			MinefieldData *minefieldData = mine->mMinefieldData;//è·å–é›·åœº
 			if (minefieldData)
 			{
-				//»ñÈ¡Íæ¼ÒµÄ4¸öµãÎ»ÖÃ×ø±ê
+				//è·å–ç©å®¶çš„4ä¸ªç‚¹ä½ç½®åæ ‡
 				SDL_FPoint lTPoint = { position->x,position->y };
 				SDL_FPoint rTPoint = { position->x + position->w,position->y };
 				SDL_FPoint lBPoint = { position->x,position->y + position->h };
 				SDL_FPoint rBPoint = { position->x + position->w,position->y + position->h };
-				int xSize = (int)position->w;//x·½ÏòµÄµãÊı
-				int ySize = (int)position->w;//y·½ÏòµÄµãÊı
+				int xSize = (int)position->w;//xæ–¹å‘çš„ç‚¹æ•°
+				int ySize = (int)position->w;//yæ–¹å‘çš„ç‚¹æ•°
 
 				int size = minefieldData->size;
 				for (int i = 0; i < size; i++)
@@ -142,7 +142,7 @@ namespace Dungeon
 					MineData *mineData = *(minefieldData->mines + i);
 					SDL_FRect *dest = mineData->dest;
 
-					////ÓĞbug,±ØĞëÒª4¸öµãÖĞµÄÒ»¸öÅöµ½²Å¿ÉÒÔ,ËùÒÔ²»ÄÜ°ÑÍæ¼Ò×öµÃÌ«´óÁË
+					////æœ‰bug,å¿…é¡»è¦4ä¸ªç‚¹ä¸­çš„ä¸€ä¸ªç¢°åˆ°æ‰å¯ä»¥,æ‰€ä»¥ä¸èƒ½æŠŠç©å®¶åšå¾—å¤ªå¤§äº†
 					//if (SDL_PointInFRect(&lTPoint, dest)
 					//	|| SDL_PointInFRect(&rTPoint, dest)
 					//	|| SDL_PointInFRect(&lBPoint, dest)
@@ -156,22 +156,22 @@ namespace Dungeon
 					SDL_FPoint *rPoints = (SDL_FPoint *)malloc(sizeof(SDL_FPoint) * ySize);
 					SDL_FPoint *bPoints = (SDL_FPoint *)malloc(sizeof(SDL_FPoint) * xSize);
 
-					if (lPoints)	//×ó±ßÏß
+					if (lPoints)	//å·¦è¾¹çº¿
 					{
 						for (int i = 0; i < ySize; i++)
 						{
 							//lPoints[i].x = position->x;
 							(*(lPoints + i)).x = position->x;
 							(*(lPoints + i)).y = position->y + i;
-							if (SDL_PointInFRect(lPoints, dest))//Ö±ÏßÉÏµÄµã´¥µ½À×
+							if (SDL_PointInFRect(lPoints, dest))//ç›´çº¿ä¸Šçš„ç‚¹è§¦åˆ°é›·
 							{
 								mineData->visible = SDL_FALSE;
 							}
 						}
-						free(lPoints);//ÊÍ·ÅÄÚ´æ
+						free(lPoints);//é‡Šæ”¾å†…å­˜
 					}
 
-					if (tPoints)//ÉÏ±ßÏß
+					if (tPoints)//ä¸Šè¾¹çº¿
 					{
 						for (int i = 0; i < xSize; i++)
 						{
@@ -179,41 +179,41 @@ namespace Dungeon
 							(*(tPoints + i)).x = position->x + i;
 							(*(tPoints + i)).y = position->y;
 
-							if (SDL_PointInFRect(tPoints, dest))//Ö±ÏßÉÏµÄµã´¥µ½À×
+							if (SDL_PointInFRect(tPoints, dest))//ç›´çº¿ä¸Šçš„ç‚¹è§¦åˆ°é›·
 							{
 								mineData->visible = SDL_FALSE;
 							}
 						}
-						free(tPoints);//ÊÍ·ÅÄÚ´æ
+						free(tPoints);//é‡Šæ”¾å†…å­˜
 					}
 
-					if (rPoints)//ÓÒ±ßÏß
+					if (rPoints)//å³è¾¹çº¿
 					{
 						for (int i = 0; i < ySize; i++)
 						{
 							//lPoints[i].x = position->x;
 							(*(rPoints + i)).x = position->x + position->w;
 							(*(rPoints + i)).y = position->y + i;
-							if (SDL_PointInFRect(rPoints, dest))//Ö±ÏßÉÏµÄµã´¥µ½À×
+							if (SDL_PointInFRect(rPoints, dest))//ç›´çº¿ä¸Šçš„ç‚¹è§¦åˆ°é›·
 							{
 								mineData->visible = SDL_FALSE;
 							}
 						}
-						free(rPoints);//ÊÍ·ÅÄÚ´æ
+						free(rPoints);//é‡Šæ”¾å†…å­˜
 					}
-					if (bPoints)//µ×±ßÏß
+					if (bPoints)//åº•è¾¹çº¿
 					{
 						for (int i = 0; i < xSize; i++)
 						{
 							//lPoints[i].x = position->x;
 							(*(bPoints + i)).x = position->x + i;
 							(*(bPoints + i)).y = position->y + position->h;
-							if (SDL_PointInFRect(bPoints, dest))//Ö±ÏßÉÏµÄµã´¥µ½À×
+							if (SDL_PointInFRect(bPoints, dest))//ç›´çº¿ä¸Šçš„ç‚¹è§¦åˆ°é›·
 							{
 								mineData->visible = SDL_FALSE;
 							}
 						}
-						free(bPoints);//ÊÍ·ÅÄÚ´æ
+						free(bPoints);//é‡Šæ”¾å†…å­˜
 					}
 				}
 			}
@@ -222,16 +222,16 @@ namespace Dungeon
 
 	void Mine::OnDrawCallback(DisplayObject *self, Resource *resource, SDL_Renderer *renderer)
 	{
-		Mine *mine = (Mine *)self->GetSubClass();//»ñÈ¡Êı¾İ
+		Mine *mine = (Mine *)self->GetSubClass();//è·å–æ•°æ®
 		if (mine)
 		{
-			MinefieldData *minefieldData = mine->mMinefieldData;//»ñÈ¡À×³¡
+			MinefieldData *minefieldData = mine->mMinefieldData;//è·å–é›·åœº
 			if (minefieldData)
 			{
 				int size = minefieldData->size;
 				for (int i = 0; i < size; i++)
 				{
-					//»æÖÆµØÀ×
+					//ç»˜åˆ¶åœ°é›·
 					MineData *mineData = *(minefieldData->mines + i);
 					if (mineData->visible && resource && renderer)
 					{
@@ -249,12 +249,18 @@ namespace Dungeon
 
 	}
 
+	void Mine::OnTextClickCallback(DisplayObject *self)
+	{
+		SDL_Log("Click Start Button");
+		
+	}
+
 	void Mine::OnDestoryCallback(DisplayObject *self)
 	{
-		Mine *mine = (Mine *)self->GetSubClass();//»ñÈ¡Êı¾İ
+		Mine *mine = (Mine *)self->GetSubClass();//è·å–æ•°æ®
 		if (mine)
 		{
-			MinefieldData *minefieldData = mine->mMinefieldData;//»ñÈ¡À×³¡
+			MinefieldData *minefieldData = mine->mMinefieldData;//è·å–é›·åœº
 			if (minefieldData)
 			{
 				int size = minefieldData->size;

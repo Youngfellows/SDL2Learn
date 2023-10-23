@@ -4,13 +4,14 @@
 #include "Cursor.h"
 #include "Background.h"
 #include "Mine.h"
+#include "Text.h"
 
 namespace Dungeon
 {
 	Game::Game() :mIsRunning(true), mWindow(nullptr),
 		mRenderer(nullptr), mPlayer(nullptr),
 		mResource(nullptr), mCursor(nullptr), mBackground(nullptr),
-		mMine(nullptr)
+		mMine(nullptr),mStartText(nullptr),mMsgText(nullptr)
 	{
 	}
 
@@ -22,6 +23,14 @@ namespace Dungeon
 
 	bool Game::Initialize()
 	{
+		// 初始化TTF字体库
+		if (TTF_Init() != 0)
+		{
+			SDL_Log("Can not init ttf: %s", SDL_GetError());
+			return false;
+		}
+
+
 		// SDL库初始化
 		// if (SDL_Init(SDL_INIT_VIDEO))
 		if (SDL_Init(SDL_INIT_VIDEO) != 0)
@@ -196,6 +205,16 @@ namespace Dungeon
 		}
 		// 设置玩家位置更新回调,重要
 		mPlayer->SetOnPlayerMoveCallback(mMine, &Mine::OnPlayerPosChangeCallback);
+
+		// 字体组件
+		Text *starText = new Text();
+		mStartText = starText->Create(FONT_FINE_NAME,START_TEXT,PT_SIZE_25,
+			COLOR_START_TEXT,0,0, &Mine::OnTextClickCallback);//设置回调
+		if (!mStartText)
+		{
+			return SDL_FALSE;
+		}
+
 		return SDL_TRUE;
 	}
 
@@ -218,10 +237,16 @@ namespace Dungeon
 			//mMovableRectangle->Draw2(nullptr,mRenderer);
 		}
 
+		if (mStartText)
+		{
+			mStartText->Draw(mResource, mRenderer);//绘制文字
+		}
+
 		if (mCursor)
 		{
 			mCursor->Draw(mResource, mRenderer);//绘制光标
 		}
+
 	}
 
 	void Game::FreeComponents()
@@ -250,6 +275,12 @@ namespace Dungeon
 			mMine->Destory();
 			delete mMine;
 			mMine = nullptr;
+		}
+		if (mStartText)
+		{
+			mStartText->Destory();
+			delete mStartText;
+			mStartText = nullptr;
 		}
 	}
 
@@ -283,6 +314,10 @@ namespace Dungeon
 		if (mPlayer)
 		{
 			mPlayer->MouseDown(event);
+		}
+		if (mStartText)
+		{
+			mStartText->MouseDown(event);
 		}
 	}
 
