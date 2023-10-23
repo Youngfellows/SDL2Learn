@@ -12,7 +12,8 @@ namespace Dungeon
 	}
 
 	DisplayObject *Text::Create(const char *file, const char *value,
-		int ptsize, uint32_t color, float x, float y, int size, initializer_list<OnTextClickCallback> ls)
+		int ptsize, uint32_t color, float x, float y, DisplayObject *mine,
+		int size, initializer_list<OnTextClickCallback> ls)
 	{
 		TTF_Font *font = TTF_OpenFont(file, ptsize);//打开字体
 		if (!font)
@@ -54,6 +55,7 @@ namespace Dungeon
 		mTextData->dest->h = 0;
 
 		//创建数组保存函数回调
+		mTextData->mine = mine;
 		mTextData->textClickData = (TextClickData *)malloc(sizeof(TextClickData));
 		if (!mTextData->textClickData)
 		{
@@ -67,7 +69,7 @@ namespace Dungeon
 		}
 
 		int i = 0;
-		for (auto ele = ls.begin(); ele != ls.end(); ++ele,i++){
+		for (auto ele = ls.begin(); ele != ls.end(); ++ele, i++) {
 			OnTextClickCallback onTextClickCallback = *ele;
 			*(mTextData->textClickData->OnTextClicks + i) = onTextClickCallback;//设置点击事件回调函数
 			SDL_Log("Create,onTextClickCallback:%p", onTextClickCallback);

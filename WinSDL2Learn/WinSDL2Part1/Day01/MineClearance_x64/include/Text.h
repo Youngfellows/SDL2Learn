@@ -28,6 +28,7 @@ namespace Dungeon
 		SDL_Surface *textSurface;
 		SDL_FRect *dest;//文本显示区域
 		TextClickData *textClickData;//回调函数数据
+		DisplayObject *mine;//持有mine指针
 	}TextData;
 }
 
@@ -42,7 +43,7 @@ namespace Dungeon
 		Text();
 		~Text();
 		DisplayObject *Create(const char *file, const char *value,
-			int ptsize, uint32_t color, float x, float y,
+			int ptsize, uint32_t color, float x, float y,DisplayObject *destDisObj,
 			int size, initializer_list<OnTextClickCallback> ls);
 		void TextSet(const char *value);
 		TextData *GetTextData();

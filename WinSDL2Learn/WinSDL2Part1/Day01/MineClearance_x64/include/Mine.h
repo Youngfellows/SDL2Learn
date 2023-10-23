@@ -28,7 +28,7 @@ namespace Dungeon
 		SDL_FRect *boundry;//雷场边界
 		MineData **mines;//要显示的雷个数
 		int amount;//扫掉的雷个数
-		int size;//累总数
+		int size;//雷总数
 		DisplayObject *mStartText;
 		DisplayObject *mMsgText;
 	}MinefieldData;
@@ -46,7 +46,7 @@ namespace Dungeon
 		~Mine();
 		DisplayObject *Create(float x, float y, float w, float h, int size,
 			float mineWidth, float mineHeight);
-		static void OnPlayerPosChangeCallback(DisplayObject *self, SDL_FRect *position);//回调玩家位置
+		static void OnPlayerPosChangeCallback(DisplayObject *self, SDL_FRect *playerPos);//回调玩家位置
 		static void OnDrawCallback(DisplayObject *self, Resource *resource,
 			SDL_Renderer *renderer);//绘制回调
 		static void OnDestoryCallback(DisplayObject *self);
@@ -55,7 +55,10 @@ namespace Dungeon
 		void SetTextComponents(DisplayObject *starText, DisplayObject *msgText);
 
 	private:
-		void CreateMins();//创建地雷
+		void CreateMine();//创建地雷
+		void CollideLogic1(SDL_FRect *playerPos);
+		void CollideLogic2(SDL_FRect *playerPos);
+		void ResetMine();//重置雷
 	};
 
 }

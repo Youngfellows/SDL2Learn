@@ -209,8 +209,9 @@ namespace Dungeon
 		// 字体组件
 		Text *starText = new Text();
 		mStartText = starText->Create(FONT_FINE_NAME, START_TEXT, PT_SIZE_25,
-			COLOR_START_TEXT, START_TEXT_X_POSITION, START_TEXT_Y_POSITION, 
-			2, { &Mine::OnTextClickCallback,&Player::OnTextClickCallback});//设置回调
+			COLOR_START_TEXT, START_TEXT_X_POSITION, START_TEXT_Y_POSITION,
+			mMine,
+			2, { &Mine::OnTextClickCallback,&Player::OnTextClickCallback });//设置回调
 		if (!mStartText)
 		{
 			return SDL_FALSE;
@@ -218,15 +219,15 @@ namespace Dungeon
 
 		Text *msgText = new Text();
 		mMsgText = msgText->Create(FONT_FINE_NAME, ELIMINATE_TEXT, PT_SIZE_25,
-			COLOR_START_TEXT, MSG_TEXT_X_POSITION, MSG_TEXT_Y_POSITION,
-			2, { &Mine::OnTextClickCallback,&Player::OnTextClickCallback });//设置回调
+			COLOR_START_TEXT, MSG_TEXT_X_POSITION, MSG_TEXT_Y_POSITION, nullptr,
+			0, {});//设置回调
 		if (!mMsgText)
 		{
 			return SDL_FALSE;
 		}
 
 		// 设置text文本对象
-		mine->SetTextComponents(mStartText,mMsgText);
+		mine->SetTextComponents(mStartText, mMsgText);
 
 		return SDL_TRUE;
 	}
@@ -299,7 +300,7 @@ namespace Dungeon
 			delete mStartText;
 			mStartText = nullptr;
 		}
-	
+
 		if (mMsgText)
 		{
 			mMsgText->Destory();

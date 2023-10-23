@@ -55,7 +55,6 @@ namespace Dungeon
 			}
 			//mMinefieldData->mines[i] = mineData;//通过角标为元素赋值,保存的是地址
 			*((mMinefieldData->mines) + i) = mineData;//通过指针为元素赋值,保存的是地址
-			mineData->visible = SDL_TRUE;
 			mineData->dest = (SDL_FRect *)malloc(sizeof(SDL_FRect));
 			if (!mineData->dest)
 			{
@@ -66,7 +65,7 @@ namespace Dungeon
 		}
 
 		//创建地雷数据
-		CreateMins();
+		CreateMine();
 
 		//创建要显示对象
 		DisplayObject *displayObject = new DisplayObject();
@@ -81,10 +80,20 @@ namespace Dungeon
 		return displayObject;
 	}
 
+	void Mine::ResetMine()
+	{
+		// 更新雷的位置
+		if (mMinefieldData)
+		{
+			CreateMine();
+			mMinefieldData->amount = 0;
+		}
+	}
+
 	/*
 	* 生成位置随机的地雷
 	*/
-	void Mine::CreateMins()
+	void Mine::CreateMine()
 	{
 		if (mMinefieldData)
 		{
@@ -113,7 +122,7 @@ namespace Dungeon
 						SDL_Log("x:%f,y:%f", x, y);
 						//MineData *mineData = mMinefieldData->mines[i];//获取保存的地址,通过索引方式
 
-
+						mineData->visible = SDL_TRUE;
 						mineData->dest->x = x;
 						mineData->dest->y = y;
 					}
@@ -123,149 +132,207 @@ namespace Dungeon
 	}
 
 	/*
-	* 逻辑:直线上的点触到雷,雷就消失
+	* 逻辑: 直线上的点触到雷,雷就消失
+	* 缺点: 性能不高,而且还有可能触碰到了也不消失
 	*/
-	void Mine::OnPlayerPosChangeCallback(DisplayObject *self, SDL_FRect *position)
+	void Mine::CollideLogic1(SDL_FRect *playerPos)
 	{
-		Mine *mine = (Mine *)self->GetSubClass();
-		if (mine)
+		MinefieldData *minefieldData = this->mMinefieldData;//获取雷场
+		if (minefieldData)
 		{
-			MinefieldData *minefieldData = mine->mMinefieldData;//获取雷场
-			if (minefieldData)
+			//获取玩家的4个点位置坐标
+			SDL_FPoint lTPoint = { playerPos->x,playerPos->y };
+			SDL_FPoint rTPoint = { playerPos->x + playerPos->w,playerPos->y };
+			SDL_FPoint lBPoint = { playerPos->x,playerPos->y + playerPos->h };
+			SDL_FPoint rBPoint = { playerPos->x + playerPos->w,playerPos->y + playerPos->h };
+			int xSize = (int)playerPos->w;//x方向的点数
+			int ySize = (int)playerPos->w;//y方向的点数
+
+			int size = minefieldData->size;
+			for (int i = 0; i < size; i++)
 			{
-				//获取玩家的4个点位置坐标
-				SDL_FPoint lTPoint = { position->x,position->y };
-				SDL_FPoint rTPoint = { position->x + position->w,position->y };
-				SDL_FPoint lBPoint = { position->x,position->y + position->h };
-				SDL_FPoint rBPoint = { position->x + position->w,position->y + position->h };
-				int xSize = (int)position->w;//x方向的点数
-				int ySize = (int)position->w;//y方向的点数
+				MineData *mineData = *(minefieldData->mines + i);
+				SDL_FRect *dest = mineData->dest;
 
-				int size = minefieldData->size;
-				for (int i = 0; i < size; i++)
+				SDL_FPoint *lPoints = (SDL_FPoint *)malloc(sizeof(SDL_FPoint) * ySize);
+				SDL_FPoint *tPoints = (SDL_FPoint *)malloc(sizeof(SDL_FPoint) * xSize);
+				SDL_FPoint *rPoints = (SDL_FPoint *)malloc(sizeof(SDL_FPoint) * ySize);
+				SDL_FPoint *bPoints = (SDL_FPoint *)malloc(sizeof(SDL_FPoint) * xSize);
+
+				if (lPoints)	//左边线
 				{
-					MineData *mineData = *(minefieldData->mines + i);
-					SDL_FRect *dest = mineData->dest;
-
-					////有bug,必须要4个点中的一个碰到才可以,所以不能把玩家做得太大了
-					//if (SDL_PointInFRect(&lTPoint, dest)
-					//	|| SDL_PointInFRect(&rTPoint, dest)
-					//	|| SDL_PointInFRect(&lBPoint, dest)
-					//	|| SDL_PointInFRect(&rBPoint, dest))
-					//{
-					//	mineData->visible = SDL_FALSE;
-					//}
-
-					SDL_FPoint *lPoints = (SDL_FPoint *)malloc(sizeof(SDL_FPoint) * ySize);
-					SDL_FPoint *tPoints = (SDL_FPoint *)malloc(sizeof(SDL_FPoint) * xSize);
-					SDL_FPoint *rPoints = (SDL_FPoint *)malloc(sizeof(SDL_FPoint) * ySize);
-					SDL_FPoint *bPoints = (SDL_FPoint *)malloc(sizeof(SDL_FPoint) * xSize);
-
-					if (lPoints)	//左边线
+					for (int i = 0; i < ySize; i++)
 					{
-						for (int i = 0; i < ySize; i++)
+						//lPoints[i].x = position->x;
+						(*(lPoints + i)).x = playerPos->x;
+						(*(lPoints + i)).y = playerPos->y + i;
+						if (mineData->visible && SDL_PointInFRect(lPoints, dest))//直线上的点触到雷
 						{
-							//lPoints[i].x = position->x;
-							(*(lPoints + i)).x = position->x;
-							(*(lPoints + i)).y = position->y + i;
-							if (mineData->visible && SDL_PointInFRect(lPoints, dest))//直线上的点触到雷
-							{
-								mineData->visible = SDL_FALSE;
-								minefieldData->amount++;
-								SDL_Log("Left touch mine");
-								break;
-							}
-						}
-						free(lPoints);//释放内存
-					}
-
-					if (tPoints)//上边线
-					{
-						for (int i = 0; i < xSize; i++)
-						{
-							//lPoints[i].x = position->x;
-							(*(tPoints + i)).x = position->x + i;
-							(*(tPoints + i)).y = position->y;
-
-							if (mineData->visible && SDL_PointInFRect(tPoints, dest))//直线上的点触到雷
-							{
-								mineData->visible = SDL_FALSE;
-								minefieldData->amount++;
-								SDL_Log("Top touch mine");
-								break;
-							}
-						}
-						free(tPoints);//释放内存
-					}
-
-					if (rPoints)//右边线
-					{
-						for (int i = 0; i < ySize; i++)
-						{
-							//lPoints[i].x = position->x;
-							(*(rPoints + i)).x = position->x + position->w;
-							(*(rPoints + i)).y = position->y + i;
-							if (mineData->visible && SDL_PointInFRect(rPoints, dest))//直线上的点触到雷
-							{
-								mineData->visible = SDL_FALSE;
-								minefieldData->amount++;
-								SDL_Log("Right touch mine");
-								break;
-							}
-						}
-						free(rPoints);//释放内存
-					}
-					if (bPoints)//底边线
-					{
-						for (int i = 0; i < xSize; i++)
-						{
-							//lPoints[i].x = position->x;
-							(*(bPoints + i)).x = position->x + i;
-							(*(bPoints + i)).y = position->y + position->h;
-							if (mineData->visible && SDL_PointInFRect(bPoints, dest))//直线上的点触到雷
-							{
-								mineData->visible = SDL_FALSE;
-								minefieldData->amount++;
-								SDL_Log("Bottom touch mine");
-								break;
-							}
-						}
-						free(bPoints);//释放内存
-					}
-
-					//设置提示
-					if (minefieldData->amount == minefieldData->size)
-					{
-						//SDL_Log("%s", GAME_OVER_TEXT);
-						
-						DisplayObject *msgTextObj = minefieldData->mMsgText;
-						if (msgTextObj)
-						{
-							Text *msgText = (Text *)msgTextObj->GetSubClass();
-							if (msgText)
-							{
-								char msg[256];
-								sprintf(msg, "%s %d", GAME_OVER_TEXT, minefieldData->amount);
-								msgText->TextSet(msg);
-							}
+							mineData->visible = SDL_FALSE;
+							minefieldData->amount++;
+							SDL_Log("Left touch mine");
+							break;
 						}
 					}
-					else
+					free(lPoints);//释放内存
+				}
+
+				if (tPoints)//上边线
+				{
+					for (int i = 0; i < xSize; i++)
 					{
-						DisplayObject *msgTextObj = minefieldData->mMsgText;
-						if (msgTextObj)
+						//lPoints[i].x = position->x;
+						(*(tPoints + i)).x = playerPos->x + i;
+						(*(tPoints + i)).y = playerPos->y;
+
+						if (mineData->visible && SDL_PointInFRect(tPoints, dest))//直线上的点触到雷
 						{
-							Text *msgText = (Text *)msgTextObj->GetSubClass();
-							if (msgText)
-							{
-								char msg[256];
-								sprintf(msg, "%s %d", ELIMINATE_TEXT, minefieldData->amount);
-								msgText->TextSet(msg);
-							}
+							mineData->visible = SDL_FALSE;
+							minefieldData->amount++;
+							SDL_Log("Top touch mine");
+							break;
+						}
+					}
+					free(tPoints);//释放内存
+				}
+
+				if (rPoints)//右边线
+				{
+					for (int i = 0; i < ySize; i++)
+					{
+						//lPoints[i].x = position->x;
+						(*(rPoints + i)).x = playerPos->x + playerPos->w;
+						(*(rPoints + i)).y = playerPos->y + i;
+						if (mineData->visible && SDL_PointInFRect(rPoints, dest))//直线上的点触到雷
+						{
+							mineData->visible = SDL_FALSE;
+							minefieldData->amount++;
+							SDL_Log("Right touch mine");
+							break;
+						}
+					}
+					free(rPoints);//释放内存
+				}
+				if (bPoints)//底边线
+				{
+					for (int i = 0; i < xSize; i++)
+					{
+						//lPoints[i].x = position->x;
+						(*(bPoints + i)).x = playerPos->x + i;
+						(*(bPoints + i)).y = playerPos->y + playerPos->h;
+						if (mineData->visible && SDL_PointInFRect(bPoints, dest))//直线上的点触到雷
+						{
+							mineData->visible = SDL_FALSE;
+							minefieldData->amount++;
+							SDL_Log("Bottom touch mine");
+							break;
+						}
+					}
+					free(bPoints);//释放内存
+				}
+
+				//设置提示
+				if (minefieldData->amount == minefieldData->size)
+				{
+					//SDL_Log("%s", GAME_OVER_TEXT);
+
+					DisplayObject *msgTextObj = minefieldData->mMsgText;
+					if (msgTextObj)
+					{
+						Text *msgText = (Text *)msgTextObj->GetSubClass();
+						if (msgText)
+						{
+							char msg[256];
+							sprintf(msg, "%s %d", GAME_OVER_TEXT, minefieldData->amount);
+							msgText->TextSet(msg);
+						}
+					}
+				}
+				else
+				{
+					DisplayObject *msgTextObj = minefieldData->mMsgText;
+					if (msgTextObj)
+					{
+						Text *msgText = (Text *)msgTextObj->GetSubClass();
+						if (msgText)
+						{
+							char msg[256];
+							sprintf(msg, "%s %d", ELIMINATE_TEXT, minefieldData->amount);
+							msgText->TextSet(msg);
 						}
 					}
 				}
 			}
+		}
+	}
+
+	/*
+	*  逻辑: 直线上的点触到雷,雷就消失
+	*  有点: 性能高,只要雷上的任意一个顶点落入玩家所在的矩形区域,就可以消灭到雷
+	*/
+	void Mine::CollideLogic2(SDL_FRect *playerPos)
+	{
+		MinefieldData *minefieldData = this->mMinefieldData;//获取雷场
+		if (minefieldData)
+		{
+			// 遍历全部雷
+			int size = minefieldData->size;
+			for (int i = 0; i < size; i++)
+			{
+				MineData *mineData = *(minefieldData->mines + i);
+				SDL_FRect *dest = mineData->dest;
+
+				//每个雷的四个顶点坐标
+				SDL_FPoint lTPoint = { dest->x,dest->y };
+				SDL_FPoint rTPoint = { dest->x + dest->w,dest->y };
+				SDL_FPoint lBPoint = { dest->x,dest->y + dest->h };
+				SDL_FPoint rBPoint = { dest->x + dest->w,dest->y + dest->h };
+
+				//性能高
+				if (mineData->visible
+					&& (SDL_PointInFRect(&lTPoint, playerPos)
+						|| SDL_PointInFRect(&rTPoint, playerPos)
+						|| SDL_PointInFRect(&lBPoint, playerPos)
+						|| SDL_PointInFRect(&rBPoint, playerPos)))
+				{
+					mineData->visible = SDL_FALSE;
+					minefieldData->amount++;
+				}
+
+				//设置提示
+				DisplayObject *msgTextObj = minefieldData->mMsgText;
+				Text *msgText = nullptr;
+				char msg[256];
+				if (msgTextObj)
+				{
+					msgText = (Text *)msgTextObj->GetSubClass();
+				}
+
+				if (minefieldData->amount == minefieldData->size)
+				{
+
+					sprintf(msg, "%s %d", GAME_OVER_TEXT, minefieldData->amount);
+				}
+				else
+				{
+					sprintf(msg, "%s %d", ELIMINATE_TEXT, minefieldData->amount);
+				}
+
+				if (msgText)
+				{
+					msgText->TextSet(msg);
+				}
+			}
+		}
+	}
+
+	void Mine::OnPlayerPosChangeCallback(DisplayObject *self, SDL_FRect *playerPos)
+	{
+		Mine *mine = (Mine *)self->GetSubClass();
+		if (mine)
+		{
+			//mine->CollideLogic1(playerPos);
+			mine->CollideLogic2(playerPos);
 		}
 	}
 
@@ -297,9 +364,29 @@ namespace Dungeon
 
 	}
 
+	/*
+	* 重置游戏
+	*/
 	void Mine::OnTextClickCallback(DisplayObject *self)
 	{
 		SDL_Log(" Mine::OnTextClickCallback:: Click Start Button");
+		Text *text = (Text *)self->GetSubClass();
+		if (text)
+		{
+			TextData *textData = text->GetTextData();
+			if (textData)
+			{
+				DisplayObject *obj = textData->mine;
+				if (obj)
+				{
+					Mine *mine = (Mine *)obj->GetSubClass();
+					if (mine)
+					{
+						mine->ResetMine();//重置游戏
+					}
+				}
+			}
+		}
 	}
 
 	/*
