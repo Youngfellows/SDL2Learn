@@ -46,13 +46,19 @@ namespace Dungeon
 #define START_TEXT "Start" //开始游戏
 #define ELIMINATE_TEXT "Sliminate:" //开始游戏
 #define GAME_OVER_TEXT "Game Over:" //游戏结束
-#define COLOR_START_TEXT 0xff239344 //字体颜色
-#define COLOR_MSG_TEXT 0xFFCB95F7 //字体颜色
+#define COLOR_START_TEXT 0xffff0000 //字体颜色
+#define COLOR_MSG_TEXT 0xff00ff00//字体颜色
+#define BG_COLOR_START_TEXT 0xFF62E872 //背景颜色
+#define BG_COLOR_MSG_TEXT 0xFFB23AEE //背景颜色
+#define PADDING_LEFT 10 //左边距
+#define PADDING_RIGHT 10 //右边距
+#define PADDING_TOP 10 //上边距
+#define PADDING_BOTTOM 10 //下边距
 
 #define START_TEXT_X_POSITION START_X_POSITION + MINE_FIELD_WIDTH  + 10//绘制开始X位置
 #define START_TEXT_Y_POSITION START_Y_POSITION //绘制开始Y位置
 #define MSG_TEXT_X_POSITION START_X_POSITION + MINE_FIELD_WIDTH + 10//绘制开始X位置
-#define MSG_TEXT_Y_POSITION START_Y_POSITION + 30 //绘制开始Y位置
+#define MSG_TEXT_Y_POSITION START_Y_POSITION + 80 //绘制开始Y位置
 }
 
 #endif // !_DUNGEON_CONFIG_H_

@@ -11,6 +11,15 @@ using namespace std;
 
 namespace Dungeon
 {
+	//边距
+	typedef struct TextPadding
+	{
+		float left;
+		float right;
+		float top;
+		float bottom;
+	}TextPadding;
+
 	//点击事件回调函数列表
 	typedef struct TextClickData
 	{
@@ -27,6 +36,9 @@ namespace Dungeon
 		uint32_t color;//字体颜色
 		SDL_Surface *textSurface;
 		SDL_FRect *dest;//文本显示区域
+		TextPadding *padding;//边距
+		uint32_t bgColor;//背景
+		SDL_FRect *background;//背景
 		TextClickData *textClickData;//回调函数数据
 		DisplayObject *mine;//持有mine指针
 	}TextData;
@@ -43,8 +55,9 @@ namespace Dungeon
 		Text();
 		~Text();
 		DisplayObject *Create(const char *file, const char *value,
-			int ptsize, uint32_t color, float x, float y,DisplayObject *destDisObj,
-			int size, initializer_list<OnTextClickCallback> ls);
+			int ptsize, uint32_t color, float x, float y, uint32_t bgColor,
+			float left, float right, float top, float bottom,
+			DisplayObject *destDisObj, int size, initializer_list<OnTextClickCallback> ls);
 		void TextSet(const char *value);
 		TextData *GetTextData();
 		static void OnDrawCallback(DisplayObject *self, Resource *resource, SDL_Renderer *renderer);

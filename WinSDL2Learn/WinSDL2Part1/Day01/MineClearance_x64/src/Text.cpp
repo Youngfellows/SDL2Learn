@@ -12,7 +12,8 @@ namespace Dungeon
 	}
 
 	DisplayObject *Text::Create(const char *file, const char *value,
-		int ptsize, uint32_t color, float x, float y, DisplayObject *mine,
+		int ptsize, uint32_t color, float x, float y, uint32_t bgColor,
+		float left, float right, float top, float bottom, DisplayObject *mine,
 		int size, initializer_list<OnTextClickCallback> ls)
 	{
 		TTF_Font *font = TTF_OpenFont(file, ptsize);//打开字体
@@ -44,15 +45,36 @@ namespace Dungeon
 		mTextData->color = color;
 		mTextData->textSurface = nullptr;
 
+		mTextData->padding = (TextPadding *)malloc(sizeof(TextPadding));
+		if (!mTextData->padding)
+		{
+			return nullptr;
+		}
+		mTextData->padding->left = left;
+		mTextData->padding->top = top;
+		mTextData->padding->right = right;
+		mTextData->padding->bottom = bottom;
+
 		mTextData->dest = (SDL_FRect *)malloc(sizeof(SDL_FRect));
 		if (!mTextData->dest)
 		{
 			return nullptr;
 		}
-		mTextData->dest->x = x;
-		mTextData->dest->y = y;
+		//mTextData->dest->x = x + mTextData->padding->left;
+		mTextData->dest->x = x + left;
+		mTextData->dest->y = y + top;
 		mTextData->dest->w = 0;
 		mTextData->dest->h = 0;
+
+		mTextData->bgColor = bgColor;
+		mTextData->background = (SDL_FRect *)malloc(sizeof(SDL_FRect));
+		if (mTextData->background)
+		{
+			mTextData->background->x = x;
+			mTextData->background->y = y;
+			mTextData->background->w = 0;
+			mTextData->background->h = 0;
+		}
 
 		//创建数组保存函数回调
 		mTextData->mine = mine;
@@ -120,6 +142,9 @@ namespace Dungeon
 			textData->textSurface = TTF_RenderUTF8_Blended(textData->font, textData->value, textColor);
 			textData->dest->w = (float)textData->textSurface->w;
 			textData->dest->h = (float)textData->textSurface->h;
+
+			textData->background->w = textData->padding->left + textData->dest->w + textData->padding->right;
+			textData->background->h = textData->padding->top + textData->dest->h + textData->padding->bottom;
 		}
 	}
 
@@ -135,8 +160,19 @@ namespace Dungeon
 				//绘制文本
 				if (textData->textSurface)
 				{
+					SDL_Color bgColor = {
+					(textData->bgColor & 0x00ff0000) >> 16,
+					(textData->bgColor & 0x0000ff00) >> 8,
+					(textData->bgColor & 0x000000ff),
+					(textData->bgColor & 0xff000000) >> 24
+					};
+					SDL_SetRenderDrawColor(renderer, bgColor.r, bgColor.g, bgColor.b, bgColor.a);
+					//SDL_RenderDrawRectF(renderer, textData->background);//绘制背景,带边框
+					SDL_RenderFillRectF(renderer, textData->background);//绘制背景,填充
+
+
 					SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, textData->textSurface);
-					SDL_RenderCopyF(renderer, texture, nullptr, textData->dest);
+					SDL_RenderCopyF(renderer, texture, nullptr, textData->dest);//绘制文本
 					SDL_DestroyTexture(texture);
 				}
 			}
@@ -176,6 +212,8 @@ namespace Dungeon
 			{
 				SDL_FreeSurface(textData->textSurface);
 				TTF_CloseFont(textData->font);
+				free(textData->background);
+				free(textData->padding);
 				free(textData->dest);
 				free(textData->value);
 				free(textData->file);
