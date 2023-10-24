@@ -186,7 +186,8 @@ namespace Dungeon
 		{
 			TextData *textData = text->GetTextData();
 			SDL_FPoint point = { event->button.x,event->button.y };
-			if (SDL_PointInFRect(&point, textData->dest))
+			//if (SDL_PointInFRect(&point, textData->dest))
+			if (SDL_PointInFRect(&point, textData->background))
 			{
 				for (int i = 0; i < textData->textClickData->size; i++)
 				{
