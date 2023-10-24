@@ -35,7 +35,7 @@ namespace Dungeon
 #define BACKGROUND_FILE_NAME "./resources/bg_volcano.png" //背景图
 #define PLAYER_FILE_NAME "./resources/player.png"
 
-#define MINE_SIZE 20 //地雷数量
+#define MINE_SIZE 50 //地雷数量
 #define MINE_FIELD_WIDTH BACKGROUND_RECT_DEST_WIDTH //雷场宽
 #define MINE_FIELD_HEIGHT BACKGROUND_RECT_DEST_HEIGHT //雷场高
 #define MINE_DEST_RECT_WIDTH 20 //雷宽
