@@ -23,6 +23,14 @@ namespace Dungeon
 		}
 	}
 
+	void ComponentCallback::SetAudioPlayer(AudioPlayer *audioPlayer)
+	{
+		if (mComponentCallbackData)
+		{
+			mComponentCallbackData->audioPlayer = audioPlayer;//设置播放器对象指针
+		}
+	}
+
 	DisplayObject *ComponentCallback::Create()
 	{
 		//动态申请内存
@@ -40,6 +48,7 @@ namespace Dungeon
 		strcpy(mComponentCallbackData->message, psz);
 		SDL_Log("ComponentCallback::Create:: %s", mComponentCallbackData->message);
 		mComponentCallbackData->stateText = nullptr;
+		mComponentCallbackData->audioPlayer = nullptr;
 
 		//设置组件对象
 		DisplayObject *displayObject = new DisplayObject();
@@ -76,8 +85,13 @@ namespace Dungeon
 							if (stateText)
 							{
 								char msg[128];
-								sprintf(msg,"%s: %s",STATE_TEXT,START_TEXT);
+								sprintf(msg, "%s: %s", STATE_TEXT, START_TEXT);
 								stateText->TextSet(msg);
+							}
+							AudioPlayer *player = data->audioPlayer;
+							if (player)
+							{
+								player->Create(WAV_SOUND_FILE_NAME);//创建播放器并播放
 							}
 						}
 					}
@@ -112,6 +126,11 @@ namespace Dungeon
 								sprintf(msg, "%s: %s", STATE_TEXT, PAUSE_TEXT);
 								stateText->TextSet(msg);
 							}
+							AudioPlayer *player = data->audioPlayer;
+							if (player)
+							{
+								player->Pause();//暂停播放
+							}
 						}
 					}
 				}
@@ -145,8 +164,13 @@ namespace Dungeon
 								sprintf(msg, "%s: %s", STATE_TEXT, RE_START_TEXT);
 								stateText->TextSet(msg);
 							}
+							AudioPlayer *player = data->audioPlayer;
+							if (player)
+							{
+								player->ReStart();//从新播放
+							}
 						}
-						
+
 					}
 				}
 			}
@@ -178,6 +202,11 @@ namespace Dungeon
 								char msg[128];
 								sprintf(msg, "%s: %s", STATE_TEXT, STOP_TEXT);
 								stateText->TextSet(msg);
+							}
+							AudioPlayer *player = data->audioPlayer;
+							if (player)
+							{
+								player->Stop();//停止播放
 							}
 						}
 					}

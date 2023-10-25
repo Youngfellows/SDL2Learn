@@ -33,6 +33,12 @@
     <ClInclude Include="include\ComponentCallback.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="include\AudioPlayer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AudioPlayerCallback.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Game.cpp">
@@ -51,6 +57,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\ComponentCallback.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AudioPlayer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AudioPlayerCallback.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

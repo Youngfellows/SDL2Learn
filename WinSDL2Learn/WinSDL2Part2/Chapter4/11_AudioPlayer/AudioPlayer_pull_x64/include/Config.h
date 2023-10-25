@@ -45,6 +45,12 @@ namespace Dungeon
 
 #define COMPONENT_SIZE 6 //需要创建的组件个数
 
+#define WAV_SOUND_FILE_NAME "./resources/sound.wav"
+#define FLAG_CREATE_AUDIO_PLAYER "CreateAudioPlayer"
+#define FLAG_START_AUDIO_PLAYER "StartAudioPlayer"
+#define FLAG_STOP_AUDIO_PLAYER "StopAudioPlayer"
+#define FLAG_PAUSE_AUDIO_PLAYER "PauseAudioPlayer"
+#define FLAG_RELEASE_AUDIO_PLAYER "ReleaseAudioPlayer"
 }
 
 #endif // !_DUNGEON_CONFIG_H_

@@ -8,6 +8,7 @@ extern "C"
 }
 #include "DisplayObject.h"
 #include "Resource.h"
+#include "AudioPlayer.h"
 
 namespace Dungeon
 {
@@ -19,6 +20,7 @@ namespace Dungeon
 		SDL_Renderer *mRenderer;
 		Resource *mResource;//资源
 		DisplayObject **mComponents;//组件列表,指针数组
+		AudioPlayer *mAudioPlayer;//播放器组件
 
 	public:
 		Game();

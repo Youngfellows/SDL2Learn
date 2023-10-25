@@ -3,21 +3,21 @@
 
 namespace Dungeon
 {
-#define WINDOW_WIDTH 700 //Window´°¿Ú¿í
-#define WINDOW_HEIGHT 600 //Window´°¿Ú¸ß
-#define FRAMERATE 60 //Ö¡
+#define WINDOW_WIDTH 700 //Windowçª—å£å®½
+#define WINDOW_HEIGHT 600 //Windowçª—å£é«˜
+#define FRAMERATE 60 //å¸§
 
 #define FONT_FILE_NAME "./resources/padmaa.ttf"
-#define PT_SIZE_20 20 //×ÖÌå´óĞ¡20°ñ
-#define PT_SIZE_32 32 //×ÖÌå´óĞ¡32°ñ
-#define PT_SIZE_40 40 //×ÖÌå´óĞ¡40°ñ
+#define PT_SIZE_20 20 //å­—ä½“å¤§å°20æ¦œ
+#define PT_SIZE_32 32 //å­—ä½“å¤§å°32æ¦œ
+#define PT_SIZE_40 40 //å­—ä½“å¤§å°40æ¦œ
 
 #define SOUND_FILE_NAME "./resources/sound.wav"
 #define FLAG_CREATE_AUDIO_PLAYER "CreateAudioPlayer"
-#define FLAG_CREATE_AUDIO_PLAYER "StartAudioPlayer"
-#define FLAG_CREATE_AUDIO_PLAYER "StopAudioPlayer"
-#define FLAG_CREATE_AUDIO_PLAYER "PauseAudioPlayer"
-#define FLAG_CREATE_AUDIO_PLAYER "ReleaseAudioPlayer"
+#define FLAG_START_AUDIO_PLAYER "StartAudioPlayer"
+#define FLAG_STOP_AUDIO_PLAYER "StopAudioPlayer"
+#define FLAG_PAUSE_AUDIO_PLAYER "PauseAudioPlayer"
+#define FLAG_RELEASE_AUDIO_PLAYER "ReleaseAudioPlayer"
 }
 
 #endif // !_DUNGEON_CONFIG_H_

@@ -6,6 +6,7 @@
 #include "SDL2/SDL.h"
 #include "DisplayObject.h"
 #include "Text.h"
+#include "AudioPlayer.h"
 
 namespace Dungeon
 {
@@ -14,6 +15,7 @@ namespace Dungeon
 		//AudioPlayer *mAudioPlayer;
 		char *message;
 		Text *stateText;
+		AudioPlayer *audioPlayer;//wav 音频播放器
 	}ComponentCallbackData;
 }
 
@@ -32,6 +34,7 @@ namespace Dungeon
 		~ComponentCallback();
 		DisplayObject *Create();
 		void SetStateText(Text *text);
+		void SetAudioPlayer(AudioPlayer *audioPlayer);
 		static void OnStartTextClickCallback(DisplayObject *self);
 		static void OnPauseTextClickCallback(DisplayObject *self);
 		static void OnReStartTextClickCallback(DisplayObject *self);

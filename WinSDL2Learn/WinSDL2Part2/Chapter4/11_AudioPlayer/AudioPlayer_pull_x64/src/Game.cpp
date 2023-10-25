@@ -2,11 +2,13 @@
 #include "Config.h"
 #include "Text.h"
 #include "ComponentCallback.h"
+#include "AudioPlayerCallback.h"
 
 namespace Dungeon
 {
 	Game::Game() :mIsRunning(true), mWindow(nullptr),
-		mRenderer(nullptr), mResource(nullptr), mComponents(nullptr)
+		mRenderer(nullptr), mResource(nullptr),
+		mComponents(nullptr),mAudioPlayer(nullptr)
 	{
 	}
 
@@ -203,6 +205,23 @@ namespace Dungeon
 		}
 		callbackComponent->SetStateText(state);//设置stateText文本指针给组件
 
+		//创建播放器组件
+		mAudioPlayer = new AudioPlayer();
+		if (!mAudioPlayer->InitAudio())
+		{
+			return SDL_FALSE;
+		}
+		//设置播放器回调
+		mAudioPlayer->SetAudioPlayerCallback(
+			&AudioPlayerCallback::OnCreateCallback,
+			&AudioPlayerCallback::OnStartCallback,
+			&AudioPlayerCallback::OnPauseCallback,
+		    &AudioPlayerCallback::OnStopCallback,
+			&AudioPlayerCallback::OnReleaseCallback,
+			&AudioPlayerCallback::OnCompleteCallback,
+			&AudioPlayerCallback::OnProgressCallbacc);
+		callbackComponent->SetAudioPlayer(mAudioPlayer);//设置播放器指针给组件
+
 		return SDL_TRUE;
 	}
 
@@ -235,6 +254,12 @@ namespace Dungeon
 					component->Destory();//释放各个组件资源
 				}
 			}
+		}
+		if (mAudioPlayer)
+		{
+			mAudioPlayer->Destory();//释放播放器资源
+			delete mAudioPlayer;
+			mAudioPlayer = nullptr;
 		}
 	}
 

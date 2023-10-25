@@ -174,7 +174,7 @@ namespace Dungeon
 		{
 			return;
 		}
-		SDL_memset(stream, 0, len);
+		SDL_memset(stream, 0, len);//清空缓冲区
 		SoundInfo *soundInfo = audioPlayer->mSoundInfo;
 		if (!soundInfo->completed)
 		{
@@ -182,6 +182,7 @@ namespace Dungeon
 			if (remaining > len)
 			{
 				SDL_memcpy(stream, soundInfo->sound + soundInfo->soundPos, len);//把数据喂到缓冲区
+				//SDL_MixAudio(stream, soundInfo->sound + soundInfo->soundPos, len,SDL_MIX_MAXVOLUME);//把数据喂到缓冲区,有bug,没声音
 				soundInfo->soundPos += len;//更新已经播放长度
 				if (soundInfo->OnProgress)
 				{
@@ -191,6 +192,7 @@ namespace Dungeon
 			else
 			{
 				SDL_memcpy(stream, soundInfo->sound + soundInfo->soundPos, remaining);//把数据喂到缓冲区
+				//SDL_MixAudio(stream, soundInfo->sound + soundInfo->soundPos, remaining, SDL_MIX_MAXVOLUME);//把数据喂到缓冲区,有bug,没声音
 				soundInfo->soundPos = 0;
 				soundInfo->completed = SDL_TRUE;//播放完成
 				SDL_Log("AudioCallback completed");
