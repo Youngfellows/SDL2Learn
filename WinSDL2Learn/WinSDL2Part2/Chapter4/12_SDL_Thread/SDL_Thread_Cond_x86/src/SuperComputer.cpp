@@ -167,7 +167,7 @@ namespace Dungeon
 				if (audioList)
 				{
 					//容器满了,等容器有空间了再继续往下执行
-					if (audioList->size() >= MAX_SIZE)
+					if (!audioList->empty() && audioList->size() >= MAX_SIZE)
 					{
 						//释放mMutex锁,并阻塞在这里,等待条件变量mMakeCond有信号才继续往下执行
 						SDL_CondWait(computer->mMakeCond, computer->mMutex);//等待有mMakeCond信号,才继续生产音频
@@ -178,13 +178,17 @@ namespace Dungeon
 					if (audio)
 					{
 						audio->pcm = (char *)malloc(sizeof(char) * 128);
+						if (data->amount >= SDL_MAX_SINT32)
+						{
+							data->amount = 0;
+						}
 						data->amount++;
 						audio->serialNumber = data->amount;
 						if (audio->pcm)
 						{
 							sprintf(audio->pcm, "PCM_Audio_%ld", data->amount);
 						}
-						int sn = audio->serialNumber;
+						long sn = audio->serialNumber;
 						char *pcm = audio->pcm;
 						SDL_Log("Make:: sn:%ld,pcm:%s", sn, pcm);
 						audioList->push_back(audio);//向容器尾部添加数据
@@ -215,7 +219,7 @@ namespace Dungeon
 				if (audioList)
 				{
 					//容器是空的,等有数据再使用
-					if (audioList->size() == 0)
+					if (audioList->empty())
 					{
 						//释放mMutex锁,并阻塞在这里,等待条件变量mUseCond有信号才继续往下执行
 						SDL_CondWait(computer->mUseCond, computer->mMutex);//等待有mUseCond信号,才继续使用音频
@@ -226,7 +230,7 @@ namespace Dungeon
 					audio = audioList->front();//从列表头开始获取
 					if (audio)
 					{
-						int sn = audio->serialNumber;
+						long sn = audio->serialNumber;
 						char *pcm = audio->pcm;
 						SDL_Log("Use:: sn:%ld,pcm:%s", sn, pcm);
 						free(audio->pcm);//释放空间

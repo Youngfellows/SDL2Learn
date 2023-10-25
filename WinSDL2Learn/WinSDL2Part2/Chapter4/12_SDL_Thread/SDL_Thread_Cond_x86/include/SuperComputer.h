@@ -12,7 +12,7 @@ namespace Dungeon
 	//音频消息结构体
 	typedef struct AudioInfo
 	{
-		int serialNumber;//序列号
+		long serialNumber;//序列号
 		char *pcm;//音频数据
 	}AudioInfo;
 
