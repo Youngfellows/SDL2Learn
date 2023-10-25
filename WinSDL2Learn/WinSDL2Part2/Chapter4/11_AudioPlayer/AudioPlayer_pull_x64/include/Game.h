@@ -6,6 +6,7 @@ extern "C"
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_ttf.h"
 }
+#include "DisplayObject.h"
 #include "Resource.h"
 
 namespace Dungeon
@@ -17,7 +18,7 @@ namespace Dungeon
 		bool mIsRunning;
 		SDL_Renderer *mRenderer;
 		Resource *mResource;//资源
-		//DisplayObject *mStartText;//开始文本
+		DisplayObject **mComponents;//组件列表,指针数组
 
 	public:
 		Game();
