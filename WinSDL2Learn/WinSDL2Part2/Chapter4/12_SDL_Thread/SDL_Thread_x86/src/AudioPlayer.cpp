@@ -6,8 +6,8 @@ namespace Dungeon
 {
 	AudioPlayer::AudioPlayer() :mAudioPlayerData(nullptr)
 	{
-		srand(time(0));//²úÉúËæ»úÊıÖÖ×Ó
-		//¶¯Ì¬ÉêÇëÄÚ´æ,ÉèÖÃ»Øµ÷º¯Êı
+		srand(time(0));//äº§ç”Ÿéšæœºæ•°ç§å­
+		//åŠ¨æ€ç”³è¯·å†…å­˜,è®¾ç½®å›è°ƒå‡½æ•°
 		this->mAudioPlayerData = (AudioPlayerData *)malloc(sizeof(AudioPlayerData));
 		if (mAudioPlayerData)
 		{
@@ -26,7 +26,7 @@ namespace Dungeon
 	}
 
 	/*
-	* Ïß³Ì»Øµ÷º¯Êı
+	* çº¿ç¨‹å›è°ƒå‡½æ•°
 	*/
 	int SDLCALL AudioPlayer::ThreadCallback(void *userdata)
 	{
@@ -69,7 +69,7 @@ namespace Dungeon
 	void AudioPlayer::Start()
 	{
 		SDL_Log("Start");
-		//Æô¶¯²¥·ÅÏß³Ì,´´½¨Ïß³Ì²¢Ö´ĞĞ
+		//å¯åŠ¨æ’­æ”¾çº¿ç¨‹,åˆ›å»ºçº¿ç¨‹å¹¶æ‰§è¡Œ
 		AudioPlayer *userData = this;
 		SDL_Thread *audioThread = SDL_CreateThread(&ThreadCallback, "Audio_Player_Thread", (void *)userData);
 		if (!audioThread)
@@ -80,9 +80,9 @@ namespace Dungeon
 		{
 			//int status;
 			SDL_Log("Start Create Thread Success");
-			//SDL_WaitThread(audioThread, &status);//µÈ´ı×ÓÏß³Ì½áÊø
+			//SDL_WaitThread(audioThread, &status);//ç­‰å¾…å­çº¿ç¨‹ç»“æŸ
 			//SDL_Log("Thread Return Value:%d", status);
-			//SDL_DetachThread(audioThread);//×ÓÏß³Ì×Ô¼ºÔËĞĞ,²»Ó°ÏìÖ÷Ïß³ÌÖ´ĞĞ
+			//SDL_DetachThread(audioThread);//å­çº¿ç¨‹è‡ªå·±è¿è¡Œ,ä¸å½±å“ä¸»çº¿ç¨‹æ‰§è¡Œ
 			SDL_Log("Start Detach Audio Thread");
 		}
 	}

@@ -9,8 +9,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PlaySound_x86", "PlaySound_
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PlaySound_x86_2", "PlaySound_x86_2\PlaySound_x86_2.vcxproj", "{241F6874-51E8-4FB9-961B-1260A1134C33}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SDL_Thread_x86", "SDL_Thread_x86\SDL_Thread_x86.vcxproj", "{068CE09F-109D-4D3F-B660-B807F1C05C25}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -43,14 +41,6 @@ Global
 		{241F6874-51E8-4FB9-961B-1260A1134C33}.Release|x64.Build.0 = Release|x64
 		{241F6874-51E8-4FB9-961B-1260A1134C33}.Release|x86.ActiveCfg = Release|Win32
 		{241F6874-51E8-4FB9-961B-1260A1134C33}.Release|x86.Build.0 = Release|Win32
-		{068CE09F-109D-4D3F-B660-B807F1C05C25}.Debug|x64.ActiveCfg = Debug|x64
-		{068CE09F-109D-4D3F-B660-B807F1C05C25}.Debug|x64.Build.0 = Debug|x64
-		{068CE09F-109D-4D3F-B660-B807F1C05C25}.Debug|x86.ActiveCfg = Debug|Win32
-		{068CE09F-109D-4D3F-B660-B807F1C05C25}.Debug|x86.Build.0 = Debug|Win32
-		{068CE09F-109D-4D3F-B660-B807F1C05C25}.Release|x64.ActiveCfg = Release|x64
-		{068CE09F-109D-4D3F-B660-B807F1C05C25}.Release|x64.Build.0 = Release|x64
-		{068CE09F-109D-4D3F-B660-B807F1C05C25}.Release|x86.ActiveCfg = Release|Win32
-		{068CE09F-109D-4D3F-B660-B807F1C05C25}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
