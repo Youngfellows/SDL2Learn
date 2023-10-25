@@ -45,7 +45,9 @@ namespace Dungeon
 
 #define COMPONENT_SIZE 6 //需要创建的组件个数
 
+#define WAV_SOUND_SIZE 2 //音频数量
 #define WAV_SOUND_FILE_NAME "./resources/sound.wav"
+#define WAV_SOUND_SIREN_FILE_NAME "./resources/siren_signal_wail_yelp_multitone_phaser_hilo.wav"
 #define FLAG_CREATE_AUDIO_PLAYER "CreateAudioPlayer"
 #define FLAG_START_AUDIO_PLAYER "StartAudioPlayer"
 #define FLAG_STOP_AUDIO_PLAYER "StopAudioPlayer"

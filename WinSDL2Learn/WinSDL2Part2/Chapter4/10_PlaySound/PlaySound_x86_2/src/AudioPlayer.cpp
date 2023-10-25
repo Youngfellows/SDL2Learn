@@ -67,6 +67,8 @@ namespace Dungeon
 			SDL_Log("Can not create audio player");
 			return SDL_FALSE;
 		}
+		CloseDevice();//如果已经打开了播放设备,先关闭
+
 		//动态申请内存
 		mSoundInfo->file = (char *)malloc(sizeof(char) * SDL_strlen(file) + 1);
 		if (mSoundInfo->file)

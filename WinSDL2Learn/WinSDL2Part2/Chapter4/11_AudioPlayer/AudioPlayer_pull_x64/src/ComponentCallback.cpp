@@ -1,13 +1,14 @@
 #include "ComponentCallback.h"
 #include "Text.h"
 #include "Config.h"
+#include <ctime>
 
 namespace Dungeon
 {
 
 	ComponentCallback::ComponentCallback() :mComponentCallbackData(nullptr)
 	{
-
+		srand(time(0));//设置随机数种子
 	}
 
 	ComponentCallback::~ComponentCallback()
@@ -50,6 +51,31 @@ namespace Dungeon
 		mComponentCallbackData->stateText = nullptr;
 		mComponentCallbackData->audioPlayer = nullptr;
 
+		//设置播放资源
+		mComponentCallbackData->size = WAV_SOUND_SIZE;
+		mComponentCallbackData->files = (char **)malloc(sizeof(char *) * (mComponentCallbackData->size));//创建二维数组
+		if (!mComponentCallbackData->files)
+		{
+			return nullptr;
+		}
+		//动态申请数组元素0内存
+		char *file0 = (char *)malloc(sizeof(char *) * strlen(WAV_SOUND_FILE_NAME)+1);
+		if (!file0)
+		{
+			return nullptr;
+		}
+		strcpy(file0, WAV_SOUND_FILE_NAME);//为数组元素0赋值
+		*(mComponentCallbackData->files + 0) = file0;//为二维数组元素赋值
+
+		char *file1 = (char *)malloc(sizeof(char *) * strlen(WAV_SOUND_SIREN_FILE_NAME) + 1);
+		if (!file1)
+		{
+			return nullptr;
+		}
+		strcpy(file1, WAV_SOUND_SIREN_FILE_NAME);//为数组元素0赋值
+		*(mComponentCallbackData->files + 1) = file1;//为二维数组元素赋值
+
+
 		//设置组件对象
 		DisplayObject *displayObject = new DisplayObject();
 		displayObject->SetSubClass(this);//把当前对象设置过去
@@ -91,7 +117,11 @@ namespace Dungeon
 							AudioPlayer *player = data->audioPlayer;
 							if (player)
 							{
-								player->Create(WAV_SOUND_FILE_NAME);//创建播放器并播放
+								int index = rand() % WAV_SOUND_SIZE;
+								char *file = *(data->files + index);
+								SDL_Log("ComponentCallback::OnStartTextClickCallback:: index:%d,file:%s", index, file);
+								//player->Create(WAV_SOUND_FILE_NAME);//创建播放器并播放
+								player->Create(file);//创建播放器并播放
 							}
 						}
 					}

@@ -16,6 +16,8 @@ namespace Dungeon
 		char *message;
 		Text *stateText;
 		AudioPlayer *audioPlayer;//wav 音频播放器
+		char **files;//音频资源
+		int size;//资源数量
 	}ComponentCallbackData;
 }
 
@@ -40,7 +42,7 @@ namespace Dungeon
 		static void OnReStartTextClickCallback(DisplayObject *self);
 		static void OnStopTextClickCallback(DisplayObject *self);
 		static void OnDestoryCallback(DisplayObject *self);
-		
+
 	};
 }
 #endif // !_DUNGEON_COMPONENTCALLBACK_H_
