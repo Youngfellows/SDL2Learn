@@ -197,7 +197,9 @@ namespace Dungeon
 				char *msg = data->message;//获取成员
 				SDL_Log("ComponentCallback::OnDestoryCallback::%s", msg);
 				free(msg);
+				free(data);
 				msg = nullptr;
+				data = nullptr;
 			}
 		}
 	}
