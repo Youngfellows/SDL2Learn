@@ -38,7 +38,7 @@ namespace Dungeon
 		}
 		AudioPlayerData *data = audioPlayer->mAudioPlayerData;
 
-		for (int i = 0; i < 30; i++)
+		for (int i = 0; i < 5; i++)
 		{
 			SDL_Delay(1000);
 			int state = rand() % 5;

@@ -12,6 +12,7 @@ int main(int argc, char *argv[])
 	audioPlayer->Start();
 
 	SDL_Log("Thread main start");
+	//SDL_Delay(2*60 * 1000);//等待子线程结束
 	SDL_Delay(2*60 * 1000);
 	SDL_Log("Thread main finish");
 
