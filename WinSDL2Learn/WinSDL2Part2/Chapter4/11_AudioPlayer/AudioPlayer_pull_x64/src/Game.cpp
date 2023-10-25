@@ -201,7 +201,7 @@ namespace Dungeon
 		{
 			return SDL_FALSE;
 		}
-		//callbackComponent->SetStateText(state);//设置stateText文本指针给组件
+		callbackComponent->SetStateText(state);//设置stateText文本指针给组件
 
 		return SDL_TRUE;
 	}

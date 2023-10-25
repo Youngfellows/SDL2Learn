@@ -76,8 +76,8 @@ namespace Dungeon
 							if (stateText)
 							{
 								char msg[128];
-								sprintf(msg,"%s:%s",STATE_TEXT,START_TEXT);
-								stateText->TextSet("");
+								sprintf(msg,"%s: %s",STATE_TEXT,START_TEXT);
+								stateText->TextSet(msg);
 							}
 						}
 					}
@@ -109,8 +109,8 @@ namespace Dungeon
 							if (stateText)
 							{
 								char msg[128];
-								sprintf(msg, "%s:%s", STATE_TEXT, PAUSE_TEXT);
-								stateText->TextSet("");
+								sprintf(msg, "%s: %s", STATE_TEXT, PAUSE_TEXT);
+								stateText->TextSet(msg);
 							}
 						}
 					}
@@ -142,8 +142,8 @@ namespace Dungeon
 							if (stateText)
 							{
 								char msg[128];
-								sprintf(msg, "%s:%s", STATE_TEXT, RE_START_TEXT);
-								stateText->TextSet("");
+								sprintf(msg, "%s: %s", STATE_TEXT, RE_START_TEXT);
+								stateText->TextSet(msg);
 							}
 						}
 						
@@ -176,8 +176,8 @@ namespace Dungeon
 							if (stateText)
 							{
 								char msg[128];
-								sprintf(msg, "%s:%s", STATE_TEXT, STOP_TEXT);
-								stateText->TextSet("");
+								sprintf(msg, "%s: %s", STATE_TEXT, STOP_TEXT);
+								stateText->TextSet(msg);
 							}
 						}
 					}
