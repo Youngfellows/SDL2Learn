@@ -98,7 +98,7 @@ namespace Dungeon
 	*/
 	void SuperComputer::Start()
 	{
-		if (!OpenFile(PCM_2_FILE_NAME))
+		if (!OpenFile(PCM_3_FILE_NAME))
 		{
 			return;
 		}
