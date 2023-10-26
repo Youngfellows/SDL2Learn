@@ -136,6 +136,7 @@
     <ClCompile Include="src\SuperComputer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Config.h" />
     <ClInclude Include="include\SuperComputer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

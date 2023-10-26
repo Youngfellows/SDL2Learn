@@ -1,6 +1,7 @@
 #include "SuperComputer.h"
 
 #include <iostream>
+#include "Config.h"
 
 namespace Dungeon
 {
@@ -28,12 +29,12 @@ namespace Dungeon
 		}
 
 		this->mMakeCond = SDL_CreateCond();//创建条件变量
-		if (mMakeCond)
+		if (!mMakeCond)
 		{
 			SDL_Log("Create Make Cond Failure");
 		}
 		this->mUseCond = SDL_CreateCond();//创建条件变量
-		if (mUseCond)
+		if (!mUseCond)
 		{
 			SDL_Log("Create Use Cond Failure");
 		}
@@ -97,8 +98,33 @@ namespace Dungeon
 	*/
 	void SuperComputer::Start()
 	{
+		if (!OpenFile(PCM_1_FILE_NAME))
+		{
+			return;
+		}
 		UseAudio();//多线程消费音频
 		MakeAudio();//多线程生产音频
+	}
+
+	SDL_bool SuperComputer::OpenFile(const char *fileName)
+	{
+		if (this->mComputerData)
+		{
+			mComputerData->file = fopen(fileName, "rb");//打开文件
+			if (!mComputerData->file)
+			{
+				SDL_Log("open file failed: %s", fileName);
+				return SDL_FALSE;
+			}
+			mComputerData->fileName = (char *)malloc(sizeof(char) * strlen(fileName) + 1);
+			if (!mComputerData->fileName)
+			{
+				return SDL_FALSE;
+			}
+			strcpy(mComputerData->fileName, PCM_1_FILE_NAME);//赋值文件名
+
+		}
+		return SDL_TRUE;
 	}
 
 	/*

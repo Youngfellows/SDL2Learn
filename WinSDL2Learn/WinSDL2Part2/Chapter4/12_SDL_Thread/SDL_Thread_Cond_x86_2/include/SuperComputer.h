@@ -4,6 +4,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "SDL2/SDL.h"
 #include <list>
+#include <iostream>
 
 using namespace std;
 
@@ -21,6 +22,8 @@ namespace Dungeon
 	{
 		long amount;//金额
 		char *threadName;//线程名称
+		char *fileName;//文件名
+		FILE *file;//文件指针
 		list<AudioInfo *> *audioList;//保存音频的列表
 	}ComputerData;
 
@@ -56,6 +59,7 @@ namespace Dungeon
 		static int SDLCALL UseAudioThreadCallback(void *userdata);//使用音频线程回调函数
 		void MakeAudio();//生产音频
 		void UseAudio();//使用音频
+		SDL_bool OpenFile(const char *fileName);
 	};
 
 

@@ -28,12 +28,12 @@ namespace Dungeon
 		}
 
 		this->mMakeCond = SDL_CreateCond();//创建条件变量
-		if (mMakeCond)
+		if (!mMakeCond)
 		{
 			SDL_Log("Create Make Cond Failure");
 		}
 		this->mUseCond = SDL_CreateCond();//创建条件变量
-		if (mUseCond)
+		if (!mUseCond)
 		{
 			SDL_Log("Create Use Cond Failure");
 		}
