@@ -6,7 +6,7 @@ namespace Dungeon
 {
 #define MAKE_THREAD_SIZE 4 //多线程数量
 #define USE_THREAD_SIZE 5 //多线程数量
-#define MAX_SIZE 20 //保存音频容器的最大容量
+#define MAX_SIZE 200 //保存音频容器的最大容量
 
 	SuperComputer::SuperComputer() :
 		isRunning(SDL_TRUE),
@@ -194,8 +194,8 @@ namespace Dungeon
 						audioList->push_back(audio);//向容器尾部添加数据
 					}
 				}
-				SDL_UnlockMutex(computer->mMutex);//解锁
 				SDL_CondSignal(computer->mUseCond);//发送信号mUseCond给使用线程,可以使用音频了
+				SDL_UnlockMutex(computer->mMutex);//解锁
 				SDL_Delay(100);//生产快一点
 			}
 		}
@@ -238,8 +238,8 @@ namespace Dungeon
 					}
 					audioList->pop_front();//移除列表头部元素
 				}
-				SDL_UnlockMutex(computer->mMutex);//解锁
 				SDL_CondSignal(computer->mMakeCond);//发送信号mMakeCond给生产线程,可以生产音频了
+				SDL_UnlockMutex(computer->mMutex);//解锁
 				SDL_Delay(150);//使用慢一点
 			}
 		}

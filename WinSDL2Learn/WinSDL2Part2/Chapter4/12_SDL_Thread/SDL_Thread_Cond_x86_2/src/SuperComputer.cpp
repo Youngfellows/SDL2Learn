@@ -5,8 +5,8 @@
 
 namespace Dungeon
 {
-#define MAKE_THREAD_SIZE 4 //多线程数量
-#define USE_THREAD_SIZE 5 //多线程数量
+#define MAKE_THREAD_SIZE 2 //多线程数量
+#define USE_THREAD_SIZE 3 //多线程数量
 #define MAX_SIZE 20 //保存音频容器的最大容量
 
 	SuperComputer::SuperComputer() :
@@ -98,12 +98,32 @@ namespace Dungeon
 	*/
 	void SuperComputer::Start()
 	{
-		if (!OpenFile(PCM_1_FILE_NAME))
+		if (!OpenFile(PCM_2_FILE_NAME))
 		{
 			return;
 		}
+		//获取文件大小
+		this->mComputerData->size = GetFileSize(this->mComputerData->file);
 		UseAudio();//多线程消费音频
 		MakeAudio();//多线程生产音频
+	}
+
+	/*
+	* 获取文件大小
+	*/
+	long SuperComputer::GetFileSize(FILE *file)
+	{
+		long size = -1;
+		if (file)
+		{
+			if (fseek(file, 0L, SEEK_END) == 0)//指针移到文件末尾
+			{
+				size = ftell(file);
+			}
+			rewind(file);//指针又移到文件开头
+		}
+		SDL_Log("file size: %ld", size);
+		return size;
 	}
 
 	SDL_bool SuperComputer::OpenFile(const char *fileName)
@@ -203,26 +223,38 @@ namespace Dungeon
 					AudioInfo *audio = (AudioInfo *)malloc(sizeof(AudioInfo));
 					if (audio)
 					{
-						audio->pcm = (char *)malloc(sizeof(char) * 128);
+						audio->pcm = (char *)malloc(sizeof(char) * AUDIO_CAPACITY);//申请保存音频的空间512个字节
 						if (data->amount >= SDL_MAX_SINT32)
 						{
 							data->amount = 0;
 						}
-						data->amount++;
-						audio->serialNumber = data->amount;
 						if (audio->pcm)
 						{
-							sprintf(audio->pcm, "PCM_Audio_%ld", data->amount);
+							//sprintf(audio->pcm, "PCM_Audio_%ld", data->amount);
+							if (fread(audio->pcm, 1, AUDIO_CAPACITY, data->file) == 0)
+							{
+								SDL_Log("================================================");
+								data->amount = 0;
+								audio->serialNumber = data->amount;
+								rewind(data->file);//重置文件指针到开头
+							}
+							else
+							{
+								data->amount++;
+								audio->serialNumber = data->amount;
+								long sn = audio->serialNumber;
+								char *pcm = audio->pcm;
+								//SDL_Log("Make:: sn:%ld,pcm:%s", sn, pcm);
+								SDL_Log("Make:: 1 sn:%ld,pcm audio", sn);
+								audioList->push_back(audio);//向容器尾部添加数据
+							}	
 						}
-						long sn = audio->serialNumber;
-						char *pcm = audio->pcm;
-						SDL_Log("Make:: sn:%ld,pcm:%s", sn, pcm);
-						audioList->push_back(audio);//向容器尾部添加数据
 					}
 				}
-				SDL_UnlockMutex(computer->mMutex);//解锁
+				SDL_Log("Make:: 2 sn:,pcm audio");
 				SDL_CondSignal(computer->mUseCond);//发送信号mUseCond给使用线程,可以使用音频了
-				SDL_Delay(100);//生产快一点
+				SDL_UnlockMutex(computer->mMutex);//解锁
+				//SDL_Delay(100);//生产快一点
 			}
 		}
 		return 1;
@@ -239,7 +271,9 @@ namespace Dungeon
 			SDL_Log("Start In Use Audio Thread:");
 			while (computer->isRunning)
 			{
+				SDL_Log("In Use Audio Thread: 1");
 				SDL_LockMutex(computer->mMutex);//加锁
+				SDL_Log("In Use Audio Thread: 2");
 				ComputerData *data = computer->mComputerData;
 				list<AudioInfo *> *audioList = data->audioList;
 				if (audioList)
@@ -247,26 +281,32 @@ namespace Dungeon
 					//容器是空的,等有数据再使用
 					if (audioList->empty())
 					{
+						SDL_Log("In Use Audio Thread:: audioList is empty wait");
 						//释放mMutex锁,并阻塞在这里,等待条件变量mUseCond有信号才继续往下执行
 						SDL_CondWait(computer->mUseCond, computer->mMutex);//等待有mUseCond信号,才继续使用音频
 					}
 
 					//获取列表保存的已经生产好的音频数据
 					AudioInfo *audio = nullptr;
-					audio = audioList->front();//从列表头开始获取
-					if (audio)
+					if (!audioList->empty())
 					{
-						long sn = audio->serialNumber;
-						char *pcm = audio->pcm;
-						SDL_Log("Use:: sn:%ld,pcm:%s", sn, pcm);
-						free(audio->pcm);//释放空间
-						free(audio);
-					}
-					audioList->pop_front();//移除列表头部元素
+						audio = audioList->front();//从列表头开始获取
+						if (audio)
+						{
+							long sn = audio->serialNumber;
+							char *pcm = audio->pcm;
+							//SDL_Log("Use:: sn:%ld,pcm:%s", sn, pcm);
+							SDL_Log("Use:: sn:%ld,pcm audio", sn);
+							free(audio->pcm);//释放空间
+							free(audio);
+						}
+						audioList->pop_front();//移除列表头部元素
+					}	
 				}
-				SDL_UnlockMutex(computer->mMutex);//解锁
+				SDL_Log("In Use Audio Thread: 3");
 				SDL_CondSignal(computer->mMakeCond);//发送信号mMakeCond给生产线程,可以生产音频了
-				SDL_Delay(150);//使用慢一点
+				SDL_UnlockMutex(computer->mMutex);//解锁
+				//SDL_Delay(150);//使用慢一点
 			}
 		}
 
