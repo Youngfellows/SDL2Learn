@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SDL_Thread_x86_2", "SDL_Thr
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SDL_Thread_Cond_x86", "SDL_Thread_Cond_x86\SDL_Thread_Cond_x86.vcxproj", "{0F2FB25F-3329-4644-A034-6477C5E21771}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SDL_Thread_Cond_x86_2", "SDL_Thread_Cond_x86_2\SDL_Thread_Cond_x86_2.vcxproj", "{B2909EAA-B55E-457D-A8A6-4D7A2B40F8D9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -41,6 +43,14 @@ Global
 		{0F2FB25F-3329-4644-A034-6477C5E21771}.Release|x64.Build.0 = Release|x64
 		{0F2FB25F-3329-4644-A034-6477C5E21771}.Release|x86.ActiveCfg = Release|Win32
 		{0F2FB25F-3329-4644-A034-6477C5E21771}.Release|x86.Build.0 = Release|Win32
+		{B2909EAA-B55E-457D-A8A6-4D7A2B40F8D9}.Debug|x64.ActiveCfg = Debug|x64
+		{B2909EAA-B55E-457D-A8A6-4D7A2B40F8D9}.Debug|x64.Build.0 = Debug|x64
+		{B2909EAA-B55E-457D-A8A6-4D7A2B40F8D9}.Debug|x86.ActiveCfg = Debug|Win32
+		{B2909EAA-B55E-457D-A8A6-4D7A2B40F8D9}.Debug|x86.Build.0 = Debug|Win32
+		{B2909EAA-B55E-457D-A8A6-4D7A2B40F8D9}.Release|x64.ActiveCfg = Release|x64
+		{B2909EAA-B55E-457D-A8A6-4D7A2B40F8D9}.Release|x64.Build.0 = Release|x64
+		{B2909EAA-B55E-457D-A8A6-4D7A2B40F8D9}.Release|x86.ActiveCfg = Release|Win32
+		{B2909EAA-B55E-457D-A8A6-4D7A2B40F8D9}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
