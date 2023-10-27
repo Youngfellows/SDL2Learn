@@ -76,6 +76,15 @@ namespace Dungeon
 		*(mComponentCallbackData->files + 1) = file1;//为二维数组元素赋值
 
 
+		char *file2 = (char *)malloc(sizeof(char *) * strlen(WAV_SOUND_MRX_FILE_NAME) + 1);
+		if (!file2)
+		{
+			return nullptr;
+		}
+		strcpy(file2, WAV_SOUND_MRX_FILE_NAME);//为数组元素0赋值
+		*(mComponentCallbackData->files + 2) = file2;//为二维数组元素赋值
+
+
 		//设置组件对象
 		DisplayObject *displayObject = new DisplayObject();
 		displayObject->SetSubClass(this);//把当前对象设置过去
