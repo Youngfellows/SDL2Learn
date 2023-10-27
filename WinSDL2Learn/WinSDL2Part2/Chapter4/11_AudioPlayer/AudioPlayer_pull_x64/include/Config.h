@@ -48,7 +48,7 @@ namespace Dungeon
 #define WAV_SOUND_SIZE 3 //音频数量
 #define WAV_SOUND_FILE_NAME "./resources/sound.wav"
 #define WAV_SOUND_SIREN_FILE_NAME "./resources/siren_signal_wail_yelp_multitone_phaser_hilo.wav"
-#define WAV_SOUND_MRX_FILE_NAME "./resources/mu_rong_xue_xue_kai_qi_1.wav"
+#define WAV_SOUND_MRX_FILE_NAME "./resources/mu_rong_xue_xue_kai_qi_1.pcm"
 #define FLAG_CREATE_AUDIO_PLAYER "CreateAudioPlayer"
 #define FLAG_START_AUDIO_PLAYER "StartAudioPlayer"
 #define FLAG_STOP_AUDIO_PLAYER "StopAudioPlayer"
