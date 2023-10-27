@@ -5,8 +5,8 @@
 
 namespace Dungeon
 {
-#define MAKE_THREAD_SIZE 2 //多线程数量
-#define USE_THREAD_SIZE 3 //多线程数量
+#define MAKE_THREAD_SIZE 1 //多线程数量
+#define USE_THREAD_SIZE 1 //多线程数量
 #define MAX_SIZE 20 //保存音频容器的最大容量
 
 	SuperComputer::SuperComputer() :
@@ -98,7 +98,11 @@ namespace Dungeon
 	*/
 	void SuperComputer::Start()
 	{
-		if (!OpenFile(PCM_3_FILE_NAME))
+		//PCM_1_FILE_NAME
+		//PCM_2_FILE_NAME
+		//PCM_3_FILE_NAME
+		//MP3_FILE_NAME
+		if (!OpenFile(PCM_2_FILE_NAME))
 		{
 			return;
 		}
@@ -215,6 +219,8 @@ namespace Dungeon
 					//容器满了,等容器有空间了再继续往下执行
 					if (!audioList->empty() && audioList->size() >= MAX_SIZE)
 					{
+						const char *fullStr = "============ Audio List Is Full,Wait mMakeCond ================";
+						SDL_Log("%s", fullStr);
 						//释放mMutex锁,并阻塞在这里,等待条件变量mMakeCond有信号才继续往下执行
 						SDL_CondWait(computer->mMakeCond, computer->mMutex);//等待有mMakeCond信号,才继续生产音频
 					}
@@ -231,29 +237,31 @@ namespace Dungeon
 						if (audio->pcm)
 						{
 							//sprintf(audio->pcm, "PCM_Audio_%ld", data->amount);
-							if (fread(audio->pcm, 1, AUDIO_CAPACITY, data->file) == 0)
-							{
-								SDL_Log("================================================");
-								data->amount = 0;
-								audio->serialNumber = data->amount;
-								rewind(data->file);//重置文件指针到开头
-							}
-							else
+							size_t len = fread(audio->pcm, 1, AUDIO_CAPACITY, data->file);
+							if (len > 0)
 							{
 								data->amount++;
 								audio->serialNumber = data->amount;
 								long sn = audio->serialNumber;
 								char *pcm = audio->pcm;
 								//SDL_Log("Make:: sn:%ld,pcm:%s", sn, pcm);
-								SDL_Log("Make:: 1 sn:%ld,pcm audio", sn);
-								audioList->push_back(audio);//向容器尾部添加数据
-							}	
+								SDL_Log("Make:: sn:%ld,pcm audio size:%d", sn, len);
+								audioList->push_back(audio);//向容器尾部添加数据	
+							}
+							else if (len == 0)
+							{
+								const char *endStr = "============ Read Audio End ================";
+								SDL_Log("%s", endStr);
+								data->amount = 0;
+								audio->serialNumber = data->amount;
+								rewind(data->file);//重置文件指针到开头
+							}
 						}
 					}
 				}
-				SDL_Log("Make:: 2 sn:,pcm audio");
+				//SDL_Log("Make:: 2 sn:,pcm audio");
+				SDL_UnlockMutex(computer->mMutex);//解锁,一定要先释放锁,然后再发送信号
 				SDL_CondSignal(computer->mUseCond);//发送信号mUseCond给使用线程,可以使用音频了
-				SDL_UnlockMutex(computer->mMutex);//解锁
 				//SDL_Delay(100);//生产快一点
 			}
 		}
@@ -271,9 +279,9 @@ namespace Dungeon
 			SDL_Log("Start In Use Audio Thread:");
 			while (computer->isRunning)
 			{
-				SDL_Log("In Use Audio Thread: 1");
+				//SDL_Log("In Use Audio Thread: 1");
 				SDL_LockMutex(computer->mMutex);//加锁
-				SDL_Log("In Use Audio Thread: 2");
+				//SDL_Log("In Use Audio Thread: 2");
 				ComputerData *data = computer->mComputerData;
 				list<AudioInfo *> *audioList = data->audioList;
 				if (audioList)
@@ -281,7 +289,8 @@ namespace Dungeon
 					//容器是空的,等有数据再使用
 					if (audioList->empty())
 					{
-						SDL_Log("In Use Audio Thread:: audioList is empty wait");
+						const char *emptyStr = "============ Audio List Is Empty,Wait mUseCond ================";
+						SDL_Log("%s", emptyStr);
 						//释放mMutex锁,并阻塞在这里,等待条件变量mUseCond有信号才继续往下执行
 						SDL_CondWait(computer->mUseCond, computer->mMutex);//等待有mUseCond信号,才继续使用音频
 					}
@@ -301,11 +310,11 @@ namespace Dungeon
 							free(audio);
 						}
 						audioList->pop_front();//移除列表头部元素
-					}	
+					}
 				}
-				SDL_Log("In Use Audio Thread: 3");
+				//SDL_Log("In Use Audio Thread: 3");
+				SDL_UnlockMutex(computer->mMutex);//解锁,一定要先释放锁,然后再发送信号
 				SDL_CondSignal(computer->mMakeCond);//发送信号mMakeCond给生产线程,可以生产音频了
-				SDL_UnlockMutex(computer->mMutex);//解锁
 				//SDL_Delay(150);//使用慢一点
 			}
 		}
