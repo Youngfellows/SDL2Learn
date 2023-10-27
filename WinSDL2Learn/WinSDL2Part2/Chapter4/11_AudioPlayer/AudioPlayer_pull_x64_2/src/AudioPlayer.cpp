@@ -97,7 +97,9 @@ namespace Dungeon
 
 		//启动读取音频数据线程
 		this->mSuperComputer = new SuperComputer();
-		if (!mSuperComputer->Start(srcFileName, destFileName, save, &OnAudioCallback))
+		//设置播放器对象和回调函数给SuperComputer
+		if (!mSuperComputer->Start(srcFileName, destFileName, save,
+			this, &OnAudioCallback))
 		{
 			return SDL_FALSE;
 		}
@@ -124,11 +126,25 @@ namespace Dungeon
 	}
 
 	/*
-	* 线程回调函数
+	* 1.线程回调函数
+	* 2.采用push的方式播放音频
 	*/
-	void AudioPlayer::OnAudioCallback(AudioInfo *audioInfo)
+	void AudioPlayer::OnAudioCallback(AudioPlayer *self, AudioInfo *audioInfo)
 	{
-		SDL_Log("OnAudioCallback::~~~~~");
+		if (self)
+		{
+			SoundInfo *soundInfo = self->mSoundInfo;
+			if (soundInfo)
+			{
+				SDL_Log("OnAudioCallback:: State:%d", soundInfo->state);
+				if (soundInfo->state == PLAYING)
+				{
+					SDL_Log("OnAudioCallback:: feed audio,State:%d", soundInfo->state);
+					//填充音频数据push方式
+					SDL_QueueAudio(soundInfo->device, audioInfo->pcm, audioInfo->len);
+				}
+			}
+		}
 	}
 
 	/*
@@ -176,7 +192,8 @@ namespace Dungeon
 					soundInfo->device = 0;
 					soundInfo->state = IDLE;
 
-					audioSpec->callback = &AudioCallback;//设置回调函数
+					//audioSpec->callback = &AudioCallback;//设置回调函数,pull方式,会出现问题
+					audioSpec->callback = nullptr;//设置回调函数,pull方式,会出现问题
 					audioSpec->userdata = audioPlayer;//设置回调数据
 
 					// 打开音频设备
@@ -316,6 +333,7 @@ namespace Dungeon
 			if (mSoundInfo->device)
 			{
 				SDL_PauseAudioDevice(mSoundInfo->device, SDL_TRUE);//暂停
+				SDL_ClearQueuedAudio(mSoundInfo->device);//丢弃所有等待发送到硬件的排队音频数据
 			}
 			mSoundInfo->soundPos = 0;
 			mSoundInfo->completed = SDL_TRUE;//播放完成
@@ -335,13 +353,9 @@ namespace Dungeon
 			{
 				if (mSoundInfo->device)
 				{
+					SDL_ClearQueuedAudio(mSoundInfo->device);//丢弃所有等待发送到硬件的排队音频数据
 					SDL_CloseAudioDevice(mSoundInfo->device);//关闭声卡
 				}
-				//if (mSoundInfo->sound)
-				//{
-				//	SDL_Log("sound:%p", mSoundInfo->sound);
-				//	SDL_FreeWAV(mSoundInfo->sound);//释放内存
-				//}
 			}
 		}
 	}

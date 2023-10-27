@@ -6,7 +6,9 @@
 
 namespace Dungeon
 {
+	class SuperComputer;//先声明类
 	class AudioPlayer;//先声明类
+	class AudioInfo;//先声明结构体
 
 	//函数回调
 	typedef void (*OnCreateCallback)(AudioPlayer *audioPlayer);
@@ -88,7 +90,7 @@ namespace Dungeon
 		static void SDLCALL AudioCallback(void *userdata, Uint8 *stream, int len);
 		void CloseDevice();
 		static int SDLCALL ThreadCallback(void *userdata);
-		static void OnAudioCallback(AudioInfo *audioInfo);
+		static void OnAudioCallback(AudioPlayer *slef, AudioInfo *audioInfo);
 	};
 }
 

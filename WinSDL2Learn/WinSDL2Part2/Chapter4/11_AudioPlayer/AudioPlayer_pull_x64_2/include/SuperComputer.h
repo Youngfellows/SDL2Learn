@@ -5,11 +5,14 @@
 #include "SDL2/SDL.h"
 #include <list>
 #include <iostream>
+#include "AudioPlayer.h"
 
 using namespace std;
 
 namespace Dungeon
 {
+	class AudioPlayer;//先声明类
+
 	//音频消息结构体
 	typedef struct AudioInfo
 	{
@@ -23,7 +26,7 @@ namespace Dungeon
 	}AudioInfo;
 
 	//函数指针,回调音频数据给播放器
-	typedef void (*OnAudioCallback)(AudioInfo *audioInfo);
+	typedef void (*OnAudioCallback)(AudioPlayer *self, AudioInfo *audioInfo);
 
 	typedef struct ComputerData
 	{
@@ -38,6 +41,7 @@ namespace Dungeon
 		long pos;//已经读取长度
 		list<AudioInfo *> *audioList;//保存音频的列表
 		OnAudioCallback AudioCallback;//回调函数
+		AudioPlayer *audioPlayer;//播放器对象
 	}ComputerData;
 }
 
@@ -62,7 +66,8 @@ namespace Dungeon
 	public:
 		SuperComputer();
 		~SuperComputer();
-		SDL_bool Start(const char *srcFileName, const char *destFileName, SDL_bool save, OnAudioCallback onAudioCallback);
+		SDL_bool Start(const char *srcFileName, const char *destFileName, SDL_bool save,
+			AudioPlayer *audioPlayer, OnAudioCallback onAudioCallback);
 		void Wait();
 		AudioInfo *GetAudio();//使用多线程方式获取列表中的音频数据,该函数是阻塞的
 

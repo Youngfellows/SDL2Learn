@@ -129,7 +129,8 @@ namespace Dungeon
 								//audioSpec.silence = 0;
 								//audioSpec.samples = 2048;
 
-								player->Create(&audioSpec,PCM_2_FILE_NAME,SAVE_FILE_NAME,SDL_TRUE);//创建播放器并播放
+								//player->Create(&audioSpec,PCM_2_FILE_NAME,SAVE_FILE_NAME,SDL_TRUE);//创建播放器并播放
+								player->Create(&audioSpec,PCM_2_FILE_NAME,SAVE_FILE_NAME,SDL_FALSE);//创建播放器并播放
 							}
 						}
 					}

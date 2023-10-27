@@ -110,8 +110,8 @@ namespace Dungeon
 	/*
 	* 开启多线程
 	*/
-	SDL_bool SuperComputer::Start(const char *srcFileName, const char *destFileName, 
-		SDL_bool save,OnAudioCallback onAudioCallback)
+	SDL_bool SuperComputer::Start(const char *srcFileName, const char *destFileName,
+		SDL_bool save, AudioPlayer *audioPlayer, OnAudioCallback onAudioCallback)
 	{
 		//PCM_1_FILE_NAME
 		//PCM_2_FILE_NAME
@@ -123,6 +123,7 @@ namespace Dungeon
 			return SDL_FALSE;
 		}
 		this->mComputerData->save = save;//是否保存文件
+		this->mComputerData->audioPlayer = audioPlayer;//设置播放器
 		this->mComputerData->AudioCallback = onAudioCallback;//设置回调函数
 		//获取文件大小
 		this->mComputerData->size = GetFileSize(this->mComputerData->srcFile);
@@ -266,7 +267,7 @@ namespace Dungeon
 						//把音频数据传递给播放器播放
 						if (data->AudioCallback)
 						{
-							data->AudioCallback(audio);
+							data->AudioCallback(data->audioPlayer, audio);
 						}
 					}
 				}
@@ -462,7 +463,7 @@ namespace Dungeon
 							//把音频数据传递给播放器播放
 							if (data->AudioCallback)
 							{
-								data->AudioCallback(audio);
+								data->AudioCallback(data->audioPlayer, audio);
 							}
 							free(audio->pcm);//释放空间
 							free(audio);
