@@ -5,10 +5,6 @@
 
 namespace Dungeon
 {
-#define MAKE_THREAD_SIZE 1 //多线程数量
-#define USE_THREAD_SIZE 1 //多线程数量
-#define MAX_SIZE 20 //保存音频容器的最大容量
-
 	SuperComputer::SuperComputer() :
 		isRunning(SDL_TRUE),
 		mComputerData(nullptr),
@@ -68,6 +64,14 @@ namespace Dungeon
 					audioInfo = nullptr;
 				}
 			}
+			if (mComputerData->file)
+			{
+				fclose(mComputerData->file);
+			}
+			if (mComputerData->fileName)
+			{
+				free(mComputerData->fileName);
+			}
 		}
 		if (mMakeThreads)
 		{
@@ -91,6 +95,7 @@ namespace Dungeon
 		{
 			SDL_DestroyCond(mUseCond);//销毁条件变量,释放条件变量资源
 		}
+
 	}
 
 	/*
@@ -145,7 +150,8 @@ namespace Dungeon
 			{
 				return SDL_FALSE;
 			}
-			strcpy(mComputerData->fileName, PCM_1_FILE_NAME);//赋值文件名
+			strcpy(mComputerData->fileName, fileName);//赋值文件名
+			SDL_Log("open file:%s", mComputerData->fileName);
 
 		}
 		return SDL_TRUE;
