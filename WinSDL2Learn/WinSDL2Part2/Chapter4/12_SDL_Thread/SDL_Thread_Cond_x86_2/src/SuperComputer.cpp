@@ -64,13 +64,22 @@ namespace Dungeon
 					audioInfo = nullptr;
 				}
 			}
-			if (mComputerData->file)
+			if (mComputerData->srcFile)
 			{
-				fclose(mComputerData->file);
+				fclose(mComputerData->srcFile);
 			}
-			if (mComputerData->fileName)
+			if (mComputerData->srcFileName)
 			{
-				free(mComputerData->fileName);
+				free(mComputerData->srcFileName);
+			}
+
+			if (mComputerData->destFile)
+			{
+				fclose(mComputerData->destFile);
+			}
+			if (mComputerData->destFileName)
+			{
+				free(mComputerData->destFileName);
 			}
 		}
 		if (mMakeThreads)
@@ -107,12 +116,12 @@ namespace Dungeon
 		//PCM_2_FILE_NAME
 		//PCM_3_FILE_NAME
 		//MP3_FILE_NAME
-		if (!OpenFile(PCM_2_FILE_NAME))
+		if (!OpenFile(PCM_2_FILE_NAME, SAVE_FILE_NAME))
 		{
 			return;
 		}
 		//获取文件大小
-		this->mComputerData->size = GetFileSize(this->mComputerData->file);
+		this->mComputerData->size = GetFileSize(this->mComputerData->srcFile);
 		UseAudio();//多线程消费音频
 		MakeAudio();//多线程生产音频
 	}
@@ -135,24 +144,36 @@ namespace Dungeon
 		return size;
 	}
 
-	SDL_bool SuperComputer::OpenFile(const char *fileName)
+	SDL_bool SuperComputer::OpenFile(const char *srcFileName, const char *destFileName)
 	{
 		if (this->mComputerData)
 		{
-			mComputerData->file = fopen(fileName, "rb");//打开文件
-			if (!mComputerData->file)
+			mComputerData->srcFile = fopen(srcFileName, "rb");//打开要读取的文件
+			if (!mComputerData->srcFile)
 			{
-				SDL_Log("open file failed: %s", fileName);
+				SDL_Log("open src file failed: %s", srcFileName);
 				return SDL_FALSE;
 			}
-			mComputerData->fileName = (char *)malloc(sizeof(char) * strlen(fileName) + 1);
-			if (!mComputerData->fileName)
+			mComputerData->srcFileName = (char *)malloc(sizeof(char) * strlen(srcFileName) + 1);
+			if (!mComputerData->srcFileName)
 			{
 				return SDL_FALSE;
 			}
-			strcpy(mComputerData->fileName, fileName);//赋值文件名
-			SDL_Log("open file:%s", mComputerData->fileName);
+			strcpy(mComputerData->srcFileName, srcFileName);//赋值文件名
+			SDL_Log("open src file:%s", mComputerData->srcFileName);
 
+			mComputerData->destFile = fopen(destFileName, "wb");//打开要保存的文件
+			if (!mComputerData->destFileName)
+			{
+				SDL_Log("open dest file failed: %s", destFileName);
+				return SDL_FALSE;
+			}
+			mComputerData->destFileName = (char *)malloc(sizeof(char) * strlen(destFileName) + 1);
+			if (!mComputerData->destFileName)
+			{
+				return SDL_FALSE;
+			}
+			strcpy(mComputerData->destFileName, destFileName);//赋值文件名
 		}
 		return SDL_TRUE;
 	}
@@ -235,7 +256,8 @@ namespace Dungeon
 					AudioInfo *audio = (AudioInfo *)malloc(sizeof(AudioInfo));
 					if (audio)
 					{
-						audio->pcm = (char *)malloc(sizeof(char) * AUDIO_CAPACITY);//申请保存音频的空间512个字节
+						//申请保存音频的空间AUDIO_CAPACITY个字节
+						audio->pcm = (char *)malloc(sizeof(char) * AUDIO_CAPACITY);
 						if (data->amount >= SDL_MAX_SINT32)
 						{
 							data->amount = 0;
@@ -243,11 +265,13 @@ namespace Dungeon
 						if (audio->pcm)
 						{
 							//sprintf(audio->pcm, "PCM_Audio_%ld", data->amount);
-							size_t len = fread(audio->pcm, 1, AUDIO_CAPACITY, data->file);
+							size_t len = fread(audio->pcm, 1, AUDIO_CAPACITY, data->srcFile);
 							if (len > 0)
 							{
 								data->amount++;
 								audio->serialNumber = data->amount;
+								audio->len = len;
+
 								long sn = audio->serialNumber;
 								char *pcm = audio->pcm;
 								//SDL_Log("Make:: sn:%ld,pcm:%s", sn, pcm);
@@ -260,7 +284,7 @@ namespace Dungeon
 								SDL_Log("%s", endStr);
 								data->amount = 0;
 								audio->serialNumber = data->amount;
-								rewind(data->file);//重置文件指针到开头
+								rewind(data->srcFile);//重置文件指针到开头
 							}
 						}
 					}
@@ -310,8 +334,15 @@ namespace Dungeon
 						{
 							long sn = audio->serialNumber;
 							char *pcm = audio->pcm;
+							long len = audio->len;
 							//SDL_Log("Use:: sn:%ld,pcm:%s", sn, pcm);
-							SDL_Log("Use:: sn:%ld,pcm audio", sn);
+							SDL_Log("Use:: sn:%ld,pcm audio len:", sn, len);
+
+							//把多线程读取到的音频写入到文件中
+							if (data->destFile && len > 0)
+							{
+								fwrite(pcm, 1, len, data->destFile);
+							}
 							free(audio->pcm);//释放空间
 							free(audio);
 						}
