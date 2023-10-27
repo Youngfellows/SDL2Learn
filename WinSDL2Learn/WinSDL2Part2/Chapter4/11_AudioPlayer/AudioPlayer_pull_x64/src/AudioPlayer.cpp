@@ -125,6 +125,7 @@ namespace Dungeon
 					Uint8 *sound;
 					Uint32 soundLen;
 
+					
 					// 加载音频资源
 					if (!SDL_LoadWAV(soundInfo->file, &audioSpec, &sound, &soundLen))
 					{

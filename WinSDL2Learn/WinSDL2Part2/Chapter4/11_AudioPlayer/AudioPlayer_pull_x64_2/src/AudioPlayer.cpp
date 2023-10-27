@@ -160,13 +160,29 @@ namespace Dungeon
 						SDL_Log("Can not open audio device,audioSpec is null");
 						return SDL_FALSE;
 					}
+					Uint8 *sound;
+					Uint32 soundLen;
+
+					// 加载音频资源
+					if (!SDL_LoadWAV(soundInfo->file, audioSpec, &sound, &soundLen))
+					{
+						SDL_Log("Can not load audio: %s", SDL_GetError());
+						return SDL_FALSE;
+					}
+					//soundInfo->sound = sound;
+					soundInfo->soundLen = soundLen;
+					soundInfo->soundPos = 0;
+					soundInfo->completed = SDL_FALSE;
+					soundInfo->device = 0;
+					soundInfo->state = IDLE;
+
 					audioSpec->callback = &AudioCallback;//设置回调函数
 					audioSpec->userdata = audioPlayer;//设置回调数据
 
 					// 打开音频设备
 					SDL_AudioSpec obtainSpec;
 					SDL_AudioDeviceID device = SDL_OpenAudioDevice(nullptr,
-						SDL_TRUE, audioSpec, &obtainSpec, 0);
+						SDL_FALSE, audioSpec, &obtainSpec, 0);
 					SDL_Log("obtainSpec: format:%d", obtainSpec.format);
 					if (!device)
 					{
@@ -199,47 +215,50 @@ namespace Dungeon
 	void SDLCALL AudioPlayer::AudioCallback(void *userdata, Uint8 *stream, int len)
 	{
 		SDL_Log("AudioPlayer::AudioCallback: 222222222222222,len:%d", len);
-		/*
+
 		AudioPlayer *audioPlayer = (AudioPlayer *)userdata;
 		if (!audioPlayer)
 		{
 			return;
 		}
 		SDL_memset(stream, 0, len);//清空缓冲区
-		SoundInfo *soundInfo = audioPlayer->mSoundInfo;
-		if (!soundInfo->completed)
+		SuperComputer *superComputer = audioPlayer->mSuperComputer;
+		if (superComputer)
 		{
-			Uint32 remaining = soundInfo->soundLen - soundInfo->soundPos;//剩余多少没有读取完
-			if (remaining > len)
+			SoundInfo *soundInfo = audioPlayer->mSoundInfo;
+			//这种方式不好，会出现声音卡顿现象,原因容器每一个buffer可能太小,解决办法
+			// 1. 最好的方式是把声音全部加载到内存中
+			// 2. 容器每一个buffer的内存要足够大,最好与len相同
+			AudioInfo *audio = superComputer->GetAudio();//向线程列表要音频数据
+			if (audio->len)
 			{
-				SDL_memcpy(stream, soundInfo->sound + soundInfo->soundPos, len);//把数据喂到缓冲区
-				//SDL_MixAudio(stream, soundInfo->sound + soundInfo->soundPos, len,SDL_MIX_MAXVOLUME);//把数据喂到缓冲区,有bug,没声音
-				soundInfo->soundPos += len;//更新已经播放长度
-				if (soundInfo->OnProgress)
-				{
-					soundInfo->OnProgress(audioPlayer, soundInfo->soundLen, soundInfo->soundPos);
-				}
+				//buffer太大了会丢数据
+				SDL_memcpy(stream, audio->pcm, len);//把数据喂到缓冲区
 			}
 			else
 			{
-				SDL_memcpy(stream, soundInfo->sound + soundInfo->soundPos, remaining);//把数据喂到缓冲区
-				//SDL_MixAudio(stream, soundInfo->sound + soundInfo->soundPos, remaining, SDL_MIX_MAXVOLUME);//把数据喂到缓冲区,有bug,没声音
+				//buffer太小了会出现播放声音不连续
+				SDL_memcpy(stream, audio->pcm, audio->len);//把数据喂到缓冲区
+			}
+			soundInfo->soundPos = audio->pos;
+			if (soundInfo->OnProgress)
+			{
+				soundInfo->OnProgress(audioPlayer, audio->size, audio->pos);
+			}
+
+			if (audio->end)
+			{
 				soundInfo->soundPos = 0;
 				soundInfo->completed = SDL_TRUE;//播放完成
-				SDL_Log("AudioCallback completed");
+				soundInfo->state = IDLE;
+				//SDL_PauseAudioDevice(soundInfo->device, SDL_TRUE);//暂停
+				SDL_Log("AudioCallback Already Play completed");
+				if (soundInfo->OnComplete)
+				{
+					soundInfo->OnComplete(audioPlayer);
+				}
 			}
 		}
-		else
-		{
-			soundInfo->state = IDLE;
-			SDL_PauseAudioDevice(soundInfo->device, SDL_TRUE);//暂停
-			SDL_Log("AudioCallback Already Play completed");
-			if (soundInfo->OnComplete)
-			{
-				soundInfo->OnComplete(audioPlayer);
-			}
-		}
-		*/
 	}
 
 	/*

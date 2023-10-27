@@ -123,11 +123,11 @@ namespace Dungeon
 
 								//设置音频参数
 								SDL_AudioSpec audioSpec;
-								audioSpec.freq = 44100;;
-								audioSpec.format = AUDIO_S32SYS;//AUDIO_U16SYS,AUDIO_S16SYS,AUDIO_S32SYS,AUDIO_F32SYS
-								audioSpec.channels = 2;
-								audioSpec.silence = 0;
-								audioSpec.samples = 2048;
+								//audioSpec.freq = 44100;;
+								//audioSpec.format = AUDIO_S32SYS;//AUDIO_U16SYS,AUDIO_S16SYS,AUDIO_S32SYS,AUDIO_F32SYS
+								//audioSpec.channels = 2;
+								//audioSpec.silence = 0;
+								//audioSpec.samples = 2048;
 
 								player->Create(&audioSpec,PCM_2_FILE_NAME,SAVE_FILE_NAME,SDL_TRUE);//创建播放器并播放
 							}

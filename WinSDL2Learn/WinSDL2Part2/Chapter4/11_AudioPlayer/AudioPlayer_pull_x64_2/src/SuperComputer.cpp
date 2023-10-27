@@ -216,10 +216,10 @@ namespace Dungeon
 	* 1.使用多线程方式获取列表中的音频数据
 	* 2.该函数是阻塞的
 	*/
-	AudioInfo *SuperComputer::GetAudio(void *userdata)
+	AudioInfo *SuperComputer::GetAudio()
 	{
 		AudioInfo *audio = nullptr;
-		SuperComputer *computer = (SuperComputer *)userdata;//获取主线程传递给子线程的参数
+		SuperComputer *computer = (SuperComputer *)this;//获取主线程传递给子线程的参数
 		if (computer)
 		{
 			SDL_Log("SuperComputer::GetAudio:: In Use Audio Thread");

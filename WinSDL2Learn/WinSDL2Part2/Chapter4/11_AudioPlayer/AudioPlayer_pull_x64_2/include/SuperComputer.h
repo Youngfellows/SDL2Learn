@@ -64,7 +64,7 @@ namespace Dungeon
 		~SuperComputer();
 		SDL_bool Start(const char *srcFileName, const char *destFileName, SDL_bool save, OnAudioCallback onAudioCallback);
 		void Wait();
-		AudioInfo *GetAudio(void *userdata);//使用多线程方式获取列表中的音频数据,该函数是阻塞的
+		AudioInfo *GetAudio();//使用多线程方式获取列表中的音频数据,该函数是阻塞的
 
 	private:
 		static int SDLCALL MakeAudioThreadCallback(void *userdata);//生产音频线程回调函数
