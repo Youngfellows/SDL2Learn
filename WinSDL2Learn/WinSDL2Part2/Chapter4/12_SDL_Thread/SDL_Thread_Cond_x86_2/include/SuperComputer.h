@@ -14,9 +14,12 @@ namespace Dungeon
 	typedef struct AudioInfo
 	{
 		long serialNumber;//序列号
+		long size;//文件总大小
 		long len;//文件大小
-		long pos;//当前进度
+		long pos;//已经读取长度
 		char *pcm;//音频数据
+		SDL_bool begin;//是否是第1次读取到的数据
+		SDL_bool end;//是否是最后一次数据
 	}AudioInfo;
 
 
@@ -29,6 +32,7 @@ namespace Dungeon
 		FILE *srcFile;//文件指针
 		FILE *destFile;//文件指针
 		long size;//文件大小
+		long pos;//已经读取长度
 		list<AudioInfo *> *audioList;//保存音频的列表
 	}ComputerData;
 

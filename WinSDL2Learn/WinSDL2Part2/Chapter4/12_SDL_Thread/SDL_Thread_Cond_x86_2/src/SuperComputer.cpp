@@ -122,6 +122,7 @@ namespace Dungeon
 		}
 		//获取文件大小
 		this->mComputerData->size = GetFileSize(this->mComputerData->srcFile);
+		this->mComputerData->pos = 0;
 		UseAudio();//多线程消费音频
 		MakeAudio();//多线程生产音频
 	}
@@ -271,11 +272,42 @@ namespace Dungeon
 								data->amount++;
 								audio->serialNumber = data->amount;
 								audio->len = len;
+								audio->size = data->size;
 
+								if (data->pos == 0)//是文件开始的一个buffer数据
+								{
+									audio->begin = SDL_TRUE;//第1次读取到数据,是头	
+									audio->end = SDL_FALSE;//第1次读取到数据,不是尾
+								}
+								else if (len < AUDIO_CAPACITY)//没有读满,是最后的一个buffer数据
+								{
+									audio->begin = SDL_FALSE;
+									audio->end = SDL_TRUE;
+								}
+								else //不是头,也不是尾
+								{
+									audio->begin = SDL_FALSE;
+									audio->end = SDL_FALSE;
+								}
+								data->pos += audio->len;
+								audio->pos = data->pos;//更新当前读取到的位置
+								if (audio->end)//读完了,把读取到的进度重置
+								{
+									data->pos = 0;
+								}
+
+								//获取一次读取到的数据信息
 								long sn = audio->serialNumber;
 								char *pcm = audio->pcm;
-								//SDL_Log("Make:: sn:%ld,pcm:%s", sn, pcm);
-								SDL_Log("Make:: sn:%ld,pcm audio size:%d", sn, len);
+								long len = audio->len;
+								long size = audio->size;
+								long pos = audio->pos;
+								SDL_bool begin = audio->begin;
+								SDL_bool end = audio->end;
+								//SDL_Log("Use:: sn:%ld,pcm:%s", sn, pcm);
+								SDL_Log("Make:: pcm audio,sn:%ld,len:%ld,pos:%ld,size:%ld,begin:%d,end:%d", 
+									sn, len, pos, size, begin, end);
+								//SDL_Log("Make:: sn:%ld,pcm audio size:%d", sn, len);
 								audioList->push_back(audio);//向容器尾部添加数据	
 							}
 							else if (len == 0)
@@ -283,7 +315,8 @@ namespace Dungeon
 								const char *endStr = "============ Read Audio End ================";
 								SDL_Log("%s", endStr);
 								data->amount = 0;
-								audio->serialNumber = data->amount;
+								//audio->serialNumber = data->amount;
+								data->pos = 0;//更新当前读取到的位置
 								rewind(data->srcFile);//重置文件指针到开头
 							}
 						}
@@ -335,8 +368,12 @@ namespace Dungeon
 							long sn = audio->serialNumber;
 							char *pcm = audio->pcm;
 							long len = audio->len;
+							long size = audio->size;
+							long pos = audio->pos;
+							SDL_bool begin = audio->begin;
+							SDL_bool end = audio->end;
 							//SDL_Log("Use:: sn:%ld,pcm:%s", sn, pcm);
-							SDL_Log("Use:: sn:%ld,pcm audio len:", sn, len);
+							SDL_Log("Use:: pcm audio,sn:%ld,len:%ld,pos:%ld,size:%ld,begin:%d,end:%d", sn, len, pos, size, begin, end);
 
 							//把多线程读取到的音频写入到文件中
 							if (data->destFile && len > 0)
