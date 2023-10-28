@@ -269,8 +269,8 @@ namespace Dungeon
 						{
 							data->AudioCallback(data->audioPlayer, audio);
 						}
-						free(audio->pcm);//释放内存
-						free(audio);
+						//free(audio->pcm);//释放内存,不能在这里释放,使用完了再释放
+						//free(audio);
 					}
 				}
 			}

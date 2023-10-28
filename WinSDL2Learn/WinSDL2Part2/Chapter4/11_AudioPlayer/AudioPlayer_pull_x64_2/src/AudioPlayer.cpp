@@ -99,7 +99,7 @@ namespace Dungeon
 		this->mSuperComputer = new SuperComputer();
 		//设置播放器对象和回调函数给SuperComputer
 		//if (!mSuperComputer->Start(srcFileName, destFileName, save,this, &OnAudioCallback))
-		if (!mSuperComputer->Start(srcFileName, destFileName, save,this, nullptr))
+		if (!mSuperComputer->Start(srcFileName, destFileName, save, this, nullptr))
 		{
 			return SDL_FALSE;
 		}
@@ -247,33 +247,43 @@ namespace Dungeon
 			// 1. 最好的方式是把声音全部加载到内存中
 			// 2. 容器每一个buffer的内存要足够大,最好与len相同
 			AudioInfo *audio = superComputer->GetAudio();//向线程列表要音频数据
-			if (audio->len)
+			if (audio)
 			{
-				//buffer太大了会丢数据
-				SDL_memcpy(stream, audio->pcm, len);//把数据喂到缓冲区
+				if (audio->len)
+				{
+					//buffer太大了会丢数据
+					SDL_memcpy(stream, audio->pcm, len);//把数据喂到缓冲区
+				}
+				else
+				{
+					//buffer太小了会出现播放声音不连续
+					SDL_memcpy(stream, audio->pcm, audio->len);//把数据喂到缓冲区
+				}
+				soundInfo->soundPos = audio->pos;
+				if (soundInfo->OnProgress)
+				{
+					soundInfo->OnProgress(audioPlayer, audio->size, audio->pos);
+				}
+
+				if (audio->end)
+				{
+					soundInfo->soundPos = 0;
+					soundInfo->completed = SDL_TRUE;//播放完成
+					soundInfo->state = IDLE;
+					//SDL_PauseAudioDevice(soundInfo->device, SDL_TRUE);//暂停
+					SDL_Log("AudioCallback Already Play completed");
+					if (soundInfo->OnComplete)
+					{
+						soundInfo->OnComplete(audioPlayer);
+					}
+				}
+				//释放内存
+				free(audio->pcm);
+				free(audio);
 			}
 			else
 			{
-				//buffer太小了会出现播放声音不连续
-				SDL_memcpy(stream, audio->pcm, audio->len);//把数据喂到缓冲区
-			}
-			soundInfo->soundPos = audio->pos;
-			if (soundInfo->OnProgress)
-			{
-				soundInfo->OnProgress(audioPlayer, audio->size, audio->pos);
-			}
-
-			if (audio->end)
-			{
-				soundInfo->soundPos = 0;
-				soundInfo->completed = SDL_TRUE;//播放完成
-				soundInfo->state = IDLE;
-				//SDL_PauseAudioDevice(soundInfo->device, SDL_TRUE);//暂停
-				SDL_Log("AudioCallback Already Play completed");
-				if (soundInfo->OnComplete)
-				{
-					soundInfo->OnComplete(audioPlayer);
-				}
+				SDL_Log("Get Audio is nullptr");
 			}
 		}
 	}
