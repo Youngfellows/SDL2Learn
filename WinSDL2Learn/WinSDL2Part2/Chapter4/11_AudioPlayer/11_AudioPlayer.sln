@@ -5,7 +5,9 @@ VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AudioPlayer_pull_x64", "AudioPlayer_pull_x64\AudioPlayer_pull_x64.vcxproj", "{BF83B884-DBD3-40C8-9C13-66872D6A5589}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AudioPlayer_push_x64_2", "AudioPlayer_push_x64_2\AudioPlayer_push_x64_2.vcxproj", "{D7043D6C-D58B-4071-9F33-7F74236BFC11}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AudioPlayer_push_x64", "AudioPlayer_push_x64\AudioPlayer_push_x64.vcxproj", "{D7043D6C-D58B-4071-9F33-7F74236BFC11}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AudioPlayer_pull_x64_2", "AudioPlayer_pull_x64_2\AudioPlayer_pull_x64_2.vcxproj", "{742B4E41-A74E-499F-8307-9220C4F3DCB0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +33,14 @@ Global
 		{D7043D6C-D58B-4071-9F33-7F74236BFC11}.Release|x64.Build.0 = Release|x64
 		{D7043D6C-D58B-4071-9F33-7F74236BFC11}.Release|x86.ActiveCfg = Release|Win32
 		{D7043D6C-D58B-4071-9F33-7F74236BFC11}.Release|x86.Build.0 = Release|Win32
+		{742B4E41-A74E-499F-8307-9220C4F3DCB0}.Debug|x64.ActiveCfg = Debug|x64
+		{742B4E41-A74E-499F-8307-9220C4F3DCB0}.Debug|x64.Build.0 = Debug|x64
+		{742B4E41-A74E-499F-8307-9220C4F3DCB0}.Debug|x86.ActiveCfg = Debug|Win32
+		{742B4E41-A74E-499F-8307-9220C4F3DCB0}.Debug|x86.Build.0 = Debug|Win32
+		{742B4E41-A74E-499F-8307-9220C4F3DCB0}.Release|x64.ActiveCfg = Release|x64
+		{742B4E41-A74E-499F-8307-9220C4F3DCB0}.Release|x64.Build.0 = Release|x64
+		{742B4E41-A74E-499F-8307-9220C4F3DCB0}.Release|x86.ActiveCfg = Release|Win32
+		{742B4E41-A74E-499F-8307-9220C4F3DCB0}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
