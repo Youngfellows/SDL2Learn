@@ -143,6 +143,8 @@ namespace Dungeon
 					//填充音频数据push方式
 					SDL_QueueAudio(soundInfo->device, audioInfo->pcm, audioInfo->len);
 				}
+				free(audioInfo->pcm);//释放内存
+				free(audioInfo);
 			}
 		}
 	}

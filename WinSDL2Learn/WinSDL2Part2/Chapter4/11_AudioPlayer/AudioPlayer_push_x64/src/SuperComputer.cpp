@@ -269,8 +269,8 @@ namespace Dungeon
 						{
 							data->AudioCallback(data->audioPlayer, audio);
 						}
-						free(audio->pcm);//释放内存
-						free(audio);
+						//free(audio->pcm);//释放内存
+						//free(audio);
 					}
 				}
 			}
@@ -440,6 +440,7 @@ namespace Dungeon
 					if (!audioList->empty())
 					{
 						audio = audioList->front();//从列表头开始获取
+						audioList->pop_front();//移除列表头部元素
 						if (audio)
 						{
 							long sn = audio->serialNumber;
@@ -461,16 +462,14 @@ namespace Dungeon
 								}
 							}
 
-
 							//把音频数据传递给播放器播放
 							if (data->AudioCallback)
 							{
 								data->AudioCallback(data->audioPlayer, audio);
 							}
-							free(audio->pcm);//释放空间
-							free(audio);
-						}
-						audioList->pop_front();//移除列表头部元素
+							//free(audio->pcm);//释放空间
+							//free(audio);
+						}	
 					}
 				}
 				//SDL_Log("In Use Audio Thread: 3");
