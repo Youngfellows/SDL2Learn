@@ -3,7 +3,7 @@
 
 namespace Dungeon
 {
-	AudioPlayer::AudioPlayer() :mSoundInfo(nullptr), mSuperComputer(nullptr)
+	AudioPlayer::AudioPlayer() :mSoundInfo(nullptr), mSuperComputer(nullptr), mExit(SDL_FALSE)
 	{
 
 	}
@@ -133,6 +133,11 @@ namespace Dungeon
 	{
 		if (self)
 		{
+			if (self->mExit)
+			{
+				return;
+			}
+
 			SoundInfo *soundInfo = self->mSoundInfo;
 			if (soundInfo)
 			{
@@ -158,8 +163,6 @@ namespace Dungeon
 					SDL_QueueAudio(soundInfo->device, audioInfo->pcm, audioInfo->len);
 					SDL_UnlockAudioDevice(soundInfo->device);
 				}
-				//free(audioInfo->pcm);//释放内存
-				//free(audioInfo);
 			}
 		}
 	}
@@ -313,7 +316,6 @@ namespace Dungeon
 				{
 					mSoundInfo->OnStart(this);//回调OnStarCallback
 				}
-
 			}
 		}
 	}
@@ -413,6 +415,7 @@ namespace Dungeon
 	{
 		const char *psz = "***********************************************************";
 		SDL_Log("AudioPlayer::Destory():: %s", psz);
+		mExit = SDL_TRUE;
 		if (mSuperComputer)
 		{
 			delete mSuperComputer;

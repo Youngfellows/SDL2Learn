@@ -65,6 +65,7 @@ namespace Dungeon
 
 	private:
 		SuperComputer *mSuperComputer;//读取音频多线程
+		SDL_bool mExit;//是否已经销毁播放器
 
 	public:
 		AudioPlayer();
