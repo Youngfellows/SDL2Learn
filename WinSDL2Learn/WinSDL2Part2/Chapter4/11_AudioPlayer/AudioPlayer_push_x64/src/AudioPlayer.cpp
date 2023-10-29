@@ -385,9 +385,9 @@ namespace Dungeon
 					const char *psz = "8888888888888888888888888888888888888888888888";
 					SDL_Log("AudioPlayer::CloseDevice():: 1,queueSize:%d,%s", queueSize, psz);
 					SDL_ClearQueuedAudio(mSoundInfo->device);//丢弃所有等待发送到硬件的排队音频数据
-					SDL_CloseAudioDevice(mSoundInfo->device);//关闭声卡
 					queueSize = SDL_GetQueuedAudioSize(mSoundInfo->device);
 					SDL_Log("AudioPlayer::CloseDevice():: 2,queueSize:%d,%s", queueSize, psz);
+					SDL_CloseAudioDevice(mSoundInfo->device);//关闭声卡
 				}
 			}
 		}
