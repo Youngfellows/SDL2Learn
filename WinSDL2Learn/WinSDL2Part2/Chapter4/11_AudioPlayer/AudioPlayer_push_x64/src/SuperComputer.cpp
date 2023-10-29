@@ -485,8 +485,11 @@ namespace Dungeon
 										//SDL_Log("Use:: mSoundInfo:%p", data->audioPlayer->mSoundInfo);
 										data->AudioCallback(data->audioPlayer, audio);
 									}
-									free(audio->pcm);//释放空间
-									free(audio);
+									if (computer->isRunning == SDL_TRUE)
+									{
+										free(audio->pcm);//释放空间
+										free(audio);
+									}					
 								}
 							}
 						}
