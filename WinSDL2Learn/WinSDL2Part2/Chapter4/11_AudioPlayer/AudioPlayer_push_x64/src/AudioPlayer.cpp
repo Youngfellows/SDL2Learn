@@ -162,7 +162,7 @@ namespace Dungeon
 				if (soundInfo->state == PLAYING)
 				{
 					SDL_Log("OnAudioCallback:: PLAYING State:%d", soundInfo->state);
-					//填充音频数据push方式
+					//填充音频数据push方式,还是会有bug,内存会不断的增加
 					SDL_LockAudioDevice(soundInfo->device);
 					SDL_QueueAudio(soundInfo->device, audioInfo->pcm, audioInfo->len);
 					SDL_UnlockAudioDevice(soundInfo->device);
