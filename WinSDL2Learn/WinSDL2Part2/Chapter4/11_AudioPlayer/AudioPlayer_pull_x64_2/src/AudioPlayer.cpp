@@ -95,7 +95,12 @@ namespace Dungeon
 		mSoundInfo->state = IDLE;
 		mSoundInfo->audioSpec = audioSpec;//初始化音频参数
 
-		//启动读取音频数据线程
+		//启动读取音频数据线程,先把缓冲区的数据清空
+		if (this->mSuperComputer)
+		{
+			delete	mSuperComputer;
+			mSuperComputer = nullptr;
+		}
 		this->mSuperComputer = new SuperComputer();
 		//设置播放器对象和回调函数给SuperComputer
 		//if (!mSuperComputer->Start(srcFileName, destFileName, save,this, &OnAudioCallback))

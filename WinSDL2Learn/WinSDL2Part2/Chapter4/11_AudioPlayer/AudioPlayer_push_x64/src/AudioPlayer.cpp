@@ -44,14 +44,12 @@ namespace Dungeon
 			SDL_Log("Can not init audio: %s", SDL_GetError());
 			return SDL_FALSE;
 		}
-
-		// 动态申请内存
 		this->mSoundInfo = (SoundInfo *)malloc(sizeof(SoundInfo));
 		if (!mSoundInfo)
 		{
+			SDL_Log("Can not malloc mSoundInfo");
 			return SDL_FALSE;
 		}
-		//mSoundInfo->sound = nullptr;
 		mSoundInfo->file = nullptr;
 		mSoundInfo->flag = nullptr;
 		return SDL_TRUE;
@@ -63,14 +61,15 @@ namespace Dungeon
 	SDL_bool AudioPlayer::Create(SDL_AudioSpec *audioSpec, const char *srcFileName,
 		const char *destFileName, SDL_bool save)
 	{
-		if (!mSoundInfo)
-		{
-			SDL_Log("Can not create audio player");
-			return SDL_FALSE;
-		}
 		if (!audioSpec)
 		{
 			SDL_Log("Can not create audio player,audioSpec is null");
+			return SDL_FALSE;
+		}
+		this->mExit = SDL_FALSE;
+		if (!mSoundInfo)
+		{
+			SDL_Log("Can not create audio player,mSoundInfo is null");
 			return SDL_FALSE;
 		}
 		CloseDevice();//如果已经打开了播放设备,先关闭
@@ -95,7 +94,12 @@ namespace Dungeon
 		mSoundInfo->state = IDLE;
 		mSoundInfo->audioSpec = audioSpec;//初始化音频参数
 
-		//启动读取音频数据线程
+		//启动读取音频数据线程,先把缓冲区的数据清空
+		if (this->mSuperComputer)
+		{
+			delete	mSuperComputer;
+			mSuperComputer = nullptr;
+		}
 		this->mSuperComputer = new SuperComputer();
 		//设置播放器对象和回调函数给SuperComputer
 		if (!mSuperComputer->Start(srcFileName, destFileName, save,
@@ -377,8 +381,13 @@ namespace Dungeon
 			{
 				if (mSoundInfo->device)
 				{
+					uint32_t queueSize = SDL_GetQueuedAudioSize(mSoundInfo->device);
+					const char *psz = "8888888888888888888888888888888888888888888888";
+					SDL_Log("AudioPlayer::CloseDevice():: 1,queueSize:%d,%s", queueSize, psz);
 					SDL_ClearQueuedAudio(mSoundInfo->device);//丢弃所有等待发送到硬件的排队音频数据
 					SDL_CloseAudioDevice(mSoundInfo->device);//关闭声卡
+					queueSize = SDL_GetQueuedAudioSize(mSoundInfo->device);
+					SDL_Log("AudioPlayer::CloseDevice():: 2,queueSize:%d,%s", queueSize, psz);
 				}
 			}
 		}
@@ -421,13 +430,13 @@ namespace Dungeon
 			delete mSuperComputer;
 			mSuperComputer = nullptr;
 		}
+		CloseDevice();
 		if (mSoundInfo)
 		{
 			if (mSoundInfo->OnRelease)
 			{
 				mSoundInfo->OnRelease(this);
 			}
-			CloseDevice();
 			if (mSoundInfo->flag)
 			{
 				free(mSoundInfo->flag);

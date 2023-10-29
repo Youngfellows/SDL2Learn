@@ -67,12 +67,12 @@ namespace Dungeon
 		strcpy(file0, WAV_SOUND_FILE_NAME);//为数组元素0赋值
 		*(mComponentCallbackData->files + 0) = file0;//为二维数组元素赋值
 
-		char *file1 = (char *)malloc(sizeof(char *) * strlen(WAV_SOUND_SIREN_FILE_NAME) + 1);
+		char *file1 = (char *)malloc(sizeof(char *) * strlen(PCM_2_FILE_NAME) + 1);
 		if (!file1)
 		{
 			return nullptr;
 		}
-		strcpy(file1, WAV_SOUND_SIREN_FILE_NAME);//为数组元素0赋值
+		strcpy(file1, PCM_2_FILE_NAME);//为数组元素0赋值
 		*(mComponentCallbackData->files + 1) = file1;//为二维数组元素赋值
 
 
@@ -129,8 +129,8 @@ namespace Dungeon
 								//audioSpec.silence = 0;
 								//audioSpec.samples = 2048;
 
-								//player->Create(&audioSpec,PCM_2_FILE_NAME,SAVE_FILE_NAME,SDL_TRUE);//创建播放器并播放
-								player->Create(&audioSpec,PCM_2_FILE_NAME,SAVE_FILE_NAME,SDL_FALSE);//创建播放器并播放
+								//player->Create(&audioSpec,PCM_2_FILE_NAME,SAVE_FILE_NAME,SDL_FALSE);//创建播放器并播放
+								player->Create(&audioSpec, file,SAVE_FILE_NAME,SDL_FALSE);//创建播放器并播放
 							}
 						}
 					}
