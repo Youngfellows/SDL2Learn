@@ -343,7 +343,7 @@ namespace Dungeon
 			if (mSoundInfo->device)
 			{
 				SDL_PauseAudioDevice(mSoundInfo->device, SDL_TRUE);//暂停
-				SDL_ClearQueuedAudio(mSoundInfo->device);//丢弃所有等待发送到硬件的排队音频数据
+				//SDL_ClearQueuedAudio(mSoundInfo->device);//丢弃所有等待发送到硬件的排队音频数据
 			}
 			mSoundInfo->soundPos = 0;
 			mSoundInfo->completed = SDL_TRUE;//播放完成
@@ -363,8 +363,8 @@ namespace Dungeon
 			{
 				if (mSoundInfo->device)
 				{
-					SDL_ClearQueuedAudio(mSoundInfo->device);//丢弃所有等待发送到硬件的排队音频数据
-					//SDL_CloseAudioDevice(mSoundInfo->device);//关闭声卡
+					//SDL_ClearQueuedAudio(mSoundInfo->device);//丢弃所有等待发送到硬件的排队音频数据
+					SDL_CloseAudioDevice(mSoundInfo->device);//关闭声卡
 				}
 			}
 		}
@@ -399,11 +399,8 @@ namespace Dungeon
 
 	void AudioPlayer::Destory()
 	{
-		if (mSuperComputer)
-		{
-			delete mSuperComputer;
-			mSuperComputer = nullptr;
-		}
+		const char *psz = "11111111111111111111";
+		SDL_Log("AudioPlayer::Destory()::%s", psz);
 		if (mSoundInfo)
 		{
 			if (mSoundInfo->OnRelease)
@@ -420,6 +417,11 @@ namespace Dungeon
 				free(mSoundInfo->file);
 			}
 			free(mSoundInfo);
+		}
+		if (mSuperComputer)
+		{
+			delete mSuperComputer;
+			mSuperComputer = nullptr;
 		}
 	}
 }

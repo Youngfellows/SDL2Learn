@@ -38,6 +38,7 @@ namespace Dungeon
 
 	SuperComputer::~SuperComputer()
 	{
+		SDL_Log("SuperComputer::~SuperComputer()::");
 		if (mComputerData)
 		{
 			if (mComputerData->audioList)
