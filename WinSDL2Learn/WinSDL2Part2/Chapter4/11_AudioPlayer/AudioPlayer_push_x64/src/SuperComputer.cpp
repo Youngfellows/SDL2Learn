@@ -400,7 +400,7 @@ namespace Dungeon
 						}
 					}
 				}
-				SDL_Log("Make:: 2 sn:,pcm audio,isRunning:%d", computer->isRunning);
+				//SDL_Log("Make:: 2 sn:,pcm audio,isRunning:%d", computer->isRunning);
 				if (computer->isRunning == SDL_TRUE)
 				{
 					SDL_UnlockMutex(computer->mMutex);//解锁,一定要先释放锁,然后再发送信号
@@ -461,12 +461,12 @@ namespace Dungeon
 								long pos = audio->pos;
 								SDL_bool begin = audio->begin;
 								SDL_bool end = audio->end;
-								SDL_Log("Use:: queueSize:%d", queueSize);
-								SDL_Log("Use:: pcm audio,sn:%ld,len:%ld,pos:%ld,size:%ld,begin:%d,end:%d", sn, len, pos, size, begin, end);
-
+								//SDL_Log("Use:: queueSize:%d", queueSize);
+								
 								//如果播放器缓冲区还需要数据就取出列表中的音频喂过过去，如果还有，就先等等
 								if (queueSize <= size)
 								{
+									SDL_Log("Use:: pcm audio,sn:%ld,len:%ld,pos:%ld,size:%ld,begin:%d,end:%d", sn, len, pos, size, begin, end);
 									audioList->pop_front();//移除列表头部元素
 
 									//把多线程读取到的音频写入到文件中
@@ -481,8 +481,8 @@ namespace Dungeon
 									//把音频数据传递给播放器播放
 									if (data->AudioCallback)
 									{
-										SDL_Log("Use:: audioPlayer:%p", data->audioPlayer);
-										SDL_Log("Use:: mSoundInfo:%p", data->audioPlayer->mSoundInfo);
+										//SDL_Log("Use:: audioPlayer:%p", data->audioPlayer);
+										//SDL_Log("Use:: mSoundInfo:%p", data->audioPlayer->mSoundInfo);
 										data->AudioCallback(data->audioPlayer, audio);
 									}
 									free(audio->pcm);//释放空间
@@ -492,7 +492,7 @@ namespace Dungeon
 						}
 					}
 				}
-				SDL_Log("In Use Audio Thread: 3 isRunning:%d", computer->isRunning);
+				//SDL_Log("In Use Audio Thread: 3 isRunning:%d", computer->isRunning);
 				if (computer->isRunning == SDL_TRUE)
 				{
 					SDL_UnlockMutex(computer->mMutex);//解锁,一定要先释放锁,然后再发送信号
