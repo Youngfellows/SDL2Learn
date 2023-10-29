@@ -60,8 +60,10 @@ namespace Dungeon
 {
 	class AudioPlayer
 	{
-	private:
+	public:
 		SoundInfo *mSoundInfo;//音频信息结构体
+
+	private:
 		SuperComputer *mSuperComputer;//读取音频多线程
 
 	public:

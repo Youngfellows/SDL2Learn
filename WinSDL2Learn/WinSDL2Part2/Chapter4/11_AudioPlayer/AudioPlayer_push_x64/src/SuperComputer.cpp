@@ -38,6 +38,7 @@ namespace Dungeon
 
 	SuperComputer::~SuperComputer()
 	{
+		isRunning = SDL_FALSE;
 		if (mComputerData)
 		{
 			if (mComputerData->audioList)
@@ -450,8 +451,8 @@ namespace Dungeon
 							long pos = audio->pos;
 							SDL_bool begin = audio->begin;
 							SDL_bool end = audio->end;
-							//SDL_Log("Use:: sn:%ld,pcm:%s", sn, pcm);
 							SDL_Log("Use:: pcm audio,sn:%ld,len:%ld,pos:%ld,size:%ld,begin:%d,end:%d", sn, len, pos, size, begin, end);
+						
 
 							//把多线程读取到的音频写入到文件中
 							if (data->save)
@@ -465,11 +466,13 @@ namespace Dungeon
 							//把音频数据传递给播放器播放
 							if (data->AudioCallback)
 							{
+								SDL_Log("Use:: audioPlayer:%p", data->audioPlayer);
+								SDL_Log("Use:: mSoundInfo:%p", data->audioPlayer->mSoundInfo);
 								data->AudioCallback(data->audioPlayer, audio);
 							}
-							//free(audio->pcm);//释放空间
-							//free(audio);
-						}	
+							free(audio->pcm);//释放空间
+							free(audio);
+						}
 					}
 				}
 				//SDL_Log("In Use Audio Thread: 3");

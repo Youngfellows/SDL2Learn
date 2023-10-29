@@ -399,6 +399,11 @@ namespace Dungeon
 
 	void AudioPlayer::Destory()
 	{
+		if (mSuperComputer)
+		{
+			delete mSuperComputer;
+			mSuperComputer = nullptr;
+		}
 		if (mSoundInfo)
 		{
 			if (mSoundInfo->OnRelease)

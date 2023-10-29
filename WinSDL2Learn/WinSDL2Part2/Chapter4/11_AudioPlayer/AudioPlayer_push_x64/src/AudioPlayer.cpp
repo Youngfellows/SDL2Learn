@@ -136,15 +136,27 @@ namespace Dungeon
 			SoundInfo *soundInfo = self->mSoundInfo;
 			if (soundInfo)
 			{
+				SDL_Log("OnAudioCallback:: soundInfo:%p", soundInfo);
 				SDL_Log("OnAudioCallback:: State:%d", soundInfo->state);
+				AudioInfo *audio = audioInfo;
+				long sn = audio->serialNumber;
+				char *pcm = audio->pcm;
+				long len = audio->len;
+				long size = audio->size;
+				long pos = audio->pos;
+				SDL_bool begin = audio->begin;
+				SDL_bool end = audio->end;
+				//SDL_Log("Use:: sn:%ld,pcm:%s", sn, pcm);
+				SDL_Log("OnAudioCallback:: pcm audio,sn:%ld,len:%ld,pos:%ld,size:%ld,begin:%d,end:%d", sn, len, pos, size, begin, end);
+
 				if (soundInfo->state == PLAYING)
 				{
 					SDL_Log("OnAudioCallback:: feed audio,State:%d", soundInfo->state);
 					//填充音频数据push方式
-					SDL_QueueAudio(soundInfo->device, audioInfo->pcm, audioInfo->len);
+					//SDL_QueueAudio(soundInfo->device, audioInfo->pcm, audioInfo->len);
 				}
-				free(audioInfo->pcm);//释放内存
-				free(audioInfo);
+				//free(audioInfo->pcm);//释放内存
+				//free(audioInfo);
 			}
 		}
 	}
@@ -290,12 +302,15 @@ namespace Dungeon
 			mSoundInfo->completed = SDL_FALSE;
 			if (mSoundInfo->device)
 			{
+				//丢弃所有等待发送到硬件的排队音频数据
+				SDL_ClearQueuedAudio(mSoundInfo->device);
 				SDL_PauseAudioDevice(mSoundInfo->device, SDL_FALSE);//不暂停
 				mSoundInfo->state = PLAYING;
 				if (mSoundInfo->OnStart)
 				{
 					mSoundInfo->OnStart(this);//回调OnStarCallback
 				}
+
 			}
 		}
 	}
@@ -306,6 +321,8 @@ namespace Dungeon
 		{
 			if (mSoundInfo->device)
 			{
+				//丢弃所有等待发送到硬件的排队音频数据
+				SDL_ClearQueuedAudio(mSoundInfo->device);
 				SDL_PauseAudioDevice(mSoundInfo->device, SDL_TRUE);//暂停
 				mSoundInfo->state = PAUSE;
 				if (mSoundInfo->OnPause)
@@ -334,8 +351,8 @@ namespace Dungeon
 			mSoundInfo->state = STOP;
 			if (mSoundInfo->device)
 			{
-				SDL_PauseAudioDevice(mSoundInfo->device, SDL_TRUE);//暂停
 				SDL_ClearQueuedAudio(mSoundInfo->device);//丢弃所有等待发送到硬件的排队音频数据
+				SDL_PauseAudioDevice(mSoundInfo->device, SDL_TRUE);//暂停
 			}
 			mSoundInfo->soundPos = 0;
 			mSoundInfo->completed = SDL_TRUE;//播放完成
@@ -391,6 +408,13 @@ namespace Dungeon
 
 	void AudioPlayer::Destory()
 	{
+		const char *psz = "***********************************************************";
+		SDL_Log("AudioPlayer::Destory():: %s",psz);
+		if (mSuperComputer)
+		{
+			delete mSuperComputer;
+			mSuperComputer = nullptr;
+		}
 		if (mSoundInfo)
 		{
 			if (mSoundInfo->OnRelease)
