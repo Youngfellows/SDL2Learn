@@ -172,8 +172,11 @@ namespace Dungeon
 
 
 					SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, textData->textSurface);
-					SDL_RenderCopyF(renderer, texture, nullptr, textData->dest);//绘制文本
-					SDL_DestroyTexture(texture);
+					if (texture)
+					{
+						SDL_RenderCopyF(renderer, texture, nullptr, textData->dest);//绘制文本
+						SDL_DestroyTexture(texture);
+					}	
 				}
 			}
 		}
