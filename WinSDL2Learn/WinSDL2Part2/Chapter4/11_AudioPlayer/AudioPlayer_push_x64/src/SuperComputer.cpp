@@ -423,7 +423,11 @@ namespace Dungeon
 			SDL_Log("Start In Use Audio Thread:");
 			while (computer->isRunning == SDL_TRUE)
 			{
-				//SDL_Log("In Use Audio Thread: 1");
+				SDL_Log("In Use Audio Thread: 1");
+				if (computer->isRunning != SDL_TRUE)
+				{
+					break;
+				}
 				SDL_LockMutex(computer->mMutex);//加锁
 				//SDL_Log("In Use Audio Thread: 2");
 				ComputerData *data = computer->mComputerData;
