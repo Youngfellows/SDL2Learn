@@ -137,7 +137,7 @@ namespace Dungeon
 			if (soundInfo)
 			{
 				SDL_Log("OnAudioCallback:: soundInfo:%p", soundInfo);
-				SDL_Log("OnAudioCallback:: State:%d", soundInfo->state);
+				//SDL_Log("OnAudioCallback:: State:%d", soundInfo->state);
 				AudioInfo *audio = audioInfo;
 				long sn = audio->serialNumber;
 				char *pcm = audio->pcm;
@@ -146,14 +146,17 @@ namespace Dungeon
 				long pos = audio->pos;
 				SDL_bool begin = audio->begin;
 				SDL_bool end = audio->end;
+				uint32_t queueSize = SDL_GetQueuedAudioSize(soundInfo->device);
 				//SDL_Log("Use:: sn:%ld,pcm:%s", sn, pcm);
 				SDL_Log("OnAudioCallback:: pcm audio,sn:%ld,len:%ld,pos:%ld,size:%ld,begin:%d,end:%d", sn, len, pos, size, begin, end);
-
+				SDL_Log("OnAudioCallback:: feed audio,State:%d,queueSize:%d", soundInfo->state, queueSize);
 				if (soundInfo->state == PLAYING)
 				{
-					SDL_Log("OnAudioCallback:: feed audio,State:%d", soundInfo->state);
+					SDL_Log("OnAudioCallback:: PLAYING State:%d", soundInfo->state);
 					//填充音频数据push方式
-					//SDL_QueueAudio(soundInfo->device, audioInfo->pcm, audioInfo->len);
+					SDL_LockAudioDevice(soundInfo->device);
+					SDL_QueueAudio(soundInfo->device, audioInfo->pcm, audioInfo->len);
+					SDL_UnlockAudioDevice(soundInfo->device);
 				}
 				//free(audioInfo->pcm);//释放内存
 				//free(audioInfo);
@@ -409,7 +412,7 @@ namespace Dungeon
 	void AudioPlayer::Destory()
 	{
 		const char *psz = "***********************************************************";
-		SDL_Log("AudioPlayer::Destory():: %s",psz);
+		SDL_Log("AudioPlayer::Destory():: %s", psz);
 		if (mSuperComputer)
 		{
 			delete mSuperComputer;

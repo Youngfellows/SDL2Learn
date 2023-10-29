@@ -443,38 +443,52 @@ namespace Dungeon
 					AudioInfo *audio = nullptr;
 					if (!audioList->empty())
 					{
-						audio = audioList->front();//从列表头开始获取
-						audioList->pop_front();//移除列表头部元素
-						if (audio)
+						AudioPlayer *audioPlayer = data->audioPlayer;
+						if (audioPlayer)
 						{
-							long sn = audio->serialNumber;
-							char *pcm = audio->pcm;
-							long len = audio->len;
-							long size = audio->size;
-							long pos = audio->pos;
-							SDL_bool begin = audio->begin;
-							SDL_bool end = audio->end;
-							SDL_Log("Use:: pcm audio,sn:%ld,len:%ld,pos:%ld,size:%ld,begin:%d,end:%d", sn, len, pos, size, begin, end);
+							SoundInfo *soundInfo = audioPlayer->mSoundInfo;
+							SDL_AudioDeviceID device = soundInfo->device;
 
-
-							//把多线程读取到的音频写入到文件中
-							if (data->save)
+							audio = audioList->front();//从列表头开始获取
+							//audioList->pop_front();//移除列表头部元素
+							if (audio)
 							{
-								if (data->destFile && len > 0)
+								uint32_t queueSize = SDL_GetQueuedAudioSize(device);
+								long sn = audio->serialNumber;
+								char *pcm = audio->pcm;
+								long len = audio->len;
+								long size = audio->size;
+								long pos = audio->pos;
+								SDL_bool begin = audio->begin;
+								SDL_bool end = audio->end;
+								SDL_Log("Use:: queueSize:%d", queueSize);
+								SDL_Log("Use:: pcm audio,sn:%ld,len:%ld,pos:%ld,size:%ld,begin:%d,end:%d", sn, len, pos, size, begin, end);
+
+								//如果播放器缓冲区还需要数据就取出列表中的音频喂过过去，如果还有，就先等等
+								if (queueSize <= size)
 								{
-									fwrite(pcm, 1, len, data->destFile);
+									audioList->pop_front();//移除列表头部元素
+
+									//把多线程读取到的音频写入到文件中
+									if (data->save)
+									{
+										if (data->destFile && len > 0)
+										{
+											fwrite(pcm, 1, len, data->destFile);
+										}
+									}
+
+									//把音频数据传递给播放器播放
+									if (data->AudioCallback)
+									{
+										SDL_Log("Use:: audioPlayer:%p", data->audioPlayer);
+										SDL_Log("Use:: mSoundInfo:%p", data->audioPlayer->mSoundInfo);
+										data->AudioCallback(data->audioPlayer, audio);
+									}
+									free(audio->pcm);//释放空间
+									free(audio);
 								}
 							}
-
-							//把音频数据传递给播放器播放
-							if (data->AudioCallback)
-							{
-								SDL_Log("Use:: audioPlayer:%p", data->audioPlayer);
-								SDL_Log("Use:: mSoundInfo:%p", data->audioPlayer->mSoundInfo);
-								data->AudioCallback(data->audioPlayer, audio);
-							}
-							free(audio->pcm);//释放空间
-							free(audio);
 						}
 					}
 				}
