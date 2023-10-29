@@ -315,7 +315,7 @@ namespace Dungeon
 		{
 			SDL_Log("Start In Make Audio Thread:");
 
-			while (computer->isRunning)
+			while (computer->isRunning == SDL_TRUE)
 			{
 				SDL_LockMutex(computer->mMutex);//加锁
 				ComputerData *data = computer->mComputerData;
@@ -400,9 +400,12 @@ namespace Dungeon
 						}
 					}
 				}
-				//SDL_Log("Make:: 2 sn:,pcm audio");
-				SDL_UnlockMutex(computer->mMutex);//解锁,一定要先释放锁,然后再发送信号
-				SDL_CondSignal(computer->mUseCond);//发送信号mUseCond给使用线程,可以使用音频了
+				SDL_Log("Make:: 2 sn:,pcm audio,isRunning:%d", computer->isRunning);
+				if (computer->isRunning == SDL_TRUE)
+				{
+					SDL_UnlockMutex(computer->mMutex);//解锁,一定要先释放锁,然后再发送信号
+					SDL_CondSignal(computer->mUseCond);//发送信号mUseCond给使用线程,可以使用音频了
+				}
 				//SDL_Delay(100);//生产快一点
 			}
 		}
@@ -418,7 +421,7 @@ namespace Dungeon
 		if (computer)
 		{
 			SDL_Log("Start In Use Audio Thread:");
-			while (computer->isRunning)
+			while (computer->isRunning == SDL_TRUE)
 			{
 				//SDL_Log("In Use Audio Thread: 1");
 				SDL_LockMutex(computer->mMutex);//加锁
@@ -452,7 +455,7 @@ namespace Dungeon
 							SDL_bool begin = audio->begin;
 							SDL_bool end = audio->end;
 							SDL_Log("Use:: pcm audio,sn:%ld,len:%ld,pos:%ld,size:%ld,begin:%d,end:%d", sn, len, pos, size, begin, end);
-						
+
 
 							//把多线程读取到的音频写入到文件中
 							if (data->save)
@@ -475,9 +478,12 @@ namespace Dungeon
 						}
 					}
 				}
-				//SDL_Log("In Use Audio Thread: 3");
-				SDL_UnlockMutex(computer->mMutex);//解锁,一定要先释放锁,然后再发送信号
-				SDL_CondSignal(computer->mMakeCond);//发送信号mMakeCond给生产线程,可以生产音频了
+				SDL_Log("In Use Audio Thread: 3 isRunning:%d", computer->isRunning);
+				if (computer->isRunning == SDL_TRUE)
+				{
+					SDL_UnlockMutex(computer->mMutex);//解锁,一定要先释放锁,然后再发送信号
+					SDL_CondSignal(computer->mMakeCond);//发送信号mMakeCond给生产线程,可以生产音频了
+				}
 				//SDL_Delay(150);//使用慢一点
 			}
 		}

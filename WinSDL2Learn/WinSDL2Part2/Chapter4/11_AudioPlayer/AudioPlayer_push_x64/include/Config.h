@@ -57,9 +57,9 @@ namespace Dungeon
 
 namespace Dungeon
 {
-#define MAKE_THREAD_SIZE 4 //多线程数量
-#define USE_THREAD_SIZE 4 //多线程数量
-#define MAX_SIZE 200 //保存音频容器的最大容量
+#define MAKE_THREAD_SIZE 1 //多线程数量
+#define USE_THREAD_SIZE 1 //多线程数量
+#define MAX_SIZE 20 //保存音频容器的最大容量
 //#define AUDIO_CAPACITY 2048*1 //每次读取文件的内存大小2024个字节,也就是2kb
 #define AUDIO_CAPACITY 16384 //每次读取文件的内存大小2024个字节,也就是2kb
 
