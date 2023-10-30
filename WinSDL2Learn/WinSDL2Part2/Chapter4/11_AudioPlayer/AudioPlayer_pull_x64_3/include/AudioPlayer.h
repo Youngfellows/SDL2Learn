@@ -1,6 +1,7 @@
 #ifndef _DUNGEON_AUDIOPLAYER_H_
 #define _DUNGEON_AUDIOPLAYER_H_
 
+#define _CRT_SECURE_NO_WARNINGS
 #include "SDL2/SDL.h"
 #include "SuperComputer.h"
 
@@ -8,7 +9,7 @@ namespace Dungeon
 {
 	class SuperComputer;//先声明类
 	class AudioPlayer;//先声明类
-	class AudioInfo;//先声明结构体
+	class SoundData;//先声明结构体
 
 	//函数回调
 	typedef void (*OnCreateCallback)(AudioPlayer *audioPlayer);
@@ -39,7 +40,7 @@ namespace Dungeon
 	{
 		SDL_AudioSpec *audioSpec;//音频配置参数
 		char *file;//音频文件
-		//Uint8 *sound;//音频
+		char *sound;//音频
 		Uint32 soundLen;//音频长
 		Uint32 soundPos;//当前播放位置
 		SDL_bool completed;//是否播放完成
@@ -90,7 +91,7 @@ namespace Dungeon
 		static void SDLCALL AudioCallback(void *userdata, Uint8 *stream, int len);
 		void CloseDevice();
 		static int SDLCALL ThreadCallback(void *userdata);
-		static void OnAudioCallback(AudioPlayer *slef, AudioInfo *audioInfo);
+		static void OnLoadAudioCallback(AudioPlayer *slef, SoundData soundData);
 	};
 }
 

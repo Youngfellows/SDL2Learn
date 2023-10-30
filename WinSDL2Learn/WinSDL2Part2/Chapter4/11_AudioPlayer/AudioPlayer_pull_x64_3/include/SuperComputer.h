@@ -25,8 +25,15 @@ namespace Dungeon
 		SDL_bool end;//是否是最后一次数据
 	}AudioInfo;
 
+	//加载到内存的音频数据
+	typedef struct SoundData
+	{
+		char *sound;//音频数据
+		long length;//长度
+	}SoundData;
+
 	//函数指针,回调音频数据给播放器
-	typedef void (*OnAudioCallback)(AudioPlayer *self, AudioInfo *audioInfo);
+	typedef void (*OnLoadAudioCallback)(AudioPlayer *self, SoundData audioData);
 
 	typedef struct ComputerData
 	{
@@ -39,8 +46,9 @@ namespace Dungeon
 		SDL_bool save;//是否保存文件
 		long size;//文件大小
 		long pos;//已经读取长度
+		char *sound;//音频数据
 		list<AudioInfo *> *audioList;//保存音频的列表
-		OnAudioCallback AudioCallback;//回调函数
+		OnLoadAudioCallback LoadAudioCallback;//回调函数
 		AudioPlayer *audioPlayer;//播放器对象
 	}ComputerData;
 }
@@ -67,9 +75,8 @@ namespace Dungeon
 		SuperComputer();
 		~SuperComputer();
 		SDL_bool Start(const char *srcFileName, const char *destFileName, SDL_bool save,
-			AudioPlayer *audioPlayer, OnAudioCallback onAudioCallback);
+			AudioPlayer *audioPlayer, OnLoadAudioCallback onLoadAudioCallback);
 		void Wait();
-		AudioInfo *GetAudio();//使用多线程方式获取列表中的音频数据,该函数是阻塞的
 
 	private:
 		static int SDLCALL MakeAudioThreadCallback(void *userdata);//生产音频线程回调函数

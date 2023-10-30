@@ -69,7 +69,7 @@ namespace Dungeon
 #define PCM_3_FILE_NAME "./resources/mu_rong_xue_xue_kai_qi.pcm" //其实是一个pcm音频文件
 #define MP3_FILE_NAME "./resources/mu_rong_xue_xue_kai_qi.mp3"
 #define SAVE_FILE_NAME "../x64/Debug/my_save_1.pcm" //保存读取到的音频文件
-//#define USE_AUDIO_IN_CALLBACK //是否使用多线程写音频文件的标志
+#define USE_AUDIO_IN_CALLBACK //是否使用多线程写音频文件的标志
 }
 
 #endif // !_DUNGEON_CONFIG_H_

@@ -102,54 +102,48 @@ namespace Dungeon
 			mSuperComputer = nullptr;
 		}
 		this->mSuperComputer = new SuperComputer();
-		//设置播放器对象和回调函数给SuperComputer
-		//if (!mSuperComputer->Start(srcFileName, destFileName, save,this, &OnAudioCallback))
-		if (!mSuperComputer->Start(srcFileName, destFileName, save, this, nullptr))
+		//设置播放器对象和回调函数给SuperComputer,音频加载完成了再去初始化播放器
+		if (!mSuperComputer->Start(srcFileName, destFileName, save, this, &OnLoadAudioCallback))
 		{
 			return SDL_FALSE;
 		}
+	}
 
-		//启动线程,创建线程并执行
-		AudioPlayer *userData = this;
-		SDL_Thread *audioThread = SDL_CreateThread(&ThreadCallback, "Audio_Player_Thread", (void *)userData);
+	/*
+	* 音频资源加载成功的回调
+	*/
+	void AudioPlayer::OnLoadAudioCallback(AudioPlayer *slef, SoundData soundData)
+	{
+		SDL_Log("AudioPlayer::OnLoadAudioCallback:: Load Sound Success");
+		AudioPlayer *audioPlayer = slef;
+		//拷贝已经加载好的音频数据
+		audioPlayer->mSoundInfo->soundLen = soundData.length;
+		audioPlayer->mSoundInfo->sound = (char *)malloc(sizeof(char) * soundData.length);
+		if (!audioPlayer->mSoundInfo->sound)
+		{
+			SDL_Log("Create sound memory error");
+			return;
+		}
+		strcpy(audioPlayer->mSoundInfo->sound, soundData.sound);
+
+		//创建播放线程并执行
+		SDL_Thread *audioThread = SDL_CreateThread(&ThreadCallback, "Audio_Player_Thread", (void *)audioPlayer);
 		if (!audioThread)
 		{
-			SDL_Log("Create:: Thread Failed: %s", SDL_GetError());
+			SDL_Log("AudioPlayer::OnLoadAudioCallback:: Create Thread Failed: %s", SDL_GetError());
 		}
 		else
 		{
 			//int status;
-			SDL_Log("Create:: Thread Success");
+			SDL_Log("AudioPlayer::OnLoadAudioCallback:: Create Thread Success");
 			//SDL_WaitThread(audioThread, &status);//等待子线程结束
 			//SDL_Log("Thread Return Value:%d", status);
 			//SDL_DetachThread(audioThread);//子线程自己运行,不影响主线程执行
-			SDL_Log("Create:: Detach Audio Thread");
+			SDL_Log("AudioPlayer::OnLoadAudioCallback:: Create Detach Audio Thread");
 		}
 		/*this->mSuperComputer->Wait();
 		int status;
 		SDL_WaitThread(audioThread, &status);*/
-	}
-
-	/*
-	* 1.线程回调函数
-	* 2.采用push的方式播放音频
-	*/
-	void AudioPlayer::OnAudioCallback(AudioPlayer *self, AudioInfo *audioInfo)
-	{
-		if (self)
-		{
-			SoundInfo *soundInfo = self->mSoundInfo;
-			if (soundInfo)
-			{
-				SDL_Log("OnAudioCallback:: State:%d", soundInfo->state);
-				if (soundInfo->state == PLAYING)
-				{
-					SDL_Log("OnAudioCallback:: feed audio,State:%d", soundInfo->state);
-					//填充音频数据push方式
-					SDL_QueueAudio(soundInfo->device, audioInfo->pcm, audioInfo->len);
-				}
-			}
-		}
 	}
 
 	/*
@@ -190,8 +184,8 @@ namespace Dungeon
 						SDL_Log("Can not load audio: %s", SDL_GetError());
 						return SDL_FALSE;
 					}
-					//soundInfo->sound = sound;
-					soundInfo->soundLen = soundLen;
+					//soundInfo->sound = sound;//使用我的线程加载好的音频数据
+					//soundInfo->soundLen = soundLen;
 					soundInfo->soundPos = 0;
 					soundInfo->completed = SDL_FALSE;
 					soundInfo->device = 0;
@@ -213,12 +207,6 @@ namespace Dungeon
 					}
 					soundInfo->device = device;
 
-					/*if (SDL_OpenAudio(audioSpec, &obtainSpec) != 0)
-					{
-						SDL_Log("Can not open audio device: %s", SDL_GetError());
-						return SDL_FALSE;
-					}*/
-
 					SDL_Log("ThreadCallback: %s", "Create Audio Player Success");
 					if (soundInfo->OnCreate)
 					{
@@ -237,58 +225,43 @@ namespace Dungeon
 	void SDLCALL AudioPlayer::AudioCallback(void *userdata, Uint8 *stream, int len)
 	{
 		SDL_Log("AudioPlayer::AudioCallback: 222222222222222,len:%d", len);
-
 		AudioPlayer *audioPlayer = (AudioPlayer *)userdata;
 		if (!audioPlayer)
 		{
 			return;
 		}
 		SDL_memset(stream, 0, len);//清空缓冲区
-		SuperComputer *superComputer = audioPlayer->mSuperComputer;
-		if (superComputer)
+		SoundInfo *soundInfo = audioPlayer->mSoundInfo;
+		if (!soundInfo->completed)
 		{
-			SoundInfo *soundInfo = audioPlayer->mSoundInfo;
-			//这种方式不好，会出现声音卡顿现象,原因容器每一个buffer可能太小,解决办法
-			// 1. 最好的方式是把声音全部加载到内存中
-			// 2. 容器每一个buffer的内存要足够大,最好与len相同
-			AudioInfo *audio = superComputer->GetAudio();//向线程列表要音频数据
-			if (audio)
+			Uint32 remaining = soundInfo->soundLen - soundInfo->soundPos;//剩余多少没有读取完
+			if (remaining > len)
 			{
-				if (audio->len)
-				{
-					//buffer太大了会丢数据
-					SDL_memcpy(stream, audio->pcm, len);//把数据喂到缓冲区
-				}
-				else
-				{
-					//buffer太小了会出现播放声音不连续
-					SDL_memcpy(stream, audio->pcm, audio->len);//把数据喂到缓冲区
-				}
-				soundInfo->soundPos = audio->pos;
+				SDL_memcpy(stream, soundInfo->sound + soundInfo->soundPos, len);//把数据喂到缓冲区
+				//SDL_MixAudio(stream, soundInfo->sound + soundInfo->soundPos, len,SDL_MIX_MAXVOLUME);//把数据喂到缓冲区,有bug,没声音
+				soundInfo->soundPos += len;//更新已经播放长度
 				if (soundInfo->OnProgress)
 				{
-					soundInfo->OnProgress(audioPlayer, audio->size, audio->pos);
+					soundInfo->OnProgress(audioPlayer, soundInfo->soundLen, soundInfo->soundPos);
 				}
-
-				if (audio->end)
-				{
-					soundInfo->soundPos = 0;
-					soundInfo->completed = SDL_TRUE;//播放完成
-					soundInfo->state = IDLE;
-					//SDL_PauseAudioDevice(soundInfo->device, SDL_TRUE);//暂停
-					SDL_Log("AudioCallback Already Play completed");
-					if (soundInfo->OnComplete)
-					{
-						soundInfo->OnComplete(audioPlayer);
-					}
-				}
-				//释放内存
-				free(audio->pcm);
-				free(audio);
 			}
 			else
 			{
-				SDL_Log("Get Audio is nullptr");
+				SDL_memcpy(stream, soundInfo->sound + soundInfo->soundPos, remaining);//把数据喂到缓冲区
+				//SDL_MixAudio(stream, soundInfo->sound + soundInfo->soundPos, remaining, SDL_MIX_MAXVOLUME);//把数据喂到缓冲区,有bug,没声音
+				soundInfo->soundPos = 0;
+				soundInfo->completed = SDL_TRUE;//播放完成
+				SDL_Log("AudioCallback completed");
+			}
+		}
+		else
+		{
+			soundInfo->state = IDLE;
+			SDL_PauseAudioDevice(soundInfo->device, SDL_TRUE);//暂停
+			SDL_Log("AudioCallback Already Play completed");
+			if (soundInfo->OnComplete)
+			{
+				soundInfo->OnComplete(audioPlayer);
 			}
 		}
 	}
@@ -348,7 +321,6 @@ namespace Dungeon
 			if (mSoundInfo->device)
 			{
 				SDL_PauseAudioDevice(mSoundInfo->device, SDL_TRUE);//暂停
-				//SDL_ClearQueuedAudio(mSoundInfo->device);//丢弃所有等待发送到硬件的排队音频数据
 			}
 			mSoundInfo->soundPos = 0;
 			mSoundInfo->completed = SDL_TRUE;//播放完成
@@ -368,7 +340,6 @@ namespace Dungeon
 			{
 				if (mSoundInfo->device)
 				{
-					//SDL_ClearQueuedAudio(mSoundInfo->device);//丢弃所有等待发送到硬件的排队音频数据
 					SDL_CloseAudioDevice(mSoundInfo->device);//关闭声卡
 				}
 			}
@@ -408,6 +379,11 @@ namespace Dungeon
 		SDL_Log("AudioPlayer::Destory()::%s", psz);
 		if (mSoundInfo)
 		{
+			if (mSoundInfo->sound)
+			{
+				free(mSoundInfo->sound);
+			}
+
 			if (mSoundInfo->OnRelease)
 			{
 				mSoundInfo->OnRelease(this);
