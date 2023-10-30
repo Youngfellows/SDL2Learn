@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AudioPlayer_push_x64", "Aud
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AudioPlayer_pull_x64_2", "AudioPlayer_pull_x64_2\AudioPlayer_pull_x64_2.vcxproj", "{742B4E41-A74E-499F-8307-9220C4F3DCB0}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AudioPlayer_pull_x64_3", "AudioPlayer_pull_x64_3\AudioPlayer_pull_x64_3.vcxproj", "{9EB9FA5F-14C9-4A6C-9B53-2596A320044E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -41,6 +43,14 @@ Global
 		{742B4E41-A74E-499F-8307-9220C4F3DCB0}.Release|x64.Build.0 = Release|x64
 		{742B4E41-A74E-499F-8307-9220C4F3DCB0}.Release|x86.ActiveCfg = Release|Win32
 		{742B4E41-A74E-499F-8307-9220C4F3DCB0}.Release|x86.Build.0 = Release|Win32
+		{9EB9FA5F-14C9-4A6C-9B53-2596A320044E}.Debug|x64.ActiveCfg = Debug|x64
+		{9EB9FA5F-14C9-4A6C-9B53-2596A320044E}.Debug|x64.Build.0 = Debug|x64
+		{9EB9FA5F-14C9-4A6C-9B53-2596A320044E}.Debug|x86.ActiveCfg = Debug|Win32
+		{9EB9FA5F-14C9-4A6C-9B53-2596A320044E}.Debug|x86.Build.0 = Debug|Win32
+		{9EB9FA5F-14C9-4A6C-9B53-2596A320044E}.Release|x64.ActiveCfg = Release|x64
+		{9EB9FA5F-14C9-4A6C-9B53-2596A320044E}.Release|x64.Build.0 = Release|x64
+		{9EB9FA5F-14C9-4A6C-9B53-2596A320044E}.Release|x86.ActiveCfg = Release|Win32
+		{9EB9FA5F-14C9-4A6C-9B53-2596A320044E}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
