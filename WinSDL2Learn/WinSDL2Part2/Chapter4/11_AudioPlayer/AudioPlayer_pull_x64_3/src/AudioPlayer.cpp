@@ -126,6 +126,16 @@ namespace Dungeon
 		}
 		strcpy(audioPlayer->mSoundInfo->sound, soundData.sound);
 
+		const char *fileName = "./resources/save_2.pcm";
+		FILE *file = fopen(fileName, "wb");
+		if (!file)
+		{
+			SDL_Log("open file error: %s", fileName);
+			return;
+		}
+		fwrite(audioPlayer->mSoundInfo->sound, 1, audioPlayer->mSoundInfo->soundLen, file);
+		fclose(file);
+
 		//创建播放线程并执行
 		SDL_Thread *audioThread = SDL_CreateThread(&ThreadCallback, "Audio_Player_Thread", (void *)audioPlayer);
 		if (!audioThread)

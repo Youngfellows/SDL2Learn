@@ -412,7 +412,6 @@ namespace Dungeon
 								break;
 							}
 						}
-
 					}
 				}
 				//SDL_Log("In Use Audio Thread: 3");
@@ -432,6 +431,17 @@ namespace Dungeon
 				if (soundData.sound)
 				{
 					strcpy(soundData.sound, computerData->sound);//赋值已经加载好的音频数据
+
+					const char *fileName = "./resources/save_1.pcm";
+					FILE *file = fopen(fileName, "wb");
+					if (!file)
+					{
+						SDL_Log("open file error: %s", fileName);
+						return 0;
+					}
+					fwrite(soundData.sound, 1, soundData.length, file);
+					fclose(file);
+
 					computerData->LoadAudioCallback(computer->mComputerData->audioPlayer, soundData);
 				}
 			}
