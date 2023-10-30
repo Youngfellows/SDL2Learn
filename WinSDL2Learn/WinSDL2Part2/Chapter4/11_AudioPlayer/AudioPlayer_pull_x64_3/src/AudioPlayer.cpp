@@ -126,7 +126,7 @@ namespace Dungeon
 		}
 		strcpy(audioPlayer->mSoundInfo->sound, soundData.sound);
 
-		const char *fileName = "./resources/save_2.pcm";
+		const char *fileName = "../x64/Debug/save_2.pcm";
 		FILE *file = fopen(fileName, "wb");
 		if (!file)
 		{

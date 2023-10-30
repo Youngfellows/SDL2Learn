@@ -396,10 +396,14 @@ namespace Dungeon
 									fwrite(pcm, 1, len, data->destFile);
 								}
 							}
-							//把音频数据拷贝到缓冲区
+							//把音频数据拷贝到缓冲区,有bug，只拷贝了一次数据
 							if (data->sound)
 							{
-								strcpy(data->sound + (pos - len), audio->pcm);//复制音频数据到缓冲区
+								//strcpy(data->sound, "123456789");//复制音频数据到缓冲区
+								//strcpy(data->sound + (pos - len), pcm);//复制音频数据到缓冲区
+								SDL_Log("pos-len=%d", pos - len);
+								//strcpy(&data->sound[pos - len], "123456789");//复制音频数据到缓冲区
+								strcpy(data->sound + (pos - len), pcm);//复制音频数据到缓冲区
 							}
 
 							//把音频数据传递给播放器播放
@@ -432,7 +436,7 @@ namespace Dungeon
 				{
 					strcpy(soundData.sound, computerData->sound);//赋值已经加载好的音频数据
 
-					const char *fileName = "./resources/save_1.pcm";
+					const char *fileName = "../x64/Debug/save_1.pcm";
 					FILE *file = fopen(fileName, "wb");
 					if (!file)
 					{
