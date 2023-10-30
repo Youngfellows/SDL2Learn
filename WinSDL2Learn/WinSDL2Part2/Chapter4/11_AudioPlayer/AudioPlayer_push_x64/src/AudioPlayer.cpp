@@ -50,8 +50,22 @@ namespace Dungeon
 			SDL_Log("Can not malloc mSoundInfo");
 			return SDL_FALSE;
 		}
+		mSoundInfo->audioSpec = nullptr;
+		mSoundInfo->soundLen = 0;
+		mSoundInfo->soundPos = 0;
+		mSoundInfo->completed = SDL_FALSE;
+		mSoundInfo->device = 0;
+		mSoundInfo->state = IDLE;
+		//mSoundInfo->sound = nullptr;
 		mSoundInfo->file = nullptr;
 		mSoundInfo->flag = nullptr;
+		mSoundInfo->OnCreate = nullptr;
+		mSoundInfo->OnStart = nullptr;
+		mSoundInfo->OnStop = nullptr;
+		mSoundInfo->OnPause = nullptr;
+		mSoundInfo->OnComplete = nullptr;
+		mSoundInfo->OnRelease = nullptr;
+		mSoundInfo->OnProgress = nullptr;
 		return SDL_TRUE;
 	}
 

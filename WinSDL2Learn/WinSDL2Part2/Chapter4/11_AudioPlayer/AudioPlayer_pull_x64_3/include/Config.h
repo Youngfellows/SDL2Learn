@@ -45,7 +45,7 @@ namespace Dungeon
 
 #define COMPONENT_SIZE 6 //需要创建的组件个数
 
-#define WAV_SOUND_SIZE 2 //音频数量
+#define WAV_SOUND_SIZE 3 //音频数量
 #define WAV_SOUND_FILE_NAME "./resources/sound.wav"
 #define WAV_SOUND_SIREN_FILE_NAME "./resources/siren_signal_wail_yelp_multitone_phaser_hilo.wav"
 #define FLAG_CREATE_AUDIO_PLAYER "CreateAudioPlayer"
@@ -59,8 +59,8 @@ namespace Dungeon
 {
 #define MAKE_THREAD_SIZE 5 //多线程数量
 #define USE_THREAD_SIZE 3 //多线程数量
-#define MAX_SIZE 200 //保存音频容器的最大容量
-//#define AUDIO_CAPACITY 2048*1 //每次读取文件的内存大小2024个字节,也就是2kb
+#define MAX_SIZE 300 //保存音频容器的最大容量
+	//#define AUDIO_CAPACITY 2048*1 //每次读取文件的内存大小2024个字节,也就是2kb
 #define AUDIO_CAPACITY 16384 //每次读取文件的内存大小2024个字节,也就是2kb
 
 
@@ -70,6 +70,7 @@ namespace Dungeon
 #define MP3_FILE_NAME "./resources/mu_rong_xue_xue_kai_qi.mp3"
 #define SAVE_FILE_NAME "../x64/Debug/my_save_1.pcm" //保存读取到的音频文件
 #define USE_AUDIO_IN_CALLBACK //是否使用多线程写音频文件的标志
+//#define TEST_SAVE_PCM //释放保存音频的标志
 }
 
 #endif // !_DUNGEON_CONFIG_H_

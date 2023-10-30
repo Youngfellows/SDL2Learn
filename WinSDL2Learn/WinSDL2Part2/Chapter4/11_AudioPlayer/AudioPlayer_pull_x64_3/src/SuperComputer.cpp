@@ -122,6 +122,7 @@ namespace Dungeon
 		this->mComputerData->LoadAudioCallback = onLoadAudioCallback;//设置回调函数	
 		this->mComputerData->pos = 0;
 		this->mComputerData->size = GetFileSize(this->mComputerData->srcFile);//获取文件大小
+		SDL_Log("SuperComputer::Start():: size:%ld", mComputerData->size);
 		this->mComputerData->sound = (char *)malloc(sizeof(char) * mComputerData->size);//申请缓冲区
 		if (!mComputerData->sound)
 		{
@@ -338,8 +339,9 @@ namespace Dungeon
 				SDL_CondSignal(computer->mUseCond);//发送信号mUseCond给使用线程,可以使用音频了
 				//SDL_Delay(100);//生产快一点
 			}
+			SDL_Log("End In Make Audio Thread ...");
 		}
-		SDL_Log("End In Make Audio Thread ...");
+
 		return 1;
 	}
 
@@ -396,17 +398,20 @@ namespace Dungeon
 									fwrite(pcm, 1, len, data->destFile);
 								}
 							}
-							//把音频数据拷贝到缓冲区,有bug，只拷贝了一次数据
+
+							//注意:把音频数据拷贝到缓冲区,二进制数据一定要用memcpy
 							if (data->sound)
 							{
-								//strcpy(data->sound, "123456789");//复制音频数据到缓冲区
-								//strcpy(data->sound + (pos - len), pcm);//复制音频数据到缓冲区
-								SDL_Log("pos-len=%d", pos - len);
+								//SDL_Log("pos-len=%d", pos - len);
 								//strcpy(&data->sound[pos - len], "123456789");//复制音频数据到缓冲区
-								strcpy(data->sound + (pos - len), pcm);//复制音频数据到缓冲区
+								//strcpy(data->sound + (pos - len), pcm);//复制音频数据到缓冲区
+
+								/*const char *psz = "0123456789";
+								memcpy(data->sound + (pos - len), psz, strlen(psz));*/
+								memcpy(data->sound + (pos - len), audio->pcm, len);
 							}
 
-							//把音频数据传递给播放器播放
+
 							free(audio->pcm);//释放空间
 							free(audio);
 							if (end)
@@ -423,8 +428,8 @@ namespace Dungeon
 				SDL_CondSignal(computer->mMakeCond);//发送信号mMakeCond给生产线程,可以生产音频了
 				//SDL_Delay(150);//使用慢一点
 			}
-
 			SDL_Log("End In Use Audio Thread ...");
+
 			//把音频数据回调出去
 			ComputerData *computerData = computer->mComputerData;
 			if (computerData && computerData->LoadAudioCallback)
@@ -434,8 +439,11 @@ namespace Dungeon
 				soundData.sound = (char *)malloc(sizeof(char) * soundData.length);
 				if (soundData.sound)
 				{
-					strcpy(soundData.sound, computerData->sound);//赋值已经加载好的音频数据
+					//注意:二进制数据,一定要用memcpy拷贝
+					//strcpy(soundData.sound, computerData->sound);//赋值已经加载好的音频数据
+					memcpy(soundData.sound, computerData->sound, soundData.length);//赋值已经加载好的音频数据
 
+#ifdef TEST_SAVE_PCM
 					const char *fileName = "../x64/Debug/save_1.pcm";
 					FILE *file = fopen(fileName, "wb");
 					if (!file)
@@ -445,7 +453,7 @@ namespace Dungeon
 					}
 					fwrite(soundData.sound, 1, soundData.length, file);
 					fclose(file);
-
+#endif // TEST_SAVE_PCM
 					computerData->LoadAudioCallback(computer->mComputerData->audioPlayer, soundData);
 				}
 			}

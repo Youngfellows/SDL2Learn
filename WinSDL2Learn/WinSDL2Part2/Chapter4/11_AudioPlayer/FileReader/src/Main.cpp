@@ -3,10 +3,10 @@
 
 using namespace std;
 
-//#define	SRC_FILE_NAME "./resources/mu_rong_xue_xue_kai_qi_1.wav"
-//#define SAVE_FILE_NAME "../x64/Debug/save_test_1.pcm"
-#define	SRC_FILE_NAME "./resources/readme.txt" //读取文本文件没有问题
-#define SAVE_FILE_NAME "../x64/Debug/save_readme.txt"
+#define	SRC_FILE_NAME "./resources/mu_rong_xue_xue_kai_qi_1.wav"
+#define SAVE_FILE_NAME "../x64/Debug/save_test_x1.pcm"
+//#define	SRC_FILE_NAME "./resources/readme.txt" //读取文本文件没有问题
+//#define SAVE_FILE_NAME "../x64/Debug/save_readme.txt"
 
 #define CACHE_SIZE 1024 //临时缓存大小
 
@@ -36,15 +36,14 @@ int main(int argc, char *argv[])
 		return 0;
 	}
 	size_t len = 0;
-	int index = 0;
+	size_t index = 0;
 	while ((len = fread(cache, 1, CACHE_SIZE, srcFile)) > 0)
 	{
-		printf("index:%d,len:%ld\n", index, len);
-		strcpy(buffer + index, cache);//把读取到的数据拷贝到缓存
+		printf("index:%ld,len:%ld\n", index, len);
+		//strcpy(buffer + index, cache);//把读取到的数据拷贝到缓存
 		//strncpy(buffer + index, cache, len);
-		//memcpy(buffer + index, cache, len);
+		memcpy(buffer + index, cache, len);//一定要用memcpy才可以复制二进制文件
 		index += len;
-		//printf("%s", cache);
 		memset(cache, 0, CACHE_SIZE);//清空缓存
 	}
 	fclose(srcFile);

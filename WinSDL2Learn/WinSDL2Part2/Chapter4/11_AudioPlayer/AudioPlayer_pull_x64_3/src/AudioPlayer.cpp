@@ -51,9 +51,22 @@ namespace Dungeon
 		{
 			return SDL_FALSE;
 		}
-		//mSoundInfo->sound = nullptr;
+		mSoundInfo->audioSpec = nullptr;
+		mSoundInfo->soundLen = 0;
+		mSoundInfo->soundPos = 0;
+		mSoundInfo->completed = SDL_FALSE;
+		mSoundInfo->device = 0;
+		mSoundInfo->state = IDLE;
+		mSoundInfo->sound = nullptr;
 		mSoundInfo->file = nullptr;
 		mSoundInfo->flag = nullptr;
+		mSoundInfo->OnCreate = nullptr;
+		mSoundInfo->OnStart = nullptr;
+		mSoundInfo->OnStop = nullptr;
+		mSoundInfo->OnPause = nullptr;
+		mSoundInfo->OnComplete = nullptr;
+		mSoundInfo->OnRelease = nullptr;
+		mSoundInfo->OnProgress = nullptr;
 		return SDL_TRUE;
 	}
 
@@ -124,8 +137,11 @@ namespace Dungeon
 			SDL_Log("Create sound memory error");
 			return;
 		}
-		strcpy(audioPlayer->mSoundInfo->sound, soundData.sound);
+		//注意:一定要用memcpy拷贝二进制数据
+		//strcpy(audioPlayer->mSoundInfo->sound, soundData.sound);
+		memcpy(audioPlayer->mSoundInfo->sound, soundData.sound, soundData.length);
 
+#ifdef TEST_SAVE_PCM
 		const char *fileName = "../x64/Debug/save_2.pcm";
 		FILE *file = fopen(fileName, "wb");
 		if (!file)
@@ -135,6 +151,8 @@ namespace Dungeon
 		}
 		fwrite(audioPlayer->mSoundInfo->sound, 1, audioPlayer->mSoundInfo->soundLen, file);
 		fclose(file);
+
+#endif // TEST_SAVE_PCM
 
 		//创建播放线程并执行
 		SDL_Thread *audioThread = SDL_CreateThread(&ThreadCallback, "Audio_Player_Thread", (void *)audioPlayer);
