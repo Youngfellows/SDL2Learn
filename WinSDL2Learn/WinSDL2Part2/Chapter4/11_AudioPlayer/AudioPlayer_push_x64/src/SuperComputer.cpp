@@ -466,7 +466,7 @@ namespace Dungeon
 								SDL_bool begin = audio->begin;
 								SDL_bool end = audio->end;
 								//SDL_Log("Use:: queueSize:%d", queueSize);
-								
+
 								//如果播放器缓冲区还需要数据就取出列表中的音频喂过过去，如果还有，就先等等
 								if (queueSize <= size)
 								{
@@ -489,8 +489,11 @@ namespace Dungeon
 										//SDL_Log("Use:: mSoundInfo:%p", data->audioPlayer->mSoundInfo);
 										data->AudioCallback(data->audioPlayer, audio);
 									}
-									free(audio->pcm);//释放空间
-									free(audio);
+									if (computer->isRunning == SDL_TRUE && audio)
+									{
+										free(audio->pcm);//释放空间
+										free(audio);
+									}
 								}
 							}
 						}
