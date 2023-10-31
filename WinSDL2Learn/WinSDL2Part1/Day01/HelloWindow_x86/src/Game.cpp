@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "Config.h"
 #include "Rectangle.h"
+#include "EventListener.h"
 
 namespace Dungeon
 {
@@ -137,7 +138,7 @@ namespace Dungeon
 
 		Rectangle *rectangle = new Rectangle();//矩形组件
 		mComponents[0] = rectangle->Create(RECT_START_X, RECT_START_Y, RECT_WIDTH, RECT_HEIGHT
-			, RECT_COLOR, RECT_BORDER_COLOR, PT_SIZE_25, nullptr);
+			, RECT_COLOR, RECT_BORDER_COLOR, PT_SIZE_25, &Dungeon::EventListener::OnClickRect);
 		if (!mComponents[0])
 		{
 			return SDL_FALSE;
