@@ -232,6 +232,7 @@ namespace Dungeon
 
 	void Rectangle::Destory()
 	{
+		SDL_Log("Rectangle::Destory()::");
 		//释放内存资源
 		if (mRectangleData)
 		{

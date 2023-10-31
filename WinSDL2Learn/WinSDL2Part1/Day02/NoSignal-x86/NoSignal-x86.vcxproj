@@ -23,6 +23,7 @@
     <ClCompile Include="src\EventListener.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\NoSignal.cpp" />
     <ClCompile Include="src\Rectangle.cpp" />
     <ClCompile Include="src\Resource.cpp" />
   </ItemGroup>

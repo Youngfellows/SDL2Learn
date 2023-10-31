@@ -8,7 +8,7 @@ namespace Dungeon
 #define FRAMERATE 60 //每1秒帧数
 #define WINDOW_TITLE "Dungeon" //Window窗口title
 
-#define COMPONENT_SIZE 1 //需要创建的组件个数
+#define COMPONENT_SIZE 2 //需要创建的组件个数
 
 #define RECT_START_X 50 //矩形开始绘制的X位置
 #define RECT_START_Y 50 //矩形开始绘制的X位置

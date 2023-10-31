@@ -81,6 +81,7 @@ namespace Dungeon
 	}
 	void Game::Shutdown()
 	{
+		FreeComponents();
 		SDL_DestroyRenderer(mRenderer);
 		SDL_DestroyWindow(mWindow);
 		SDL_Quit();

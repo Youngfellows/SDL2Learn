@@ -2,6 +2,7 @@
 #include "Config.h"
 #include "Rectangle.h"
 #include "EventListener.h"
+#include "NoSignal.h"
 
 namespace Dungeon
 {
@@ -81,6 +82,7 @@ namespace Dungeon
 	}
 	void Game::Shutdown()
 	{
+		FreeComponents();
 		SDL_DestroyRenderer(mRenderer);
 		SDL_DestroyWindow(mWindow);
 		SDL_Quit();
@@ -136,10 +138,17 @@ namespace Dungeon
 		//this->mComponents = (DisplayObject **)malloc(sizeof(DisplayObject *) * COMPONENT_SIZE);//C方式
 		this->mComponents = new DisplayObject * [COMPONENT_SIZE];//C++方式
 
-		Rectangle *rectangle = new Rectangle();//矩形组件
-		mComponents[0] = rectangle->Create(RECT_START_X, RECT_START_Y, RECT_WIDTH, RECT_HEIGHT
-			, RECT_COLOR, RECT_BORDER_COLOR, PT_SIZE_25, &Dungeon::EventListener::OnClickRect);
+		NoSignal *noSignal = new NoSignal();//电视无信号组件
+		mComponents[0] = noSignal->Create(WINDOW_WIDTH, WINDOW_HEIGHT);
 		if (!mComponents[0])
+		{
+			return SDL_FALSE;
+		}
+
+		Rectangle *rectangle = new Rectangle();//矩形组件
+		mComponents[1] = rectangle->Create(RECT_START_X, RECT_START_Y, RECT_WIDTH, RECT_HEIGHT
+			, RECT_COLOR, RECT_BORDER_COLOR, PT_SIZE_25, &Dungeon::EventListener::OnClickRect);
+		if (!mComponents[1])
 		{
 			return SDL_FALSE;
 		}
