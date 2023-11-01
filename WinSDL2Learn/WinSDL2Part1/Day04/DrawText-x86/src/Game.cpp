@@ -4,7 +4,7 @@
 #include "EventListener.h"
 #include "NoSignal.h"
 #include "Photo.h"
-
+#include "Text.h"
 
 namespace Dungeon
 {

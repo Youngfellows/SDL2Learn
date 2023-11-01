@@ -9,9 +9,12 @@ namespace Dungeon
 #define WINDOW_TITLE "Dungeon" //Window窗口title
 
 #define COMPONENT_SIZE 3 //需要创建的组件个数
+#define START_X 50
+#define START_Y 80
+#define MARGIN_LEFT 10
 
-#define RECT_START_X 50 //矩形开始绘制的X位置
-#define RECT_START_Y 50 //矩形开始绘制的X位置
+#define RECT_START_X START_X //矩形开始绘制的X位置
+#define RECT_START_Y START_Y //矩形开始绘制的X位置
 #define RECT_WIDTH 50 //矩形宽
 #define RECT_HEIGHT 50 //矩形高
 #define RECT_COLOR 0xFFFFB900 //矩形颜色
@@ -24,15 +27,19 @@ namespace Dungeon
 
 #define CAT_PHOTO_FILE "./resources/cat.jpg" //图片资源
 #define GIRL_PHOTO_FILE "./resources/girl.jpg" //图片资源
-#define PHOTO_CAT_START_X 120 //图片开始绘制的X位置
-#define PHOTO_CAT_START_Y 50 //图片开始绘制的X位置
+#define PHOTO_CAT_START_X START_X+RECT_WIDTH+MARGIN_LEFT //图片开始绘制的X位置
+#define PHOTO_CAT_START_Y START_Y //图片开始绘制的X位置
 #define PHOTO_CAT_WIDTH 80 //图片宽
 #define PHOTO_CAT_HEIGHT 80 //图片高
 
-#define PHOTO_GIRL_START_X 220 //图片开始绘制的X位置
-#define PHOTO_GIRL_START_Y 50 //图片开始绘制的X位置
+#define PHOTO_GIRL_START_X START_X+RECT_WIDTH+PHOTO_CAT_WIDTH+MARGIN_LEFT*2 //图片开始绘制的X位置
+#define PHOTO_GIRL_START_Y START_Y //图片开始绘制的X位置
 #define PHOTO_GIRL_WIDTH 200 //图片宽
 #define PHOTO_GIRL_HEIGHT 200 //图片高
+
+#define ARIAL_FONT_FILE "./resources/Arial.ttf" //字体
+#define GOOGLE_WEBSITE "https://www.google.com"
+#define GIRL_NAME "Mona Lisa"
 }
 
 #endif // !_DUNGEON_CONFIG_H_

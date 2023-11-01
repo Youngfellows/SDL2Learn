@@ -155,6 +155,10 @@ namespace Dungeon
 			//更新位置
 			mPhotoData->point->x = point.x;
 			mPhotoData->point->y = point.y;
+			if (mPhotoData->OnClick)
+			{
+				mPhotoData->OnClick();
+			}
 		}
 	}
 
