@@ -324,6 +324,7 @@ namespace Dungeon
 
 	void Text::Destory()
 	{
+		SDL_Log("Text::Destory()::");
 		TextData *textData = GetTextData();
 		//TextData *textData = text->mTextData;
 		if (textData)
@@ -332,13 +333,19 @@ namespace Dungeon
 			TTF_CloseFont(textData->font);
 			Free(textData->point);
 			Free(textData->background);
-			Free(textData->background);
 			Free(textData->padding);
 			Free(textData->dest);
 			Free(textData->value);
 			Free(textData->file);
 			Free(textData);
+			textData->point = nullptr;
+			textData->background = nullptr;
+			textData->padding = nullptr;
+			textData->dest = nullptr;
+			textData->value = nullptr;
+			textData->file = nullptr;
 			textData = nullptr;
+			//SDL_Log("Text::Destory():: 222");
 		}
 	}
 

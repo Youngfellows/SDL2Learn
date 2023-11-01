@@ -45,8 +45,8 @@ namespace Dungeon
 #define TEXT_BACKGROUND_COLOR 0xFFFFB6C1 //字体背景颜色
 #define TEXT_1_X_POSITION 10 //开始绘制文本1的X位置
 #define TEXT_1_Y_POSITION 10 //开始绘制文本1的Y位置
-#define TEXT_2_X_POSITION 200 //开始绘制文本2的X位置
-#define TEXT_2_Y_POSITION TEXT_1_Y_POSITION //开始绘制文本2的Y位置
+#define TEXT_2_X_POSITION TEXT_1_X_POSITION //开始绘制文本2的X位置
+#define TEXT_2_Y_POSITION START_Y + PHOTO_CAT_HEIGHT + PT_SIZE_10  //开始绘制文本2的Y位置
 #define PADDING_LEFT PT_SIZE_10 //左边距
 #define PADDING_TOP PT_SIZE_10 //上边距
 #define PADDING_RIGHT PT_SIZE_10 //右边距

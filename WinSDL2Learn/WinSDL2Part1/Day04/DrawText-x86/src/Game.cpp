@@ -227,6 +227,7 @@ namespace Dungeon
 		{
 			//DisplayObject *component = mComponents[i];//获取数组元素
 			DisplayObject *component = *(mComponents + i);//获取数组元素
+			SDL_Log("Game::FreeComponents():: i:%d", i);
 			component->Destory();//释放组件资源
 		}
 		delete[] mComponents;//删除二维数组

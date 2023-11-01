@@ -88,7 +88,7 @@ namespace Dungeon
 
 	void DisplayObject::Destory()
 	{
-		SDL_Log("Destory");
+		SDL_Log("DisplayObject::Destory():: ");
 		if (OnCallback)
 		{
 			if (OnCallback->OnDestory)
@@ -96,7 +96,7 @@ namespace Dungeon
 				OnCallback->OnDestory(this);
 			}
 			free(OnCallback);
-			SDL_Log("Destory free memory");
+			SDL_Log("DisplayObject::Destory():: free memory");
 		}
 	}
 }
