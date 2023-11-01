@@ -5,6 +5,7 @@
 #include "NoSignal.h"
 #include "Photo.h"
 #include "Text.h"
+#include "SDL2/SDL_ttf.h"
 
 namespace Dungeon
 {
@@ -21,6 +22,12 @@ namespace Dungeon
 
 	bool Game::Initialize()
 	{
+		// 初始化TTF字体库
+		if (TTF_Init() != 0)
+		{
+			return false;
+		}
+
 		// SDL库初始化
 		// if (SDL_Init(SDL_INIT_VIDEO))
 		if (SDL_Init(SDL_INIT_VIDEO) != 0)
@@ -155,7 +162,7 @@ namespace Dungeon
 			return SDL_FALSE;
 		}
 
-		Photo *cat = new Photo();
+		Photo *cat = new Photo();//图片组件
 		mComponents[1] = cat->Create(PHOTO_CAT_START_X, PHOTO_CAT_START_Y, PHOTO_CAT_WIDTH, PHOTO_CAT_HEIGHT,
 			mResource->GetCatTexture(), &Dungeon::EventListener::OnClickCat);
 		if (!mComponents[1])
@@ -167,6 +174,26 @@ namespace Dungeon
 		mComponents[2] = girl->Create(PHOTO_GIRL_START_X, PHOTO_GIRL_START_Y, PHOTO_GIRL_WIDTH, PHOTO_GIRL_HEIGHT,
 			mResource->GetGirlTexture(), &Dungeon::EventListener::OnClickGirl);
 		if (!mComponents[2])
+		{
+			return SDL_FALSE;
+		}
+
+		Text *text1 = new Text();//文本组件
+		mComponents[3] = text1->Create(FONT_FILE, TEXT_1, PT_SIZE_30, TEXT_COLOR,
+			TEXT_1_X_POSITION, TEXT_1_Y_POSITION, TEXT_BACKGROUND_COLOR,
+			PADDING_LEFT, PADDING_TOP, PADDING_RIGHT, PADDING_BOTTOM,
+			nullptr, 0, {});
+		if (!mComponents[3])
+		{
+			return SDL_FALSE;
+		}
+
+		Text *text2 = new Text();//文本组件
+		mComponents[4] = text2->Create(FONT_FILE, TEXT_2, PT_SIZE_30, TEXT_COLOR,
+			TEXT_2_X_POSITION, TEXT_2_Y_POSITION, TEXT_BACKGROUND_COLOR,
+			PADDING_LEFT, PADDING_TOP, PADDING_RIGHT, PADDING_BOTTOM,
+			nullptr, 0, {});
+		if (!mComponents[4])
 		{
 			return SDL_FALSE;
 		}

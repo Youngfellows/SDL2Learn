@@ -279,6 +279,7 @@ namespace Dungeon
 		SDL_FPoint *point = mTextData->point;
 		SDL_FPoint curPoint = { event->motion.x ,event->motion.y };
 		SDL_FRect *inner = mTextData->background;
+		SDL_FRect *dest = mTextData->dest;
 		SDL_Log("Photo::MouseMove:: point(%f,%f),curPoint(%f,%f),move:%d",
 			point->x, point->y, curPoint.x, curPoint.y, move);
 
@@ -291,6 +292,8 @@ namespace Dungeon
 
 			inner->x += dx;//更新矩形位置
 			inner->y += dy;
+			dest->x += dx;
+			dest->y += dy;
 
 			point->x = curPoint.x;//更新点坐标
 			point->y = curPoint.y;
@@ -299,18 +302,22 @@ namespace Dungeon
 			if (inner->x < 0)
 			{
 				inner->x = 0;//限定左边界
+				dest->x = inner->x + mTextData->padding->left;
 			}
 			if (inner->x > WINDOW_WIDTH - inner->w)
 			{
 				inner->x = WINDOW_WIDTH - inner->w;//限定右边界
+				dest->x = inner->x + mTextData->padding->left;
 			}
 			if (inner->y < 0)
 			{
 				inner->y = 0;//限定上边界
+				dest->y = inner->y + mTextData->padding->top;
 			}
 			if (inner->y > WINDOW_HEIGHT - inner->h)
 			{
 				inner->y = WINDOW_HEIGHT - inner->h;//限定下边界
+				dest->y = inner->y + mTextData->padding->top;
 			}
 		}
 	}
