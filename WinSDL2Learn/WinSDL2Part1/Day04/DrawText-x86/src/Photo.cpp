@@ -10,6 +10,8 @@ namespace Dungeon
 		this->mPhotoData = (PhontData *)malloc(sizeof(PhontData));
 		if (mPhotoData)
 		{
+			mPhotoData->anim = SDL_FALSE;
+			mPhotoData->angle = 0;
 			mPhotoData->OnClick = nullptr;
 			mPhotoData->texture = nullptr;
 			mPhotoData->dest = (SDL_FRect *)malloc(sizeof(SDL_FRect));
@@ -126,6 +128,16 @@ namespace Dungeon
 		}
 	}
 
+	void Photo::Rotate()
+	{
+		if (!mPhotoData)
+		{
+			SDL_Log("Photo::Rotate():: mPhotoData is null");
+			return;
+		}
+		mPhotoData->anim = SDL_TRUE;
+	}
+
 	void Photo::Draw(SDL_Renderer *renderer)
 	{
 		if (!mPhotoData)
@@ -138,8 +150,16 @@ namespace Dungeon
 			SDL_Log("Photo::Draw():: mPhotoData->texture is null");
 			return;
 		}
+
+		if (mPhotoData->anim)
+		{
+			mPhotoData->angle += 4.5;//更新旋转角度
+		}
+
 		//绘制图片
-		SDL_RenderCopyF(renderer, mPhotoData->texture, nullptr, mPhotoData->dest);
+		//SDL_RenderCopyF(renderer, mPhotoData->texture, nullptr, mPhotoData->dest);
+		SDL_RenderCopyExF(renderer, mPhotoData->texture, nullptr, mPhotoData->dest,
+			mPhotoData->angle, nullptr, SDL_FLIP_NONE);//绘制图片
 	}
 
 	void Photo::MouseButtonDown(SDL_Event *event)
@@ -169,6 +189,7 @@ namespace Dungeon
 			return;
 		}
 		mPhotoData->move = SDL_FALSE;
+		mPhotoData->anim = SDL_FALSE;
 	}
 
 	void Photo::MouseMove(SDL_Event *event)

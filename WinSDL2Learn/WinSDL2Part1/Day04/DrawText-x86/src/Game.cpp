@@ -182,7 +182,7 @@ namespace Dungeon
 		mComponents[3] = text1->Create(FONT_FILE, TEXT_1, PT_SIZE_30, TEXT_COLOR,
 			TEXT_1_X_POSITION, TEXT_1_Y_POSITION, TEXT_BACKGROUND_COLOR,
 			PADDING_LEFT, PADDING_TOP, PADDING_RIGHT, PADDING_BOTTOM,
-			nullptr, 0, {});
+			mComponents[1], 1, { &Dungeon::EventListener::OnClickText1 });
 		if (!mComponents[3])
 		{
 			return SDL_FALSE;
@@ -192,7 +192,7 @@ namespace Dungeon
 		mComponents[4] = text2->Create(FONT_FILE, TEXT_2, PT_SIZE_30, TEXT_COLOR,
 			TEXT_2_X_POSITION, TEXT_2_Y_POSITION, TEXT_BACKGROUND_COLOR,
 			PADDING_LEFT, PADDING_TOP, PADDING_RIGHT, PADDING_BOTTOM,
-			nullptr, 0, {});
+			mComponents[2], 1, { &Dungeon::EventListener::OnClickText2 });
 		if (!mComponents[4])
 		{
 			return SDL_FALSE;

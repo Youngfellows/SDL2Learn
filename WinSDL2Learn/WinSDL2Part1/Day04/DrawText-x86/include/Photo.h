@@ -16,6 +16,8 @@ namespace Dungeon
 		OnPhotoClickCallback OnClick;//定义点击回调
 		SDL_bool move;//是否可移动
 		SDL_FPoint *point;//位置坐标
+		SDL_bool anim;//是否动画
+		float angle;//旋转角度
 	} PhotoData;
 }
 
@@ -36,6 +38,7 @@ namespace Dungeon
 		static void OnMouseUpCallback(DisplayObject *self, SDL_Event *event);
 		static void OnMouseMoveCallback(DisplayObject *self, SDL_Event *event);
 		static void OnDestoryCallback(DisplayObject *self);
+		void Rotate();
 
 	private:
 		void Draw(SDL_Renderer *renderer);
