@@ -87,7 +87,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2_ttf.lib;SDL2main.lib;SDL2test.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2_ttf.lib;SDL2_image.lib;SDL2main.lib;SDL2test.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -137,10 +137,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\Config.h" />
+    <ClInclude Include="include\DisplayObject.h" />
     <ClInclude Include="include\DrawText.h" />
+    <ClInclude Include="include\Eventlistener.h" />
+    <ClInclude Include="include\Game.h" />
+    <ClInclude Include="include\NoSignal.h" />
+    <ClInclude Include="include\Photo.h" />
+    <ClInclude Include="include\Rectangle.h" />
+    <ClInclude Include="include\Resource.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\DisplayObject.cpp" />
+    <ClCompile Include="src\EventListener.cpp" />
+    <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\NoSignal.cpp" />
+    <ClCompile Include="src\Photo.cpp" />
+    <ClCompile Include="src\Rectangle.cpp" />
+    <ClCompile Include="src\Resource.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
