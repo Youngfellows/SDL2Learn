@@ -28,8 +28,10 @@
     <ClInclude Include="include\main.h" />
     <ClInclude Include="include\NoSignal.h" />
     <ClInclude Include="include\Photo.h" />
+    <ClInclude Include="include\Point.h" />
     <ClInclude Include="include\Rectangle.h" />
     <ClInclude Include="include\Resource.h" />
+    <ClInclude Include="include\StarlitSky.h" />
     <ClInclude Include="include\Text.h" />
   </ItemGroup>
   <ItemGroup>
@@ -39,8 +41,10 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\NoSignal.cpp" />
     <ClCompile Include="src\Photo.cpp" />
+    <ClCompile Include="src\Point.cpp" />
     <ClCompile Include="src\Rectangle.cpp" />
     <ClCompile Include="src\Resource.cpp" />
+    <ClCompile Include="src\StarlitSky.cpp" />
     <ClCompile Include="src\Text.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

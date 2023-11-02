@@ -7,6 +7,7 @@
 #include "Text.h"
 #include "SDL2/SDL_ttf.h"
 #include <string>
+#include "StarlitSky.h"
 
 namespace Dungeon
 {
@@ -214,6 +215,13 @@ namespace Dungeon
 			return SDL_FALSE;
 		}
 
+		StarlitSky *starlitSky = new StarlitSky();//星空组件
+		mComponents[5] = starlitSky->Create(mResource, POINT_COUNT, STARLITSKY_COLOR, STARLITSKY_BACKGROUND_COLOR,
+			STARLITSKY_START_X, STARLITSKY_START_Y, STARLITSKY_WIDTH, STARLITSKY_HEIGHT);
+		if (!mComponents[5])
+		{
+			return SDL_FALSE;
+		}
 		return SDL_TRUE;
 	}
 

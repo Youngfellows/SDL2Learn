@@ -3,12 +3,12 @@
 
 namespace Dungeon
 {
-#define WINDOW_WIDTH 600 //Window窗口宽
-#define WINDOW_HEIGHT 400 //Window窗口高
+#define WINDOW_WIDTH 900 //Window窗口宽
+#define WINDOW_HEIGHT 600 //Window窗口高
 #define FRAMERATE 60 //每1秒帧数
 #define WINDOW_TITLE "Dungeon" //Window窗口title
 
-#define COMPONENT_SIZE 5 //需要创建的组件个数
+#define COMPONENT_SIZE 6 //需要创建的组件个数
 #define START_X 50
 #define START_Y 80
 #define MARGIN_LEFT 10
@@ -52,7 +52,13 @@ namespace Dungeon
 #define PADDING_RIGHT PT_SIZE_10 //右边距
 #define PADDING_BOTTOM PT_SIZE_10 //下边距
 
-#define POINT_COUNT 50000 //绘制点数量
+#define POINT_COUNT 50 //星空绘制点数量
+#define STARLITSKY_COLOR 0xFFE95420 //星空点的颜色
+#define STARLITSKY_BACKGROUND_COLOR 0xFF2885CD //星空背景
+#define STARLITSKY_START_X WINDOW_WIDTH - STARLITSKY_WIDTH - MARGIN_LEFT*2 //绘制星空的X起始位置
+#define STARLITSKY_START_Y START_Y //绘制星空的Y起始位置
+#define STARLITSKY_WIDTH 300 //星空宽
+#define STARLITSKY_HEIGHT STARLITSKY_WIDTH//星空高
 
 }
 
