@@ -11,7 +11,7 @@ namespace Dungeon
 			mStarlitData->size = 0;
 			mStarlitData->color = 0;
 			mStarlitData->bgColor = 0;
-			mStarlitData->points = new std::vector<Point *>;
+			mStarlitData->bubbles = new std::vector<Bubble *>;
 			mStarlitData->dest = (SDL_FRect *)malloc(sizeof(SDL_FRect));
 			if (mStarlitData->dest)
 			{
@@ -99,10 +99,10 @@ namespace Dungeon
 		{
 			SDL_FRect border = { mStarlitData->dest->x ,mStarlitData->dest->y,mStarlitData->dest->w,mStarlitData->dest->h };
 			SDL_Log("StarlitSky::CreatePoints():: %d,Start,border{%f,%f,%f,%f}", i, border.x, border.y, border.w, border.h);
-			Point *point = new Point(resource,mStarlitData->bgColor, border);
+			Bubble *bubble = new Bubble(resource,mStarlitData->bgColor, border);
 			//SDL_Log("StarlitSky::CreatePoints():: xxxx,mStarlitData->points:%p", mStarlitData->points);
-			mStarlitData->points->push_back(point);//把点添加到列表中
-			SDL_Log("StarlitSky::CreatePoints():: point:%p", point);
+			mStarlitData->bubbles->push_back(bubble);//把点添加到列表中
+			SDL_Log("StarlitSky::CreatePoints():: point:%p", bubble);
 		}
 		SDL_Log("StarlitSky::CreatePoints():: End ...");
 	}
@@ -112,11 +112,11 @@ namespace Dungeon
 		if (mStarlitData)
 		{
 			// 1.使用迭代器
-			std::vector<Point *>::iterator it;
+			std::vector<Bubble *>::iterator it;
 			//int i = 0;
-			for (it = mStarlitData->points->begin(); it != mStarlitData->points->end(); it++)
+			for (it = mStarlitData->bubbles->begin(); it != mStarlitData->bubbles->end(); it++)
 			{
-				Point *point = *it;//获取元素
+				Bubble *point = *it;//获取元素
 				//SDL_Log("StarlitSky::DrawPoints():: %d, x:%f", i, point->mPointData->x);
 				point->Draw(resource,renderer);//绘制每一个点
 				//i++;
@@ -151,17 +151,17 @@ namespace Dungeon
 		SDL_Log("StarlitSky::~Destory()::");
 		if (mStarlitData)
 		{
-			if (mStarlitData->points)
+			if (mStarlitData->bubbles)
 			{
-				std::vector<Point *>::iterator it;
+				std::vector<Bubble *>::iterator it;
 				int i = 0;
-				for (it = mStarlitData->points->begin(); it != mStarlitData->points->end(); it++)
+				for (it = mStarlitData->bubbles->begin(); it != mStarlitData->bubbles->end(); it++)
 				{
-					Point *point = *it;//获取元素
+					Bubble *point = *it;//获取元素
 					delete point;
 				}
-				delete mStarlitData->points;
-				mStarlitData->points = nullptr;
+				delete mStarlitData->bubbles;
+				mStarlitData->bubbles = nullptr;
 			}
 
 			if (mStarlitData->dest)

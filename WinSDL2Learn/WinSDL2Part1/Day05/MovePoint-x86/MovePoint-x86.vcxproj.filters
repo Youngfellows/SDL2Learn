@@ -54,7 +54,7 @@
     <ClInclude Include="include\StarlitSky.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="include\Point.h">
+    <ClInclude Include="include\Bubble.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

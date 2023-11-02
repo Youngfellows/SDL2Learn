@@ -3,7 +3,7 @@
 
 #include "SDL2/SDL.h"
 #include <vector>
-#include "Point.h"
+#include "Bubble.h"
 #include "DisplayObject.h"
 #include "Config.h"
 
@@ -15,7 +15,7 @@ namespace Dungeon
 		Uint32 color;//绘制点颜色
 		Uint32 bgColor;//背景颜色
 		Uint32 size;
-		std::vector<Point *> *points;//绘制点列表
+		std::vector<Bubble *> *bubbles;//绘制点列表
 	}StarlitSkyData;
 }
 

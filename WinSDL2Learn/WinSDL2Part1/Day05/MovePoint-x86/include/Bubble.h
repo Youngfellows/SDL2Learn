@@ -6,7 +6,7 @@
 
 namespace Dungeon
 {
-	typedef struct PointData
+	typedef struct BubbleData
 	{
 		Uint32 color;//颜色
 		float x;
@@ -16,22 +16,22 @@ namespace Dungeon
 		SDL_FRect border;//边界
 		float angel;
 		SDL_Texture *photo;
-	}PointData;
+	}BubbleData;
 }
 
 namespace Dungeon
 {
-	class Point
+	class Bubble
 	{
 	private:
 		const float WIDTH_HEIGHT = 30;
 
 	public:
-		PointData *mPointData;
+		BubbleData *mBubbleData;
 
 	public:
-		Point(Resource *resource, Uint32 color, SDL_FRect border);
-		~Point();
+		Bubble(Resource *resource, Uint32 color, SDL_FRect border);
+		~Bubble();
 		void Draw(Resource *resource, SDL_Renderer *renderer);
 	};
 }

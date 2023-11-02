@@ -28,7 +28,7 @@
     <ClInclude Include="include\main.h" />
     <ClInclude Include="include\NoSignal.h" />
     <ClInclude Include="include\Photo.h" />
-    <ClInclude Include="include\Point.h" />
+    <ClInclude Include="include\Bubble.h" />
     <ClInclude Include="include\Rectangle.h" />
     <ClInclude Include="include\Resource.h" />
     <ClInclude Include="include\StarlitSky.h" />
