@@ -38,8 +38,8 @@ namespace Dungeon
 #define PHOTO_GIRL_HEIGHT 200 //图片高
 
 #define FONT_FILE "./resources/Arial.ttf" //字体
-#define TEXT_1 "https://www.google.com"
-#define TEXT_2 "Mona Lisa"
+#define TEXT_1 "Cat"
+#define TEXT_2 "Lisa"
 
 #define TEXT_COLOR 0xff000000 //字体颜色
 #define TEXT_BACKGROUND_COLOR 0xFFFFB6C1 //字体背景颜色
@@ -51,6 +51,8 @@ namespace Dungeon
 #define PADDING_TOP PT_SIZE_10 //上边距
 #define PADDING_RIGHT PT_SIZE_10 //右边距
 #define PADDING_BOTTOM PT_SIZE_10 //下边距
+
+#define POINT_COUNT 50000 //绘制点数量
 
 }
 

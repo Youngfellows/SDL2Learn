@@ -15,6 +15,8 @@ namespace Dungeon
 		SDL_Renderer *mRenderer;//渲染器
 		Resource *mResource;//资源加载器
 		DisplayObject **mComponents;//组件列表,指针数组
+		int mFrames;
+		Uint32 mLastTicks;
 
 	public:
 		Game();

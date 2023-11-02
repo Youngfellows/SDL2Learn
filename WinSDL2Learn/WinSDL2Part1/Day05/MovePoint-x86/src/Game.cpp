@@ -6,11 +6,13 @@
 #include "Photo.h"
 #include "Text.h"
 #include "SDL2/SDL_ttf.h"
+#include <string>
 
 namespace Dungeon
 {
 	Game::Game() :mIsRunning(true), mWindow(nullptr),
-		mRenderer(nullptr), mComponents(nullptr), mResource(nullptr)
+		mRenderer(nullptr), mComponents(nullptr),
+		mResource(nullptr), mFrames(0), mLastTicks(0)
 	{
 	}
 
@@ -87,6 +89,20 @@ namespace Dungeon
 			{
 				Update(delay);
 			}
+
+			//没多大意义,只是为了更新title
+			mFrames++;
+			current = SDL_GetTicks();
+			if (mFrames % 30 == 0)
+			{
+				Uint32 fps = 1000 / (current - mLastTicks);//按这个速度计算帧率
+				std::string fpsStr = "Rendering ";
+				fpsStr += std::to_string(POINT_COUNT);
+				fpsStr += " points, fps: ";
+				fpsStr += std::to_string(fps);
+				SDL_SetWindowTitle(mWindow, fpsStr.c_str());
+			}
+			mLastTicks = current;
 		}
 	}
 	void Game::Shutdown()
