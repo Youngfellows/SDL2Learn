@@ -34,9 +34,9 @@ namespace Dungeon
 		~StarlitSky();
 		DisplayObject *Create(Resource *resource, Uint32 size, Uint32 color, Uint32 bgColor, float x, float y, float w, float h);
 		static void OnDrawCallback(DisplayObject *self, Resource *resource, SDL_Renderer *renderer);
-		static void OnMouseDownCallback(DisplayObject *self,SDL_Event *event);
-		static void OnMouseUpCallback(DisplayObject *self,SDL_Event *event);
-		static void OnMouseMoveCallback(DisplayObject *self,SDL_Event *event);
+		static void OnMouseDownCallback(DisplayObject *self, SDL_Event *event);
+		static void OnMouseUpCallback(DisplayObject *self, SDL_Event *event);
+		static void OnMouseMoveCallback(DisplayObject *self, SDL_Event *event);
 		static void OnDestoryCallbac(DisplayObject *self);
 
 

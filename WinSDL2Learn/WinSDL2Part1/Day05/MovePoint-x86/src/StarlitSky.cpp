@@ -187,8 +187,7 @@ namespace Dungeon
 				mStarlitData->dest->y = WINDOW_HEIGHT - mStarlitData->dest->h;
 			}
 
-			//变化的位置
-			SDL_FPoint dPoint = { dx,dy };
+			SDL_FPoint dPoint = { dx,dy };//变化的位置
 			UpdateBubblePosition(dPoint);
 		}
 	}

@@ -46,28 +46,30 @@ namespace Dungeon
 		{
 			return;
 		}
+		mBubbleData->x += mBubbleData->speedX;
+		mBubbleData->y += mBubbleData->speedY;
 		mBubbleData->angel += 0.5;
-
-		if (!mBubbleData->move)//没有拖动时可以碰撞改变方向
+		if (mBubbleData->x < mBubbleData->border.x)
 		{
-			mBubbleData->x += mBubbleData->speedX;
-			mBubbleData->y += mBubbleData->speedY;
-			if (mBubbleData->x > mBubbleData->border.w + mBubbleData->border.x - mBubbleData->dest.w)
-			{
-				mBubbleData->speedX = -abs(mBubbleData->speedX);//改变x方向
-			}
-			if (mBubbleData->x < mBubbleData->border.x)
-			{
-				mBubbleData->speedX = abs(mBubbleData->speedX);//改变x方向
-			}
-			if (mBubbleData->y > mBubbleData->border.h + mBubbleData->border.y - mBubbleData->dest.h)
-			{
-				mBubbleData->speedY = -abs(mBubbleData->speedY);//改变y方向
-			}
-			if (mBubbleData->y < mBubbleData->border.y)
-			{
-				mBubbleData->speedY = abs(mBubbleData->speedY);//改变y方向
-			}
+			mBubbleData->speedX = abs(mBubbleData->speedX);//改变x方向
+			mBubbleData->x = mBubbleData->border.x;
+		}
+
+		if (mBubbleData->x > mBubbleData->border.w + mBubbleData->border.x - mBubbleData->dest.w)
+		{
+			mBubbleData->speedX = -abs(mBubbleData->speedX);//改变x方向
+			mBubbleData->x = mBubbleData->border.w + mBubbleData->border.x - mBubbleData->dest.w;
+		}
+
+		if (mBubbleData->y < mBubbleData->border.y)
+		{
+			mBubbleData->speedY = abs(mBubbleData->speedY);//改变y方向
+			mBubbleData->y = mBubbleData->border.y;
+		}
+		if (mBubbleData->y > mBubbleData->border.h + mBubbleData->border.y - mBubbleData->dest.h)
+		{
+			mBubbleData->speedY = -abs(mBubbleData->speedY);//改变y方向
+			mBubbleData->y = mBubbleData->border.h + mBubbleData->border.y - mBubbleData->dest.h;
 		}
 
 		//0xffffffff ARGB
@@ -142,7 +144,7 @@ namespace Dungeon
 		{
 			mBubbleData->x = mBubbleData->border.w + mBubbleData->border.x - mBubbleData->dest.w;
 		}
-	
+
 		if (mBubbleData->y < mBubbleData->border.y)
 		{
 			mBubbleData->y = mBubbleData->border.y;
