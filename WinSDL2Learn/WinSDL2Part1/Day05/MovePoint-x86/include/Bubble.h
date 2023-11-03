@@ -17,6 +17,7 @@ namespace Dungeon
 		float angel;
 		SDL_Texture *photo;
 		SDL_FRect dest;//绘制区域
+		SDL_bool move;
 	}BubbleData;
 }
 
@@ -34,6 +35,8 @@ namespace Dungeon
 		Bubble(Resource *resource, Uint32 color, SDL_FRect border);
 		~Bubble();
 		void Draw(Resource *resource, SDL_Renderer *renderer);
+		void MouseMove(SDL_FPoint point);
+		void SetMouseMove(SDL_bool move);
 	};
 }
 #endif // ! _DUNGEON_POINT_H_

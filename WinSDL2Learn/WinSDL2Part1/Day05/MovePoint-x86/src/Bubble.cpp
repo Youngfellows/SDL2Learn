@@ -29,6 +29,7 @@ namespace Dungeon
 				photo = resource->GetCatTexture();
 			}
 			mBubbleData->photo = photo;
+			mBubbleData->move = SDL_FALSE;
 			SDL_Log("Bubble::Bubble():: border:%p", &mBubbleData->border);
 			SDL_Log("Bubble::Bubble():: x:%f,y:%f,color:%d", mBubbleData->x, mBubbleData->y, mBubbleData->color);
 			SDL_Log("Bubble::Bubble():: speedX:%f,speedY:%f", mBubbleData->speedX, mBubbleData->speedY);
@@ -41,29 +42,35 @@ namespace Dungeon
 
 	void Bubble::Draw(Resource *resource, SDL_Renderer *renderer)
 	{
-		//SDL_Log("Bubble::Draw():: 1,x:%f,y:%f", mPointData->x, mPointData->y);
-		mBubbleData->x += mBubbleData->speedX;
-		mBubbleData->y += mBubbleData->speedY;
+		if (!mBubbleData)
+		{
+			return;
+		}
+		if (!mBubbleData->move)
+		{
+			mBubbleData->x += mBubbleData->speedX;
+			mBubbleData->y += mBubbleData->speedY;
+		}
 		mBubbleData->angel += 0.5;
 		if (mBubbleData->x > mBubbleData->border.w + mBubbleData->border.x - WIDTH_HEIGHT)
 		{
 			mBubbleData->speedX = -abs(mBubbleData->speedX);//改变x方向
-			//SDL_Log("Bubble::Draw():: 22222,x:%f,y:%f", mPointData->x, mPointData->y);
+			mBubbleData->x = mBubbleData->border.w + mBubbleData->border.x - WIDTH_HEIGHT;
 		}
 		if (mBubbleData->x < mBubbleData->border.x)
 		{
 			mBubbleData->speedX = abs(mBubbleData->speedX);//改变x方向
-			//SDL_Log("Bubble::Draw():: 33333,x:%f,y:%f", mPointData->x, mPointData->y);
+			mBubbleData->x = mBubbleData->border.x;
 		}
 		if (mBubbleData->y > mBubbleData->border.h + mBubbleData->border.y - WIDTH_HEIGHT)
 		{
 			mBubbleData->speedY = -abs(mBubbleData->speedY);//改变y方向
-			//SDL_Log("Bubble::Draw():: 44444,x:%f,y:%f", mPointData->x, mPointData->y);
+			mBubbleData->y = mBubbleData->border.h + mBubbleData->border.y - WIDTH_HEIGHT;
 		}
 		if (mBubbleData->y < mBubbleData->border.y)
 		{
 			mBubbleData->speedY = abs(mBubbleData->speedY);//改变y方向
-			//SDL_Log("Bubble::Draw():: 55555,x:%f,y:%f", mPointData->x, mPointData->y);
+			mBubbleData->y = mBubbleData->border.y;
 		}
 		//0xffffffff ARGB
 		SDL_Color color = {
@@ -87,6 +94,50 @@ namespace Dungeon
 		mBubbleData->dest.x = mBubbleData->x;
 		mBubbleData->dest.y = mBubbleData->y;
 		SDL_RenderCopyExF(renderer, mBubbleData->photo, nullptr, &mBubbleData->dest, mBubbleData->angel, nullptr, SDL_FLIP_NONE);
+	}
+
+	void Bubble::SetMouseMove(SDL_bool move)
+	{
+		if (!mBubbleData)
+		{
+			return;
+		}
+		mBubbleData->move = move;
+	}
+
+	void Bubble::MouseMove(SDL_FPoint point)
+	{
+		if (!mBubbleData)
+		{
+			return;
+		}
+		mBubbleData->x += point.x;
+		mBubbleData->y += point.y;
+
+		//移动鼠标时更新各个泡泡的位置
+		mBubbleData->dest.x = mBubbleData->x;
+		mBubbleData->dest.y = mBubbleData->y;
+
+		//更新边界,限定边界
+		mBubbleData->border.x += point.x;
+		mBubbleData->border.y += point.y;
+		if (mBubbleData->border.x < 0)
+		{
+			mBubbleData->border.x = 0;
+		}
+		if (mBubbleData->border.x > WINDOW_WIDTH - mBubbleData->border.w)
+		{
+			mBubbleData->border.x = WINDOW_WIDTH - mBubbleData->border.w;
+		}
+
+		if (mBubbleData->border.y < 0)
+		{
+			mBubbleData->border.y = 0;
+		}
+		if (mBubbleData->border.y > WINDOW_HEIGHT - mBubbleData->border.h)
+		{
+			mBubbleData->border.y = WINDOW_HEIGHT - mBubbleData->border.h;
+		}
 	}
 
 	Bubble::~Bubble()

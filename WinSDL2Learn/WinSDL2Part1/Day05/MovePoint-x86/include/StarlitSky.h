@@ -48,6 +48,7 @@ namespace Dungeon
 		void MouseButtonDown(SDL_Event *event);
 		void MouseButtonUp(SDL_Event *event);
 		void MouseButtonMove(SDL_Event *event);
+		void UpdateBubblePosition(SDL_FPoint point);
 		void Destory();
 	};
 }

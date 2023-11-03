@@ -141,6 +141,13 @@ namespace Dungeon
 			return;
 		}
 		mStarlitData->move = SDL_FALSE;
+
+		std::vector<Bubble *>::iterator it;
+		for (it = mStarlitData->bubbles->begin(); it != mStarlitData->bubbles->end(); it++)
+		{
+			Bubble *bubble = *it;//获取元素
+			bubble->SetMouseMove(SDL_FALSE);
+		}
 	}
 
 	void StarlitSky::MouseButtonMove(SDL_Event *event)
@@ -179,6 +186,25 @@ namespace Dungeon
 			{
 				mStarlitData->dest->y = WINDOW_HEIGHT - mStarlitData->dest->h;
 			}
+
+			//变化的位置
+			SDL_FPoint dPoint = { dx,dy };
+			UpdateBubblePosition(dPoint);
+		}
+	}
+
+	void StarlitSky::UpdateBubblePosition(SDL_FPoint point)
+	{
+		if (!mStarlitData)
+		{
+			return;
+		}
+		std::vector<Bubble *>::iterator it;
+		for (it = mStarlitData->bubbles->begin(); it != mStarlitData->bubbles->end(); it++)
+		{
+			Bubble *bubble = *it;//获取元素
+			bubble->SetMouseMove(SDL_TRUE);
+			bubble->MouseMove(point);
 		}
 	}
 
@@ -216,13 +242,10 @@ namespace Dungeon
 		{
 			// 1.使用迭代器
 			std::vector<Bubble *>::iterator it;
-			//int i = 0;
 			for (it = mStarlitData->bubbles->begin(); it != mStarlitData->bubbles->end(); it++)
 			{
-				Bubble *point = *it;//获取元素
-				//SDL_Log("StarlitSky::DrawPoints():: %d, x:%f", i, point->mPointData->x);
-				point->Draw(resource, renderer);//绘制每一个点
-				//i++;
+				Bubble *bubble = *it;//获取元素
+				bubble->Draw(resource, renderer);//绘制每一个点
 			}
 		}
 	}
