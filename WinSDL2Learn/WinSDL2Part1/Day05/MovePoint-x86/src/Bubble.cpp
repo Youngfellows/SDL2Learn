@@ -46,11 +46,14 @@ namespace Dungeon
 		{
 			return;
 		}
-		if (!mBubbleData->move)
+		/*if (!mBubbleData->move)
 		{
 			mBubbleData->x += mBubbleData->speedX;
 			mBubbleData->y += mBubbleData->speedY;
-		}
+		}*/
+		mBubbleData->x += mBubbleData->speedX;
+		mBubbleData->y += mBubbleData->speedY;
+
 		mBubbleData->angel += 0.5;
 		if (mBubbleData->x > mBubbleData->border.w + mBubbleData->border.x - WIDTH_HEIGHT)
 		{
