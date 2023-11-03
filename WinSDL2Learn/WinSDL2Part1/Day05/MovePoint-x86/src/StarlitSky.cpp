@@ -12,6 +12,9 @@ namespace Dungeon
 			mStarlitData->color = 0;
 			mStarlitData->bgColor = 0;
 			mStarlitData->bubbles = new std::vector<Bubble *>;
+			mStarlitData->move = SDL_FALSE;
+			mStarlitData->point.x = 0;
+			mStarlitData->point.y = 0;
 			mStarlitData->dest = (SDL_FRect *)malloc(sizeof(SDL_FRect));
 			if (mStarlitData->dest)
 			{
@@ -37,7 +40,7 @@ namespace Dungeon
 		Destory();
 	}
 
-	DisplayObject *StarlitSky::Create(Resource *resource,Uint32 size, Uint32 color, Uint32 bgColor, float x, float y, float w, float h)
+	DisplayObject *StarlitSky::Create(Resource *resource, Uint32 size, Uint32 color, Uint32 bgColor, float x, float y, float w, float h)
 	{
 		if (!this->mStarlitData)
 		{
@@ -65,6 +68,9 @@ namespace Dungeon
 		if (callback)
 		{
 			callback->OnDraw = &OnDrawCallback;
+			callback->OnMouseDown = &OnMouseDownCallback;
+			callback->OnMouseUp = &OnMouseUpCallback;
+			callback->OnMouseMove = &OnMouseMoveCallback;
 			callback->OnDestory = &OnDestoryCallbac;
 		}
 		return displayObject;
@@ -75,7 +81,102 @@ namespace Dungeon
 		StarlitSky *starlitSky = (StarlitSky *)self->GetSubClass();
 		if (starlitSky)
 		{
-			starlitSky->Draw(resource,renderer);
+			starlitSky->Draw(resource, renderer);
+		}
+	}
+
+	void StarlitSky::OnMouseDownCallback(DisplayObject *self, SDL_Event *event)
+	{
+		StarlitSky *starlitSky = (StarlitSky *)self->GetSubClass();
+		if (starlitSky)
+		{
+			starlitSky->MouseButtonDown(event);
+		}
+	}
+
+	void StarlitSky::OnMouseUpCallback(DisplayObject *self, SDL_Event *event)
+	{
+		StarlitSky *starlitSky = (StarlitSky *)self->GetSubClass();
+		if (starlitSky)
+		{
+			starlitSky->MouseButtonUp(event);
+		}
+	}
+
+	void StarlitSky::OnMouseMoveCallback(DisplayObject *self, SDL_Event *event)
+	{
+		StarlitSky *starlitSky = (StarlitSky *)self->GetSubClass();
+		if (starlitSky)
+		{
+			starlitSky->MouseButtonMove(event);
+		}
+	}
+
+	void StarlitSky::MouseButtonDown(SDL_Event *event)
+	{
+		//SDL_Log("StarlitSky::MouseButtonDown():: mouse button down");
+		if (!mStarlitData)
+		{
+			SDL_Log("StarlitSky::MouseButtonDown():: mStarlitData is null");
+			return;
+		}
+		SDL_FPoint point = { event->button.x,event->button.y };
+		if (SDL_PointInFRect(&point, mStarlitData->dest))
+		{
+			SDL_Log("StarlitSky::MouseButtonDown():: In StarlitSky, mouse button down");
+			mStarlitData->move = SDL_TRUE;
+			mStarlitData->point.x = point.x;
+			mStarlitData->point.y = point.y;
+		}
+	}
+
+	void StarlitSky::MouseButtonUp(SDL_Event *event)
+	{
+		SDL_Log("StarlitSky::MouseButtonUp():: mouse button up");
+		if (!mStarlitData)
+		{
+			SDL_Log("StarlitSky::MouseButtonUp():: mStarlitData is null");
+			return;
+		}
+		mStarlitData->move = SDL_FALSE;
+	}
+
+	void StarlitSky::MouseButtonMove(SDL_Event *event)
+	{
+		SDL_Log("StarlitSky::MouseButtonMove():: mouse move");
+		if (!mStarlitData)
+		{
+			SDL_Log("StarlitSky::MouseButtonMove():: mStarlitData is null");
+			return;
+		}
+		SDL_FPoint curPoint = { event->motion.x,event->motion.y };
+		SDL_bool move = mStarlitData->move;
+		if (move)
+		{
+			float dx = curPoint.x - mStarlitData->point.x;
+			float dy = curPoint.y - mStarlitData->point.y;
+			mStarlitData->dest->x += dx;
+			mStarlitData->dest->y += dy;
+			mStarlitData->point.x = curPoint.x;
+			mStarlitData->point.y = curPoint.y;
+			//限定边界
+			if (mStarlitData->dest->x < 0)
+			{
+				mStarlitData->dest->x = 0;
+			}
+			if (mStarlitData->dest->x > WINDOW_WIDTH - mStarlitData->dest->w)
+			{
+				mStarlitData->dest->x = WINDOW_WIDTH - mStarlitData->dest->w;
+			}
+
+			if (mStarlitData->dest->y < 0)
+			{
+				mStarlitData->dest->y = 0;
+			}
+			if (mStarlitData->dest->y > WINDOW_HEIGHT - mStarlitData->dest->h)
+			{
+				mStarlitData->dest->y = WINDOW_HEIGHT - mStarlitData->dest->h;
+			}
 		}
 	}
 
@@ -99,7 +200,7 @@ namespace Dungeon
 		{
 			SDL_FRect border = { mStarlitData->dest->x ,mStarlitData->dest->y,mStarlitData->dest->w,mStarlitData->dest->h };
 			SDL_Log("StarlitSky::CreatePoints():: %d,Start,border{%f,%f,%f,%f}", i, border.x, border.y, border.w, border.h);
-			Bubble *bubble = new Bubble(resource,mStarlitData->bgColor, border);
+			Bubble *bubble = new Bubble(resource, mStarlitData->bgColor, border);
 			//SDL_Log("StarlitSky::CreatePoints():: xxxx,mStarlitData->points:%p", mStarlitData->points);
 			mStarlitData->bubbles->push_back(bubble);//把点添加到列表中
 			SDL_Log("StarlitSky::CreatePoints():: point:%p", bubble);
@@ -118,7 +219,7 @@ namespace Dungeon
 			{
 				Bubble *point = *it;//获取元素
 				//SDL_Log("StarlitSky::DrawPoints():: %d, x:%f", i, point->mPointData->x);
-				point->Draw(resource,renderer);//绘制每一个点
+				point->Draw(resource, renderer);//绘制每一个点
 				//i++;
 			}
 		}
@@ -143,7 +244,7 @@ namespace Dungeon
 	void StarlitSky::Draw(Resource *resource, SDL_Renderer *renderer)
 	{
 		DrawBackground(renderer);//绘制背景
-		DrawPoints(resource,renderer);//绘制点
+		DrawPoints(resource, renderer);//绘制点
 	}
 
 	void StarlitSky::Destory()

@@ -16,6 +16,8 @@ namespace Dungeon
 		Uint32 bgColor;//背景颜色
 		Uint32 size;
 		std::vector<Bubble *> *bubbles;//绘制点列表
+		SDL_bool move;//是否可移动
+		SDL_FPoint point;//位置
 	}StarlitSkyData;
 }
 
@@ -31,13 +33,20 @@ namespace Dungeon
 		~StarlitSky();
 		DisplayObject *Create(Resource *resource, Uint32 size, Uint32 color, Uint32 bgColor, float x, float y, float w, float h);
 		static void OnDrawCallback(DisplayObject *self, Resource *resource, SDL_Renderer *renderer);
+		static void OnMouseDownCallback(DisplayObject *self,SDL_Event *event);
+		static void OnMouseUpCallback(DisplayObject *self,SDL_Event *event);
+		static void OnMouseMoveCallback(DisplayObject *self,SDL_Event *event);
 		static void OnDestoryCallbac(DisplayObject *self);
+
 
 	private:
 		void CreatePoints(Resource *resource);
 		void DrawPoints(Resource *resource, SDL_Renderer *renderer);
 		void DrawBackground(SDL_Renderer *renderer);
 		void Draw(Resource *resource, SDL_Renderer *renderer);
+		void MouseButtonDown(SDL_Event *event);
+		void MouseButtonUp(SDL_Event *event);
+		void MouseButtonMove(SDL_Event *event);
 		void Destory();
 	};
 }
