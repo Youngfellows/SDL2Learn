@@ -10,7 +10,7 @@ namespace Dungeon
 
 #define BACKGROUND_COLOR 0xffffffff //背景颜色-白
 
-#define COMPONENT_SIZE 0 //需要创建的组件个数
+#define COMPONENT_SIZE 1 //需要创建的组件个数
 #define START_X 50
 #define START_Y 80
 #define MARGIN_LEFT 10

@@ -1,7 +1,7 @@
 #include "Game.h"
 #include "Config.h"
 #include <string>
-
+#include "Rectangle.h"
 
 namespace Dungeon
 {
@@ -140,13 +140,13 @@ namespace Dungeon
 		//this->mComponents = (DisplayObject **)malloc(sizeof(DisplayObject *) * COMPONENT_SIZE);//C方式
 		this->mComponents = new DisplayObject * [COMPONENT_SIZE];//C++方式
 
-		//Rectangle *rectangle = new Rectangle();//矩形组件
-		//mComponents[0] = rectangle->Create(RECT_START_X, RECT_START_Y, RECT_WIDTH, RECT_HEIGHT
-		//	, RECT_COLOR, RECT_BORDER_COLOR, PT_SIZE_25, mComponents[0], &Dungeon::EventListener::OnClickRect);
-		//if (!mComponents[0])
-		//{
-		//	return SDL_FALSE;
-		//}
+		Rectangle *rectangle = new Rectangle();//矩形组件
+		mComponents[0] = rectangle->Create(RECT_START_X, RECT_START_Y, RECT_WIDTH, RECT_HEIGHT
+			, RECT_COLOR, RECT_BORDER_COLOR, PT_SIZE_25, nullptr, nullptr);
+		if (!mComponents[0])
+		{
+			return SDL_FALSE;
+		}
 		return SDL_TRUE;
 	}
 

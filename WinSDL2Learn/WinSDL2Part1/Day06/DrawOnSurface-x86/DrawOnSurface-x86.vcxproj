@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="include\Config.h" />
     <ClInclude Include="include\Game.h" />
+    <ClInclude Include="include\Rectangle.h" />
     <ClInclude Include="include\Resource.h" />
     <ClInclude Include="include\DisplayObject.h" />
   </ItemGroup>
@@ -28,6 +29,7 @@
     <ClCompile Include="src\DisplayObject.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\Rectangle.cpp" />
     <ClCompile Include="src\Resource.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
