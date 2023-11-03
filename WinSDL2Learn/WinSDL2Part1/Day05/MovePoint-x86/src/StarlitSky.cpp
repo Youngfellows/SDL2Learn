@@ -160,6 +160,7 @@ namespace Dungeon
 		}
 		SDL_FPoint curPoint = { event->motion.x,event->motion.y };
 		SDL_bool move = mStarlitData->move;
+		//if (move && SDL_PointInFRect(&curPoint, mStarlitData->dest))//有bug，不是很灵敏
 		if (move)
 		{
 			float dx = curPoint.x - mStarlitData->point.x;
