@@ -1,2 +1,3 @@
 #pragma once
-void draw(struct SDL_Surface* surface);
+void drawRect(struct SDL_Surface* surface);
+void drawBmp(struct SDL_Surface *surface,struct SDL_Surface* image);
