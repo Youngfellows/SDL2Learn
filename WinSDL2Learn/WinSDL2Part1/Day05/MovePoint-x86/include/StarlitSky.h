@@ -18,6 +18,7 @@ namespace Dungeon
 		std::vector<Bubble *> *bubbles;//绘制点列表
 		SDL_bool move;//是否可移动
 		SDL_FPoint point;//位置
+		SDL_Texture *texture;
 	}StarlitSkyData;
 }
 

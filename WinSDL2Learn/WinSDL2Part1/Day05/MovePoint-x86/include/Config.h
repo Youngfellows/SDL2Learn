@@ -27,6 +27,7 @@ namespace Dungeon
 
 #define CAT_PHOTO_FILE "./resources/cat.jpg" //图片资源
 #define GIRL_PHOTO_FILE "./resources/girl.jpg" //图片资源
+#define LANDSCAPE_PHOTO_FILE "./resources/landscape.png" //图片资源
 #define PHOTO_CAT_START_X START_X+RECT_WIDTH+MARGIN_LEFT //图片开始绘制的X位置
 #define PHOTO_CAT_START_Y START_Y //图片开始绘制的X位置
 #define PHOTO_CAT_WIDTH 80 //图片宽

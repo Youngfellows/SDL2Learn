@@ -26,6 +26,10 @@ namespace Dungeon
 		{
 			return SDL_FALSE;
 		}
+		if (!LoadLandscapeTexture(renderer))
+		{
+			return SDL_FALSE;
+		}
 		return SDL_TRUE;
 	}
 
@@ -51,6 +55,17 @@ namespace Dungeon
 		return SDL_TRUE;
 	}
 
+	SDL_bool Resource::LoadLandscapeTexture(SDL_Renderer *renderer)
+	{
+		this->mLandscapeTexture = IMG_LoadTexture(renderer, LANDSCAPE_PHOTO_FILE);
+		if (!mLandscapeTexture)
+		{
+			SDL_Log("Can not load landscape:%s", SDL_GetError());
+			return SDL_FALSE;
+		}
+		return SDL_TRUE;
+	}
+
 	SDL_Texture *Resource::GetCatTexture()
 	{
 		return this->mCatTexture;
@@ -59,6 +74,11 @@ namespace Dungeon
 	SDL_Texture *Resource::GetGirlTexture()
 	{
 		return this->mGirlTexture;
+	}
+
+	SDL_Texture *Resource::GetLandscapeTexture()
+	{
+		return this->mLandscapeTexture;
 	}
 
 	void Resource::Destory()
@@ -72,6 +92,11 @@ namespace Dungeon
 		{
 			SDL_DestroyTexture(mGirlTexture);
 			mGirlTexture = nullptr;
+		}
+		if (mLandscapeTexture)
+		{
+			SDL_DestroyTexture(mLandscapeTexture);
+			mLandscapeTexture = nullptr;
 		}
 	}
 }

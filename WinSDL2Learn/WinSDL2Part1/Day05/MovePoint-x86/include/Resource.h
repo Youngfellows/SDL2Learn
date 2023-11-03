@@ -13,6 +13,7 @@ namespace Dungeon
 	private:
 		SDL_Texture *mCatTexture;
 		SDL_Texture *mGirlTexture;
+		SDL_Texture *mLandscapeTexture;
 
 	public:
 		Resource();
@@ -20,8 +21,10 @@ namespace Dungeon
 		SDL_bool Load(SDL_Renderer *renderer);
 		SDL_bool LoadCatTexture(SDL_Renderer *renderer);
 		SDL_bool LoadGirlTexture(SDL_Renderer *renderer);
+		SDL_bool LoadLandscapeTexture(SDL_Renderer *renderer);
 		SDL_Texture *GetCatTexture();
 		SDL_Texture *GetGirlTexture();
+		SDL_Texture *GetLandscapeTexture();
 		void Destory();
 	};
 }

@@ -15,6 +15,7 @@ namespace Dungeon
 			mStarlitData->move = SDL_FALSE;
 			mStarlitData->point.x = 0;
 			mStarlitData->point.y = 0;
+			mStarlitData->texture = nullptr;
 			mStarlitData->dest = (SDL_FRect *)malloc(sizeof(SDL_FRect));
 			if (mStarlitData->dest)
 			{
@@ -59,6 +60,7 @@ namespace Dungeon
 		mStarlitData->dest->y = y;
 		mStarlitData->dest->w = w;
 		mStarlitData->dest->h = h;
+		mStarlitData->texture = resource->GetLandscapeTexture();
 		CreatePoints(resource);//创建点
 
 		//创建显示代理对象
@@ -229,15 +231,23 @@ namespace Dungeon
 	{
 		if (mStarlitData)
 		{
-			//0xffffffff ARGB
-			SDL_Color color = {
-				(mStarlitData->color & 0x00ff0000) >> 16,//R
-				(mStarlitData->color & 0x0000ff00) >> 8,//G
-				(mStarlitData->color & 0x000000ff) >> 0,//B
-				(mStarlitData->color & 0xff000000) >> 24,//A
-			};
-			SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);//设置颜色
-			SDL_RenderFillRectF(renderer, mStarlitData->dest);//绘制背景
+			if (!mStarlitData->texture)
+			{
+				//0xffffffff ARGB
+				SDL_Color color = {
+					(mStarlitData->color & 0x00ff0000) >> 16,//R
+					(mStarlitData->color & 0x0000ff00) >> 8,//G
+					(mStarlitData->color & 0x000000ff) >> 0,//B
+					(mStarlitData->color & 0xff000000) >> 24,//A
+				};
+				SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);//设置颜色
+				SDL_RenderFillRectF(renderer, mStarlitData->dest);//绘制背景
+			}
+			else
+			{
+				//绘制背景图
+				SDL_RenderCopyF(renderer, mStarlitData->texture, nullptr, mStarlitData->dest);
+			}
 		}
 	}
 
