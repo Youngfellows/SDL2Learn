@@ -46,35 +46,30 @@ namespace Dungeon
 		{
 			return;
 		}
-		/*if (!mBubbleData->move)
+		mBubbleData->angel += 0.5;
+
+		if (!mBubbleData->move)//没有拖动时可以碰撞改变方向
 		{
 			mBubbleData->x += mBubbleData->speedX;
 			mBubbleData->y += mBubbleData->speedY;
-		}*/
-		mBubbleData->x += mBubbleData->speedX;
-		mBubbleData->y += mBubbleData->speedY;
+			if (mBubbleData->x > mBubbleData->border.w + mBubbleData->border.x - mBubbleData->dest.w)
+			{
+				mBubbleData->speedX = -abs(mBubbleData->speedX);//改变x方向
+			}
+			if (mBubbleData->x < mBubbleData->border.x)
+			{
+				mBubbleData->speedX = abs(mBubbleData->speedX);//改变x方向
+			}
+			if (mBubbleData->y > mBubbleData->border.h + mBubbleData->border.y - mBubbleData->dest.h)
+			{
+				mBubbleData->speedY = -abs(mBubbleData->speedY);//改变y方向
+			}
+			if (mBubbleData->y < mBubbleData->border.y)
+			{
+				mBubbleData->speedY = abs(mBubbleData->speedY);//改变y方向
+			}
+		}
 
-		mBubbleData->angel += 0.5;
-		if (mBubbleData->x > mBubbleData->border.w + mBubbleData->border.x - WIDTH_HEIGHT)
-		{
-			mBubbleData->speedX = -abs(mBubbleData->speedX);//改变x方向
-			mBubbleData->x = mBubbleData->border.w + mBubbleData->border.x - WIDTH_HEIGHT;
-		}
-		if (mBubbleData->x < mBubbleData->border.x)
-		{
-			mBubbleData->speedX = abs(mBubbleData->speedX);//改变x方向
-			mBubbleData->x = mBubbleData->border.x;
-		}
-		if (mBubbleData->y > mBubbleData->border.h + mBubbleData->border.y - WIDTH_HEIGHT)
-		{
-			mBubbleData->speedY = -abs(mBubbleData->speedY);//改变y方向
-			mBubbleData->y = mBubbleData->border.h + mBubbleData->border.y - WIDTH_HEIGHT;
-		}
-		if (mBubbleData->y < mBubbleData->border.y)
-		{
-			mBubbleData->speedY = abs(mBubbleData->speedY);//改变y方向
-			mBubbleData->y = mBubbleData->border.y;
-		}
 		//0xffffffff ARGB
 		SDL_Color color = {
 		(mBubbleData->color & 0x00FF0000) >> 16,//R
@@ -117,10 +112,6 @@ namespace Dungeon
 		mBubbleData->x += point.x;
 		mBubbleData->y += point.y;
 
-		//移动鼠标时更新各个泡泡的位置
-		mBubbleData->dest.x = mBubbleData->x;
-		mBubbleData->dest.y = mBubbleData->y;
-
 		//更新边界,限定边界
 		mBubbleData->border.x += point.x;
 		mBubbleData->border.y += point.y;
@@ -141,6 +132,27 @@ namespace Dungeon
 		{
 			mBubbleData->border.y = WINDOW_HEIGHT - mBubbleData->border.h;
 		}
+
+		//移动鼠标时限定边界并更新泡泡的位置
+		if (mBubbleData->x < mBubbleData->border.x)
+		{
+			mBubbleData->x = mBubbleData->border.x;
+		}
+		if (mBubbleData->x > mBubbleData->border.w + mBubbleData->border.x - mBubbleData->dest.w)
+		{
+			mBubbleData->x = mBubbleData->border.w + mBubbleData->border.x - mBubbleData->dest.w;
+		}
+	
+		if (mBubbleData->y < mBubbleData->border.y)
+		{
+			mBubbleData->y = mBubbleData->border.y;
+		}
+		if (mBubbleData->y > mBubbleData->border.h + mBubbleData->border.y - mBubbleData->dest.h)
+		{
+			mBubbleData->y = mBubbleData->border.h + mBubbleData->border.y - mBubbleData->dest.h;
+		}
+		mBubbleData->dest.x = mBubbleData->x;
+		mBubbleData->dest.y = mBubbleData->y;
 	}
 
 	Bubble::~Bubble()
