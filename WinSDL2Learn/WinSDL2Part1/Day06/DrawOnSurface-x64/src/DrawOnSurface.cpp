@@ -41,7 +41,8 @@ int main(int argc, char *argv[])
 			}
 		}
 	}
-
+	SDL_FreeSurface(image);
+	SDL_FreeSurface(screen);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
 	return 0;
