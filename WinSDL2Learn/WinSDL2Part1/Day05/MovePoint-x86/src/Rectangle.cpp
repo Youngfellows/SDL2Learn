@@ -26,7 +26,8 @@ namespace Dungeon
 	}
 
 	DisplayObject *Rectangle::Create(float x, float y, float w, float h,
-		int color, int borderColor, int borderSize, OnRectangleClickCallback onClickCallback)
+		int color, int borderColor, int borderSize, 
+		DisplayObject *destObj, OnRectangleClickCallback onClickCallback)
 	{
 		if (!mRectangleData)
 		{
@@ -46,6 +47,7 @@ namespace Dungeon
 		mRectangleData->borderColor = borderColor;
 		mRectangleData->borderSize = borderSize;
 		mRectangleData->OnClick = onClickCallback;
+		mRectangleData->destObj = destObj;
 		mRectangleData->move = SDL_FALSE;
 		mRectangleData->point = (SDL_FPoint *)malloc(sizeof(SDL_FPoint));
 		if (!mRectangleData->point)
@@ -210,7 +212,7 @@ namespace Dungeon
 			mRectangleData->point->y = point.y;
 			if (mRectangleData->OnClick)
 			{
-				mRectangleData->OnClick();//调用回调函数
+				mRectangleData->OnClick(mRectangleData->destObj);//调用回调函数
 			}
 		}
 		else

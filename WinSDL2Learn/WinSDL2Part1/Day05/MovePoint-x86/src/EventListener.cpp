@@ -2,6 +2,7 @@
 
 #include "SDL2/SDL.h"
 #include "Photo.h"
+#include "StarlitSky.h"
 
 namespace Dungeon
 {
@@ -13,9 +14,14 @@ namespace Dungeon
 	{
 	}
 
-	void EventListener::OnClickRect()
+	void EventListener::OnClickRect(DisplayObject *self)
 	{
 		SDL_Log("EventListener::OnClickRect():: click the rectangle");
+		StarlitSky *starlitSky = (StarlitSky *)self->GetSubClass();
+		if (starlitSky)
+		{
+			starlitSky->Rotate();
+		}
 	}
 
 	void EventListener::OnClickCat()

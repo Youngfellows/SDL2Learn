@@ -13,6 +13,8 @@ namespace Dungeon
 			mStarlitData->bgColor = 0;
 			mStarlitData->bubbles = new std::vector<Bubble *>;
 			mStarlitData->move = SDL_FALSE;
+			mStarlitData->anim = SDL_FALSE;
+			mStarlitData->angle = 0;
 			mStarlitData->point.x = 0;
 			mStarlitData->point.y = 0;
 			mStarlitData->texture = nullptr;
@@ -141,6 +143,7 @@ namespace Dungeon
 			return;
 		}
 		mStarlitData->move = SDL_FALSE;
+		mStarlitData->anim = SDL_FALSE;
 
 		std::vector<Bubble *>::iterator it;
 		for (it = mStarlitData->bubbles->begin(); it != mStarlitData->bubbles->end(); it++)
@@ -208,6 +211,15 @@ namespace Dungeon
 		}
 	}
 
+	void StarlitSky::Rotate()
+	{
+		if (!mStarlitData)
+		{
+			return;
+		}
+		mStarlitData->anim = SDL_TRUE;
+	}
+
 	void StarlitSky::OnDestoryCallbac(DisplayObject *self)
 	{
 		StarlitSky *starlitSky = (StarlitSky *)self->GetSubClass();
@@ -269,7 +281,17 @@ namespace Dungeon
 			else
 			{
 				//绘制背景图
-				SDL_RenderCopyF(renderer, mStarlitData->texture, nullptr, mStarlitData->dest);
+				if (mStarlitData->anim)
+				{
+					/*if (mStarlitData->angle >= 360)
+					{
+						mStarlitData->angle = 0;
+					}*/
+					mStarlitData->angle += 2.5;
+				}
+				//SDL_RenderCopyF(renderer, mStarlitData->texture, nullptr, mStarlitData->dest);
+				SDL_RenderCopyExF(renderer, mStarlitData->texture, nullptr,
+					mStarlitData->dest, mStarlitData->angle, nullptr, SDL_FLIP_NONE);
 			}
 		}
 	}

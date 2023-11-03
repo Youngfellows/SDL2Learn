@@ -7,7 +7,7 @@
 namespace Dungeon
 {
 	//函数指针,矩形被点击的回调函数
-	typedef void (*OnRectangleClickCallback)();
+	typedef void (*OnRectangleClickCallback)(DisplayObject *self);
 
 	typedef struct RectangleData
 	{
@@ -17,6 +17,7 @@ namespace Dungeon
 		int color;//矩形颜色
 		int borderColor;//边框颜色
 		int borderSize;//边框大小
+		DisplayObject *destObj;
 		OnRectangleClickCallback OnClick;//被点击的回调
 	}RectangleData;
 
@@ -36,7 +37,8 @@ namespace Dungeon
 		Rectangle();
 		~Rectangle();
 		DisplayObject *Create(float x, float y, float w, float h,
-			int color, int borderColor, int borderSize, OnRectangleClickCallback onClickCallback);
+			int color, int borderColor, int borderSize,
+			DisplayObject *destObj,OnRectangleClickCallback onClickCallback);
 		static void OnDrawCallback(DisplayObject *self, Resource *resource, SDL_Renderer *renderer);
 		static void OnMouseMoveCallback(DisplayObject *self, SDL_Event *event);
 		static void OnMouseDownCallback(DisplayObject *self, SDL_Event *event);

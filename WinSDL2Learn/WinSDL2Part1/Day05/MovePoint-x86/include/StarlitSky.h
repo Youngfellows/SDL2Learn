@@ -19,6 +19,8 @@ namespace Dungeon
 		SDL_bool move;//是否可移动
 		SDL_FPoint point;//位置
 		SDL_Texture *texture;
+		SDL_bool anim;
+		float angle;
 	}StarlitSkyData;
 }
 
@@ -38,7 +40,7 @@ namespace Dungeon
 		static void OnMouseUpCallback(DisplayObject *self, SDL_Event *event);
 		static void OnMouseMoveCallback(DisplayObject *self, SDL_Event *event);
 		static void OnDestoryCallbac(DisplayObject *self);
-
+		void Rotate();
 
 	private:
 		void CreatePoints(Resource *resource);

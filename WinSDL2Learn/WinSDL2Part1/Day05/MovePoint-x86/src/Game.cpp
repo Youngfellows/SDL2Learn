@@ -171,9 +171,9 @@ namespace Dungeon
 		//	return SDL_FALSE;
 		//}
 
-		Rectangle *rectangle = new Rectangle();//矩形组件
-		mComponents[0] = rectangle->Create(RECT_START_X, RECT_START_Y, RECT_WIDTH, RECT_HEIGHT
-			, RECT_COLOR, RECT_BORDER_COLOR, PT_SIZE_25, &Dungeon::EventListener::OnClickRect);
+		StarlitSky *starlitSky = new StarlitSky();//星空组件
+		mComponents[0] = starlitSky->Create(mResource, BUBBLE_COUNT, STARLITSKY_COLOR, STARLITSKY_BACKGROUND_COLOR,
+			STARLITSKY_START_X, STARLITSKY_START_Y, STARLITSKY_WIDTH, STARLITSKY_HEIGHT);
 		if (!mComponents[0])
 		{
 			return SDL_FALSE;
@@ -215,9 +215,9 @@ namespace Dungeon
 			return SDL_FALSE;
 		}
 
-		StarlitSky *starlitSky = new StarlitSky();//星空组件
-		mComponents[5] = starlitSky->Create(mResource, BUBBLE_COUNT, STARLITSKY_COLOR, STARLITSKY_BACKGROUND_COLOR,
-			STARLITSKY_START_X, STARLITSKY_START_Y, STARLITSKY_WIDTH, STARLITSKY_HEIGHT);
+		Rectangle *rectangle = new Rectangle();//矩形组件
+		mComponents[5] = rectangle->Create(RECT_START_X, RECT_START_Y, RECT_WIDTH, RECT_HEIGHT
+			, RECT_COLOR, RECT_BORDER_COLOR, PT_SIZE_25, mComponents[0], &Dungeon::EventListener::OnClickRect);
 		if (!mComponents[5])
 		{
 			return SDL_FALSE;

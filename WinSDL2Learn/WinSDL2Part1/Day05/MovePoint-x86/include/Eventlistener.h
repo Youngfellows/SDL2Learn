@@ -16,7 +16,7 @@ namespace Dungeon
 	public:
 		EventListener();
 		~EventListener();
-		static void OnClickRect();//点击矩形的回调
+		static void OnClickRect(DisplayObject *self);//点击矩形的回调
 		static void OnClickCat();//点击矩形的回调
 		static void OnClickGirl();//点击矩形的回调
 		static void OnClickText1(DisplayObject *self);//点击文本1
