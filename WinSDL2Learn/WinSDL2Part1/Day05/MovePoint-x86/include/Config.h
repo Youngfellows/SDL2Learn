@@ -52,7 +52,9 @@ namespace Dungeon
 #define PADDING_RIGHT PT_SIZE_10 //右边距
 #define PADDING_BOTTOM PT_SIZE_10 //下边距
 
-#define POINT_COUNT 50 //星空绘制点数量
+#define BUBBLE_COUNT 50 //星空绘制点数量
+#define BUBBLE_WIDTH 30 //泡泡宽
+#define BUBBLE_HEIGHT BUBBLE_WIDTH //泡泡高
 #define STARLITSKY_COLOR 0xFFE95420 //星空点的颜色
 #define STARLITSKY_BACKGROUND_COLOR 0xFF2885CD //星空背景
 #define STARLITSKY_START_X WINDOW_WIDTH - STARLITSKY_WIDTH - MARGIN_LEFT*2 //绘制星空的X起始位置

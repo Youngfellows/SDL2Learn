@@ -16,6 +16,7 @@ namespace Dungeon
 		SDL_FRect border;//边界
 		float angel;
 		SDL_Texture *photo;
+		SDL_FRect dest;//绘制区域
 	}BubbleData;
 }
 

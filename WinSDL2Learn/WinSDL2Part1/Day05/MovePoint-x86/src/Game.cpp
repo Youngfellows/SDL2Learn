@@ -98,7 +98,7 @@ namespace Dungeon
 			{
 				Uint32 fps = 1000 / (current - mLastTicks);//按这个速度计算帧率
 				std::string fpsStr = "Rendering ";
-				fpsStr += std::to_string(POINT_COUNT);
+				fpsStr += std::to_string(BUBBLE_COUNT);
 				fpsStr += " points, fps: ";
 				fpsStr += std::to_string(fps);
 				SDL_SetWindowTitle(mWindow, fpsStr.c_str());
@@ -216,7 +216,7 @@ namespace Dungeon
 		}
 
 		StarlitSky *starlitSky = new StarlitSky();//星空组件
-		mComponents[5] = starlitSky->Create(mResource, POINT_COUNT, STARLITSKY_COLOR, STARLITSKY_BACKGROUND_COLOR,
+		mComponents[5] = starlitSky->Create(mResource, BUBBLE_COUNT, STARLITSKY_COLOR, STARLITSKY_BACKGROUND_COLOR,
 			STARLITSKY_START_X, STARLITSKY_START_Y, STARLITSKY_WIDTH, STARLITSKY_HEIGHT);
 		if (!mComponents[5])
 		{
