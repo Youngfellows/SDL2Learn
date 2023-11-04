@@ -110,7 +110,7 @@ namespace Dungeon
 		{
 			long index = (mLineData->k * x + mLineData->b) * mLineData->winWidth + x;
 			//long index = mLineData->k * x + mLineData->b;
-			SDL_Log("Line::Draw():: index:%ld", index);
+			//SDL_Log("Line::Draw():: index:%ld", index);
 			((Uint32 *)(winSurface->pixels))[index] = mLineData->color;
 		}
 	}
@@ -122,6 +122,7 @@ namespace Dungeon
 		{
 			free(mLineData);
 			mLineData = nullptr;
+			SDL_Log(" Line::Destory()::");
 		}
 	}
 }

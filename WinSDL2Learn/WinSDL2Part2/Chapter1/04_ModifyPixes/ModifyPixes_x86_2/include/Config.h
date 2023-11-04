@@ -57,9 +57,9 @@ namespace Dungeon
 #define PADDING_BOTTOM PT_SIZE_10 //下边距
 
 #define LINE_STAR_X_POSITION 100 //直线开始位置
-#define LINE_STAR_Y_POSITION 50 //直线开始位置
-#define LINE_END_X_POSITION 200 //直线开始位置
-#define LINE_END_Y_POSITION 80 //直线开始位置
+#define LINE_STAR_Y_POSITION 100 //直线开始位置
+#define LINE_END_X_POSITION 500 //直线开始位置
+#define LINE_END_Y_POSITION 500 //直线开始位置
 #define LINE_COLOR 0xffff0000 //直线颜色
 
 }
