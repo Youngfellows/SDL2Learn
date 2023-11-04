@@ -13,6 +13,7 @@ namespace Dungeon
 	private:
 		SDL_Surface *mWinSurface;
 		SDL_Surface *mCatSurface;
+		SDL_Surface *mSDLLogoSurface;
 
 	public:
 		Resource();
@@ -20,8 +21,10 @@ namespace Dungeon
 		SDL_bool Load(SDL_Window *window);
 		SDL_bool LoadWinSurface(SDL_Window *window);
 		SDL_bool LoadCatSurface();
+		SDL_bool LoadSDLLogoSurface();
 		SDL_Surface *GetWinSurface();
 		SDL_Surface *GetCatSurface();
+		SDL_Surface *GetSDLLogoSurface();
 		void Destory();
 	};
 }

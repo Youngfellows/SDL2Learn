@@ -1,12 +1,14 @@
 #include "Resource.h"
 #include "Config.h"
+#include "SDL_Logo.h"
 
 namespace Dungeon
 {
 
 	Resource::Resource() :
 		mWinSurface(nullptr),
-		mCatSurface(nullptr)
+		mCatSurface(nullptr),
+		mSDLLogoSurface(nullptr)
 	{
 
 	}
@@ -23,6 +25,10 @@ namespace Dungeon
 			return SDL_FALSE;
 		}
 		if (!LoadCatSurface())
+		{
+			return SDL_FALSE;
+		}
+		if (!LoadSDLLogoSurface())
 		{
 			return SDL_FALSE;
 		}
@@ -51,6 +57,23 @@ namespace Dungeon
 		return SDL_TRUE;
 	}
 
+	/*
+	* 加载图片二进制数据到Surface
+	*/
+	SDL_bool Resource::LoadSDLLogoSurface()
+	{
+		this->mSDLLogoSurface = SDL_LoadBMP_RW(
+			SDL_RWFromConstMem(SDLLogoData, sizeof(SDLLogoData)),
+			1
+		);
+		if (!mSDLLogoSurface)
+		{
+			SDL_Log("Can not get sdl logo surface: %s", SDL_GetError());
+			return SDL_FALSE;
+		}
+		return SDL_TRUE;
+	}
+
 	SDL_Surface *Resource::GetWinSurface()
 	{
 		return this->mWinSurface;
@@ -59,6 +82,11 @@ namespace Dungeon
 	SDL_Surface *Resource::GetCatSurface()
 	{
 		return this->mCatSurface;
+	}
+
+	SDL_Surface *Resource::GetSDLLogoSurface()
+	{
+		return this->mSDLLogoSurface;
 	}
 
 	void Resource::Destory()

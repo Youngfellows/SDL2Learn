@@ -191,6 +191,19 @@ namespace Dungeon
 		{
 			return SDL_FALSE;
 		}
+
+		Photo *sdlLogo = new Photo();//图片组件
+		mComponents[4] = sdlLogo->Create(
+			PHOTO_SDL_LOGO_START_X,
+			PHOTO_SDL_LOGO_START_Y,
+			PHOTO_SDL_LOGO_WIDTH,
+			PHOTO_SDL_LOGO_HEIGHT,
+			mResource->GetSDLLogoSurface(),
+			nullptr);
+		if (!mComponents[4])
+		{
+			return SDL_FALSE;
+		}
 		return SDL_TRUE;
 	}
 

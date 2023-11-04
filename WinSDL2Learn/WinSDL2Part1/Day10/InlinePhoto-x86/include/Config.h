@@ -10,7 +10,7 @@ namespace Dungeon
 
 #define BACKGROUND_COLOR 0xffffffff //背景颜色-白
 
-#define COMPONENT_SIZE 4 //需要创建的组件个数
+#define COMPONENT_SIZE 5 //需要创建的组件个数
 #define START_X 50
 #define START_Y 80
 #define MARGIN_LEFT 10
@@ -35,10 +35,10 @@ namespace Dungeon
 #define PHOTO_CAT_WIDTH 80 //图片宽
 #define PHOTO_CAT_HEIGHT 80 //图片高
 
-#define PHOTO_GIRL_START_X START_X+RECT_WIDTH+PHOTO_CAT_WIDTH+MARGIN_LEFT*2 //图片开始绘制的X位置
-#define PHOTO_GIRL_START_Y START_Y //图片开始绘制的X位置
-#define PHOTO_GIRL_WIDTH 200 //图片宽
-#define PHOTO_GIRL_HEIGHT 200 //图片高
+#define PHOTO_SDL_LOGO_START_X START_X+RECT_WIDTH+PHOTO_CAT_WIDTH+MARGIN_LEFT*2 //图片开始绘制的X位置
+#define PHOTO_SDL_LOGO_START_Y START_Y //图片开始绘制的X位置
+#define PHOTO_SDL_LOGO_WIDTH 100 //图片宽,没多大作用，只是限定可以拖动的范围
+#define PHOTO_SDL_LOGO_HEIGHT 100 //图片高
 
 #define ARIAL_FONT_FILE "./resources/Arial.ttf" //字体
 #define PADMAA_FONT_FILE "./resources/padmaa.ttf" //字体
