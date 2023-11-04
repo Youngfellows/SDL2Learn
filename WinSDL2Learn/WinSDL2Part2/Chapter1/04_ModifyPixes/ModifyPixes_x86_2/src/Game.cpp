@@ -7,6 +7,7 @@
 #include "Text.h"
 #include "EventListener.h"
 #include "Line.h"
+#include "Rect.h"
 
 namespace Dungeon
 {
@@ -199,6 +200,16 @@ namespace Dungeon
 			LINE_END_X_POSITION, LINE_END_Y_POSITION,
 			WINDOW_WIDTH, WINDOW_HEIGHT);
 		if (!mComponents[4])
+		{
+			return SDL_FALSE;
+		}
+
+		Rect *rect2 = new Rect();//直线组件
+		mComponents[5] = rect2->Create(RECT2_COLOR,
+			RECT2_STAR_X_POSITION, RECT2_STAR_Y_POSITION,
+			RECT2_END_X_POSITION, RECT2_END_Y_POSITION,
+			WINDOW_WIDTH, WINDOW_HEIGHT);
+		if (!mComponents[5])
 		{
 			return SDL_FALSE;
 		}
