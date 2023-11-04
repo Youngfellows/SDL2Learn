@@ -2,6 +2,7 @@
 #include "Config.h"
 #include <string>
 #include "Rectangle.h"
+#include "Photo.h"
 
 namespace Dungeon
 {
@@ -144,6 +145,19 @@ namespace Dungeon
 		mComponents[0] = rectangle->Create(RECT_START_X, RECT_START_Y, RECT_WIDTH, RECT_HEIGHT
 			, RECT_COLOR, RECT_BORDER_COLOR, PT_SIZE_25, nullptr, nullptr);
 		if (!mComponents[0])
+		{
+			return SDL_FALSE;
+		}
+
+		Photo *cat = new Photo();//图片组件
+		mComponents[1] = cat->Create(
+			PHOTO_CAT_START_X, 
+			PHOTO_CAT_START_Y, 
+			PHOTO_CAT_WIDTH, 
+			PHOTO_CAT_HEIGHT,
+			mResource->GetCatSurface(), 
+			nullptr);
+		if (!mComponents[1])
 		{
 			return SDL_FALSE;
 		}

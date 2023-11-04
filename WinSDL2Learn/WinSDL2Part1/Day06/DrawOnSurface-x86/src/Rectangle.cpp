@@ -117,7 +117,7 @@ namespace Dungeon
 	}
 
 	/*
-	* 绘制图形
+	* 绘制图形: 使用Surface
 	*/
 	void  Rectangle::Draw(SDL_Surface *winSurace, Resource *resource)
 	{

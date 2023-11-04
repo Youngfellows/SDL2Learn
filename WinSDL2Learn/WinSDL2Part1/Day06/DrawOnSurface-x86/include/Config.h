@@ -10,7 +10,7 @@ namespace Dungeon
 
 #define BACKGROUND_COLOR 0xffffffff //背景颜色-白
 
-#define COMPONENT_SIZE 1 //需要创建的组件个数
+#define COMPONENT_SIZE 2 //需要创建的组件个数
 #define START_X 50
 #define START_Y 80
 #define MARGIN_LEFT 10
@@ -27,6 +27,7 @@ namespace Dungeon
 #define PT_SIZE_25 25 //25榜
 #define PT_SIZE_30 30 //30榜
 
+#define CAT_PHOTO_BMP_FILE "./resources/cat.bmp" //图片资源
 #define CAT_PHOTO_FILE "./resources/cat.jpg" //图片资源
 #define GIRL_PHOTO_FILE "./resources/girl.jpg" //图片资源
 #define PHOTO_CAT_START_X START_X+RECT_WIDTH+MARGIN_LEFT //图片开始绘制的X位置
