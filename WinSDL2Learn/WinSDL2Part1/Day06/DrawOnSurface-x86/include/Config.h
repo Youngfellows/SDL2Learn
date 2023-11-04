@@ -10,7 +10,7 @@ namespace Dungeon
 
 #define BACKGROUND_COLOR 0xffffffff //背景颜色-白
 
-#define COMPONENT_SIZE 2 //需要创建的组件个数
+#define COMPONENT_SIZE 4 //需要创建的组件个数
 #define START_X 50
 #define START_Y 80
 #define MARGIN_LEFT 10
@@ -39,6 +39,22 @@ namespace Dungeon
 #define PHOTO_GIRL_START_Y START_Y //图片开始绘制的X位置
 #define PHOTO_GIRL_WIDTH 200 //图片宽
 #define PHOTO_GIRL_HEIGHT 200 //图片高
+
+#define ARIAL_FONT_FILE "./resources/Arial.ttf" //字体
+#define PADMAA_FONT_FILE "./resources/padmaa.ttf" //字体
+#define TEXT_1 "Cute Cat"
+#define TEXT_2 "Mona Lisa"
+
+#define TEXT_COLOR 0xff000000 //字体颜色
+#define TEXT_BACKGROUND_COLOR 0xFFFFB6C1 //字体背景颜色
+#define TEXT_1_X_POSITION 10 //开始绘制文本1的X位置
+#define TEXT_1_Y_POSITION 10 //开始绘制文本1的Y位置
+#define TEXT_2_X_POSITION TEXT_1_X_POSITION //开始绘制文本2的X位置
+#define TEXT_2_Y_POSITION START_Y + PHOTO_CAT_HEIGHT + PT_SIZE_10  //开始绘制文本2的Y位置
+#define PADDING_LEFT PT_SIZE_10 //左边距
+#define PADDING_TOP PT_SIZE_10 //上边距
+#define PADDING_RIGHT PT_SIZE_10 //右边距
+#define PADDING_BOTTOM PT_SIZE_10 //下边距
 }
 
 #endif // !_DUNGEON_CONFIG_H_

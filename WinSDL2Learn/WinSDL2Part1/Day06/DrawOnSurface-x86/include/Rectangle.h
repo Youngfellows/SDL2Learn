@@ -44,6 +44,7 @@ namespace Dungeon
 		static void OnMouseDownCallback(DisplayObject *self, SDL_Event *event);
 		static void OnMouseUpCallback(DisplayObject *self, SDL_Event *event);
 		static void OnDestoryCallback(DisplayObject *self);
+		void move();
 
 	private:
 		void Destory();

@@ -1,8 +1,11 @@
 #include "Game.h"
 #include "Config.h"
+#include "SDL2/SDL_ttf.h"
 #include <string>
 #include "Rectangle.h"
 #include "Photo.h"
+#include "Text.h"
+#include "EventListener.h"
 
 namespace Dungeon
 {
@@ -20,6 +23,13 @@ namespace Dungeon
 
 	bool Game::Initialize()
 	{
+		//初始化TTF字体库
+		if (TTF_Init() != 0)
+		{
+			SDL_Log("Can not init ttf: %s", SDL_GetError());
+			return false;
+		}
+
 		// SDL库初始化
 		// if (SDL_Init(SDL_INIT_VIDEO))
 		if (SDL_Init(SDL_INIT_VIDEO) != 0)
@@ -151,13 +161,33 @@ namespace Dungeon
 
 		Photo *cat = new Photo();//图片组件
 		mComponents[1] = cat->Create(
-			PHOTO_CAT_START_X, 
-			PHOTO_CAT_START_Y, 
-			PHOTO_CAT_WIDTH, 
+			PHOTO_CAT_START_X,
+			PHOTO_CAT_START_Y,
+			PHOTO_CAT_WIDTH,
 			PHOTO_CAT_HEIGHT,
-			mResource->GetCatSurface(), 
+			mResource->GetCatSurface(),
 			nullptr);
 		if (!mComponents[1])
+		{
+			return SDL_FALSE;
+		}
+
+		Text *text1 = new Text();//文本组件
+		mComponents[2] = text1->Create(ARIAL_FONT_FILE, TEXT_1, PT_SIZE_30, TEXT_COLOR,
+			TEXT_1_X_POSITION, TEXT_1_Y_POSITION, TEXT_BACKGROUND_COLOR,
+			PADDING_LEFT, PADDING_TOP, PADDING_RIGHT, PADDING_BOTTOM,
+			mComponents[0], 1, { &Dungeon::EventListener::OnClickText1 });
+		if (!mComponents[2])
+		{
+			return SDL_FALSE;
+		}
+
+		Text *text2 = new Text();//文本组件
+		mComponents[3] = text2->Create(PADMAA_FONT_FILE, TEXT_2, PT_SIZE_30, TEXT_COLOR,
+			TEXT_2_X_POSITION, TEXT_2_Y_POSITION, TEXT_BACKGROUND_COLOR,
+			PADDING_LEFT, PADDING_TOP, PADDING_RIGHT, PADDING_BOTTOM,
+			mComponents[1], 1, { &Dungeon::EventListener::OnClickText2 });
+		if (!mComponents[3])
 		{
 			return SDL_FALSE;
 		}

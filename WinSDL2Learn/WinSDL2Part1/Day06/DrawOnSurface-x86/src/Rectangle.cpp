@@ -116,6 +116,21 @@ namespace Dungeon
 		}
 	}
 
+	void Rectangle::move()
+	{
+		if (!mRectangleData)
+		{
+			SDL_Log("Rectangle::move():: mRectangleData is null");
+			return;
+		}
+		//模拟鼠标移动
+		SDL_Event event;
+		event.motion.x = mRectangleData->dest->x + 1.5;
+		event.motion.y = mRectangleData->dest->y + 1.5;
+		mRectangleData->move = SDL_TRUE;
+		MouseMove(&event);
+	}
+
 	/*
 	* 绘制图形: 使用Surface
 	*/
@@ -133,7 +148,7 @@ namespace Dungeon
 			(int)mRectangleData->dest->w,
 			(int)mRectangleData->dest->h
 		};
-		SDL_FillRect(winSurace,&rect,mRectangleData->color);
+		SDL_FillRect(winSurace, &rect, mRectangleData->color);
 	}
 
 	/*
