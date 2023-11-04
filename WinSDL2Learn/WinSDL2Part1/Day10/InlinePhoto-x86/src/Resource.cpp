@@ -102,5 +102,11 @@ namespace Dungeon
 			SDL_FreeSurface(mCatSurface);
 			mCatSurface = nullptr;
 		}
+
+		if (mSDLLogoSurface)
+		{
+			SDL_FreeSurface(mSDLLogoSurface);
+			mSDLLogoSurface = nullptr;
+		}
 	}
 }

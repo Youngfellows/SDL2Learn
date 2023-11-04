@@ -5,7 +5,9 @@
 namespace Dungeon
 {
 	Resource::Resource() :
-		mCatTexture(nullptr), mGirlTexture(nullptr)
+		mCatTexture(nullptr), 
+		mGirlTexture(nullptr),
+		mLandscapeTexture(nullptr)
 	{
 
 	}
