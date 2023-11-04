@@ -135,7 +135,7 @@
     <ClInclude Include="include\Game.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\ModifyPixes.cpp" />
+    <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Game.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
