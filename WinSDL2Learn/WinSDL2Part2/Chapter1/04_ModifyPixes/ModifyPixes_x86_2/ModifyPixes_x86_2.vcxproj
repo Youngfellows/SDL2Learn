@@ -22,6 +22,7 @@
     <ClInclude Include="include\Config.h" />
     <ClInclude Include="include\EventListener.h" />
     <ClInclude Include="include\Game.h" />
+    <ClInclude Include="include\Line.h" />
     <ClInclude Include="include\Photo.h" />
     <ClInclude Include="include\Rectangle.h" />
     <ClInclude Include="include\Resource.h" />
@@ -32,6 +33,7 @@
     <ClCompile Include="src\DisplayObject.cpp" />
     <ClCompile Include="src\EventListener.cpp" />
     <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\Line.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Photo.cpp" />
     <ClCompile Include="src\Rectangle.cpp" />

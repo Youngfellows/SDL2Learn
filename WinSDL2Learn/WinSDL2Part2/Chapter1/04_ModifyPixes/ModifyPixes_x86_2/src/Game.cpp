@@ -6,6 +6,7 @@
 #include "Photo.h"
 #include "Text.h"
 #include "EventListener.h"
+#include "Line.h"
 
 namespace Dungeon
 {
@@ -191,6 +192,17 @@ namespace Dungeon
 		{
 			return SDL_FALSE;
 		}
+
+		Line *line = new Line();//直线组件
+		mComponents[4] = line->Create(LINE_COLOR,
+			LINE_STAR_X_POSITION, LINE_STAR_Y_POSITION,
+			LINE_END_X_POSITION, LINE_END_Y_POSITION,
+			WINDOW_WIDTH, WINDOW_HEIGHT);
+		if (!mComponents[4])
+		{
+			return SDL_FALSE;
+		}
+
 		return SDL_TRUE;
 	}
 

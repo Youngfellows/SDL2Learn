@@ -108,6 +108,7 @@ namespace Dungeon
 		{
 			((uint32_t *)(mSurface->pixels))[WIDTH * 50 + 50 + i] = 0xff0000ff;
 		}
+		
 
 		//让Surface的绘制生效
 		SDL_UpdateWindowSurface(mWindow);

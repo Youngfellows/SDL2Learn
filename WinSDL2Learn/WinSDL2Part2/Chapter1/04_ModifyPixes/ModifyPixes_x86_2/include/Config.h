@@ -10,7 +10,7 @@ namespace Dungeon
 
 #define BACKGROUND_COLOR 0xffffffff //背景颜色-白
 
-#define COMPONENT_SIZE 4 //需要创建的组件个数
+#define COMPONENT_SIZE 5 //需要创建的组件个数
 #define START_X 50
 #define START_Y 80
 #define MARGIN_LEFT 10
@@ -55,6 +55,13 @@ namespace Dungeon
 #define PADDING_TOP PT_SIZE_10 //上边距
 #define PADDING_RIGHT PT_SIZE_10 //右边距
 #define PADDING_BOTTOM PT_SIZE_10 //下边距
+
+#define LINE_STAR_X_POSITION 100 //直线开始位置
+#define LINE_STAR_Y_POSITION 50 //直线开始位置
+#define LINE_END_X_POSITION 200 //直线开始位置
+#define LINE_END_Y_POSITION 80 //直线开始位置
+#define LINE_COLOR 0xffff0000 //直线颜色
+
 }
 
 #endif // !_DUNGEON_CONFIG_H_

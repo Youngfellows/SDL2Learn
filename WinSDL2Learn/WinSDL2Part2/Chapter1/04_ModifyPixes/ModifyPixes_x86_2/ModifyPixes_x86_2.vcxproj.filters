@@ -39,6 +39,9 @@
     <ClInclude Include="include\EventListener.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="include\Line.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Game.cpp">
@@ -63,6 +66,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\EventListener.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Line.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
