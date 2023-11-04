@@ -18,6 +18,32 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\Bubble.h" />
+    <ClInclude Include="include\Config.h" />
+    <ClInclude Include="include\DisplayObject.h" />
+    <ClInclude Include="include\Eventlistener.h" />
+    <ClInclude Include="include\Game.h" />
+    <ClInclude Include="include\NoSignal.h" />
+    <ClInclude Include="include\Photo.h" />
+    <ClInclude Include="include\Rectangle.h" />
+    <ClInclude Include="include\Resource.h" />
+    <ClInclude Include="include\StarlitSky.h" />
+    <ClInclude Include="include\Text.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Bubble.cpp" />
+    <ClCompile Include="src\DisplayObject.cpp" />
+    <ClCompile Include="src\EventListener.cpp" />
+    <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\NoSignal.cpp" />
+    <ClCompile Include="src\Photo.cpp" />
+    <ClCompile Include="src\Rectangle.cpp" />
+    <ClCompile Include="src\Resource.cpp" />
+    <ClCompile Include="src\StarlitSky.cpp" />
+    <ClCompile Include="src\Text.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -84,7 +110,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;SDL2_ttf.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -131,12 +157,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="include\Render.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="src\Render.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
