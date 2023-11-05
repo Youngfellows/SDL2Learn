@@ -1,40 +1,40 @@
 #ifndef _DUNGEON_GAME_H_
 #define _DUNGEON_GAME_H_
 
+#include "SDL2/SDL.h"
+#include "DisplayObject.h"
+#include "Resource.h"
+
 namespace Dungeon
 {
 	class Game
 	{
 	private:
-		class SDL_Window *mWindow;//!< ÏÈÉùÃ÷ *mWindow£¬´°¿Ú
-		bool mIsRunning;//!< ÔËÐÐ×´Ì¬
-		class SDL_Surface *mImage;
-		class SDL_Surface *mScreen;
+		SDL_Window *mWindow;//Windowçª—å£
+		bool mIsRunning;
+		SDL_Surface *mWinSurface;//çª—å£ç”»å¸ƒ
+		Resource *mResource;//èµ„æºåŠ è½½å™¨
+		DisplayObject **mComponents;//ç»„ä»¶åˆ—è¡¨,æŒ‡é’ˆæ•°ç»„
+
 
 	public:
-		//! ¹¹Ôìº¯Êý
 		Game();
-
-		//! ³õÊ¼»¯
-		bool Initialize();
-
-		//! Ö÷Ñ­»·
-		void Loop();
-
-		//! ÓÎÏ·½áÊø
-		void Shutdown();
+		~Game();
+		bool Initialize();//åˆå§‹åŒ–
+		void Loop();//ä¸»å¾ªçŽ¯
+		void Shutdown();//æ¸¸æˆç»“æŸ
 
 	private:
-		//! ´¦ÀíÊÂ¼þ
-		void Event();
-
-		//! ¸üÐÂ¸÷ÖÖ×´Ì¬
-		void Update(long delay);
-
-		//! äÖÈ¾
-		void Draw();
+		void Event();//å¤„ç†äº‹ä»¶
+		void Update(long delay);//æ›´æ–°å„ç§çŠ¶æ€
+		void Draw();//æ¸²æŸ“
+		SDL_bool CreateComponents();//åˆ›å»ºç»„ä»¶
+		void DrawComponents();//ç»˜åˆ¶ç»„ä»¶
+		void FreeComponents();//é‡Šæ”¾ç»„ä»¶èµ„æº
+		void MouseMoveEvent(SDL_Event *event);//å…‰æ ‡ç§»åŠ¨äº‹ä»¶
+		void MouseDownEvent(SDL_Event *event);//é¼ æ ‡é”®æŒ‰ä¸‹äº‹ä»¶
+		void MouseUpEvent(SDL_Event *event);//é¼ æ ‡é”®æŒ‰ä¸‹äº‹ä»¶
 	};
 }
-
 #endif // !_DUNGEON_GAME_H_
 
