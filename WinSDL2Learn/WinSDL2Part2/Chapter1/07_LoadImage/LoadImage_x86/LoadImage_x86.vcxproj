@@ -18,11 +18,35 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\Config.h" />
+    <ClInclude Include="include\EventListener.h" />
+    <ClInclude Include="include\Game.h" />
+    <ClInclude Include="include\Line.h" />
+    <ClInclude Include="include\Photo.h" />
+    <ClInclude Include="include\Rect.h" />
+    <ClInclude Include="include\Rectangle.h" />
+    <ClInclude Include="include\Resource.h" />
+    <ClInclude Include="include\DisplayObject.h" />
+    <ClInclude Include="include\Text.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\DisplayObject.cpp" />
+    <ClCompile Include="src\EventListener.cpp" />
+    <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\Line.cpp" />
+    <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\Photo.cpp" />
+    <ClCompile Include="src\Rect.cpp" />
+    <ClCompile Include="src\Rectangle.cpp" />
+    <ClCompile Include="src\Resource.cpp" />
+    <ClCompile Include="src\Text.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{8dc6060b-c44d-44f7-9570-0d232c3dab00}</ProjectGuid>
-    <RootNamespace>LoadImagex86</RootNamespace>
+    <ProjectGuid>{da90ddad-f079-4a74-bfa8-ca8ee8851b87}</ProjectGuid>
+    <RootNamespace>DrawOnSurfacex86</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -84,7 +108,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -131,13 +155,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="include\Game.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="src\Game.cpp" />
-    <ClCompile Include="src\LoadImage.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
