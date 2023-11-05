@@ -13,6 +13,8 @@ namespace Dungeon
 			mRectangleData->dest = nullptr;
 			mRectangleData->OnClick = nullptr;
 			mRectangleData->point = nullptr;
+			mRectangleData->speedX = 10;
+			mRectangleData->speedY = 12;
 		}
 		else
 		{
@@ -124,11 +126,38 @@ namespace Dungeon
 			return;
 		}
 		//模拟鼠标移动
-		SDL_Event event;
+		/*SDL_Event event;
 		event.motion.x = mRectangleData->dest->x + 1.5;
 		event.motion.y = mRectangleData->dest->y + 1.5;
 		mRectangleData->move = SDL_TRUE;
-		MouseMove(&event);
+		MouseMove(&event);*/
+
+		//移动
+		SDL_FRect *inner = mRectangleData->dest;
+		inner->x += mRectangleData->speedX;//更新矩形位置
+		inner->y += mRectangleData->speedY;
+
+		//限定可拖动边界
+		if (inner->x < 0)
+		{
+			inner->x = 0;//限定左边界
+			mRectangleData->speedX = abs(mRectangleData->speedX);
+		}
+		if (inner->x > WINDOW_WIDTH - inner->w)
+		{
+			inner->x = WINDOW_WIDTH - inner->w;//限定右边界
+			mRectangleData->speedX = -abs(mRectangleData->speedX);
+		}
+		if (inner->y < 0)
+		{
+			inner->y = 0;//限定上边界
+			mRectangleData->speedY = abs(mRectangleData->speedY);
+		}
+		if (inner->y > WINDOW_HEIGHT - inner->h)
+		{
+			inner->y = WINDOW_HEIGHT - inner->h;//限定下边界
+			mRectangleData->speedY = -abs(mRectangleData->speedY);
+		}
 	}
 
 	/*

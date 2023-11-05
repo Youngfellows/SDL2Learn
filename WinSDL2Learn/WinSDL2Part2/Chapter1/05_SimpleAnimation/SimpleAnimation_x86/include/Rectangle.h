@@ -19,6 +19,8 @@ namespace Dungeon
 		int borderSize;//边框大小
 		DisplayObject *destObj;
 		OnRectangleClickCallback OnClick;//被点击的回调
+		int speedX;
+		int speedY;
 	}RectangleData;
 
 }
