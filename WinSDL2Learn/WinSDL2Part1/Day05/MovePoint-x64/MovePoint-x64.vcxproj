@@ -25,7 +25,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\GPoint.cpp" />
-    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Main.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
