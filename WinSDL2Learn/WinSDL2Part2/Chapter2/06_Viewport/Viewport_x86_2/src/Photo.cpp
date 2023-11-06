@@ -168,8 +168,9 @@ namespace Dungeon
 			mPhotoData->angle += 4.5;//更新旋转角度
 		}
 
-		//保存临时矩形变量
-		SDL_FRect dest = { mPhotoData->dest->x,mPhotoData->dest->y,mPhotoData->dest->w,mPhotoData->dest->h };
+		//使用视窗来实现在中心位置经行缩放
+		SDL_FRect destRect = { mPhotoData->dest->x,mPhotoData->dest->y,mPhotoData->dest->w,mPhotoData->dest->h };
+		//SDL_FRect destRect = { 0,0,mPhotoData->dest->w,mPhotoData->dest->h };
 
 		if (mPhotoData->scaleAnim)
 		{
@@ -177,10 +178,10 @@ namespace Dungeon
 			float scale = SDL_sinf(mPhotoData->valueX) + 1;//缩放比例为0~2倍数
 			//SDL_RenderSetScale(renderer, scale, scale);//设置缩放动画,有问题是把整个画布都缩放啦
 			//改变宽高来实现缩放
-			dest.w *= scale;
-			dest.h *= scale;
-			/*dest.x = mPhotoData->dest->x + dest.w;
-			dest.y = mPhotoData->dest->y + dest.h;*/
+			destRect.w *= scale;
+			destRect.h *= scale;
+			//SDL_Rect viewport = { mPhotoData->dest->x,mPhotoData->dest->y,destRect.w,destRect.h };
+			//SDL_RenderSetViewport(renderer, &viewport);//有bug，窗口大小被缩放了,其他的图形不会绘制
 		}
 
 		//绘制图片
@@ -188,7 +189,7 @@ namespace Dungeon
 		//SDL_RenderCopyExF(renderer, mPhotoData->texture, nullptr, mPhotoData->dest,
 		//	mPhotoData->angle, nullptr, SDL_FLIP_NONE);//绘制图片
 
-		SDL_RenderCopyExF(renderer, mPhotoData->texture, nullptr, &dest,
+		SDL_RenderCopyExF(renderer, mPhotoData->texture, nullptr, &destRect,
 			mPhotoData->angle, nullptr, SDL_FLIP_NONE);//绘制图片
 	}
 
