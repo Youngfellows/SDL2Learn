@@ -57,6 +57,9 @@
     <ClInclude Include="include\Bubble.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="include\Line.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -90,6 +93,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\StarlitSky.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Line.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

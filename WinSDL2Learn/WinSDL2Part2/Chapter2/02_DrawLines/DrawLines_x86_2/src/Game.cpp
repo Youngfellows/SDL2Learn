@@ -8,6 +8,7 @@
 #include "SDL2/SDL_ttf.h"
 #include <string>
 #include "StarlitSky.h"
+#include "Line.h"
 
 namespace Dungeon
 {
@@ -219,6 +220,19 @@ namespace Dungeon
 		mComponents[5] = rectangle->Create(RECT_START_X, RECT_START_Y, RECT_WIDTH, RECT_HEIGHT
 			, RECT_COLOR, RECT_BORDER_COLOR, PT_SIZE_25, mComponents[0], &Dungeon::EventListener::OnClickRect);
 		if (!mComponents[5])
+		{
+			return SDL_FALSE;
+		}
+
+		Line *line = new Line();//直线组件
+		SDL_FPoint start;
+		start.x = POINT_1_X;
+		start.y = POINT_1_Y;
+		SDL_FPoint end;
+		end.x = POINT_2_X;
+		end.y = POINT_2_Y;
+		mComponents[6] = line->Create(LINE_1_COLOR, start, end);
+		if (!mComponents[6])
 		{
 			return SDL_FALSE;
 		}

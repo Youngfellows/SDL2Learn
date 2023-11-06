@@ -25,6 +25,7 @@
     <ClInclude Include="include\Eventlistener.h" />
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\GPoint.h" />
+    <ClInclude Include="include\Line.h" />
     <ClInclude Include="include\main.h" />
     <ClInclude Include="include\NoSignal.h" />
     <ClInclude Include="include\Photo.h" />
@@ -38,6 +39,7 @@
     <ClCompile Include="src\DisplayObject.cpp" />
     <ClCompile Include="src\EventListener.cpp" />
     <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\Line.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\NoSignal.cpp" />
     <ClCompile Include="src\Photo.cpp" />
