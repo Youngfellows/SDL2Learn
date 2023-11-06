@@ -19,16 +19,43 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Main.cpp" />
+    <ClInclude Include="include\BrokenLine.h" />
+    <ClInclude Include="include\Config.h" />
+    <ClInclude Include="include\constants.h" />
+    <ClInclude Include="include\DisplayObject.h" />
+    <ClInclude Include="include\Eventlistener.h" />
+    <ClInclude Include="include\Game.h" />
+    <ClInclude Include="include\GPoint.h" />
+    <ClInclude Include="include\Line.h" />
+    <ClInclude Include="include\main.h" />
+    <ClInclude Include="include\NoSignal.h" />
+    <ClInclude Include="include\Photo.h" />
+    <ClInclude Include="include\Bubble.h" />
+    <ClInclude Include="include\Rectangle.h" />
+    <ClInclude Include="include\Resource.h" />
+    <ClInclude Include="include\StarlitSky.h" />
+    <ClInclude Include="include\Text.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\ScaleImage.h" />
+    <ClCompile Include="src\BrokenLine.cpp" />
+    <ClCompile Include="src\DisplayObject.cpp" />
+    <ClCompile Include="src\EventListener.cpp" />
+    <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\Line.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\NoSignal.cpp" />
+    <ClCompile Include="src\Photo.cpp" />
+    <ClCompile Include="src\Bubble.cpp" />
+    <ClCompile Include="src\Rectangle.cpp" />
+    <ClCompile Include="src\Resource.cpp" />
+    <ClCompile Include="src\StarlitSky.cpp" />
+    <ClCompile Include="src\Text.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{883093d5-084b-4826-9502-44f671202b6c}</ProjectGuid>
-    <RootNamespace>My05ScaleImagex64</RootNamespace>
+    <ProjectGuid>{e7eb8d26-bfbf-49ea-910c-a64294928779}</ProjectGuid>
+    <RootNamespace>MovePointx86</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -79,6 +106,9 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>include;$(IncludePath)</IncludePath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -89,6 +119,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -113,6 +145,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard_C>stdc11</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
