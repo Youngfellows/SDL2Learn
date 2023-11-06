@@ -7,7 +7,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DrawLines_x64", "DrawLines_
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DrawLines_x86", "DrawLines_x86\DrawLines_x86.vcxproj", "{3A6AED2E-BF36-4973-A6AC-F5596042492C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RenderImage_x86_2", "..\01_RenderImage\RenderImage_x86_2\RenderImage_x86_2.vcxproj", "{E7EB8D26-BFBF-49EA-910C-A64294928779}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DrawLines_x86_2", "DrawLines_x86_2\DrawLines_x86_2.vcxproj", "{E7EB8D26-BFBF-49EA-910C-A64294928779}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
