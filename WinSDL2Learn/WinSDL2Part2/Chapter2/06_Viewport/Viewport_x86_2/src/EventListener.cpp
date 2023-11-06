@@ -40,7 +40,7 @@ namespace Dungeon
 		Photo *cat = (Photo *)self->GetSubClass();
 		if (cat)
 		{
-			cat->Rotate();//开启旋转动画
+			//cat->Rotate();//开启旋转动画
 			cat->Scale();//开启缩放动画
 		}
 	}

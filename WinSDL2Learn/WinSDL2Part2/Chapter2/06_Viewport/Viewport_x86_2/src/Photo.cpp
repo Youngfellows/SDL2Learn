@@ -168,20 +168,25 @@ namespace Dungeon
 			mPhotoData->angle += 4.5;//更新旋转角度
 		}
 
-		//使用视窗来实现在中心位置经行缩放
 		SDL_FRect destRect = { mPhotoData->dest->x,mPhotoData->dest->y,mPhotoData->dest->w,mPhotoData->dest->h };
-		//SDL_FRect destRect = { 0,0,mPhotoData->dest->w,mPhotoData->dest->h };
 
+		//改变宽高来实现缩放,原来图片的中心点0(x0,y0)
+		float x0 = mPhotoData->dest->x + mPhotoData->dest->w / 2.0f;
+		float y0 = mPhotoData->dest->y + mPhotoData->dest->h / 2.0f;
+
+		//设置缩放中心在图片的中心位置
 		if (mPhotoData->scaleAnim)
 		{
 			mPhotoData->valueX += 0.1f;
-			float scale = SDL_sinf(mPhotoData->valueX) + 1;//缩放比例为0~2倍数
-			//SDL_RenderSetScale(renderer, scale, scale);//设置缩放动画,有问题是把整个画布都缩放啦
-			//改变宽高来实现缩放
+			float scale = SDL_sinf(mPhotoData->valueX) + 1;//缩放比例为0~2倍数			
 			destRect.w *= scale;
 			destRect.h *= scale;
-			//SDL_Rect viewport = { mPhotoData->dest->x,mPhotoData->dest->y,destRect.w,destRect.h };
-			//SDL_RenderSetViewport(renderer, &viewport);//有bug，窗口大小被缩放了,其他的图形不会绘制
+
+			//新绘制的起始位置A1(x1,y1),原来的起始位置A(x,y)
+			float x1 = x0 - destRect.w / 2.0f;
+			float y1 = y0 - destRect.h / 2.0f;
+			destRect.x = x1;
+			destRect.y = y1;
 		}
 
 		//绘制图片
