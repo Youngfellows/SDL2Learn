@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\RenderImage.cpp">
+    <ClCompile Include="src\Main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

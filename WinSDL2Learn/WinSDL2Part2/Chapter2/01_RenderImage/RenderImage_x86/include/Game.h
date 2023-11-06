@@ -8,32 +8,32 @@ namespace Dungeon
 	class Game
 	{
 	private:
-		SDL_Window *mWindow;//!< ÏÈÉùÃ÷ *mWindow£¬´°¿Ú
-		bool mIsRunning;//!< ÔËÐÐ×´Ì¬
+		SDL_Window *mWindow;//!< å…ˆå£°æ˜Ž *mWindowï¼Œçª—å£
+		bool mIsRunning;//!< è¿è¡ŒçŠ¶æ€
 		SDL_Renderer *mRenderer;
 		SDL_Texture *mImageTexture;
-		
+
 	public:
-		//! ¹¹Ôìº¯Êý
+		//! æž„é€ å‡½æ•°
 		Game();
 
-		//! ³õÊ¼»¯
+		//! åˆå§‹åŒ–
 		bool Initialize();
 
-		//! Ö÷Ñ­»·
+		//! ä¸»å¾ªçŽ¯
 		void Loop();
 
-		//! ÓÎÏ·½áÊø
+		//! æ¸¸æˆç»“æŸ
 		void Shutdown();
 
 	private:
-		//! ´¦ÀíÊÂ¼þ
+		//! å¤„ç†äº‹ä»¶
 		void Event();
 
-		//! ¸üÐÂ¸÷ÖÖ×´Ì¬
+		//! æ›´æ–°å„ç§çŠ¶æ€
 		void Update(long delay);
 
-		//! äÖÈ¾
+		//! æ¸²æŸ“
 		void Draw();
 	};
 }

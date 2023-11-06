@@ -7,11 +7,12 @@
 #define FRAMERATE 60
 #define FILE_NAME "./resources/cat.bmp"
 
-SDL_Renderer* renderer;
-SDL_Window* window;
-SDL_Texture* imageTexture;
+SDL_Renderer *renderer;
+SDL_Window *window;
+SDL_Texture *imageTexture;
 
-int main(int argc, char* argv[]) {
+int main(int argc, char *argv[])
+{
 	if (SDL_Init(SDL_INIT_VIDEO)) {
 		SDL_Log("Can not init video, %s", SDL_GetError());
 		return 1;
@@ -35,7 +36,7 @@ int main(int argc, char* argv[]) {
 		return 1;
 	}
 
-	SDL_Surface* imageSurface = SDL_LoadBMP(FILE_NAME);
+	SDL_Surface *imageSurface = SDL_LoadBMP(FILE_NAME);
 	if (imageSurface == NULL) {
 		SDL_Log("Can not load image, %s", SDL_GetError());
 		return 1;
@@ -51,7 +52,8 @@ int main(int argc, char* argv[]) {
 	return 0;
 }
 
-void draw() {
+void draw()
+{
 	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 	SDL_RenderClear(renderer);
 	//    int w, h;
@@ -62,7 +64,8 @@ void draw() {
 	SDL_RenderPresent(renderer);
 }
 
-void event_loop() {
+void event_loop()
+{
 	while (1) {
 		uint32_t begin = SDL_GetTicks();
 		draw();

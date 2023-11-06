@@ -13,14 +13,14 @@ namespace Dungeon
 
 	bool Game::Initialize()
 	{
-		// SDL¿â³õÊ¼»¯
+		// SDLåº“åˆå§‹åŒ–
 		if (SDL_Init(SDL_INIT_VIDEO) != 0)
 		{
 			SDL_Log("Can not init video: %s", SDL_GetError());
 			return false;
 		}
 
-		// ´°¿Ú³õÊ¼»¯
+		// çª—å£åˆå§‹åŒ–
 		mWindow = SDL_CreateWindow("Dungeon", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, SDL_WINDOW_SHOWN);
 		if (!mWindow)
 		{
@@ -28,7 +28,7 @@ namespace Dungeon
 			return false;
 		}
 
-		// Renderer³õÊ¼»¯
+		// Rendereråˆå§‹åŒ–
 		mRenderer = SDL_CreateRenderer(mWindow, -1, SDL_RENDERER_ACCELERATED);
 		if (!mRenderer)
 		{
@@ -57,7 +57,7 @@ namespace Dungeon
 
 			long current = SDL_GetTicks();
 			long cost = current - begin;
-			long frame = 1000 / FRAMERATE;//Ã¿Ò»Ö¡¶à³¤Ê±¼ä
+			long frame = 1000 / FRAMERATE;//æ¯ä¸€å¸§å¤šé•¿æ—¶é—´
 			long delay = frame - cost;
 			//SDL_Log("delay=%ld", delay);
 			if (delay > 0)
@@ -70,12 +70,12 @@ namespace Dungeon
 	void Game::Event()
 	{
 		SDL_Event event;
-		// Èç¹ûÊÂ¼ş¶ÓÁĞÖĞÓĞÎ´´¦ÀíµÄÊÂ¼ş£¬°´Ë³Ğò´¦Àí
+		// å¦‚æœäº‹ä»¶é˜Ÿåˆ—ä¸­æœ‰æœªå¤„ç†çš„äº‹ä»¶ï¼ŒæŒ‰é¡ºåºå¤„ç†
 		while (SDL_PollEvent(&event))
 		{
 			switch (event.type)
 			{
-			case SDL_QUIT:// ÍË³öÊÂ¼ş£¬°´ÏÂ´°¿ÚµÄ²æ
+			case SDL_QUIT:// é€€å‡ºäº‹ä»¶ï¼ŒæŒ‰ä¸‹çª—å£çš„å‰
 				mIsRunning = false;
 				break;
 			default:

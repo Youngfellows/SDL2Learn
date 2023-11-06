@@ -20,7 +20,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\DrawLines.cpp">
+    <ClCompile Include="src\Main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

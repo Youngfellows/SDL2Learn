@@ -22,7 +22,7 @@
     <ClInclude Include="include\DrawLines.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\DrawLines.cpp" />
+    <ClCompile Include="src\Main.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
