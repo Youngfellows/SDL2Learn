@@ -1,5 +1,6 @@
 #include "Line.h"
 
+
 namespace Dungeon
 {
 	Line::Line()
