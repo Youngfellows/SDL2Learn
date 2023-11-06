@@ -55,4 +55,15 @@ namespace Dungeon
 			girl->Scale();//开启缩放动画
 		}
 	}
+
+	void EventListener::OnClickText3(DisplayObject *self)
+	{
+		SDL_Log("EventListener::OnClickText2():: click text2");
+		Photo *girl = (Photo *)self->GetSubClass();
+		if (girl)
+		{
+			girl->Rotate();//开启旋转动画
+			girl->Scale();//开启缩放动画
+		}
+	}
 }

@@ -258,6 +258,16 @@ namespace Dungeon
 		{
 			return SDL_FALSE;
 		}
+
+		Text *text3 = new Text();//文本组件
+		mComponents[9] = text3->Create(FONT_FILE, TEXT_3, PT_SIZE_30, TEXT_COLOR,
+			TEXT_3_X_POSITION, TEXT_3_Y_POSITION, TEXT_BACKGROUND_COLOR,
+			PADDING_LEFT, PADDING_TOP, PADDING_RIGHT, PADDING_BOTTOM,
+			mComponents[2], 1, { &Dungeon::EventListener::OnClickText3 });
+		if (!mComponents[9])
+		{
+			return SDL_FALSE;
+		}
 		return SDL_TRUE;
 	}
 

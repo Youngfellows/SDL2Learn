@@ -21,6 +21,7 @@ namespace Dungeon
 		static void OnClickGirl();//点击矩形的回调
 		static void OnClickText1(DisplayObject *self);//点击文本1
 		static void OnClickText2(DisplayObject *self);//点击文本2
+		static void OnClickText3(DisplayObject *self);//点击文本2
 	};
 
 }
