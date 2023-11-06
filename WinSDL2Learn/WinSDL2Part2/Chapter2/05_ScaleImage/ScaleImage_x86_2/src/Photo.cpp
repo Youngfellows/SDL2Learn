@@ -10,8 +10,10 @@ namespace Dungeon
 		this->mPhotoData = (PhontData *)malloc(sizeof(PhontData));
 		if (mPhotoData)
 		{
-			mPhotoData->anim = SDL_FALSE;
+			mPhotoData->rotateAnim = SDL_FALSE;
+			mPhotoData->scaleAnim = SDL_FALSE;
 			mPhotoData->angle = 0;
+			mPhotoData->valueX = 0;
 			mPhotoData->OnClick = nullptr;
 			mPhotoData->texture = nullptr;
 			mPhotoData->dest = (SDL_FRect *)malloc(sizeof(SDL_FRect));
@@ -135,7 +137,17 @@ namespace Dungeon
 			SDL_Log("Photo::Rotate():: mPhotoData is null");
 			return;
 		}
-		mPhotoData->anim = SDL_TRUE;
+		mPhotoData->rotateAnim = SDL_TRUE;
+	}
+
+	void Photo::Scale()
+	{
+		if (!mPhotoData)
+		{
+			SDL_Log("Photo::Rotate():: mPhotoData is null");
+			return;
+		}
+		mPhotoData->scaleAnim = SDL_TRUE;
 	}
 
 	void Photo::Draw(SDL_Renderer *renderer)
@@ -151,14 +163,32 @@ namespace Dungeon
 			return;
 		}
 
-		if (mPhotoData->anim)
+		if (mPhotoData->rotateAnim)
 		{
 			mPhotoData->angle += 4.5;//更新旋转角度
 		}
 
+		//保存临时矩形变量
+		SDL_FRect dest = { mPhotoData->dest->x,mPhotoData->dest->y,mPhotoData->dest->w,mPhotoData->dest->h };
+
+		if (mPhotoData->scaleAnim)
+		{
+			mPhotoData->valueX += 0.1f;
+			float scale = SDL_sinf(mPhotoData->valueX) + 1;//缩放比例为0~2倍数
+			//SDL_RenderSetScale(renderer, scale, scale);//设置缩放动画,有问题是把整个画布都缩放啦
+			//改变宽高来实现缩放
+			dest.w *= scale;
+			dest.h *= scale;
+			/*dest.x = mPhotoData->dest->x + dest.w;
+			dest.y = mPhotoData->dest->y + dest.h;*/
+		}
+
 		//绘制图片
 		//SDL_RenderCopyF(renderer, mPhotoData->texture, nullptr, mPhotoData->dest);
-		SDL_RenderCopyExF(renderer, mPhotoData->texture, nullptr, mPhotoData->dest,
+		//SDL_RenderCopyExF(renderer, mPhotoData->texture, nullptr, mPhotoData->dest,
+		//	mPhotoData->angle, nullptr, SDL_FLIP_NONE);//绘制图片
+
+		SDL_RenderCopyExF(renderer, mPhotoData->texture, nullptr, &dest,
 			mPhotoData->angle, nullptr, SDL_FLIP_NONE);//绘制图片
 	}
 
@@ -189,7 +219,8 @@ namespace Dungeon
 			return;
 		}
 		mPhotoData->move = SDL_FALSE;
-		mPhotoData->anim = SDL_FALSE;
+		mPhotoData->rotateAnim = SDL_FALSE;
+		mPhotoData->scaleAnim = SDL_FALSE;
 	}
 
 	void Photo::MouseMove(SDL_Event *event)

@@ -41,6 +41,7 @@ namespace Dungeon
 		if (cat)
 		{
 			cat->Rotate();//开启旋转动画
+			cat->Scale();//开启缩放动画
 		}
 	}
 
@@ -51,6 +52,7 @@ namespace Dungeon
 		if (girl)
 		{
 			girl->Rotate();//开启旋转动画
+			girl->Scale();//开启缩放动画
 		}
 	}
 }
