@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\BrokenLine.h" />
     <ClInclude Include="include\Config.h" />
     <ClInclude Include="include\constants.h" />
     <ClInclude Include="include\DisplayObject.h" />
@@ -36,6 +37,7 @@
     <ClInclude Include="include\Text.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\BrokenLine.cpp" />
     <ClCompile Include="src\DisplayObject.cpp" />
     <ClCompile Include="src\EventListener.cpp" />
     <ClCompile Include="src\Game.cpp" />

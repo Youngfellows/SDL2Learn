@@ -9,6 +9,7 @@
 #include <string>
 #include "StarlitSky.h"
 #include "Line.h"
+#include "BrokenLine.h"
 
 namespace Dungeon
 {
@@ -233,6 +234,19 @@ namespace Dungeon
 		end.y = POINT_2_Y;
 		mComponents[6] = line->Create(LINE_1_COLOR, start, end);
 		if (!mComponents[6])
+		{
+			return SDL_FALSE;
+		}
+
+		BrokenLine *brokenLine = new BrokenLine();//折线组件
+		mComponents[7] = brokenLine->Create(LINE_4_COLOR, 5,
+			{ {POINT_1_X,POINT_1_Y},
+			{POINT_3_X,POINT_3_Y},
+			{POINT_4_X,POINT_4_Y},
+			{POINT_5_X,POINT_5_Y},
+			{POINT_6_X,POINT_6_Y},
+			});
+		if (!mComponents[7])
 		{
 			return SDL_FALSE;
 		}

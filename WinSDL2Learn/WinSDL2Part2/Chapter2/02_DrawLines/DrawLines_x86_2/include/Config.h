@@ -8,7 +8,7 @@ namespace Dungeon
 #define FRAMERATE 60 //每1秒帧数
 #define WINDOW_TITLE "Dungeon" //Window窗口title
 
-#define COMPONENT_SIZE 7 //需要创建的组件个数
+#define COMPONENT_SIZE 8 //需要创建的组件个数
 #define START_X 50
 #define START_Y 80
 #define MARGIN_LEFT 10
@@ -66,15 +66,19 @@ namespace Dungeon
 #define LINE_1_COLOR 0xffff0000 //直线颜色1
 #define LINE_2_COLOR 0xff00ff00 //直线颜色2
 #define LINE_3_COLOR 0xff0000ff //直线颜色3
-#define LINE_4_COLOR 0xFFE37F26 //直线颜色4
-#define POINT_1_X 100.0 //第1个点X位置
-#define POINT_1_Y 100.0 //第1个点Y位置	
-#define POINT_2_X 200.0 //第2个点X位置
-#define POINT_2_Y 150.0 //第2个点Y位置
-#define POINT_3_X 100.0 //第3个点X位置
-#define POINT_3_Y 200.0 //第3个点Y位置
-#define POINT_4_X 150.0 //第4个点X位置
-#define POINT_4_Y 300.0 //第4个点Y位置
+#define LINE_4_COLOR 0xFF22A5F1 //直线颜色4
+#define POINT_1_X 100 //第1个点X位置
+#define POINT_1_Y 100 //第1个点Y位置	
+#define POINT_2_X 200 //第2个点X位置
+#define POINT_2_Y 150 //第2个点Y位置
+#define POINT_3_X 100 //第3个点X位置
+#define POINT_3_Y 200 //第3个点Y位置
+#define POINT_4_X 150 //第4个点X位置
+#define POINT_4_Y 300 //第4个点Y位置
+#define POINT_5_X 300 //第4个点X位置
+#define POINT_5_Y 200 //第4个点Y位置
+#define POINT_6_X 350 //第4个点X位置
+#define POINT_6_Y 350 //第4个点Y位置
 }
 
 #endif // !_DUNGEON_CONFIG_H_
