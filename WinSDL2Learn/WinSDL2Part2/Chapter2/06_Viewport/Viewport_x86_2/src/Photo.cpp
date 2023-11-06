@@ -7,11 +7,13 @@ namespace Dungeon
 	Photo::Photo() :mPhotoData(nullptr)
 	{
 		//动态申请内存
-		this->mPhotoData = (PhontData *)malloc(sizeof(PhontData));
+		this->mPhotoData = (PhotoData *)malloc(sizeof(PhotoData));
 		if (mPhotoData)
 		{
 			mPhotoData->rotateAnim = SDL_FALSE;
 			mPhotoData->scaleAnim = SDL_FALSE;
+			mPhotoData->delay = SDL_FALSE;
+			mPhotoData->delayTime = 0;
 			mPhotoData->angle = 0;
 			mPhotoData->valueX = 0;
 			mPhotoData->OnClick = nullptr;
@@ -144,10 +146,41 @@ namespace Dungeon
 	{
 		if (!mPhotoData)
 		{
-			SDL_Log("Photo::Rotate():: mPhotoData is null");
+			SDL_Log("Photo::Scale():: mPhotoData is null");
 			return;
 		}
 		mPhotoData->scaleAnim = SDL_TRUE;
+	}
+
+	void Photo::SetDelay(int delayTime)
+	{
+		if (!mPhotoData)
+		{
+			SDL_Log("Photo::SetDelay():: mPhotoData is null");
+			return;
+		}
+		//启动子线程执行延迟任务
+		mPhotoData->delay = SDL_TRUE;
+		mPhotoData->delayTime = delayTime;
+		SDL_Thread *delayThread = SDL_CreateThread(&ThreadCallback, "Animation Thread", this);
+	}
+
+	/*
+	* 线程回调函数
+	*/
+	int SDLCALL  Photo::ThreadCallback(void *userdata)
+	{
+		Photo *photo = (Photo *)userdata;
+		if (photo)
+		{
+			PhotoData *phontData = photo->mPhotoData;
+			SDL_Delay(phontData->delayTime);//执行延迟任务
+			phontData->rotateAnim = SDL_FALSE;
+			phontData->scaleAnim = SDL_FALSE;
+			phontData->delay = SDL_FALSE;
+			return 0;
+		}
+		return 1;
 	}
 
 	void Photo::Draw(SDL_Renderer *renderer)
@@ -224,9 +257,12 @@ namespace Dungeon
 		{
 			return;
 		}
-		mPhotoData->move = SDL_FALSE;
-		mPhotoData->rotateAnim = SDL_FALSE;
-		mPhotoData->scaleAnim = SDL_FALSE;
+		if (!mPhotoData->delay)
+		{
+			mPhotoData->move = SDL_FALSE;
+			mPhotoData->rotateAnim = SDL_FALSE;
+			mPhotoData->scaleAnim = SDL_FALSE;
+		}
 	}
 
 	void Photo::MouseMove(SDL_Event *event)

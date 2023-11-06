@@ -9,7 +9,7 @@ namespace Dungeon
 	//函数指针,定义点击回调
 	typedef void (*OnPhotoClickCallback)();
 
-	typedef struct PhontData
+	typedef struct PhotoData
 	{
 		SDL_FRect *dest;//显示位置
 		SDL_Texture *texture;//显示资源
@@ -20,6 +20,8 @@ namespace Dungeon
 		SDL_bool scaleAnim;//是否缩放动画
 		float angle;//旋转角度
 		float valueX;//x坐标
+		SDL_bool delay;//动画是否延迟执行
+		int delayTime;//动画执行时间
 	} PhotoData;
 }
 
@@ -28,7 +30,7 @@ namespace Dungeon
 	class Photo
 	{
 	private:
-		PhontData *mPhotoData;
+		PhotoData *mPhotoData;
 
 	public:
 		Photo();
@@ -42,6 +44,8 @@ namespace Dungeon
 		static void OnDestoryCallback(DisplayObject *self);
 		void Rotate();
 		void Scale();
+		void SetDelay(int delayTime);
+		static int SDLCALL ThreadCallback(void *userdata);
 
 	private:
 		void Draw(SDL_Renderer *renderer);
