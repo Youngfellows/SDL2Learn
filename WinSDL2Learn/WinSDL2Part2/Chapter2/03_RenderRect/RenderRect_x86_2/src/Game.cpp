@@ -250,6 +250,14 @@ namespace Dungeon
 		{
 			return SDL_FALSE;
 		}
+
+		Rectangle *rectangle2 = new Rectangle();//矩形组件
+		mComponents[8] = rectangle2->Create(RECT_1_START_X, RECT_1_START_Y, RECT_1_WIDTH, RECT_1_HEIGHT
+			, RECT_1_COLOR, RECT_1_BORDER_COLOR, PT_SIZE_25, mComponents[0], &Dungeon::EventListener::OnClickRect);
+		if (!mComponents[8])
+		{
+			return SDL_FALSE;
+		}
 		return SDL_TRUE;
 	}
 

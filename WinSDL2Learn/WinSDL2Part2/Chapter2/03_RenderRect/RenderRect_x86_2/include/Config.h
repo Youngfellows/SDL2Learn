@@ -8,7 +8,7 @@ namespace Dungeon
 #define FRAMERATE 60 //每1秒帧数
 #define WINDOW_TITLE "Dungeon" //Window窗口title
 
-#define COMPONENT_SIZE 8 //需要创建的组件个数
+#define COMPONENT_SIZE 9 //需要创建的组件个数
 #define START_X 50
 #define START_Y 80
 #define MARGIN_LEFT 10
@@ -17,8 +17,16 @@ namespace Dungeon
 #define RECT_START_Y START_Y //矩形开始绘制的X位置
 #define RECT_WIDTH 50 //矩形宽
 #define RECT_HEIGHT 50 //矩形高
-#define RECT_COLOR 0xFFFFB900 //矩形颜色
+#define RECT_COLOR 0x64FFB900 //矩形颜色
 #define RECT_BORDER_COLOR 0xFFE33D30 //矩形边框颜色
+
+#define RECT_1_START_X START_X+RECT_WIDTH //矩形开始绘制的X位置
+#define RECT_1_START_Y START_Y+RECT_HEIGHT //矩形开始绘制的X位置
+#define RECT_1_WIDTH RECT_WIDTH //矩形宽
+#define RECT_1_HEIGHT RECT_HEIGHT //矩形高
+#define RECT_1_COLOR 0x64ff00ff //矩形颜色
+#define RECT_1_BORDER_COLOR 0x640000ff //矩形边框颜色
+
 #define PT_SIZE_10 10 //10榜
 #define PT_SIZE_15 15 //15榜
 #define PT_SIZE_20 20 //20榜

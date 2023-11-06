@@ -26,7 +26,7 @@ namespace Dungeon
 	}
 
 	DisplayObject *Rectangle::Create(float x, float y, float w, float h,
-		int color, int borderColor, int borderSize, 
+		int color, int borderColor, int borderSize,
 		DisplayObject *destObj, OnRectangleClickCallback onClickCallback)
 	{
 		if (!mRectangleData)
@@ -132,6 +132,8 @@ namespace Dungeon
 			(mRectangleData->color & 0x000000ff),//b
 			(mRectangleData->color & 0xff000000) >> 24,//a
 		};
+		//使用颜色混合,设置透明度可以叠加显示
+		SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 		SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
 		SDL_RenderFillRectF(renderer, mRectangleData->dest);
 	}
