@@ -6,6 +6,7 @@
 #include "Photo.h"
 #include "Text.h"
 #include "EventListener.h"
+#include "SDL2/SDL_Image.h"
 
 namespace Dungeon
 {
@@ -36,6 +37,13 @@ namespace Dungeon
 		{
 			SDL_Log("Can not init video: %s", SDL_GetError());
 			return false;
+		}
+
+		// 初始化SDL_image库
+		if (!IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG))
+		{
+			SDL_Log("Can not init SDL_image: %s", SDL_GetError());
+			return SDL_FALSE;
 		}
 
 		// 窗口初始化
@@ -188,6 +196,32 @@ namespace Dungeon
 			PADDING_LEFT, PADDING_TOP, PADDING_RIGHT, PADDING_BOTTOM,
 			mComponents[1], 1, { &Dungeon::EventListener::OnClickText2 });
 		if (!mComponents[3])
+		{
+			return SDL_FALSE;
+		}
+
+		Photo *sasa = new Photo();//图片组件
+		mComponents[4] = sasa->Create(
+			PHOTO_GIRL_SASA_START_X,
+			PHOTO_GIRL_SASA_START_Y,
+			PHOTO_GIRL_SASA_WIDTH,
+			PHOTO_GIRL_SASA_HEIGHT,
+			mResource->GetSasaSurface(),
+			nullptr);
+		if (!mComponents[4])
+		{
+			return SDL_FALSE;
+		}
+
+		Photo *yaya = new Photo();//图片组件
+		mComponents[5] = yaya->Create(
+			PHOTO_GIRL_YAYA_START_X,
+			PHOTO_GIRL_YAYA_START_Y,
+			PHOTO_GIRL_YAYA_WIDTH,
+			PHOTO_GIRL_YAYA_HEIGHT,
+			mResource->GetYayaSurface(),
+			nullptr);
+		if (!mComponents[5])
 		{
 			return SDL_FALSE;
 		}

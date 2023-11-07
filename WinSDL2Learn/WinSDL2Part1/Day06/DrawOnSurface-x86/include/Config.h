@@ -10,7 +10,7 @@ namespace Dungeon
 
 #define BACKGROUND_COLOR 0xffffffff //背景颜色-白
 
-#define COMPONENT_SIZE 4 //需要创建的组件个数
+#define COMPONENT_SIZE 6 //需要创建的组件个数
 #define START_X 50
 #define START_Y 80
 #define MARGIN_LEFT 10
@@ -30,15 +30,27 @@ namespace Dungeon
 #define CAT_PHOTO_BMP_FILE "./resources/cat.bmp" //图片资源
 #define CAT_PHOTO_FILE "./resources/cat.jpg" //图片资源
 #define GIRL_PHOTO_FILE "./resources/girl.jpg" //图片资源
+#define GIRL_SASA_PHOTO_FILE "./resources/sasa.jpg" //图片资源
+#define GIRL_YAYA_PHOTO_FILE "./resources/yaya.png" //图片资源
 #define PHOTO_CAT_START_X START_X+RECT_WIDTH+MARGIN_LEFT //图片开始绘制的X位置
 #define PHOTO_CAT_START_Y START_Y //图片开始绘制的X位置
 #define PHOTO_CAT_WIDTH 80 //图片宽
 #define PHOTO_CAT_HEIGHT 80 //图片高
 
-#define PHOTO_GIRL_START_X START_X+RECT_WIDTH+PHOTO_CAT_WIDTH+MARGIN_LEFT*2 //图片开始绘制的X位置
+#define PHOTO_GIRL_START_X START_X+RECT_WIDTH+PHOTO_CAT_WIDTH+MARGIN_LEFT*2  //图片开始绘制的X位置
 #define PHOTO_GIRL_START_Y START_Y //图片开始绘制的X位置
 #define PHOTO_GIRL_WIDTH 200 //图片宽
 #define PHOTO_GIRL_HEIGHT 200 //图片高
+
+#define PHOTO_GIRL_SASA_START_X 2*START_X //图片开始绘制的X位置
+#define PHOTO_GIRL_SASA_START_Y 2*START_Y //图片开始绘制的X位置
+#define PHOTO_GIRL_SASA_WIDTH 200 //图片宽
+#define PHOTO_GIRL_SASA_HEIGHT 200 //图片高
+
+#define PHOTO_GIRL_YAYA_START_X 3*START_X //图片开始绘制的X位置
+#define PHOTO_GIRL_YAYA_START_Y 3*START_Y //图片开始绘制的X位置
+#define PHOTO_GIRL_YAYA_WIDTH 200 //图片宽
+#define PHOTO_GIRL_YAYA_HEIGHT 200 //图片高
 
 #define ARIAL_FONT_FILE "./resources/Arial.ttf" //字体
 #define PADMAA_FONT_FILE "./resources/padmaa.ttf" //字体
