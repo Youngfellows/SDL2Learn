@@ -1,7 +1,7 @@
 #ifndef _DUNGEON_GAME_H_
 #define _DUNGEON_GAME_H_
 
-extern "C" 
+extern "C"
 {
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_ttf.h"

@@ -59,7 +59,7 @@ namespace Dungeon
 			return nullptr;
 		}
 		//动态申请数组元素0内存
-		char *file0 = (char *)malloc(sizeof(char *) * strlen(WAV_SOUND_FILE_NAME)+1);
+		char *file0 = (char *)malloc(sizeof(char *) * strlen(WAV_SOUND_FILE_NAME) + 1);
 		if (!file0)
 		{
 			return nullptr;
@@ -130,7 +130,7 @@ namespace Dungeon
 								//audioSpec.samples = 2048;
 
 								//player->Create(&audioSpec,PCM_2_FILE_NAME,SAVE_FILE_NAME,SDL_FALSE);//创建播放器并播放
-								player->Create(&audioSpec, file,SAVE_FILE_NAME,SDL_FALSE);//创建播放器并播放
+								player->Create(&audioSpec, file, SAVE_FILE_NAME, SDL_FALSE);//创建播放器并播放
 							}
 						}
 					}

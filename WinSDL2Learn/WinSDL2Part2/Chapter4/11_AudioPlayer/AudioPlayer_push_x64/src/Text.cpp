@@ -176,7 +176,7 @@ namespace Dungeon
 					{
 						SDL_RenderCopyF(renderer, texture, nullptr, textData->dest);//绘制文本
 						SDL_DestroyTexture(texture);
-					}	
+					}
 				}
 			}
 		}

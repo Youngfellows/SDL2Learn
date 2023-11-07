@@ -8,7 +8,7 @@ namespace Dungeon
 {
 	Game::Game() :mIsRunning(true), mWindow(nullptr),
 		mRenderer(nullptr), mResource(nullptr),
-		mComponents(nullptr),mAudioPlayer(nullptr)
+		mComponents(nullptr), mAudioPlayer(nullptr)
 	{
 	}
 
@@ -156,18 +156,18 @@ namespace Dungeon
 		Text *start = new Text();
 		mComponents[1] = start->Create(FONT_FINE_NAME, START_TEXT, PT_SIZE_25,
 			COLOR_TEXT, START_TEXT_X_POSITION, START_TEXT_Y_POSITION,
-			BG_COLOR_TEXT, PADDING_LEFT, PADDING_RIGHT, PADDING_TOP, PADDING_BOTTOM, 
+			BG_COLOR_TEXT, PADDING_LEFT, PADDING_RIGHT, PADDING_TOP, PADDING_BOTTOM,
 			mComponents[0], 1, { &ComponentCallback::OnStartTextClickCallback });
 		if (!mComponents[1])
 		{
 			return SDL_FALSE;
 		}
-		
+
 
 		Text *pause = new Text();
 		mComponents[2] = pause->Create(FONT_FINE_NAME, PAUSE_TEXT, PT_SIZE_25,
 			COLOR_TEXT, PAUSE_TEXT_X_POSITION, PAUSE_TEXT_Y_POSITION,
-			BG_COLOR_TEXT, PADDING_LEFT, PADDING_RIGHT, PADDING_TOP, PADDING_BOTTOM, 
+			BG_COLOR_TEXT, PADDING_LEFT, PADDING_RIGHT, PADDING_TOP, PADDING_BOTTOM,
 			mComponents[0], 1, { &ComponentCallback::OnPauseTextClickCallback });
 		if (!mComponents[2])
 		{
@@ -177,7 +177,7 @@ namespace Dungeon
 		Text *reStar = new Text();
 		mComponents[3] = reStar->Create(FONT_FINE_NAME, RE_START_TEXT, PT_SIZE_25,
 			COLOR_TEXT, RE_START_TEXT_X_POSITION, RE_START_TEXT_Y_POSITION,
-			BG_COLOR_TEXT, PADDING_LEFT, PADDING_RIGHT, PADDING_TOP, PADDING_BOTTOM, 
+			BG_COLOR_TEXT, PADDING_LEFT, PADDING_RIGHT, PADDING_TOP, PADDING_BOTTOM,
 			mComponents[0], 1, { &ComponentCallback::OnReStartTextClickCallback });
 		if (!mComponents[3])
 		{
@@ -187,7 +187,7 @@ namespace Dungeon
 		Text *stop = new Text();
 		mComponents[4] = stop->Create(FONT_FINE_NAME, STOP_TEXT, PT_SIZE_25,
 			COLOR_TEXT, STOP_TEXT_X_POSITION, STOP_TEXT_Y_POSITION,
-			BG_COLOR_TEXT, PADDING_LEFT, PADDING_RIGHT, PADDING_TOP, PADDING_BOTTOM, 
+			BG_COLOR_TEXT, PADDING_LEFT, PADDING_RIGHT, PADDING_TOP, PADDING_BOTTOM,
 			mComponents[0], 1, { &ComponentCallback::OnStopTextClickCallback });
 		if (!mComponents[4])
 		{
@@ -197,7 +197,7 @@ namespace Dungeon
 		Text *state = new Text();
 		mComponents[5] = state->Create(FONT_FINE_NAME, STATE_TEXT, PT_SIZE_25,
 			STATE_COLOR_TEXT, STATE_TEXT_X_POSITION, STATE_TEXT_Y_POSITION,
-			STATE_BG_COLOR_TEXT, PADDING_LEFT, PADDING_RIGHT, PADDING_TOP, PADDING_BOTTOM, 
+			STATE_BG_COLOR_TEXT, PADDING_LEFT, PADDING_RIGHT, PADDING_TOP, PADDING_BOTTOM,
 			nullptr, 0, {});
 		if (!mComponents[5])
 		{
@@ -216,7 +216,7 @@ namespace Dungeon
 			&AudioPlayerCallback::OnCreateCallback,
 			&AudioPlayerCallback::OnStartCallback,
 			&AudioPlayerCallback::OnPauseCallback,
-		    &AudioPlayerCallback::OnStopCallback,
+			&AudioPlayerCallback::OnStopCallback,
 			&AudioPlayerCallback::OnReleaseCallback,
 			&AudioPlayerCallback::OnCompleteCallback,
 			&AudioPlayerCallback::OnProgressCallbacc);
