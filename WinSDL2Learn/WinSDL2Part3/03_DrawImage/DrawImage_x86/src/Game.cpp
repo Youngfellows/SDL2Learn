@@ -112,6 +112,7 @@ namespace Dungeon
 		SDL_Rect imageRect{ 0, 0, textureW, textureH };
 		// 图片目的地
 		SDL_Rect dstRect{ 130, 50, textureW, textureH };
+		//SDL_Rect dstRect{ 130, 50, 100, 100 };
 		// 将截取好的图片拷贝并填充至目的地的长方形中
 		SDL_RenderCopy(mRenderer, mTexture, &imageRect, &dstRect);
 
