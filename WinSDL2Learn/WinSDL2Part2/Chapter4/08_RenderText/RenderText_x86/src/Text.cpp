@@ -25,7 +25,7 @@ namespace Dungeon
 			return nullptr;
 		}
 
-		//¶¯Ì¬ÉêÇëÄÚ´æ
+		//åŠ¨æ€ç”³è¯·å†…å­˜
 		this->mTextData = (TextData *)malloc(sizeof(TextData));
 		if (!mTextData)
 		{
@@ -58,10 +58,10 @@ namespace Dungeon
 		mTextData->dest->x = x;
 		mTextData->dest->y = y;
 
-		//´´½¨ÒªÏÔÊ¾¶ÔÏó
+		//åˆ›å»ºè¦æ˜¾ç¤ºå¯¹è±¡
 		DisplayObject *displayObject = new DisplayObject();
-		displayObject->subClass = this;//Îª¶ÔÏó¸³Öµ(ºÃ¾«Ãî)
-		//ÉèÖÃ»Øµ÷º¯Êý
+		displayObject->subClass = this;//ä¸ºå¯¹è±¡èµ‹å€¼(å¥½ç²¾å¦™)
+		//è®¾ç½®å›žè°ƒå‡½æ•°
 		if (!displayObject->Create(
 			&DrawCallback,
 			&TextSet,
@@ -69,7 +69,7 @@ namespace Dungeon
 		{
 			return nullptr;
 		}
-		TextSet(displayObject, mTextData->value);//ÉèÖÃÎÄ±¾ÊôÐÔ
+		TextSet(displayObject, mTextData->value);//è®¾ç½®æ–‡æœ¬å±žæ€§
 		return displayObject;
 	}
 
@@ -81,7 +81,7 @@ namespace Dungeon
 			TextData *textData = text->mTextData;
 			if (textData)
 			{
-				//textData->value = value;//ÉèÖÃÒªÏÔÊ¾ÎÄ±¾
+				//textData->value = value;//è®¾ç½®è¦æ˜¾ç¤ºæ–‡æœ¬
 				textData->value = (char *)malloc(sizeof(char) * SDL_strlen(value) + 1);
 				if (textData->value)
 				{
@@ -99,7 +99,7 @@ namespace Dungeon
 				{
 					SDL_FreeSurface(textData->textSurface);
 				}
-				//´´½¨ÒªÎÄ±¾surface
+				//åˆ›å»ºè¦æ–‡æœ¬surface
 				textData->textSurface = TTF_RenderUTF8_Blended(textData->font, textData->value, textColor);
 				textData->dest->w = (float)textData->textSurface->w;
 				textData->dest->h = (float)textData->textSurface->h;
@@ -115,7 +115,7 @@ namespace Dungeon
 			TextData *textData = text->mTextData;
 			if (textData)
 			{
-				//»æÖÆÎÄ±¾
+				//ç»˜åˆ¶æ–‡æœ¬
 				SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, textData->textSurface);
 				SDL_RenderCopyF(renderer, texture, nullptr, textData->dest);
 				SDL_DestroyTexture(texture);

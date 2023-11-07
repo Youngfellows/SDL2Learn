@@ -26,7 +26,7 @@
     <ClCompile Include="src\DisplayObject.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\main.c">
+    <ClCompile Include="src\Main.c">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\Text.c">

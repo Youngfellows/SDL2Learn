@@ -3,14 +3,14 @@
 
 namespace Dungeon
 {
-// Window´°¿ÚÉèÖÃ
+	// Windowçª—å£è®¾ç½®
 #define WINDOW_WIDTH 600
 #define WINDOW_HEIGHT 500
 #define FRAMERATE 60
 
-// ¹â±êÉèÖÃ
-#define CURSOR_DEST_RECT_WIDTH 30 //¹â±ê¿í
-#define CURSOR_DEST_RECT_HEIGHT 30 //¹â±ê¿í
+// å…‰æ ‡è®¾ç½®
+#define CURSOR_DEST_RECT_WIDTH 30 //å…‰æ ‡å®½
+#define CURSOR_DEST_RECT_HEIGHT 30 //å…‰æ ‡å®½
 }
 
 #endif // !_DUNGEON_CONFIG_H_

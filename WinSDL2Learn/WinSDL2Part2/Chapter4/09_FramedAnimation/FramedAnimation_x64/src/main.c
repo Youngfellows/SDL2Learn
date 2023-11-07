@@ -7,7 +7,6 @@
 #define HEIGHT 300
 #define FRAMERATE 60
 
-
 SDL_Renderer *renderer;
 SDL_Window *window;
 DisplayObject *anim;

@@ -137,7 +137,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\DisplayObject.c" />
-    <ClCompile Include="src\main.c" />
+    <ClCompile Include="src\Main.c" />
     <ClCompile Include="src\Text.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

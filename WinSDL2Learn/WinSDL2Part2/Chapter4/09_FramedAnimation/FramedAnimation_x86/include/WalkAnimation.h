@@ -10,13 +10,13 @@ namespace Dungeon
 {
 	typedef struct WalkAnimationData
 	{
-		SDL_FRect *dest;//绘制区域
+		SDL_FRect *dest;//缁樺埗鍖哄煙
 		int currentFrameIndex;
 		uint32_t globalFramesCount;
-		SDL_Rect frames[ANIMATION_FRAMES];//动画帧数
-		SDL_bool walking;//是否在走
-		float speed;//移动位置
-		SDL_RendererFlip frameFlip;//是否反向
+		SDL_Rect frames[ANIMATION_FRAMES];//鍔ㄧ敾甯ф暟
+		SDL_bool walking;//鏄惁鍦ㄨ蛋
+		float speed;//绉诲姩浣嶇疆
+		SDL_RendererFlip frameFlip;//鏄惁鍙嶅悜
 
 	}WalkAnimationData;
 }
@@ -38,7 +38,7 @@ namespace Dungeon
 		static void OnScanCodeRight(DisplayObject *self);
 		static void OnKeyUp(DisplayObject *self);
 		static void OnDestroy(DisplayObject *self);
-	
+
 	private:
 		static SDL_bool IsWalking(DisplayObject *self);
 		static void GotoAndPlay(DisplayObject *self, int frameIndex);

@@ -49,7 +49,7 @@ void event_loop()
 				clickCount++;
 				char buf[16];
 				//sprintf_s(buf, "Count: %d", clickCount);
-				sprintf(buf,"Count: %d",clickCount);
+				sprintf(buf, "Count: %d", clickCount);
 				TextSet(text, buf);
 				break;
 			case SDL_QUIT:

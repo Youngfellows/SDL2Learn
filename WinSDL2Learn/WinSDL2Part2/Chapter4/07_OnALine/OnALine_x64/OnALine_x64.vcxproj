@@ -140,7 +140,7 @@
   <ItemGroup>
     <ClCompile Include="src\Cursor.c" />
     <ClCompile Include="src\DisplayObject.c" />
-    <ClCompile Include="src\main.c" />
+    <ClCompile Include="src\Main.c" />
     <ClCompile Include="src\Resource.c" />
     <ClCompile Include="src\Slider.c" />
   </ItemGroup>

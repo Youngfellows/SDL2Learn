@@ -13,7 +13,7 @@ typedef struct
 	char *value;
 	int ptsize;
 	uint32_t color;
-} TextData; 
+} TextData;
 
 static void TextOnDraw(struct DisplayObject *displayObject, SDL_Renderer *renderer)
 {

@@ -15,7 +15,7 @@ namespace Dungeon
 	DisplayObject *SliderBar::Create(float borderX, float borderY, float borderW, float borderH,
 		float sliderW, float sliderH)
 	{
-		//¶¯Ì¬ÉêÇëÄÚ´æ
+		//åŠ¨æ€ç”³è¯·å†…å­˜
 		this->mSliderBarData = (SliderBarData *)malloc(sizeof(SliderBarData));
 		if (!mSliderBarData)
 		{
@@ -54,10 +54,10 @@ namespace Dungeon
 		mSliderBarData->sliderData->sliderPoint->x = 0;
 		mSliderBarData->sliderData->sliderPoint->y = 0;
 
-		//´´½¨ÒªÏÔÊ¾¶ÔÏó
+		//åˆ›å»ºè¦æ˜¾ç¤ºå¯¹è±¡
 		DisplayObject *displayObject = new DisplayObject();
-		displayObject->subClass = this;//ÉèÖÃÒªÏÔÊ¾Êý¾Ý
-		//ÉèÖÃ»Øµ÷º¯Êý
+		displayObject->subClass = this;//è®¾ç½®è¦æ˜¾ç¤ºæ•°æ®
+		//è®¾ç½®å›žè°ƒå‡½æ•°
 		if (!displayObject->Create(&OnDrawCallback, &OnMouseMoveCallback, &OnDestoryCallback))
 		{
 			return nullptr;
@@ -67,7 +67,7 @@ namespace Dungeon
 	}
 
 	/*
-	* »Øµ÷º¯ÊýOnDraw
+	* å›žè°ƒå‡½æ•°OnDraw
 	*/
 	void SliderBar::OnDrawCallback(DisplayObject *self, Resource *resource, SDL_Renderer *renderer)
 	{
@@ -77,11 +77,11 @@ namespace Dungeon
 			SliderBarData *data = slidarBar->mSliderBarData;
 			if (data)
 			{
-				//»æÖÆ±ß¿ò
+				//ç»˜åˆ¶è¾¹æ¡†
 				SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 				SDL_RenderDrawRectF(renderer, data->border);
 
-				//»æÖÆ»¬¿é
+				//ç»˜åˆ¶æ»‘å—
 				SliderData *slidarData = data->sliderData;
 				SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
 				SDL_RenderDrawRectF(renderer, slidarData->sliderDest);
@@ -90,7 +90,7 @@ namespace Dungeon
 	}
 
 	/*
-	* »Øµ÷º¯ÊýOnMouseMove
+	* å›žè°ƒå‡½æ•°OnMouseMove
 	*/
 	void SliderBar::OnMouseMoveCallback(DisplayObject *self, SDL_Event *event)
 	{
@@ -100,7 +100,7 @@ namespace Dungeon
 			SliderBarData *data = slidarBar->mSliderBarData;
 			if (data)
 			{
-				//¸üÐÂ»¬¿éÎ»ÖÃ
+				//æ›´æ–°æ»‘å—ä½ç½®
 				SDL_FRect *border = data->border;
 				SliderData *slidarData = data->sliderData;
 				SDL_FPoint *point = slidarData->sliderPoint;
@@ -111,7 +111,7 @@ namespace Dungeon
 
 				/*if (SDL_PointInFRect(point,sliderDest))
 				{
-				
+
 				}*/
 				if (point->x < border->x)
 				{
@@ -128,7 +128,7 @@ namespace Dungeon
 
 
 	/*
-	* »Øµ÷º¯ÊýOnDestory
+	* å›žè°ƒå‡½æ•°OnDestory
 	*/
 	void SliderBar::OnDestoryCallback(DisplayObject *self)
 	{
