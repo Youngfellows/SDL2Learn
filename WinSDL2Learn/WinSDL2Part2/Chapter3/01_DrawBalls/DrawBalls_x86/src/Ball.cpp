@@ -23,7 +23,7 @@ namespace Dungeon
 		this->mRotateSpeed = rotateSpeed;
 	}
 
-	void Ball::Ball_Draw(SDL_Renderer *renderer,Resource *resource)
+	void Ball::Ball_Draw(SDL_Renderer *renderer, Resource *resource)
 	{
 		this->mAngle += this->mRotateSpeed;
 		if (resource)

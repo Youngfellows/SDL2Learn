@@ -8,9 +8,10 @@
 
 #define BALL_FILE_NAME "./resources/ball.png"
 
-SDL_Texture* ballTexture;
+SDL_Texture *ballTexture;
 
-int Resource_Load(SDL_Renderer* renderer) {
+int Resource_Load(SDL_Renderer *renderer)
+{
 	ballTexture = IMG_LoadTexture(renderer, BALL_FILE_NAME);
 	if (ballTexture == NULL) {
 		SDL_Log("Can not load texture, %s", IMG_GetError());
@@ -19,10 +20,12 @@ int Resource_Load(SDL_Renderer* renderer) {
 	return 0;
 }
 
-SDL_Texture* Resource_GetBallTexture() {
+SDL_Texture *Resource_GetBallTexture()
+{
 	return ballTexture;
 }
 
-void Resource_Unload() {
+void Resource_Unload()
+{
 	SDL_DestroyTexture(ballTexture);
 }

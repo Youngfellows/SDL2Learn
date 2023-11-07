@@ -6,8 +6,9 @@
 #include "Resource.h"
 #include "Config.h"
 
-Ball* Ball_Create(float x, float y, double rotateSpeed, float speedX, float speedY) {
-	Ball* b = malloc(sizeof(Ball));
+Ball *Ball_Create(float x, float y, double rotateSpeed, float speedX, float speedY)
+{
+	Ball *b = malloc(sizeof(Ball));
 	b->dest.x = x;
 	b->dest.y = y;
 	b->dest.w = 30;
@@ -19,7 +20,8 @@ Ball* Ball_Create(float x, float y, double rotateSpeed, float speedX, float spee
 	return b;
 }
 
-void Ball_Draw(Ball* self, SDL_Renderer* renderer) {
+void Ball_Draw(Ball *self, SDL_Renderer *renderer)
+{
 	self->angle += self->rotateSpeed;
 	self->dest.x += self->speedX;
 	self->dest.y += self->speedY;
@@ -43,6 +45,7 @@ void Ball_Draw(Ball* self, SDL_Renderer* renderer) {
 	);
 }
 
-void Ball_Destroy(Ball* ball) {
+void Ball_Destroy(Ball *ball)
+{
 	free(ball);
 }

@@ -8,25 +8,28 @@
 #define FRAMERATE 60
 
 
-SDL_Renderer* renderer;
-SDL_Window* window;
+SDL_Renderer *renderer;
+SDL_Window *window;
 
 #define BALL_COUNT 5
-Ball* balls[BALL_COUNT];
+Ball *balls[BALL_COUNT];
 
-void createBalls() {
+void createBalls()
+{
 	for (int i = 0; i < BALL_COUNT; ++i) {
 		balls[i] = Ball_Create(40 * i, 10, (rand() % 10) - 5);
 	}
 }
 
-void destroyBalls() {
+void destroyBalls()
+{
 	for (int i = 0; i < BALL_COUNT; ++i) {
 		Ball_Destroy(balls[i]);
 	}
 }
 
-void draw() {
+void draw()
+{
 	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 	SDL_RenderClear(renderer);
 
@@ -37,7 +40,8 @@ void draw() {
 	SDL_RenderPresent(renderer);
 }
 
-void event_loop() {
+void event_loop()
+{
 	while (1) {
 		uint32_t begin = SDL_GetTicks();
 		draw();
@@ -59,7 +63,8 @@ void event_loop() {
 	}
 }
 
-int main(int argc, char* argv[]) {
+int main(int argc, char *argv[])
+{
 	if (SDL_Init(SDL_INIT_VIDEO)) {
 		SDL_Log("Can not init video, %s", SDL_GetError());
 		return 1;

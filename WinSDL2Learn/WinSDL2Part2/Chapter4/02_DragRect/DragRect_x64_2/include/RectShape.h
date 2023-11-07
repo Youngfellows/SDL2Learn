@@ -13,7 +13,7 @@ namespace Dungeon
 		SDL_FPoint mDragStartPoint;
 		SDL_FPoint mDragStartMousePoint;
 		bool dragEnabled;
-	
+
 	public:
 		RectShape *mPre;
 		RectShape *mNext;

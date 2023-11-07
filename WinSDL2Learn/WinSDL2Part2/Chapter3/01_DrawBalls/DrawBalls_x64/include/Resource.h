@@ -9,7 +9,7 @@
 
 int Resource_Load(SDL_Renderer *renderer);
 
-SDL_Texture * Resource_GetBallTexture();
+SDL_Texture *Resource_GetBallTexture();
 
 void Resource_Unload();
 

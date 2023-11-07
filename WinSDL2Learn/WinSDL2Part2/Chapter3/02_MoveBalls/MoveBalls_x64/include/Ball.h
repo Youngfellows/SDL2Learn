@@ -7,17 +7,18 @@
 
 #include <SDL2/SDL.h>
 
-typedef struct {
+typedef struct
+{
 	SDL_FRect dest;
 	double angle;
 	double rotateSpeed;
 	float speedX, speedY;
 } Ball;
 
-Ball* Ball_Create(float x, float y, double rotateSpeed, float speedX, float speedY);
+Ball *Ball_Create(float x, float y, double rotateSpeed, float speedX, float speedY);
 
-void Ball_Draw(Ball* self, SDL_Renderer* renderer);
+void Ball_Draw(Ball *self, SDL_Renderer *renderer);
 
-void Ball_Destroy(Ball*);
+void Ball_Destroy(Ball *);
 
 #endif //DRAWBALLS_BALL_H
