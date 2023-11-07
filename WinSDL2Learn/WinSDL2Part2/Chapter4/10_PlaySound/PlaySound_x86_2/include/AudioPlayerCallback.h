@@ -6,12 +6,12 @@
 namespace Dungeon
 {
 	/*
-	* »Øµ÷º¯Êý
+	* å›žè°ƒå‡½æ•°
 	*/
 	class AudioPlayerCallback
 	{
-	/*private:
-		AudioPlayer *mAudioPlayer;*/
+		/*private:
+			AudioPlayer *mAudioPlayer;*/
 
 	public:
 		AudioPlayerCallback();

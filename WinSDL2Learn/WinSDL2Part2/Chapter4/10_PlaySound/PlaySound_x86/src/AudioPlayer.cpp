@@ -26,7 +26,7 @@ namespace Dungeon
 
 	SDL_bool AudioPlayer::InitAudio()
 	{
-		// ³õÊ¼»¯ÒôÆµ¿â
+		// åˆå§‹åŒ–éŸ³é¢‘åº“
 		if (SDL_Init(SDL_INIT_AUDIO))
 		{
 			SDL_Log("Can not init audio: %s", SDL_GetError());
@@ -36,7 +36,7 @@ namespace Dungeon
 	}
 
 	/*
-	* ´´½¨²¥·ÅÆ÷
+	* åˆ›å»ºæ’­æ”¾å™¨
 	*/
 	SDL_bool AudioPlayer::Create(const char *file)
 	{
@@ -44,15 +44,15 @@ namespace Dungeon
 		Uint8 *sound;
 		Uint32 soundLen;
 
-		// ¼ÓÔØÒôÆµ×ÊÔ´
+		// åŠ è½½éŸ³é¢‘èµ„æº
 		if (!SDL_LoadWAV(file, &audioSpec, &sound, &soundLen))
 		{
 			SDL_Log("Can not load audio: %s", SDL_GetError());
 			return SDL_FALSE;
 		}
-		audioSpec.callback = &AudioCallback;//ÉèÖÃ»Øµ÷º¯Êý
+		audioSpec.callback = &AudioCallback;//è®¾ç½®å›žè°ƒå‡½æ•°
 
-		//¶¯Ì¬ÉêÇëÄÚ´æ
+		//åŠ¨æ€ç”³è¯·å†…å­˜
 		if (this->mSoundInfo)
 		{
 			free(mSoundInfo);
@@ -73,9 +73,9 @@ namespace Dungeon
 		mSoundInfo->completed = SDL_FALSE;
 		mSoundInfo->device = 0;
 		mSoundInfo->state = IDLE;
-		audioSpec.userdata = mSoundInfo;//ÉèÖÃÊý¾Ý
+		audioSpec.userdata = mSoundInfo;//è®¾ç½®æ•°æ®
 
-		//´ò¿ªÉè±¸¿ªÊ¼²¥·Å
+		//æ‰“å¼€è®¾å¤‡å¼€å§‹æ’­æ”¾
 		SDL_AudioDeviceID device = SDL_OpenAudioDevice(nullptr,
 			SDL_FALSE, &audioSpec, nullptr, 0);
 		if (!device)
@@ -88,29 +88,29 @@ namespace Dungeon
 	}
 
 	/*
-	* ²¥·ÅÆ÷»Øµ÷
+	* æ’­æ”¾å™¨å›žè°ƒ
 	*/
 	void SDLCALL AudioPlayer::AudioCallback(void *userdata, Uint8 *stream, int len)
 	{
 		SDL_Log("AudioCallback len:%d", len);
 		SoundInfo *soundInfo = (SoundInfo *)userdata;
-		Uint32 remaining = soundInfo->soundLen - soundInfo->soundPos;//Ê£Óà¶àÉÙÃ»ÓÐ¶ÁÈ¡Íê
+		Uint32 remaining = soundInfo->soundLen - soundInfo->soundPos;//å‰©ä½™å¤šå°‘æ²¡æœ‰è¯»å–å®Œ
 		if (remaining > len)
 		{
 			SDL_memcpy(stream, soundInfo->sound + soundInfo->soundPos, len);
-			soundInfo->soundPos += len;//¸üÐÂÒÑ¾­²¥·Å³¤¶È
+			soundInfo->soundPos += len;//æ›´æ–°å·²ç»æ’­æ”¾é•¿åº¦
 		}
 		else
 		{
 			SDL_memcpy(stream, soundInfo->sound + soundInfo->soundPos, remaining);
 			soundInfo->soundPos = 0;
-			soundInfo->completed = SDL_TRUE;//²¥·ÅÍê³É
+			soundInfo->completed = SDL_TRUE;//æ’­æ”¾å®Œæˆ
 			SDL_Log("AudioCallback completed");
 		}
 	}
 
 	/*
-	* ²¥·Å
+	* æ’­æ”¾
 	*/
 	void AudioPlayer::Start()
 	{
@@ -118,31 +118,31 @@ namespace Dungeon
 		{
 			if (mSoundInfo->device)
 			{
-				SDL_PauseAudioDevice(mSoundInfo->device, SDL_FALSE);//²»ÔÝÍ£
+				SDL_PauseAudioDevice(mSoundInfo->device, SDL_FALSE);//ä¸æš‚åœ
 				mSoundInfo->state = PLAYING;
 				if (OnStart)
 				{
-					OnStart(this);//»Øµ÷¿ªÊ¼
+					OnStart(this);//å›žè°ƒå¼€å§‹
 				}
-				//²úÉúÒ»¸ö×èÈûµÄÐ§¹û
+				//äº§ç”Ÿä¸€ä¸ªé˜»å¡žçš„æ•ˆæžœ
 				while (1)
 				{
 					if (mSoundInfo->completed)
 					{
 						//break;
-						goto GO_TO_COMPLETE;//1. goto µ½²¥·ÅÍê³É	
+						goto GO_TO_COMPLETE;//1. goto åˆ°æ’­æ”¾å®Œæˆ	
 					}
 
-					//if (ÔÝÍ£²¥·Å)
+					//if (æš‚åœæ’­æ”¾)
 					//{
-					//	//2. goto µ½ÔÝÍ£²¥·Å
+					//	//2. goto åˆ°æš‚åœæ’­æ”¾
 					//	break;
 					//}
-				
-					if (mSoundInfo->state==STOP)
+
+					if (mSoundInfo->state == STOP)
 					{
 						//break;
-						goto GO_TO_STOP;//3. goto µ½Í£Ö¹²¥·Å
+						goto GO_TO_STOP;//3. goto åˆ°åœæ­¢æ’­æ”¾
 					}
 					SDL_Delay(100);
 				}
@@ -155,7 +155,7 @@ namespace Dungeon
 		{
 			mSoundInfo->state = IDLE;
 		}
-		CloseDevice();//¹Ø±Õ×ÊÔ´
+		CloseDevice();//å…³é—­èµ„æº
 		if (OnComplete)
 		{
 			OnComplete(this);
@@ -172,7 +172,7 @@ namespace Dungeon
 		{
 			if (mSoundInfo->device)
 			{
-				SDL_PauseAudioDevice(mSoundInfo->device, SDL_TRUE);//ÔÝÍ£
+				SDL_PauseAudioDevice(mSoundInfo->device, SDL_TRUE);//æš‚åœ
 				mSoundInfo->state = PAUSE;
 				if (OnPause)
 				{
@@ -183,7 +183,7 @@ namespace Dungeon
 	}
 
 	/*
-	* ÖØÐÂ²¥·Å
+	* é‡æ–°æ’­æ”¾
 	*/
 	void AudioPlayer::ReStart()
 	{
@@ -197,7 +197,7 @@ namespace Dungeon
 	}
 
 	/*
-	* Í£Ö¹²¥·Å
+	* åœæ­¢æ’­æ”¾
 	*/
 	void AudioPlayer::Stop()
 	{
@@ -214,14 +214,14 @@ namespace Dungeon
 		{
 			if (mSoundInfo->device)
 			{
-				SDL_CloseAudioDevice(mSoundInfo->device);//¹Ø±ÕÉù¿¨
-				SDL_FreeWAV(mSoundInfo->sound);//ÊÇ·ñÄÚ´æ
+				SDL_CloseAudioDevice(mSoundInfo->device);//å…³é—­å£°å¡
+				SDL_FreeWAV(mSoundInfo->sound);//æ˜¯å¦å†…å­˜
 			}
 		}
 	}
 
 	/*
-	* ÊÇ·ñÕýÔÚ²¥·Å
+	* æ˜¯å¦æ­£åœ¨æ’­æ”¾
 	*/
 	SDL_bool AudioPlayer::IsPlaying()
 	{
@@ -249,6 +249,6 @@ namespace Dungeon
 			CloseDevice();
 			free(mSoundInfo->file);
 			free(mSoundInfo);
-		}	
+		}
 	}
 }
