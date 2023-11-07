@@ -62,7 +62,8 @@ namespace Dungeon
 		Photo *girl = (Photo *)self->GetSubClass();
 		if (girl)
 		{
-			girl->SetDelay(30 * 1000);//设置动画执行时间5秒
+			//girl->SetDelay(24 * 3600 * 1000);//设置动画执行时间5秒
+			girl->SetDelay(5 * 1000);//设置动画执行时间5秒
 			girl->Rotate();//开启旋转动画
 			girl->Scale();//开启缩放动画
 		}
