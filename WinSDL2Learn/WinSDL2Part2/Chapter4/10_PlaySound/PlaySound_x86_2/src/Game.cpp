@@ -23,21 +23,21 @@ namespace Dungeon
 
 	bool Game::Initialize()
 	{
-		// TTF×ÖÌå¿â³õÊ¼»¯
+		// TTFå­—ä½“åº“åˆå§‹åŒ–
 		if (TTF_Init())
 		{
 			SDL_Log("Can not init ttf: %s", SDL_GetError());
 			return false;
 		}
 
-		// SDL¿â³õÊ¼»¯
+		// SDLåº“åˆå§‹åŒ–
 		if (SDL_Init(SDL_INIT_VIDEO) != 0)
 		{
 			SDL_Log("Can not init video: %s", SDL_GetError());
 			return false;
 		}
 
-		// ´°¿Ú³õÊ¼»¯
+		// çª—å£åˆå§‹åŒ–
 		mWindow = SDL_CreateWindow("Dungeon", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN);
 		if (!mWindow)
 		{
@@ -45,7 +45,7 @@ namespace Dungeon
 			return false;
 		}
 
-		// ³õÊ¼»¯Renderer
+		// åˆå§‹åŒ–Renderer
 		mRenderer = SDL_CreateRenderer(mWindow, -1, SDL_RENDERER_ACCELERATED);
 		if (!mRenderer)
 		{
@@ -79,7 +79,7 @@ namespace Dungeon
 
 			long current = SDL_GetTicks();
 			long cost = current - begin;
-			long frame = 1000 / FRAMERATE;//Ã¿Ò»Ö¡¶à³¤Ê±¼ä
+			long frame = 1000 / FRAMERATE;//æ¯ä¸€å¸§å¤šé•¿æ—¶é—´
 			long delay = frame - cost;
 			//SDL_Log("delay=%ld", delay);
 			if (delay > 0)
@@ -92,22 +92,22 @@ namespace Dungeon
 	void Game::Event()
 	{
 		SDL_Event event;
-		// Èç¹ûÊÂ¼þ¶ÓÁÐÖÐÓÐÎ´´¦ÀíµÄÊÂ¼þ£¬°´Ë³Ðò´¦Àí
+		// å¦‚æžœäº‹ä»¶é˜Ÿåˆ—ä¸­æœ‰æœªå¤„ç†çš„äº‹ä»¶ï¼ŒæŒ‰é¡ºåºå¤„ç†
 		while (SDL_PollEvent(&event))
 		{
 			switch (event.type)
 			{
-			case SDL_QUIT:// ÍË³öÊÂ¼þ£¬°´ÏÂ´°¿ÚµÄ²æ
+			case SDL_QUIT:// é€€å‡ºäº‹ä»¶ï¼ŒæŒ‰ä¸‹çª—å£çš„å‰
 				mIsRunning = false;
 				break;
-			case SDL_MOUSEBUTTONDOWN://Êó±ê°´ÏÂ
+			case SDL_MOUSEBUTTONDOWN://é¼ æ ‡æŒ‰ä¸‹
 				ProcessMouseDownEvent(&event);
 				break;
 			default:
 				break;
 			}
-			//»ñÈ¡²¥·ÅÆ÷×´Ì¬
-			AudioPlayerState();//ÓÐbug
+			//èŽ·å–æ’­æ”¾å™¨çŠ¶æ€
+			AudioPlayerState();//æœ‰bug
 		}
 	}
 
@@ -179,7 +179,7 @@ namespace Dungeon
 			return SDL_FALSE;
 		}
 
-		//³õÊ¼»¯Audio²¥·ÅÆ÷
+		//åˆå§‹åŒ–Audioæ’­æ”¾å™¨
 		mAudioPlayer = new AudioPlayer();
 		if (!mAudioPlayer->InitAudio())
 		{
@@ -274,7 +274,7 @@ namespace Dungeon
 		SDL_Log("point(x:%f,y:%f)", point.x, point.y);
 		if (mButtonStartText)
 		{
-			Text *buttonText = (Text *)mButtonStartText->subClass;//»ñÈ¡ÏÔÊ¾¶ÔÏó
+			Text *buttonText = (Text *)mButtonStartText->subClass;//èŽ·å–æ˜¾ç¤ºå¯¹è±¡
 			if (buttonText)
 			{
 				TextData *textData = buttonText->GetTextData();
@@ -296,7 +296,7 @@ namespace Dungeon
 							}
 							if (mAudioPlayer)
 							{
-								mAudioPlayer->Create(SOUND_FILE_NAME);//´´½¨²¥·ÅÆ÷²¢²¥·Å
+								mAudioPlayer->Create(SOUND_FILE_NAME);//åˆ›å»ºæ’­æ”¾å™¨å¹¶æ’­æ”¾
 							}
 						}
 						else
@@ -310,7 +310,7 @@ namespace Dungeon
 
 		if (mButtonPauseText)
 		{
-			Text *buttonText = (Text *)mButtonPauseText->subClass;//»ñÈ¡ÏÔÊ¾¶ÔÏó
+			Text *buttonText = (Text *)mButtonPauseText->subClass;//èŽ·å–æ˜¾ç¤ºå¯¹è±¡
 			if (buttonText)
 			{
 				TextData *textData = buttonText->GetTextData();
@@ -346,7 +346,7 @@ namespace Dungeon
 
 		if (mButtonReStartText)
 		{
-			Text *buttonText = (Text *)mButtonReStartText->subClass;//»ñÈ¡ÏÔÊ¾¶ÔÏó
+			Text *buttonText = (Text *)mButtonReStartText->subClass;//èŽ·å–æ˜¾ç¤ºå¯¹è±¡
 			if (buttonText)
 			{
 				TextData *textData = buttonText->GetTextData();
@@ -383,7 +383,7 @@ namespace Dungeon
 
 		if (mButtonStopText)
 		{
-			Text *buttonText = (Text *)mButtonStopText->subClass;//»ñÈ¡ÏÔÊ¾¶ÔÏó
+			Text *buttonText = (Text *)mButtonStopText->subClass;//èŽ·å–æ˜¾ç¤ºå¯¹è±¡
 			if (buttonText)
 			{
 				TextData *textData = buttonText->GetTextData();

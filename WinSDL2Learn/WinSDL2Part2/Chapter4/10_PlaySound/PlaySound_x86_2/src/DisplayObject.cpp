@@ -33,7 +33,7 @@ namespace Dungeon
 	{
 		if (OnDraw)
 		{
-			OnDraw(this, renderer);//调用回调函数onDrawCallback
+			OnDraw(this, renderer);//璋冪敤鍥炶皟鍑芥暟onDrawCallback
 		}
 	}
 
@@ -41,7 +41,7 @@ namespace Dungeon
 	{
 		if (OnDestroy)
 		{
-			OnDestroy(this);//调用回调函数onDestroyCallback
+			OnDestroy(this);//璋冪敤鍥炶皟鍑芥暟onDestroyCallback
 		}
 	}
 
@@ -49,7 +49,7 @@ namespace Dungeon
 	{
 		if (OnTextSet)
 		{
-			OnTextSet(this, value);//调用回调函数onTextSetCallback
+			OnTextSet(this, value);//璋冪敤鍥炶皟鍑芥暟onTextSetCallback
 		}
 	}
 }

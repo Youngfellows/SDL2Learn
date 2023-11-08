@@ -19,7 +19,7 @@ namespace Dungeon
 		SDL_Log("OnCreateCallback --->>>");
 		if (audioPlayer)
 		{
-			audioPlayer->Start();//´´½¨³É¹¦²¢²¥·Å
+			audioPlayer->Start();//åˆ›å»ºæˆåŠŸå¹¶æ’­æ”¾
 		}
 	}
 
@@ -49,7 +49,7 @@ namespace Dungeon
 		SDL_Log("OnCompleteCallback");
 		if (audioPlayer)
 		{
-			audioPlayer->ReStart();//²¥·Å½áÊø,ÖØÐÂ²¥·Å
+			audioPlayer->ReStart();//æ’­æ”¾ç»“æŸ,é‡æ–°æ’­æ”¾
 		}
 	}
 

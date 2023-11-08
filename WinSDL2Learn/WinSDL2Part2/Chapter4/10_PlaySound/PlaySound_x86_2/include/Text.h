@@ -7,23 +7,23 @@
 
 namespace Dungeon
 {
-	//ÎÄ±¾Êı¾İÊµÌå
+	//æ–‡æœ¬æ•°æ®å®ä½“
 	typedef struct TextData
 	{
-		TTF_Font *font;//×ÖÌå
-		char *fontFile;//×ÖÌåÎÄ¼ş
-		char *value;//ÎÄ±¾
-		int ptsize;//×ÖÌå´óĞ¡
-		uint32_t color;//×ÖÌåÑÕÉ«
+		TTF_Font *font;//å­—ä½“
+		char *fontFile;//å­—ä½“æ–‡ä»¶
+		char *value;//æ–‡æœ¬
+		int ptsize;//å­—ä½“å¤§å°
+		uint32_t color;//å­—ä½“é¢œè‰²
 		SDL_Surface *textSurface;
-		SDL_FRect *dest;//ÎÄ±¾ÏÔÊ¾ÇøÓò
+		SDL_FRect *dest;//æ–‡æœ¬æ˜¾ç¤ºåŒºåŸŸ
 	}TextData;
 }
 
 namespace Dungeon
 {
 	/*
-	* ÎÄ±¾Àà
+	* æ–‡æœ¬ç±»
 	*/
 	class Text
 	{

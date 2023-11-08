@@ -5,11 +5,11 @@
 
 namespace Dungeon
 {
-	class AudioPlayer;//ÏÈÉùÃ÷Àà
+	class AudioPlayer;//å…ˆå£°æ˜ç±»
 
-	//º¯Êı»Øµ÷
+	//å‡½æ•°å›è°ƒ
 	typedef void (*OnCreateCallback)(AudioPlayer *audioPlayer);
-	typedef void (*OnStartCallback)(AudioPlayer *audioPlayer);// ¿ªÊ¼²¥·Å
+	typedef void (*OnStartCallback)(AudioPlayer *audioPlayer);// å¼€å§‹æ’­æ”¾
 	typedef void (*OnPauseCallback)(AudioPlayer *audioPlayer);
 	typedef void (*OnStopCallback)(AudioPlayer *audioPlayer);
 	typedef void (*OnReleaseCallback)(AudioPlayer *audioPlayer);
@@ -18,48 +18,48 @@ namespace Dungeon
 
 	typedef enum Mode
 	{
-		DEFAULT,//µ¥´Î²¥·Å
-		SINGLE_LOOP,//µ¥ÇúÑ­»·
-		LIST_LOOP,//ÁĞ±íÑ­»·
-		RANDOM//Ëæ»ú²¥·Å
+		DEFAULT,//å•æ¬¡æ’­æ”¾
+		SINGLE_LOOP,//å•æ›²å¾ªç¯
+		LIST_LOOP,//åˆ—è¡¨å¾ªç¯
+		RANDOM//éšæœºæ’­æ”¾
 	}Mode;
 
 	typedef	enum PlayerState
 	{
-		IDLE,//¿ÕÏĞ×´Ì¬
-		PLAYING,//²¥·Å×´Ì¬
-		PAUSE,//ÔİÍ£×´Ì¬
-		STOP//Ïú»Ù
+		IDLE,//ç©ºé—²çŠ¶æ€
+		PLAYING,//æ’­æ”¾çŠ¶æ€
+		PAUSE,//æš‚åœçŠ¶æ€
+		STOP//é”€æ¯
 	}PlayerState;
 
 	typedef struct SoundInfo
 	{
-		char *file;//ÒôÆµÎÄ¼ş
-		Uint8 *sound;//ÒôÆµ
-		Uint32 soundLen;//ÒôÆµ³¤
-		Uint32 soundPos;//µ±Ç°²¥·ÅÎ»ÖÃ
-		SDL_bool completed;//ÊÇ·ñ²¥·ÅÍê³É
-		PlayerState state;//²¥·ÅÆ÷×´Ì¬
-		SDL_AudioDeviceID device;//´ò¿ªµÄÉù¿¨²¥·ÅÉè±¸
-		OnCreateCallback OnCreate;//»Øµ÷º¯ÊıOnCreate
-		OnStartCallback OnStart;//»Øµ÷º¯ÊıOnStart
-		OnPauseCallback OnPause;//»Øµ÷º¯ÊıOnPause
-		OnStopCallback OnStop;//»Øµ÷º¯ÊıOnStop
-		OnReleaseCallback OnRelease;//»Øµ÷º¯ÊıOnRelease
-		OnCompleteCallback OnComplete;//»Øµ÷º¯ÊıOnComplete
-		OnProgressCallback OnProgress;//»Øµ÷º¯ÊıOnProgress
-		char *flag;//±êÖ¾
+		char *file;//éŸ³é¢‘æ–‡ä»¶
+		Uint8 *sound;//éŸ³é¢‘
+		Uint32 soundLen;//éŸ³é¢‘é•¿
+		Uint32 soundPos;//å½“å‰æ’­æ”¾ä½ç½®
+		SDL_bool completed;//æ˜¯å¦æ’­æ”¾å®Œæˆ
+		PlayerState state;//æ’­æ”¾å™¨çŠ¶æ€
+		SDL_AudioDeviceID device;//æ‰“å¼€çš„å£°å¡æ’­æ”¾è®¾å¤‡
+		OnCreateCallback OnCreate;//å›è°ƒå‡½æ•°OnCreate
+		OnStartCallback OnStart;//å›è°ƒå‡½æ•°OnStart
+		OnPauseCallback OnPause;//å›è°ƒå‡½æ•°OnPause
+		OnStopCallback OnStop;//å›è°ƒå‡½æ•°OnStop
+		OnReleaseCallback OnRelease;//å›è°ƒå‡½æ•°OnRelease
+		OnCompleteCallback OnComplete;//å›è°ƒå‡½æ•°OnComplete
+		OnProgressCallback OnProgress;//å›è°ƒå‡½æ•°OnProgress
+		char *flag;//æ ‡å¿—
 	} SoundInfo;
 }
 
 namespace Dungeon
 {
-	//Éè¼Æ³Éµ¥ÀıµÄ
+	//è®¾è®¡æˆå•ä¾‹çš„
 
 	class AudioPlayer
 	{
 	private:
-		SoundInfo *mSoundInfo;//ÒôÆµĞÅÏ¢½á¹¹Ìå
+		SoundInfo *mSoundInfo;//éŸ³é¢‘ä¿¡æ¯ç»“æ„ä½“
 		/*OnStartCallback OnStart;
 		OnPauseCallback OnPause;
 		OnStopCallback OnStop;
