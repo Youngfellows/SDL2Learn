@@ -9,14 +9,14 @@ namespace Dungeon
 	class DisplayObject
 	{
 	public:
-		void *subClass;//ÏÔÊ¾µÄ¶ÔÏó,Ïàµ±ÓÚ·ºĞÍ
+		void *subClass;//æ˜¾ç¤ºçš„å¯¹è±¡,ç›¸å½“äºæ³›å‹
 
 	private:
 		typedef void (*OnDrawCallback)(DisplayObject *self, Resource *resource, SDL_Renderer *renderer);
 		typedef void (*OnDestroyCallback)(DisplayObject *self);
-		typedef void (*OnScanCodeLeftCallback)(DisplayObject *self);//µã»÷·½Ïò×ó¼ü»Øµ÷
-		typedef void (*OnScanCodeRightCallback)(DisplayObject *self);//µã»÷·½ÏòÓÒ¼ü»Øµ÷
-		typedef void (*OnKeyUpCallback)(DisplayObject *self);//°´¼üÌ§Æğ»Øµ÷
+		typedef void (*OnScanCodeLeftCallback)(DisplayObject *self);//ç‚¹å‡»æ–¹å‘å·¦é”®å›è°ƒ
+		typedef void (*OnScanCodeRightCallback)(DisplayObject *self);//ç‚¹å‡»æ–¹å‘å³é”®å›è°ƒ
+		typedef void (*OnKeyUpCallback)(DisplayObject *self);//æŒ‰é”®æŠ¬èµ·å›è°ƒ
 		OnDrawCallback OnDraw;
 		OnDestroyCallback OnDestroy;
 		OnScanCodeLeftCallback OnScanCodeLeft;

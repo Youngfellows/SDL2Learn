@@ -6,7 +6,7 @@ namespace Game
 {
 	using namespace std;
 
-	//³õÊ¼»¯¾²Ì¬³ÉÔ±ÊôĞÔ
+	//åˆå§‹åŒ–é™æ€æˆå‘˜å±æ€§
 	int Cursor::radius = 88;
 	FRect *Cursor::srcRect = new FRect();
 
@@ -37,7 +37,7 @@ namespace Game
 	}
 
 	/*
-	* »Øµ÷º¯Êı
+	* å›è°ƒå‡½æ•°
 	*/
 	void Cursor::Cursor_OnDraw(DisplayObject *displayObject, struct Renderer *renderer)
 	{
@@ -55,7 +55,7 @@ namespace Game
 	}
 
 	/*
-	* »Øµ÷º¯Êı
+	* å›è°ƒå‡½æ•°
 	*/
 	void Cursor::Cursor_OnMouseMove(DisplayObject *displayObject, struct Event *event)
 	{

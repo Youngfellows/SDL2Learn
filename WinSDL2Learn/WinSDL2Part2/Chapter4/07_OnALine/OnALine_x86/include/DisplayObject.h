@@ -9,10 +9,10 @@ namespace Dungeon
 	class  DisplayObject
 	{
 	public:
-		void *subClass;//Òª»æÖÆ¶ÔÏó,Ïàµ±ÓÚ·ºÐÍ,À©Õ¹ÐÔºÃ
+		void *subClass;//è¦ç»˜åˆ¶å¯¹è±¡,ç›¸å½“äºŽæ³›åž‹,æ‰©å±•æ€§å¥½
 
 	private:
-		//¶¨Òå»Øµ÷º¯Êý->Ê¹ÓÃº¯ÊýÖ¸Õë
+		//å®šä¹‰å›žè°ƒå‡½æ•°->ä½¿ç”¨å‡½æ•°æŒ‡é’ˆ
 		typedef void (*OnDrawCallback)(DisplayObject *self, Resource *resource, SDL_Renderer *renderer);
 		typedef void (*OnMouseMoveCallback)(DisplayObject *self, SDL_Event *event);
 		typedef void (*OnDestoryCallback)(DisplayObject *self);

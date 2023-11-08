@@ -7,7 +7,7 @@ namespace Dungeon
 {
 	typedef struct CursorData
 	{
-		SDL_FRect *dest;//光标显示位置区域
+		SDL_FRect *dest;//鍏夋爣鏄剧ず浣嶇疆鍖哄煙
 	}CursorData;
 }
 

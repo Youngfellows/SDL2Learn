@@ -14,7 +14,7 @@ namespace Dungeon
 
 	DisplayObject *Cursor::Cursor_Create(float x, float y, float w, float h)
 	{
-		//��̬�����ڴ�
+		//动态申请内存
 		mCursorData = (CursorData *)malloc(sizeof(CursorData));
 		if (!mCursorData)
 		{
@@ -37,7 +37,7 @@ namespace Dungeon
 		{
 			return nullptr;
 		}
-		displayObject->subClass = this;//����Ҫ��ʾ����,�൱�ڷ���
+		displayObject->subClass = this;//设置要显示对象
 
 		return displayObject;
 	}
@@ -57,7 +57,7 @@ namespace Dungeon
 	}
 
 	/*
-	* ʵ�ֻص�����OnDraw
+	* 回调函数OnDraw
 	*/
 	void Cursor::Cursor_OnDrawCallback(DisplayObject *self, Resource *resource, SDL_Renderer *renderer)
 	{
@@ -74,7 +74,7 @@ namespace Dungeon
 
 
 	/*
-	* ʵ�ֻص�����OnMouseMove
+	* 回调函数OnMouseMove
 	*/
 	void Cursor::Cursor_OnMouseMoveCallback(DisplayObject *self, SDL_Event *event)
 	{

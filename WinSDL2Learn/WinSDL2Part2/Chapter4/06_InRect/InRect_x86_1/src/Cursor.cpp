@@ -18,7 +18,7 @@ namespace Dungeon
 
 	DisplayObject *Cursor::Cursor_Create(float x, float y, float w, float h)
 	{
-		this->mCursorData = (CursorData *)malloc(sizeof(CursorData));//¶¯Ì¬ÉêÇëÄÚ´æ
+		this->mCursorData = (CursorData *)malloc(sizeof(CursorData));//åŠ¨æ€ç”³è¯·å†…å­˜
 		if (!mCursorData)
 		{
 			return nullptr;
@@ -33,27 +33,27 @@ namespace Dungeon
 		mCursorData->dest->w = w;
 		mCursorData->dest->h = h;
 
-		//´´½¨ÒªÏÔÊ¾µÄ¶ÔÏó
+		//åˆ›å»ºè¦æ˜¾ç¤ºçš„å¯¹è±¡
 		DisplayObject *displayObject = new DisplayObject();
 
-		//ÎªdisplayObjectÉèÖÃ»Øµ÷º¯Êý
+		//ä¸ºdisplayObjectè®¾ç½®å›žè°ƒå‡½æ•°
 		if (!displayObject->DisplayObject_Create(&Cursor_OnDrawCallback,
 			&Cursor_OnMouseMoveCallback, &Cursor_DestoryCallback))
 		{
 			//displayObject->DisplayObject_Destory();
 			return nullptr;
 		}
-		displayObject->mSubClassData = this;//ÉèÖÃÏÔÊ¾Êý¾Ý
+		displayObject->mSubClassData = this;//è®¾ç½®æ˜¾ç¤ºæ•°æ®
 		return displayObject;
 	}
 
 	/*
-	* ±»µ÷ÓÃµÄ»Øµ÷º¯Êý,Ö»ÄÜÊÇ¾²Ì¬µÄ,²»ÄÜ·ÃÎÊ·Ç¾²Ì¬³ÉÔ±,Í¨¹ý´«²ÎÀ´·ÃÎÊ
+	* è¢«è°ƒç”¨çš„å›žè°ƒå‡½æ•°,åªèƒ½æ˜¯é™æ€çš„,ä¸èƒ½è®¿é—®éžé™æ€æˆå‘˜,é€šè¿‡ä¼ å‚æ¥è®¿é—®
 	*/
 	void Cursor::Cursor_DestoryCallback(DisplayObject *self)
 	{
-		//ÊÍ·ÅÄÚ´æ
-		Cursor *cursor = (Cursor *)self->mSubClassData;//»ñÈ¡´«µÝµÄ¶ÔÏó
+		//é‡Šæ”¾å†…å­˜
+		Cursor *cursor = (Cursor *)self->mSubClassData;//èŽ·å–ä¼ é€’çš„å¯¹è±¡
 		if (cursor)
 		{
 			CursorData *data = cursor->mCursorData;
@@ -70,36 +70,36 @@ namespace Dungeon
 	}
 
 	/*
-	* ±»µ÷ÓÃµÄ»Øµ÷º¯Êý,Ö»ÄÜÊÇ¾²Ì¬µÄ,²»ÄÜ·ÃÎÊ·Ç¾²Ì¬³ÉÔ±,Í¨¹ý´«²ÎÀ´·ÃÎÊ
+	* è¢«è°ƒç”¨çš„å›žè°ƒå‡½æ•°,åªèƒ½æ˜¯é™æ€çš„,ä¸èƒ½è®¿é—®éžé™æ€æˆå‘˜,é€šè¿‡ä¼ å‚æ¥è®¿é—®
 	*/
 	void Cursor::Cursor_OnDrawCallback(DisplayObject *self, Resource *resource, SDL_Renderer *renderer)
 	{
-		Cursor *cursor = (Cursor *)self->mSubClassData;//»ñÈ¡´«µÝµÄ¶ÔÏó
+		Cursor *cursor = (Cursor *)self->mSubClassData;//èŽ·å–ä¼ é€’çš„å¯¹è±¡
 		if (cursor)
 		{
 			CursorData *data = cursor->mCursorData;
 			//CursorData *data = cursor->Cursor_GetCursorData();
 			if (data)
 			{
-				//»æÖÆ¹â±ê
+				//ç»˜åˆ¶å…‰æ ‡
 				SDL_RenderCopyF(renderer, resource->Resource_GetCursorTexture(), nullptr, data->dest);
 			}
 		}
 	}
 
 	/*
-	* ±»µ÷ÓÃµÄ»Øµ÷º¯Êý,Ö»ÄÜÊÇ¾²Ì¬µÄ,²»ÄÜ·ÃÎÊ·Ç¾²Ì¬³ÉÔ±,Í¨¹ý´«²ÎÀ´·ÃÎÊ
+	* è¢«è°ƒç”¨çš„å›žè°ƒå‡½æ•°,åªèƒ½æ˜¯é™æ€çš„,ä¸èƒ½è®¿é—®éžé™æ€æˆå‘˜,é€šè¿‡ä¼ å‚æ¥è®¿é—®
 	*/
 	void Cursor::Cursor_OnMouseMoveCallback(DisplayObject *self, SDL_Event *event)
 	{
-		Cursor *cursor = (Cursor *)self->mSubClassData;//»ñÈ¡´«µÝµÄ¶ÔÏó
+		Cursor *cursor = (Cursor *)self->mSubClassData;//èŽ·å–ä¼ é€’çš„å¯¹è±¡
 		if (cursor)
 		{
 			CursorData *data = cursor->mCursorData;
 			//CursorData *data = cursor->Cursor_GetCursorData();
 			if (data)
 			{
-				//¸üÐÂ¹â±êÎ»ÖÃ
+				//æ›´æ–°å…‰æ ‡ä½ç½®
 				data->dest->x = event->motion.x;
 				data->dest->y = event->motion.y;
 			}

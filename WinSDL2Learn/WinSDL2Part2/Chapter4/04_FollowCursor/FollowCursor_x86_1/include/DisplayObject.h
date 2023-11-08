@@ -14,12 +14,12 @@ namespace Dungeon
 		typedef void (*DisplayObject_OnMouseMoveCallback)(DisplayObject *self,
 			SDL_Event *event);
 		typedef void(*DisplayObject_OnDestroyCallback)(DisplayObject *self);
-		DisplayObject_OnDrawCallback OnDraw;//º¯ÊıÖ¸Õë,×÷Îª»Øµ÷º¯Êı
-		DisplayObject_OnMouseMoveCallback OnMouseMove;//º¯ÊıÖ¸Õë,×÷Îª»Øµ÷º¯Êı
-		DisplayObject_OnDestroyCallback OnDestroy;//º¯ÊıÖ¸Õë,×÷Îª»Øµ÷º¯Êı
+		DisplayObject_OnDrawCallback OnDraw;//å‡½æ•°æŒ‡é’ˆ,ä½œä¸ºå›è°ƒå‡½æ•°
+		DisplayObject_OnMouseMoveCallback OnMouseMove;//å‡½æ•°æŒ‡é’ˆ,ä½œä¸ºå›è°ƒå‡½æ•°
+		DisplayObject_OnDestroyCallback OnDestroy;//å‡½æ•°æŒ‡é’ˆ,ä½œä¸ºå›è°ƒå‡½æ•°
 
 	public:
-		void *subClass;//ÒªÏÔÊ¾¶ÔÏó
+		void *subClass;//è¦æ˜¾ç¤ºå¯¹è±¡
 
 	public:
 		DisplayObject();

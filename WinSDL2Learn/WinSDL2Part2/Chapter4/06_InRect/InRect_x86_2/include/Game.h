@@ -10,42 +10,42 @@ namespace Dungeon
 	class Game
 	{
 	private:
-		SDL_Window *mWindow;//!< ÏÈÉùÃ÷ *mWindow£¬´°¿Ú
-		bool mIsRunning;//!< ÔËÐÐ×´Ì¬
+		SDL_Window *mWindow;//!< å…ˆå£°æ˜Ž *mWindowï¼Œçª—å£
+		bool mIsRunning;//!< è¿è¡ŒçŠ¶æ€
 		SDL_Renderer *mRenderer;
 		Resource *mResource;
-		DisplayObject *mDisplayObject;//ÏÔÊ¾¶ÔÏó¿ØÖÆÆ÷
+		DisplayObject *mDisplayObject;//æ˜¾ç¤ºå¯¹è±¡æŽ§åˆ¶å™¨
 
 	public:
-		//! ¹¹Ôìº¯Êý
+		//! æž„é€ å‡½æ•°
 		Game();
 
-		//! ³õÊ¼»¯
+		//! åˆå§‹åŒ–
 		bool Initialize();
 
-		//! Ö÷Ñ­»·
+		//! ä¸»å¾ªçŽ¯
 		void Loop();
 
-		//! ÓÎÏ·½áÊø
+		//! æ¸¸æˆç»“æŸ
 		void Shutdown();
 
 	private:
-		//! ´¦ÀíÊÂ¼þ
+		//! å¤„ç†äº‹ä»¶
 		void Event();
 
-		//! ¸üÐÂ¸÷ÖÖ×´Ì¬
+		//! æ›´æ–°å„ç§çŠ¶æ€
 		void Update(long delay);
 
-		//! äÖÈ¾
+		//! æ¸²æŸ“
 		void Draw();
 
-		//! ´´½¨×é¼þ
+		//! åˆ›å»ºç»„ä»¶
 		SDL_bool CreateComponents();
 
-		//! ÊÍ·Å×é¼þ×ÊÔ´
+		//! é‡Šæ”¾ç»„ä»¶èµ„æº
 		void FreeComponents();
 
-		//! ´¦ÀíÊó±êÒÆ¶¯ÊÂ¼þ
+		//! å¤„ç†é¼ æ ‡ç§»åŠ¨äº‹ä»¶
 		void ProcessMouseMoveEvent(SDL_Event *event);
 	};
 }

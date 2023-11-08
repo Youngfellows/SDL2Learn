@@ -17,7 +17,7 @@ namespace Dungeon
 
 	SDL_bool DisplayObject::CreateComponents()
 	{
-		//光标
+		//鍏夋爣
 		Cursor *cursor = new Cursor();
 		if (!cursor->Create(0, 0, CURSOR_DESTRECT_WIDTH, CURSOR_DESTRECT_HEIGHT))
 		{
@@ -25,7 +25,7 @@ namespace Dungeon
 		}
 		SetCursor(cursor);
 
-		//带滑块的内部矩形
+		//甯︽粦鍧楃殑鍐呴儴鐭╁舰
 		RectInRect *recrInRect = new RectInRect();
 		if (!recrInRect->Create(100, 100))
 		{

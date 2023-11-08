@@ -10,14 +10,14 @@ namespace Dungeon
 
 	DisplayObject *Eyeball::Eyeball_Create(float centerX, float centerY)
 	{
-		EyeballData *data = (EyeballData *)malloc(sizeof(EyeballData));//¶¯Ì¬ÉêÇëÄÚ´æ
+		EyeballData *data = (EyeballData *)malloc(sizeof(EyeballData));//åŠ¨æ€ç”³è¯·å†…å­˜
 		if (!data)
 		{
 			return nullptr;
 		}
 
-		data->eyeRadius = EYEBALL_RADIUS;//ÑÛÇò°ë¾¶
-		data->eyeCenter = (SDL_FPoint *)malloc(sizeof(SDL_FPoint));//ÑÛ¾¦ÖĞĞÄÎ»ÖÃ
+		data->eyeRadius = EYEBALL_RADIUS;//çœ¼çƒåŠå¾„
+		data->eyeCenter = (SDL_FPoint *)malloc(sizeof(SDL_FPoint));//çœ¼ç›ä¸­å¿ƒä½ç½®
 		if (!data->eyeCenter)
 		{
 			return nullptr;
@@ -25,7 +25,7 @@ namespace Dungeon
 		data->eyeCenter->x = centerX;
 		data->eyeCenter->y = centerY;
 
-		data->eyeballSrcRect = (SDL_Rect *)malloc(sizeof(SDL_Rect));//ÑÛÇòÍ¼Æ¬¾ØĞÎ(10*10)
+		data->eyeballSrcRect = (SDL_Rect *)malloc(sizeof(SDL_Rect));//çœ¼çƒå›¾ç‰‡çŸ©å½¢(10*10)
 		if (!data->eyeballSrcRect)
 		{
 			return nullptr;
@@ -35,7 +35,7 @@ namespace Dungeon
 		data->eyeballSrcRect->w = EYEBALL_SRC_RECT_WIDTH;
 		data->eyeballSrcRect->h = EYEBALL_SRC_RECT_HEIGHT;
 
-		data->eyeballDestRect = (SDL_FRect *)malloc(sizeof(SDL_FRect));//Òª»æÖÆÑÛÇòÍ¼Æ¬¾ØĞÎ
+		data->eyeballDestRect = (SDL_FRect *)malloc(sizeof(SDL_FRect));//è¦ç»˜åˆ¶çœ¼çƒå›¾ç‰‡çŸ©å½¢
 		if (!data->eyeballDestRect)
 		{
 			return nullptr;
@@ -47,7 +47,7 @@ namespace Dungeon
 		data->eyeballDestRect->w = EYEBALL_SRC_RECT_WIDTH;
 		data->eyeballDestRect->h = EYEBALL_SRC_RECT_HEIGHT;
 
-		data->eyeSrcRect = (SDL_Rect *)malloc(sizeof(SDL_Rect));//ÑÛ¾¦Í¼Æ¬¾ØĞÎ(40*40)
+		data->eyeSrcRect = (SDL_Rect *)malloc(sizeof(SDL_Rect));//çœ¼ç›å›¾ç‰‡çŸ©å½¢(40*40)
 		if (!data->eyeSrcRect)
 		{
 
@@ -58,7 +58,7 @@ namespace Dungeon
 		data->eyeSrcRect->w = EYE_SRC_RECT_WIDTH;
 		data->eyeSrcRect->h = EYE_SRC_RECT_HEIGHT;
 
-		data->eyeDestRect = (SDL_FRect *)malloc(sizeof(SDL_FRect));//Òª»æÖÆÑÛ¾¦Í¼Æ¬¾ØĞÎ
+		data->eyeDestRect = (SDL_FRect *)malloc(sizeof(SDL_FRect));//è¦ç»˜åˆ¶çœ¼ç›å›¾ç‰‡çŸ©å½¢
 		if (!data->eyeDestRect)
 		{
 
@@ -73,9 +73,9 @@ namespace Dungeon
 			data->eyeDestRect->h = EYE_SRC_RECT_HEIGHT;
 		}
 
-		//´´½¨ÒªÏÔÊ¾µÄ¶ÔÏó
+		//åˆ›å»ºè¦æ˜¾ç¤ºçš„å¯¹è±¡
 		DisplayObject *displayObject = new DisplayObject(this);
-		this->mEyeballData = data;//Îª»æÖÆ¶ÔÏó¸³Öµ
+		this->mEyeballData = data;//ä¸ºç»˜åˆ¶å¯¹è±¡èµ‹å€¼
 		return displayObject;
 	}
 
@@ -106,20 +106,20 @@ namespace Dungeon
 	}
 
 	/*
-	* OnDraw»Øµ÷º¯Êı»æÖÆÑÛ¾¦+ÑÛÇò
+	* OnDrawå›è°ƒå‡½æ•°ç»˜åˆ¶çœ¼ç›+çœ¼çƒ
 	*/
 	void Eyeball::Eyeball_CursorOnDraw(Resource *resource, SDL_Renderer *renderer)
 	{
 		EyeballData *data = mEyeballData;
 		if (data)
 		{
-			SDL_RenderCopyF(renderer, resource->Resource_GetEyeTexture(), data->eyeSrcRect, data->eyeDestRect);//»æÖÆÑÛ¾¦
-			SDL_RenderCopyF(renderer, resource->Resource_GetEyeTexture(), data->eyeballSrcRect, data->eyeballDestRect);//»æÖÆÑÛÇò
+			SDL_RenderCopyF(renderer, resource->Resource_GetEyeTexture(), data->eyeSrcRect, data->eyeDestRect);//ç»˜åˆ¶çœ¼ç›
+			SDL_RenderCopyF(renderer, resource->Resource_GetEyeTexture(), data->eyeballSrcRect, data->eyeballDestRect);//ç»˜åˆ¶çœ¼çƒ
 		}
 	}
 
 	/*
-	* OnMouseMove»Øµ÷º¯Êı¸üĞÂÑÛÇòÎ»ÖÃ
+	* OnMouseMoveå›è°ƒå‡½æ•°æ›´æ–°çœ¼çƒä½ç½®
 	*/
 	void Eyeball::Eyeball_CursorOnMouseMove(SDL_Event *event)
 	{

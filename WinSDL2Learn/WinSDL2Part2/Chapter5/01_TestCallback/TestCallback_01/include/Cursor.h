@@ -10,7 +10,7 @@ namespace Game
 	class Cursor
 	{
 	private:
-		static int radius;//Ö»ÄÜ·ÃÎÊ¾²Ì¬³ÉÔ±
+		static int radius;//åªèƒ½è®¿é—®é™æ€æˆå‘˜
 		static FRect *srcRect;
 
 	public:
@@ -18,8 +18,8 @@ namespace Game
 		~Cursor();
 		DisplayObject *Cursor_Create(float x, float y, float w, float h);
 		void Cursor_Destory(DisplayObject *displayObject);
-		static void Cursor_OnDraw(DisplayObject *displayObject, struct Renderer *renderer);//»Øµ÷º¯Êı
-		static void Cursor_OnMouseMove(DisplayObject *displayObject, struct Event *event);//»Øµ÷º¯Êı
+		static void Cursor_OnDraw(DisplayObject *displayObject, struct Renderer *renderer);//å›è°ƒå‡½æ•°
+		static void Cursor_OnMouseMove(DisplayObject *displayObject, struct Event *event);//å›è°ƒå‡½æ•°
 	};
 
 }

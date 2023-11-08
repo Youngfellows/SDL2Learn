@@ -3,19 +3,19 @@
 
 namespace Dungeon
 {
-#define WINDOW_WIDTH 500 // Window´°¿Ú¿í
-#define WINDOW_HEIGHT 500 // Window´°¿Ú¸ß
-#define FRAMERATE 60 //Ö¡
+#define WINDOW_WIDTH 500 // Windowçª—å£å®½
+#define WINDOW_HEIGHT 500 // Windowçª—å£é«˜
+#define FRAMERATE 60 //å¸§
 
-#define CURSOR_WIDTH 20 //¹â±ê¿í
-#define CURSOR_HEIGHT 20 //¹â±ê¸ß
+#define CURSOR_WIDTH 20 //å…‰æ ‡å®½
+#define CURSOR_HEIGHT 20 //å…‰æ ‡é«˜
 
-#define SLIDERBAR_START_X_POSITION 100 //»¬¶¯ÌõÆäÊµXÎ»ÖÃ
-#define SLIDERBAR_START_Y_POSITION 100 //»¬¶¯ÌõÆäÊµXÎ»ÖÃ
-#define SLIDERBAR_WIDTH 200 //»¬¶¯Ìõ¿í
-#define SLIDERBAR_HEIGHT 50 //»¬¶¯Ìõ¸ß
-#define SLIDER_WIDTH 30 //»¬¿é¿í
-#define SLIDER_HEIGHT 30 //»¬¿é¸ß
+#define SLIDERBAR_START_X_POSITION 100 //æ»‘åŠ¨æ¡å…¶å®žXä½ç½®
+#define SLIDERBAR_START_Y_POSITION 100 //æ»‘åŠ¨æ¡å…¶å®žXä½ç½®
+#define SLIDERBAR_WIDTH 200 //æ»‘åŠ¨æ¡å®½
+#define SLIDERBAR_HEIGHT 50 //æ»‘åŠ¨æ¡é«˜
+#define SLIDER_WIDTH 30 //æ»‘å—å®½
+#define SLIDER_HEIGHT 30 //æ»‘å—é«˜
 
 #define CURSOR_FILE_NAME "./resources/cursor.png"
 }

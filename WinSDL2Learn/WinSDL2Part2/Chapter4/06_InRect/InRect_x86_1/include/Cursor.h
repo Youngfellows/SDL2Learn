@@ -9,7 +9,7 @@
 namespace Dungeon
 {
 	/*
-	* Êó±ê¹â±êÀà
+	* é¼ æ ‡å…‰æ ‡ç±»
 	*/
 	class Cursor
 	{

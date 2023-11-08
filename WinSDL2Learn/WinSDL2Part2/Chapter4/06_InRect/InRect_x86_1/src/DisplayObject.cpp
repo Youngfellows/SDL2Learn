@@ -15,7 +15,7 @@ namespace Dungeon
 	}
 
 	/*
-	* 设置回调函数
+	* 璁剧疆鍥炶皟鍑芥暟
 	*/
 	SDL_bool DisplayObject::DisplayObject_Create(DisplayObject_OnDrawCallback onDrawCallback,
 		DisplayObject_OnMouseMoveCallback onMouseMoveCallback,
@@ -35,7 +35,7 @@ namespace Dungeon
 	{
 		if (OnDraw)
 		{
-			OnDraw(this, resource, renderer);//调用回调函数OnDraw
+			OnDraw(this, resource, renderer);//璋冪敤鍥炶皟鍑芥暟OnDraw
 		}
 	}
 
@@ -43,7 +43,7 @@ namespace Dungeon
 	{
 		if (OnMoveMove)
 		{
-			OnMoveMove(this, event);//调用回调函数OnMoveMove
+			OnMoveMove(this, event);//璋冪敤鍥炶皟鍑芥暟OnMoveMove
 		}
 	}
 
@@ -51,7 +51,7 @@ namespace Dungeon
 	{
 		if (OnDestory)
 		{
-			OnDestory(this);//调用回调函数OnDestory
+			OnDestory(this);//璋冪敤鍥炶皟鍑芥暟OnDestory
 		}
 	}
 }

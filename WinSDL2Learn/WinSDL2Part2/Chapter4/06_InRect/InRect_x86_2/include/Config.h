@@ -1,20 +1,20 @@
 #ifndef  _DUNGEON_CONFIG_H_
 #define _DUNGEON_CONFIG_H_
 
-//Window╢╟©зеДжц
+//WindowГ╙≈Е▐ёИ┘█Г╫╝
 #define WINDOW_WIDTH 400
 #define WINDOW_HEIGHT 400
 #define FRAMERATE 60
 
-//╧Б╠ЙеДжц
-#define CURSOR_DESTRECT_WIDTH 20 //╧Б╠Й©М
-#define CURSOR_DESTRECT_HEIGHT 20 //╧Б╠Й╦ъ
+//Е┘┴Ф═┤И┘█Г╫╝
+#define CURSOR_DESTRECT_WIDTH 20 //Е┘┴Ф═┤Е╝╫
+#define CURSOR_DESTRECT_HEIGHT 20 //Е┘┴Ф═┤И╚≤
 
-//╬ьпнеДжц
-#define BORDER_RECT_WIDTH 200 //╠ъ©Р©М
-#define BORDER_RECT_HEIGHT 100 //╠ъ©Р╦ъ
-#define SLIDER_RECT_WIDTH 30 //╩╛©И©М
-#define SLIDER_RECT_HEIGHT 30 //╩╛©И╦ъ
+//Г÷╘Е╫╒И┘█Г╫╝
+#define BORDER_RECT_WIDTH 200 //Х╬╧Ф║├Е╝╫
+#define BORDER_RECT_HEIGHT 100 //Х╬╧Ф║├И╚≤
+#define SLIDER_RECT_WIDTH 30 //Ф╩▒Е²≈Е╝╫
+#define SLIDER_RECT_HEIGHT 30 //Ф╩▒Е²≈И╚≤
 
 #endif // ! _DUNGEON_CONFIG_H_
 

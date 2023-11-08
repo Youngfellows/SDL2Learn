@@ -6,16 +6,16 @@
 namespace Dungeon
 {
 	/*
-	* ÑÛÇòÊı¾İ½á¹¹Ìå
+	* çœ¼çƒæ•°æ®ç»“æ„ä½“
 	*/
 	typedef struct EyeballData
 	{
-		float eyeRadius;//ÑÛÇò°ë¾¶
-		SDL_FPoint *eyeCenter;//ÑÛ¾¦ÖĞĞÄÎ»ÖÃ
-		SDL_Rect *eyeballSrcRect;//ÑÛÇòÍ¼Æ¬¾ØĞÎ(10*10)
-		SDL_FRect *eyeballDestRect;//»æÖÆÑÛÇòµÄ¾ØĞÎ
-		SDL_Rect *eyeSrcRect;//ÑÛ¾¦Í¼Æ¬¾ØĞÎ(40*40)
-		SDL_FRect *eyeDestRect;//»æÖÆÑÛ¾¦¾ØĞÎ
+		float eyeRadius;//çœ¼çƒåŠå¾„
+		SDL_FPoint *eyeCenter;//çœ¼ç›ä¸­å¿ƒä½ç½®
+		SDL_Rect *eyeballSrcRect;//çœ¼çƒå›¾ç‰‡çŸ©å½¢(10*10)
+		SDL_FRect *eyeballDestRect;//ç»˜åˆ¶çœ¼çƒçš„çŸ©å½¢
+		SDL_Rect *eyeSrcRect;//çœ¼ç›å›¾ç‰‡çŸ©å½¢(40*40)
+		SDL_FRect *eyeDestRect;//ç»˜åˆ¶çœ¼ç›çŸ©å½¢
 	} EyeballData;
 }
 

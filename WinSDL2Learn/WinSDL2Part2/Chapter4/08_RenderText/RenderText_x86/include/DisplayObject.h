@@ -8,15 +8,15 @@ namespace Dungeon
 	class  DisplayObject
 	{
 	public:
-		void *subClass;//ÒªÏÔÊ¾Àà,Ïàµ±ÓÚ·ºĞÍ
+		void *subClass;//è¦æ˜¾ç¤ºç±»,ç›¸å½“äºæ³›å‹
 
 	private:
 		typedef void (*OnDrawCallback)(DisplayObject *self, SDL_Renderer *renderer);
 		typedef void (*OnTextSetCallback)(DisplayObject *self, const char *value);
 		typedef void (*OnDestroyCallback)(DisplayObject *self);
-		OnDrawCallback OnDraw;//»Øµ÷º¯ÊıOnDraw,Ê¹ÓÃº¯ÊıÖ¸Õë
-		OnDestroyCallback OnDestroy;//»Øµ÷º¯ÊıOnDestroy,Ê¹ÓÃº¯ÊıÖ¸Õë
-		OnTextSetCallback OnTextSet;//»Øµ÷º¯ÊıOnTextSet,Ê¹ÓÃº¯ÊıÖ¸Õë
+		OnDrawCallback OnDraw;//å›è°ƒå‡½æ•°OnDraw,ä½¿ç”¨å‡½æ•°æŒ‡é’ˆ
+		OnDestroyCallback OnDestroy;//å›è°ƒå‡½æ•°OnDestroy,ä½¿ç”¨å‡½æ•°æŒ‡é’ˆ
+		OnTextSetCallback OnTextSet;//å›è°ƒå‡½æ•°OnTextSet,ä½¿ç”¨å‡½æ•°æŒ‡é’ˆ
 
 	public:
 		DisplayObject();

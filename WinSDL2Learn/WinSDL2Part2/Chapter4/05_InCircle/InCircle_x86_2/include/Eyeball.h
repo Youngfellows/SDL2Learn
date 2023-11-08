@@ -8,7 +8,7 @@
 
 namespace Dungeon
 {
-	class DisplayObject;//ÏÈÉùÃ÷Àà,,ºóÃæÔÙ¶¨Òå
+	class DisplayObject;//å…ˆå£°æ˜ç±»,,åé¢å†å®šä¹‰
 
 	class Eyeball
 	{

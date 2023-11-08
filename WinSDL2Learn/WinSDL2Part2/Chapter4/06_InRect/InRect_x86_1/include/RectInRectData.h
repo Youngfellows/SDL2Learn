@@ -12,8 +12,8 @@ namespace Dungeon
 
 	typedef struct RectInRectData
 	{
-		SDL_FRect *border;//边界矩形
-		SliderData *slider;//内部滑块
+		SDL_FRect *border;//杈圭晫鐭╁舰
+		SliderData *slider;//鍐呴儴婊戝潡
 	}RectInRectData;
 }
 

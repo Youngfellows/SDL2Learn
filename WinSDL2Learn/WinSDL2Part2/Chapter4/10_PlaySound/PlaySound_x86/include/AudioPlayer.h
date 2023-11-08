@@ -7,21 +7,21 @@ namespace Dungeon
 {
 	typedef	enum PlayerState
 	{
-		IDLE,//¿ÕÏÐ×´Ì¬
-		PLAYING,//²¥·Å×´Ì¬
-		PAUSE,//ÔÝÍ£×´Ì¬
-		STOP//Ïú»Ù
+		IDLE,//ç©ºé—²çŠ¶æ€
+		PLAYING,//æ’­æ”¾çŠ¶æ€
+		PAUSE,//æš‚åœçŠ¶æ€
+		STOP//é”€æ¯
 	}PlayerState;
 
 	typedef struct SoundInfo
 	{
-		char *file;//ÒôÆµÎÄ¼þ
-		Uint8 *sound;//ÒôÆµ
-		Uint32 soundLen;//ÒôÆµ³¤
-		Uint32 soundPos;//µ±Ç°²¥·ÅÎ»ÖÃ
-		SDL_bool completed;//ÊÇ·ñ²¥·ÅÍê³É
-		PlayerState state;//²¥·ÅÆ÷×´Ì¬
-		SDL_AudioDeviceID device;//´ò¿ªµÄÉù¿¨²¥·ÅÉè±¸
+		char *file;//éŸ³é¢‘æ–‡ä»¶
+		Uint8 *sound;//éŸ³é¢‘
+		Uint32 soundLen;//éŸ³é¢‘é•¿
+		Uint32 soundPos;//å½“å‰æ’­æ”¾ä½ç½®
+		SDL_bool completed;//æ˜¯å¦æ’­æ”¾å®Œæˆ
+		PlayerState state;//æ’­æ”¾å™¨çŠ¶æ€
+		SDL_AudioDeviceID device;//æ‰“å¼€çš„å£°å¡æ’­æ”¾è®¾å¤‡
 	} SoundInfo;
 }
 
@@ -30,8 +30,8 @@ namespace Dungeon
 	class AudioPlayer
 	{
 	private:
-		SoundInfo *mSoundInfo;//ÒôÆµÐÅÏ¢½á¹¹Ìå
-		typedef void (*OnStartCallback)(AudioPlayer *audioPlayer);//º¯Êý»Øµ÷ ->> ¿ªÊ¼²¥·Å
+		SoundInfo *mSoundInfo;//éŸ³é¢‘ä¿¡æ¯ç»“æž„ä½“
+		typedef void (*OnStartCallback)(AudioPlayer *audioPlayer);//å‡½æ•°å›žè°ƒ ->> å¼€å§‹æ’­æ”¾
 		typedef void (*OnPauseCallback)(AudioPlayer *audioPlayer);
 		typedef void (*OnStopCallback)(AudioPlayer *audioPlayer);
 		typedef void (*OnReleaseCallback)(AudioPlayer *audioPlayer);

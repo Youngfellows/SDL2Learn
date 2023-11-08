@@ -8,17 +8,17 @@
 
 namespace Dungeon
 {
-	class Cursor;//ÏÈÉùÃ÷Àà
-	class RectInRect;//ÏÈÉùÃ÷Àà
+	class Cursor;//å…ˆå£°æ˜ç±»
+	class RectInRect;//å…ˆå£°æ˜ç±»
 
 	/*
-	* ÕâÖÖ·½Ê½²»½âñî,ÒÀÀµ¹ØÏµÌ«Ç¿ÁË,Ã»ÓĞÌåÏÖÃæÏò¶ÔÏóµÄÌØĞÔ
+	* è¿™ç§æ–¹å¼ä¸è§£è€¦,ä¾èµ–å…³ç³»å¤ªå¼ºäº†,æ²¡æœ‰ä½“ç°é¢å‘å¯¹è±¡çš„ç‰¹æ€§
 	*/
 	class DisplayObject
 	{
 	private:
-		Cursor *mCursor;//¹â±ê¶ÔÏó
-		RectInRect *mRectInRect;//ÄÚ¾ØĞÎ¶ÔÏó
+		Cursor *mCursor;//å…‰æ ‡å¯¹è±¡
+		RectInRect *mRectInRect;//å†…çŸ©å½¢å¯¹è±¡
 
 	public:
 		DisplayObject();

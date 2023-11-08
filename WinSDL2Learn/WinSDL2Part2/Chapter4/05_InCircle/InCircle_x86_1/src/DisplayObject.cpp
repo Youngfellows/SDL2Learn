@@ -10,15 +10,15 @@ namespace Dungeon
 	void DisplayObject::DisplayObject_Create(DisplayObject_OnDrawCallback onDrawCallback,
 		DisplayObject_OnMouseMoveCallback onMouseMoveCallback)
 	{
-		this->OnDraw = onDrawCallback;//设置OnDraw回调函数
-		this->OnMouseMove = onMouseMoveCallback;//设置OnMouseMove回调函数
+		this->OnDraw = onDrawCallback;//璁剧疆OnDraw鍥炶皟鍑芥暟
+		this->OnMouseMove = onMouseMoveCallback;//璁剧疆OnMouseMove鍥炶皟鍑芥暟
 	}
 
 	void DisplayObject::DisplayObject_Draw(Resource *resource, SDL_Renderer *renderer)
 	{
 		if (OnDraw != nullptr)
 		{
-			OnDraw(this, resource, renderer);//调用OnDraw回调函数
+			OnDraw(this, resource, renderer);//璋冪敤OnDraw鍥炶皟鍑芥暟
 		}
 	}
 
@@ -26,7 +26,7 @@ namespace Dungeon
 	{
 		if (OnMouseMove)
 		{
-			OnMouseMove(this, event);//调用OnMouseMove回调函数
+			OnMouseMove(this, event);//璋冪敤OnMouseMove鍥炶皟鍑芥暟
 		}
 	}
 

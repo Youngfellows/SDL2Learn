@@ -13,7 +13,7 @@ namespace Dungeon
 
 	DisplayObject *Cursor::Create(float x, float y, float w, float h)
 	{
-		//¶¯Ì¬ÉêÇëÄÚ´æ
+		//åŠ¨æ€ç”³è¯·å†…å­˜
 		this->mCursorData = (CursorData *)malloc(sizeof(CursorData));
 		if (!mCursorData)
 		{
@@ -29,14 +29,14 @@ namespace Dungeon
 		mCursorData->dest->w = w;
 		mCursorData->dest->h = h;
 
-		//´´½¨ÒªÏÔÊ¾¶ÔÏó
+		//åˆ›å»ºè¦æ˜¾ç¤ºå¯¹è±¡
 		DisplayObject *displayObject = new DisplayObject();
-		//ÉèÖÃ»Øµ÷º¯Êý
+		//è®¾ç½®å›žè°ƒå‡½æ•°
 		if (!displayObject->Create(&OnDrawCallback, &OnMouseMoveCallback, &OnDestoryCallback))
 		{
 			return nullptr;
 		}
-		displayObject->subClass = this;//ÉèÖÃÒªÏÔÊ¾Êý¾Ý
+		displayObject->subClass = this;//è®¾ç½®è¦æ˜¾ç¤ºæ•°æ®
 		return displayObject;
 	}
 
@@ -48,7 +48,7 @@ namespace Dungeon
 			CursorData *data = cursor->mCursorData;
 			if (data)
 			{
-				//»æÖÆ¹â±ê
+				//ç»˜åˆ¶å…‰æ ‡
 				SDL_RenderCopyF(renderer, resource->GetCursorTexture(), nullptr, data->dest);
 			}
 		}
@@ -61,7 +61,7 @@ namespace Dungeon
 			CursorData *data = cursor->mCursorData;
 			if (data)
 			{
-				//¸üÐÂ¹â±êÎ»ÖÃ
+				//æ›´æ–°å…‰æ ‡ä½ç½®
 				data->dest->x = event->motion.x;
 				data->dest->y = event->motion.y;
 			}

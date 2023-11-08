@@ -15,7 +15,7 @@ namespace Dungeon
 
 	SDL_bool RectInRect::Create(float x, float y)
 	{
-		//¶¯Ì¬ÉêÇëÄÚ´æ
+		//åŠ¨æ€ç”³è¯·å†…å­˜
 		mRectInRectData = (RectInRectData *)malloc(sizeof(RectInRectData));
 		if (!mRectInRectData)
 		{
@@ -54,11 +54,11 @@ namespace Dungeon
 		RectInRectData *data = mRectInRectData;
 		if (data)
 		{
-			//»æÖÆ±ß¿ò-ºìÉ«
+			//ç»˜åˆ¶è¾¹æ¡†-çº¢è‰²
 			SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 			SDL_RenderDrawRectF(renderer, data->border);
 
-			//»æÖÆ»¬¿é
+			//ç»˜åˆ¶æ»‘å—
 			SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
 			SDL_RenderDrawRectF(renderer, data->slider->innerRect);
 		}
@@ -73,7 +73,7 @@ namespace Dungeon
 			SliderData *sliderData = data->slider;
 			if (sliderData)
 			{
-				//¸üÐÂ»¬¿éÎ»ÖÃ
+				//æ›´æ–°æ»‘å—ä½ç½®
 				SDL_FRect *inner = sliderData->innerRect;
 				inner->x = event->motion.x;
 				inner->y = event->motion.y;

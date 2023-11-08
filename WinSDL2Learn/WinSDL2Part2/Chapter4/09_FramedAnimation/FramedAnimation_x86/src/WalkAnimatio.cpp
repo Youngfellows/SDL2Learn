@@ -13,7 +13,7 @@ namespace Dungeon
 
 	DisplayObject *WalkAnimation::Create()
 	{
-		//¶¯Ì¬ÉêÇëÄÚ´æ
+		//åŠ¨æ€ç”³è¯·å†…å­˜
 		this->mWalkAnimationData = (WalkAnimationData *)malloc(sizeof(WalkAnimationData));
 		if (!mWalkAnimationData)
 		{
@@ -41,10 +41,10 @@ namespace Dungeon
 			mWalkAnimationData->frames[i].h = ANIMATION_HEIGHT;
 		}
 
-		//´´½¨ÏÔÊ¾¶ÔÏó
+		//åˆ›å»ºæ˜¾ç¤ºå¯¹è±¡
 		DisplayObject *displayObject = new DisplayObject();
-		displayObject->subClass = this;//ÉèÖÃÒªÏÔÊ¾Êý¾Ý
-		//ÉèÖÃ»Øµ÷º¯Êý
+		displayObject->subClass = this;//è®¾ç½®è¦æ˜¾ç¤ºæ•°æ®
+		//è®¾ç½®å›žè°ƒå‡½æ•°
 		if (!displayObject->Create(&OnDraw,
 			&OnScanCodeLeft,
 			&OnScanCodeRight,
@@ -75,7 +75,7 @@ namespace Dungeon
 				data->walking, data->currentFrameIndex);
 			if (data)
 			{
-				//»æÖÆ¶¯»­
+				//ç»˜åˆ¶åŠ¨ç”»
 				SDL_RenderCopyExF(renderer, resource->GetWalkTexture(),
 					&data->frames[data->currentFrameIndex], data->dest,
 					0, nullptr, data->frameFlip);
@@ -85,7 +85,7 @@ namespace Dungeon
 				{
 					if (data->globalFramesCount % 10 == 0)
 					{
-						//ÒÆ¶¯¶¯»­
+						//ç§»åŠ¨åŠ¨ç”»
 						data->dest->x += data->speed;
 						data->currentFrameIndex++;
 						if (data->currentFrameIndex == 5)

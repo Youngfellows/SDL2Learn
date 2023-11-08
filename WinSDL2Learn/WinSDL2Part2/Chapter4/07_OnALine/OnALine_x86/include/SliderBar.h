@@ -7,18 +7,18 @@
 
 namespace Dungeon
 {
-	//»¬¿éÊı¾İ
+	//æ»‘å—æ•°æ®
 	typedef struct SliderData
 	{
-		SDL_FPoint *sliderPoint;//»¬¿é´¥ÃşÎ»ÖÃ
-		SDL_FRect *sliderDest;//Òª»æÖÆ»¬¿é¾ØĞÎÎ»ÖÃ
+		SDL_FPoint *sliderPoint;//æ»‘å—è§¦æ‘¸ä½ç½®
+		SDL_FRect *sliderDest;//è¦ç»˜åˆ¶æ»‘å—çŸ©å½¢ä½ç½®
 	}SliderData;
 
-	//»¬¶¯ÌõÊı¾İ
+	//æ»‘åŠ¨æ¡æ•°æ®
 	typedef struct SliderBarData
 	{
-		SDL_FRect *border;//»¬¶¯Ìõ±ß¿ò
-		SliderData *sliderData;//»¬¿éÊı¾İ
+		SDL_FRect *border;//æ»‘åŠ¨æ¡è¾¹æ¡†
+		SliderData *sliderData;//æ»‘å—æ•°æ®
 	}SliderBarData;
 }
 
@@ -27,7 +27,7 @@ namespace Dungeon
 	class SliderBar
 	{
 	private:
-		SliderBarData *mSliderBarData;//»¬¶¯ÌõÊı¾İ
+		SliderBarData *mSliderBarData;//æ»‘åŠ¨æ¡æ•°æ®
 
 	public:
 		SliderBar();

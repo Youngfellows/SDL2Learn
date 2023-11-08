@@ -3,15 +3,15 @@
 
 namespace Dungeon
 {
-#define WINDOW_WIDTH 900 //Window´°¿Ú¿í
-#define WINDOW_HEIGHT 300 //Window´°¿Ú¸ß
-#define FRAMERATE 60 //Ö¡
+#define WINDOW_WIDTH 900 //Windowçª—å£å®½
+#define WINDOW_HEIGHT 300 //Windowçª—å£é«˜
+#define FRAMERATE 60 //å¸§
 
 #define WALK_FILE_NAME "./resources/walk.png"
-#define ANIMATION_FRAMES 7 //¶¯»­Ö¡Êı
-#define ANIMATION_WIDTH 162 //¶¯»­¿í
-#define ANIMATION_HEIGHT 265 //¶¯»­¸ß
-#define ANIMATION_SPEED 30 //ÒÆ¶¯¾àÀë
+#define ANIMATION_FRAMES 7 //åŠ¨ç”»å¸§æ•°
+#define ANIMATION_WIDTH 162 //åŠ¨ç”»å®½
+#define ANIMATION_HEIGHT 265 //åŠ¨ç”»é«˜
+#define ANIMATION_SPEED 30 //ç§»åŠ¨è·ç¦»
 }
 
 #endif // ! _DUNGEON_CONFIG_H_

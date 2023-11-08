@@ -18,9 +18,9 @@ namespace Dungeon
 		DisplayObject_OnMouseMoveCallback onMouseMoveCallback,
 		DisplayObject_OnDestroyCallback onDestroyCallback)
 	{
-		this->OnDraw = onDrawCallback;//设置回调函数OnDraw
-		this->OnMouseMove = onMouseMoveCallback;//设置回调函数OnMouseMove
-		this->OnDestroy = onDestroyCallback;//设置回调函数OnDestroy
+		this->OnDraw = onDrawCallback;//璁剧疆鍥炶皟鍑芥暟OnDraw
+		this->OnMouseMove = onMouseMoveCallback;//璁剧疆鍥炶皟鍑芥暟OnMouseMove
+		this->OnDestroy = onDestroyCallback;//璁剧疆鍥炶皟鍑芥暟OnDestroy
 		if (!OnDraw || !OnMouseMove || !OnDestroy)
 		{
 			return SDL_FALSE;
@@ -32,7 +32,7 @@ namespace Dungeon
 	{
 		if (OnDraw)
 		{
-			OnDraw(this, resource, renderer);//调用回调函数OnDraw
+			OnDraw(this, resource, renderer);//璋冪敤鍥炶皟鍑芥暟OnDraw
 		}
 	}
 
@@ -40,7 +40,7 @@ namespace Dungeon
 	{
 		if (OnMouseMove)
 		{
-			OnMouseMove(this, event);//调用回调函数OnMouseMove
+			OnMouseMove(this, event);//璋冪敤鍥炶皟鍑芥暟OnMouseMove
 		}
 	}
 
@@ -48,7 +48,7 @@ namespace Dungeon
 	{
 		if (OnDestroy)
 		{
-			OnDestroy(this);//调用回调函数OnDestroy
+			OnDestroy(this);//璋冪敤鍥炶皟鍑芥暟OnDestroy
 		}
 	}
 }

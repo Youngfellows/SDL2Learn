@@ -9,13 +9,13 @@ namespace Dungeon
 	class DisplayObject
 	{
 	public:
-		void *subClassData;//数据对象指针
+		void *subClassData;//鏁版嵁瀵硅薄鎸囬拡
 
 	private:
 		typedef void (*DisplayObject_OnDrawCallback)(DisplayObject *self, Resource *resource, SDL_Renderer *renderer);
 		typedef void (*DisplayObject_OnMouseMoveCallback)(DisplayObject *self, SDL_Event *event);
-		DisplayObject_OnDrawCallback OnDraw;//设置OnDraw回调函数,使用函数指针
-		DisplayObject_OnMouseMoveCallback OnMouseMove;//设置OnMouseMove回调函数,使用函数指针
+		DisplayObject_OnDrawCallback OnDraw;//璁剧疆OnDraw鍥炶皟鍑芥暟,浣跨敤鍑芥暟鎸囬拡
+		DisplayObject_OnMouseMoveCallback OnMouseMove;//璁剧疆OnMouseMove鍥炶皟鍑芥暟,浣跨敤鍑芥暟鎸囬拡
 
 	public:
 		DisplayObject();

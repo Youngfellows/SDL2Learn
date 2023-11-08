@@ -7,12 +7,12 @@
 
 namespace Dungeon
 {
-	class Eyeball;//ÏÈÉùÃ÷Àà,ºóÃæÔÙ¶¨Òå
+	class Eyeball;//å…ˆå£°æ˜ç±»,åé¢å†å®šä¹‰
 
 	class DisplayObject
 	{
 	private:
-		Eyeball *mEyeball;//ĞèÒª»æÖÆµÄ¾ßÌå¶ÔÏó
+		Eyeball *mEyeball;//éœ€è¦ç»˜åˆ¶çš„å…·ä½“å¯¹è±¡
 
 	public:
 		DisplayObject(Eyeball *eyeball);

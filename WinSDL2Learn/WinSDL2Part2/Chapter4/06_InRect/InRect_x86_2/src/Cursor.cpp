@@ -18,7 +18,7 @@ namespace Dungeon
 
 	SDL_bool Cursor::Create(float x, float y, float w, float h)
 	{
-		this->mCursorData = (CursorData *)malloc(sizeof(CursorData));//¶¯Ì¬ÉêÇëÄÚ´æ
+		this->mCursorData = (CursorData *)malloc(sizeof(CursorData));//åŠ¨æ€ç”³è¯·å†…å­˜
 		if (!mCursorData)
 		{
 			return SDL_FALSE;
@@ -56,7 +56,7 @@ namespace Dungeon
 		CursorData *data = GetCursorData();
 		if (data)
 		{
-			//»æÖÆ¹â±ê
+			//ç»˜åˆ¶å…‰æ ‡
 			SDL_RenderCopyF(renderer, resource->GetCursorTexture(), nullptr, data->dest);
 		}
 	}
@@ -67,7 +67,7 @@ namespace Dungeon
 		CursorData *data = mCursorData;
 		if (data)
 		{
-			//¸üÐÂ¹â±êÎ»ÖÃ
+			//æ›´æ–°å…‰æ ‡ä½ç½®
 			data->dest->x = event->motion.x;
 			data->dest->y = event->motion.y;
 		}

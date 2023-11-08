@@ -14,7 +14,7 @@ namespace Dungeon
 	}
 
 	/*
-	* ÊµÏÖµÄ»Øµ÷º¯Êý
+	* å®žçŽ°çš„å›žè°ƒå‡½æ•°
 	*/
 	void Cursor::Cursor_OnDraw(SDL_Renderer *renderer)
 	{
@@ -22,7 +22,7 @@ namespace Dungeon
 	}
 
 	/*
-	* ÊµÏÖµÄ»Øµ÷º¯Êý
+	* å®žçŽ°çš„å›žè°ƒå‡½æ•°
 	*/
 	void Cursor::Cursor_OnMouseMove(SDL_Event *event)
 	{

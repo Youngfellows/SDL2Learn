@@ -12,8 +12,8 @@ namespace Game
 	public:
 		typedef void (*DisplayObject_OnMouseMoveCallback)(DisplayObject *displayObject, Event *event);
 		typedef void(*DisplayObject_OnDrawCallback)(DisplayObject *displayObject, Renderer *renderer);
-		//void (*onDraw)(DisplayObject *displayObject, struct Renderer *renderer);//回调函数
-		//void (*onMouseMove)(DisplayObject *displayObject, struct Event *event);//回调函数
+		//void (*onDraw)(DisplayObject *displayObject, struct Renderer *renderer);//鍥炶皟鍑芥暟
+		//void (*onMouseMove)(DisplayObject *displayObject, struct Event *event);//鍥炶皟鍑芥暟
 
 		DisplayObject_OnMouseMoveCallback onMouseMove;
 		DisplayObject_OnDrawCallback onDraw;

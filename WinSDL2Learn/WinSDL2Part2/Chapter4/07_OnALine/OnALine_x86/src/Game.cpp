@@ -14,14 +14,14 @@ namespace Dungeon
 
 	bool Game::Initialize()
 	{
-		// SDL¿â³õÊ¼»¯
+		// SDLåº“åˆå§‹åŒ–
 		if (SDL_Init(SDL_INIT_VIDEO) != 0)
 		{
 			SDL_Log("Can not init video: %s", SDL_GetError());
 			return false;
 		}
 
-		// ´°¿Ú³õÊ¼»¯
+		// çª—å£åˆå§‹åŒ–
 		mWindow = SDL_CreateWindow("Dungeon", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN);
 		if (!mWindow)
 		{
@@ -29,7 +29,7 @@ namespace Dungeon
 			return false;
 		}
 
-		// ³õÊ¼»¯Renderer
+		// åˆå§‹åŒ–Renderer
 		mRenderer = SDL_CreateRenderer(mWindow, -1, SDL_RENDERER_ACCELERATED);
 		if (!mRenderer)
 		{
@@ -37,20 +37,20 @@ namespace Dungeon
 			return false;
 		}
 
-		// ¼ÓÔØÍ¼Æ¬×ÊÔ´
+		// åŠ è½½å›¾ç‰‡èµ„æº
 		mResource = new Resource();
 		if (!mResource->Create(mRenderer))
 		{
 			return false;
 		}
 
-		// ¼ÓÔØ×é¼ş
+		// åŠ è½½ç»„ä»¶
 		if (!CreateComponents())
 		{
 			return false;
 		}
 
-		// ½ûÓÃÄ¬ÈÏ¹â±ê
+		// ç¦ç”¨é»˜è®¤å…‰æ ‡
 		SDL_ShowCursor(SDL_DISABLE);
 
 		return true;
@@ -79,7 +79,7 @@ namespace Dungeon
 
 			long current = SDL_GetTicks();
 			long cost = current - begin;
-			long frame = 1000 / FRAMERATE;//Ã¿Ò»Ö¡¶à³¤Ê±¼ä
+			long frame = 1000 / FRAMERATE;//æ¯ä¸€å¸§å¤šé•¿æ—¶é—´
 			long delay = frame - cost;
 			//SDL_Log("delay=%ld", delay);
 			if (delay > 0)
@@ -92,12 +92,12 @@ namespace Dungeon
 	void Game::Event()
 	{
 		SDL_Event event;
-		// Èç¹ûÊÂ¼ş¶ÓÁĞÖĞÓĞÎ´´¦ÀíµÄÊÂ¼ş£¬°´Ë³Ğò´¦Àí
+		// å¦‚æœäº‹ä»¶é˜Ÿåˆ—ä¸­æœ‰æœªå¤„ç†çš„äº‹ä»¶ï¼ŒæŒ‰é¡ºåºå¤„ç†
 		while (SDL_PollEvent(&event))
 		{
 			switch (event.type)
 			{
-			case SDL_QUIT:// ÍË³öÊÂ¼ş£¬°´ÏÂ´°¿ÚµÄ²æ
+			case SDL_QUIT:// é€€å‡ºäº‹ä»¶ï¼ŒæŒ‰ä¸‹çª—å£çš„å‰
 				mIsRunning = false;
 				break;
 			case SDL_MOUSEMOTION:
@@ -121,13 +121,13 @@ namespace Dungeon
 	{
 		SDL_SetRenderDrawColor(mRenderer, 255, 255, 255, 255);
 		SDL_RenderClear(mRenderer);
-		DrawComponents();//»æÖÆ×é¼ş
+		DrawComponents();//ç»˜åˆ¶ç»„ä»¶
 		SDL_RenderPresent(mRenderer);
 	}
 
 	SDL_bool Game::CreateComponents()
 	{
-		//´´½¨¹â±ê
+		//åˆ›å»ºå…‰æ ‡
 		Cursor *cursor = new Cursor();
 		this->mCursor = cursor->Create(0, 0, CURSOR_WIDTH, CURSOR_HEIGHT);
 		if (!mCursor)
@@ -161,11 +161,11 @@ namespace Dungeon
 	{
 		if (mCursor)
 		{
-			mCursor->Draw(mResource, mRenderer);//»æÖÆ¹â±ê
+			mCursor->Draw(mResource, mRenderer);//ç»˜åˆ¶å…‰æ ‡
 		}
 		if (mSliderBar)
 		{
-			mSliderBar->Draw(mResource, mRenderer);//»æÖÆ»¬¿é
+			mSliderBar->Draw(mResource, mRenderer);//ç»˜åˆ¶æ»‘å—
 		}
 	}
 
@@ -173,11 +173,11 @@ namespace Dungeon
 	{
 		if (mCursor)
 		{
-			mCursor->MouseMove(event);//¹â±ê´¦ÀíÊó±êÒÆ¶¯ÊÂ¼ş
+			mCursor->MouseMove(event);//å…‰æ ‡å¤„ç†é¼ æ ‡ç§»åŠ¨äº‹ä»¶
 		}
 		if (mSliderBar)
 		{
-			mSliderBar->MouseMove(event);//»¬¿é´¦ÀíÊó±êÒÆ¶¯ÊÂ¼ş
+			mSliderBar->MouseMove(event);//æ»‘å—å¤„ç†é¼ æ ‡ç§»åŠ¨äº‹ä»¶
 		}
 	}
 }

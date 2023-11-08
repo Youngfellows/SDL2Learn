@@ -15,7 +15,7 @@ namespace Dungeon
 
 	DisplayObject *RectInRect::RectInRect_Create(float x, float y)
 	{
-		//¶¯Ì¬ÉêÇëÄÚ´æ
+		//åŠ¨æ€ç”³è¯·å†…å­˜
 		mRectInRectData = (RectInRectData *)malloc(sizeof(RectInRectData));
 		if (!mRectInRectData)
 		{
@@ -46,10 +46,10 @@ namespace Dungeon
 		mRectInRectData->slider->innerRect->w = SLIDER_RECT_WIDTH;
 		mRectInRectData->slider->innerRect->h = SLIDER_RECT_HEIGHT;
 
-		//´´½¨Òª»æÖÆ¶ÔÏó
+		//åˆ›å»ºè¦ç»˜åˆ¶å¯¹è±¡
 		DisplayObject *displayObject = new DisplayObject();
-		displayObject->mSubClassData = this;//ÉèÖÃÒª»æÖÆÊµÌå
-		//ÉèÖÃ»Øµ÷º¯Êý
+		displayObject->mSubClassData = this;//è®¾ç½®è¦ç»˜åˆ¶å®žä½“
+		//è®¾ç½®å›žè°ƒå‡½æ•°
 		if (!displayObject->DisplayObject_Create(&RectInRect_DrawCallback,
 			&RectInRect_MouseMoveCallback, &RectInRect_DestoryCallback))
 		{
@@ -60,7 +60,7 @@ namespace Dungeon
 	}
 
 	/*
-	* »Øµ÷º¯ÊýOnDrawCallback
+	* å›žè°ƒå‡½æ•°OnDrawCallback
 	*/
 	void RectInRect::RectInRect_DrawCallback(DisplayObject *self, Resource *resource, SDL_Renderer *renderer)
 	{
@@ -70,11 +70,11 @@ namespace Dungeon
 			RectInRectData *data = rectInRect->mRectInRectData;
 			if (data)
 			{
-				//»æÖÆ±ß¿ò-ºìÉ«
+				//ç»˜åˆ¶è¾¹æ¡†-çº¢è‰²
 				SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 				SDL_RenderDrawRectF(renderer, data->border);
 
-				//»æÖÆ»¬¿é
+				//ç»˜åˆ¶æ»‘å—
 				SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
 				SDL_RenderDrawRectF(renderer, data->slider->innerRect);
 			}
@@ -82,7 +82,7 @@ namespace Dungeon
 	}
 
 	/*
-	* »Øµ÷º¯ÊýOnMouseMoveCallback
+	* å›žè°ƒå‡½æ•°OnMouseMoveCallback
 	*/
 	void RectInRect::RectInRect_MouseMoveCallback(DisplayObject *self, SDL_Event *event)
 	{
@@ -96,7 +96,7 @@ namespace Dungeon
 				SliderData *sliderData = data->slider;
 				if (sliderData)
 				{
-					//¸üÐÂ»¬¿éÎ»ÖÃ
+					//æ›´æ–°æ»‘å—ä½ç½®
 					SDL_FRect *inner = sliderData->innerRect;
 					inner->x = event->motion.x;
 					inner->y = event->motion.y;
@@ -121,7 +121,7 @@ namespace Dungeon
 	}
 
 	/*
-	* »Øµ÷º¯ÊýDestoryCallback
+	* å›žè°ƒå‡½æ•°DestoryCallback
 	*/
 	void RectInRect::RectInRect_DestoryCallback(DisplayObject *self)
 	{
