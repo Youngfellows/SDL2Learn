@@ -3,8 +3,8 @@
 #ifndef __Dungeon_Component__
 #define __Dungeon_Component__
 
-#include	<string>
-#include	<vector>
+#include<string>
+#include<vector>
 
 namespace Dungeon
 {
@@ -12,22 +12,21 @@ namespace Dungeon
 	{
 	public:
 		//! 构造函数
-		Component(class GameObject* gameObject);
+		Component(class GameObject *gameObject);
 		//! 析构函数
 		virtual ~Component();
 
 		//! 每帧更新
-		virtual void		Update();
-
+		virtual void Update();
 		//! 更新顺序的get和set
-		int					GetUpdateOrder() const;
-		void				SetUpdateOrder(int order);
+		int	GetUpdateOrder() const;
+		void SetUpdateOrder(int order);
 		//! 游戏物体的get
-		class GameObject*	GetGameObject();
+		class GameObject *GetGameObject();
 
 	protected:
-		class GameObject*	mGameObject;		//!<	自身附着的游戏物体
-		int					mUpdateOrder;		//!<	更新顺序
+		class GameObject *mGameObject;//!<自身附着的游戏物体
+		int mUpdateOrder;//!<更新顺序
 	};
 }
 

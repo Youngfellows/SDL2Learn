@@ -1,12 +1,12 @@
 ﻿//! @file GameObject.cpp
 
-#include	<Game.h>
-#include	<Component.h>
-#include	<GameObject.h>
+#include<Game.h>
+#include<Component.h>
+#include<GameObject.h>
 
 namespace Dungeon
 {
-	GameObject::GameObject(Game* game) :
+	GameObject::GameObject(Game *game) :
 		mGame(game),
 		mState(State::EActive),
 		mPosition(Vector2::Zero),
@@ -37,7 +37,7 @@ namespace Dungeon
 		}
 	}
 
-	void GameObject::AddComponent(Component* component)
+	void GameObject::AddComponent(Component *component)
 	{
 		// 获取该组件的更新顺序
 		int order = component->GetUpdateOrder();
@@ -53,7 +53,7 @@ namespace Dungeon
 		mComponents.insert(iter, component);
 	}
 
-	void GameObject::RemoveComponent(Component* component)
+	void GameObject::RemoveComponent(Component *component)
 	{
 		auto iter = std::find(mComponents.begin(), mComponents.end(), component);
 		if (iter != mComponents.end())
@@ -62,7 +62,7 @@ namespace Dungeon
 		}
 	}
 
-	Game* GameObject::GetGame() const
+	Game *GameObject::GetGame() const
 	{
 		return mGame;
 	}
@@ -82,7 +82,7 @@ namespace Dungeon
 		return mPosition;
 	}
 
-	void GameObject::SetPosition(const Vector2& p)
+	void GameObject::SetPosition(const Vector2 &p)
 	{
 		mPosition = p;
 	}

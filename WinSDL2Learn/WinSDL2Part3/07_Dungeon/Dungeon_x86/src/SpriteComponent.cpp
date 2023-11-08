@@ -1,13 +1,13 @@
 ﻿//! @file SpriteComponent.cpp
 
-#include	<SpriteComponent.h>
-#include	<GameObject.h>
-#include	<Game.h>
-#include	<SDL/SDL.h>
+#include<SpriteComponent.h>
+#include<GameObject.h>
+#include<Game.h>
+#include<SDL/SDL.h>
 
 namespace Dungeon
 {
-	SpriteComponent::SpriteComponent(GameObject* gameObject, int drawOrder) :
+	SpriteComponent::SpriteComponent(GameObject *gameObject, int drawOrder) :
 		Component(gameObject),
 		mTexture(nullptr),
 		mTexWidth(0),
@@ -22,7 +22,7 @@ namespace Dungeon
 		mGameObject->GetGame()->RemoveSprite(this);
 	}
 
-	void SpriteComponent::Draw(SDL_Renderer* renderer)
+	void SpriteComponent::Draw(SDL_Renderer *renderer)
 	{
 		if (!mTexture)
 		{
@@ -39,7 +39,7 @@ namespace Dungeon
 		SDL_RenderCopyEx(renderer, mTexture, nullptr, &dstrect, mGameObject->GetRotation(), nullptr, SDL_FLIP_NONE);
 	}
 
-	void SpriteComponent::SetTexture(SDL_Texture* texture)
+	void SpriteComponent::SetTexture(SDL_Texture *texture)
 	{
 		mTexture = texture;
 		// 从贴图中查询贴图的宽和高

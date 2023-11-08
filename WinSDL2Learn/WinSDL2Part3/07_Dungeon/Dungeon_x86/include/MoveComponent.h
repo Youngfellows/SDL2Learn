@@ -3,7 +3,7 @@
 #ifndef __Dungeon_MoveComponent__
 #define __Dungeon_MoveComponent__
 
-#include	<Component.h>
+#include<Component.h>
 
 namespace Dungeon
 {
@@ -13,10 +13,10 @@ namespace Dungeon
 	{
 	public:
 		//! 构造函数
-		MoveComponent(GameObject* gameObject);
+		MoveComponent(GameObject *gameObject);
 
 		//! 每帧更新（重写）
-		void	Update() override;
+		void Update() override;
 	};
 }
 

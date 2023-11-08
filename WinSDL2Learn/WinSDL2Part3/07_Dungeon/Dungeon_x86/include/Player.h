@@ -3,15 +3,15 @@
 #ifndef __Dungeon_Player__
 #define __Dungeon_Player__
 
-#include	<GameObject.h>
+#include<GameObject.h>
 
 namespace Dungeon
 {
-	class Player : public GameObject
+	class Player: public GameObject
 	{
 	public:
 		//! 构造函数
-		Player(class Game* game);
+		Player(class Game *game);
 	};
 }
 

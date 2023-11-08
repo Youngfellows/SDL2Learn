@@ -1,11 +1,11 @@
 //! @file Component.cpp
 
-#include	<Component.h>
-#include	<GameObject.h>
+#include<Component.h>
+#include<GameObject.h>
 
 namespace Dungeon
 {
-	Component::Component(GameObject* gameObject) :
+	Component::Component(GameObject *gameObject) :
 		mGameObject(gameObject),
 		mUpdateOrder(100)
 	{
@@ -32,7 +32,7 @@ namespace Dungeon
 		mUpdateOrder = order;
 	}
 
-	GameObject* Component::GetGameObject()
+	GameObject *Component::GetGameObject()
 	{
 		return mGameObject;
 	}

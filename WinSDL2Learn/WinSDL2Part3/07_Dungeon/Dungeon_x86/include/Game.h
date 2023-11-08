@@ -3,11 +3,11 @@
 #ifndef __Dungeon_Game__
 #define __Dungeon_Game__
 
-#include	<string>
-#include	<vector>
-#include	<unordered_map>
-#include <iostream>
-#include <algorithm>
+#include<string>
+#include<vector>
+#include<unordered_map>
+#include<iostream>
+#include<algorithm>
 
 
 struct SDL_Window;
@@ -27,52 +27,52 @@ namespace Dungeon
 		Game();
 
 		//!	初始化
-		bool	Initialize();
+		bool Initialize();
 		//!	主循环
-		void	Loop();
+		void Loop();
 		//!	游戏结束
-		void	Shutdown();
+		void Shutdown();
 
 		//! 创建并存储游戏物体
-		void	CreateGameObject(GameObject* gameObject);
+		void CreateGameObject(GameObject *gameObject);
 		//! 移除游戏对象
-		void	RemoveGameObject(GameObject* gameObject);
+		void RemoveGameObject(GameObject *gameObject);
 		//! 创建并按绘制顺序存储精灵
-		void	CreateSprite(SpriteComponent* sprite);
+		void CreateSprite(SpriteComponent *sprite);
 		//! 移除精灵
-		void	RemoveSprite(SpriteComponent* sprite);
+		void RemoveSprite(SpriteComponent *sprite);
 		//! 获取贴图
-		SDL_Texture* GetTexture(const std::string& fileName);
+		SDL_Texture *GetTexture(const std::string &fileName);
 
 	private:
 		//!	处理事件
-		void	Event();
+		void Event();
 		//!	更新各种状态
-		void	Update();
+		void Update();
 		//!	渲染
-		void	Draw();
+		void Draw();
 
 		//! 设置帧率
-		void	Tick(int fps);
+		void Tick(int fps);
 		//! 加载数据
-		void	LoadData();
+		void LoadData();
 		//!	释放数据
-		void	UnloadData();
+		void UnloadData();
 		//!	加载贴图并重命名
-		void	LoadTexture(const std::string& fileName, const std::string& newName);
+		void LoadTexture(const std::string &fileName, const std::string &newName);
 
-		std::vector<GameObject*> mGameObjects;		//!<	游戏物体容器
-		std::vector<GameObject*> mPendingObjects;	//!<	等待状态的游戏物体容器
-		std::vector<SpriteComponent*> mSprites;		//!<	存放精灵的容器
+		std::vector<GameObject *> mGameObjects;//!<游戏物体容器
+		std::vector<GameObject *> mPendingObjects;//!<等待状态的游戏物体容器
+		std::vector<SpriteComponent *> mSprites;//!<存放精灵的容器
 
-		std::unordered_map<std::string, SDL_Texture*> mTextures;	//!<	存放贴图的容器
+		std::unordered_map<std::string, SDL_Texture *> mTextures;//!<存放贴图的容器
 
-		SDL_Window* mWindow;		//!<	窗口
-		SDL_Renderer* mRenderer;		//!<	渲染器
-		bool			mIsRunning;		//!<	运行状态
-		bool			mIsUpdating;	//!<	是否在更新状态
+		SDL_Window *mWindow;//!<窗口
+		SDL_Renderer *mRenderer;//!<渲染器
+		bool mIsRunning;//!<运行状态
+		bool mIsUpdating;//!<是否在更新状态
 
-		Player* mPlayer;		//!<	玩家角色
+		Player *mPlayer;//!<玩家角色
 	};
 }
 
