@@ -1,12 +1,12 @@
 ﻿//! @file MoveComponent.cpp
 
-#include	<GameObject.h>
-#include	<MoveComponent.h>
-#include	<Timer.h>
+#include<GameObject.h>
+#include<MoveComponent.h>
+#include<Timer.h>
 
 namespace Dungeon
 {
-	MoveComponent::MoveComponent(GameObject* gameObject):
+	MoveComponent::MoveComponent(GameObject *gameObject) :
 		Component(gameObject),
 		mSpeed(100),
 		mDir(Vector2::Zero)
@@ -20,7 +20,7 @@ namespace Dungeon
 		mGameObject->SetPosition(newPos);
 	}
 
-	void MoveComponent::SetDir(const Vector2& dir)
+	void MoveComponent::SetDir(const Vector2 &dir)
 	{
 		mDir = dir;
 	}

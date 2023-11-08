@@ -1,16 +1,16 @@
 ﻿//! @file Game.cpp
 
-#include	<SDL/SDL.h>
-#include	<SDL/SDL_image.h>
-#include	<Game.h>
-#include	<Player.h>
-#include	<Dungeon.h>
-#include	<SpriteComponent.h>
-#include	<Timer.h>
+#include<SDL/SDL.h>
+#include<SDL/SDL_image.h>
+#include<Game.h>
+#include<Player.h>
+#include<Dungeon.h>
+#include<SpriteComponent.h>
+#include<Timer.h>
 
 namespace Dungeon
 {
-	Game::Game():
+	Game::Game() :
 		mWindow(nullptr),
 		mRenderer(nullptr),
 		mIsRunning(true),
@@ -79,7 +79,7 @@ namespace Dungeon
 		IMG_Quit();
 	}
 
-	void Game::CreateGameObject(GameObject* gameObject)
+	void Game::CreateGameObject(GameObject *gameObject)
 	{
 		// 如果当前正在更新，将该对象加入等待区
 		if (mIsUpdating)
@@ -92,7 +92,7 @@ namespace Dungeon
 		}
 	}
 
-	void Game::RemoveGameObject(GameObject* gameObject)
+	void Game::RemoveGameObject(GameObject *gameObject)
 	{
 		// 先在等待区中寻找并移除物体
 		auto iter = std::find(mPendingObjects.begin(), mPendingObjects.end(), gameObject);
@@ -113,7 +113,7 @@ namespace Dungeon
 		}
 	}
 
-	void Game::CreateSprite(SpriteComponent* sprite)
+	void Game::CreateSprite(SpriteComponent *sprite)
 	{
 		int order = sprite->GetDrawOrder();
 		// 按照绘制顺序插入
@@ -128,15 +128,15 @@ namespace Dungeon
 		mSprites.insert(iter, sprite);
 	}
 
-	void Game::RemoveSprite(SpriteComponent* sprite)
+	void Game::RemoveSprite(SpriteComponent *sprite)
 	{
 		auto iter = std::find(mSprites.begin(), mSprites.end(), sprite);
 		mSprites.erase(iter);
 	}
 
-	SDL_Texture* Game::GetTexture(const std::string& fileName)
+	SDL_Texture *Game::GetTexture(const std::string &fileName)
 	{
-		SDL_Texture* tex = nullptr;
+		SDL_Texture *tex = nullptr;
 		auto iter = mTextures.find(fileName);
 		if (iter != mTextures.end())
 		{
@@ -163,7 +163,7 @@ namespace Dungeon
 		}
 
 		// 获取键盘输入状态
-		const uint8_t* keyState = SDL_GetKeyboardState(NULL);
+		const uint8_t *keyState = SDL_GetKeyboardState(NULL);
 
 		// 处理所有物体的输入逻辑
 		mIsUpdating = true;
@@ -198,7 +198,7 @@ namespace Dungeon
 		mPendingObjects.clear();
 
 		// 将所有状态为EDead的物体添加至死亡区
-		std::vector<GameObject*> deadObjects;
+		std::vector<GameObject *> deadObjects;
 		for (auto deadObject : mGameObjects)
 		{
 			if (deadObject->GetState() == GameObject::State::EDead)
@@ -252,7 +252,7 @@ namespace Dungeon
 		LoadTexture("sprites/chrA07.png", "player");
 		LoadTexture("sprites/ground.png", "ground");
 		LoadTexture("sprites/wall.png", "wall");
-		
+
 		mPlayer = new Player(this);
 		mDungeon = new Dungeon(this);
 	}
@@ -273,7 +273,7 @@ namespace Dungeon
 		mTextures.clear();
 	}
 
-	void Game::LoadTexture(const std::string& fileName, const std::string& newName)
+	void Game::LoadTexture(const std::string &fileName, const std::string &newName)
 	{
 		// 判断该key值是否已被使用
 		auto iter = mTextures.find(newName);
@@ -284,14 +284,14 @@ namespace Dungeon
 		}
 
 		// 读取图片存为surface形式
-		SDL_Surface* surf = IMG_Load(fileName.c_str());
+		SDL_Surface *surf = IMG_Load(fileName.c_str());
 		if (!surf)
 		{
 			SDL_Log("Failed to load texture file %s", fileName.c_str());
 		}
 
 		// 将surface转换为texture形式
-		SDL_Texture* tex = SDL_CreateTextureFromSurface(mRenderer, surf);
+		SDL_Texture *tex = SDL_CreateTextureFromSurface(mRenderer, surf);
 		// 释放surface的内存
 		SDL_FreeSurface(surf);
 		if (!tex)

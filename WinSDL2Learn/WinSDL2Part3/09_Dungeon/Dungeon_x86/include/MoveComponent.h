@@ -3,8 +3,8 @@
 #ifndef __Dungeon_MoveComponent__
 #define __Dungeon_MoveComponent__
 
-#include	<Component.h>
-#include	<Math/Math.h>
+#include<Component.h>
+#include<Math/Math.h>
 
 namespace Dungeon
 {
@@ -14,17 +14,17 @@ namespace Dungeon
 	{
 	public:
 		//! 构造函数
-		MoveComponent(GameObject* gameObject);
+		MoveComponent(GameObject *gameObject);
 
 		//! 每帧更新（重写）
-		void	Update() override;
+		void Update() override;
 
 		//! 移动方向的set
-		void	SetDir(const Vector2& dir);
+		void SetDir(const Vector2 &dir);
 
 	private:
-		float	mSpeed;		//!<	移动速度
-		Vector2	mDir;		//!<	移动方向
+		float mSpeed;//!<移动速度
+		Vector2	mDir;//!<移动方向
 	};
 }
 
