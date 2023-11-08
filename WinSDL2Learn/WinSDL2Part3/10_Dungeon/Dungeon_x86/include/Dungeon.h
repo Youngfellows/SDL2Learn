@@ -3,7 +3,7 @@
 #ifndef __Dungeon_Dungeon__
 #define __Dungeon_Dungeon__
 
-#include	<GameObject.h>
+#include<GameObject.h>
 
 namespace Dungeon
 {
@@ -11,7 +11,7 @@ namespace Dungeon
 	{
 	public:
 		//! 构造函数
-		Dungeon(class Game* game);
+		Dungeon(class Game *game);
 	};
 }
 

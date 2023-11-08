@@ -1,6 +1,6 @@
 //! @file Math.cpp
 
-#include	<Math/Math.h>
+#include<Math/Math.h>
 
 namespace Dungeon
 {
@@ -26,32 +26,32 @@ namespace Dungeon
 	const Vector2 Vector2::NY = Vector2(0.0f, -1.0f);
 
 
-	Vector2 operator+(const Vector2& a, const Vector2& b)
+	Vector2 operator+(const Vector2 &a, const Vector2 &b)
 	{
 		return Vector2(a.x + b.x, a.y + b.y);
 	}
 
-	Vector2 operator-(const Vector2& a, const Vector2& b)
+	Vector2 operator-(const Vector2 &a, const Vector2 &b)
 	{
 		return Vector2(a.x - b.x, a.y - b.y);
 	}
 
-	Vector2 operator*(const Vector2& a, const Vector2& b)
+	Vector2 operator*(const Vector2 &a, const Vector2 &b)
 	{
 		return Vector2(a.x * b.x, a.y * b.y);
 	}
 
-	Vector2 operator*(const Vector2& vec, float scalar)
+	Vector2 operator*(const Vector2 &vec, float scalar)
 	{
 		return Vector2(vec.x * scalar, vec.y * scalar);
 	}
 
-	Vector2 operator*(float scalar, const Vector2& vec)
+	Vector2 operator*(float scalar, const Vector2 &vec)
 	{
 		return Vector2(vec.x * scalar, vec.y * scalar);
 	}
 
-	bool operator==(const Vector2& a, const Vector2& b)
+	bool operator==(const Vector2 &a, const Vector2 &b)
 	{
 		return (a.x == b.x && a.y == b.y);
 	}

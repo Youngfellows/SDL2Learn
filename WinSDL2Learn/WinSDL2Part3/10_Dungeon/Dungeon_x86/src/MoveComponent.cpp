@@ -1,12 +1,12 @@
 ﻿//! @file MoveComponent.cpp
 
-#include	<GameObject.h>
-#include	<MoveComponent.h>
-#include	<Timer.h>
+#include<GameObject.h>
+#include<MoveComponent.h>
+#include<Timer.h>
 
 namespace Dungeon
 {
-	MoveComponent::MoveComponent(GameObject* gameObject):
+	MoveComponent::MoveComponent(GameObject *gameObject) :
 		Component(gameObject),
 		mSpeed(150),
 		mDir(Vector2::Zero),
@@ -19,13 +19,13 @@ namespace Dungeon
 
 	void MoveComponent::Update()
 	{
-		if(mIsMoving)
+		if (mIsMoving)
 		{
 			ProcessMoving();
 		}
 	}
 
-	void MoveComponent::SetDir(const Vector2& dir)
+	void MoveComponent::SetDir(const Vector2 &dir)
 	{
 		// 角色处于移动状态中时跳过本函数
 		if (mIsMoving)
@@ -46,7 +46,7 @@ namespace Dungeon
 		}
 	}
 
-	void MoveComponent::SetMap(int* map)
+	void MoveComponent::SetMap(int *map)
 	{
 		mMapArray = map;
 	}
@@ -74,7 +74,7 @@ namespace Dungeon
 		}
 	}
 
-	bool MoveComponent::WallCheck(const Vector2& dst)
+	bool MoveComponent::WallCheck(const Vector2 &dst)
 	{
 		// 将像素坐标转换成格子坐标
 		int gridX = static_cast<int>(dst.x / 32);

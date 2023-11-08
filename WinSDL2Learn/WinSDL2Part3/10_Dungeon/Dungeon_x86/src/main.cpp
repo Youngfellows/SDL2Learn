@@ -1,7 +1,7 @@
-#include	<SDL/SDL.h>
-#include	<Game.h>
+#include<SDL/SDL.h>
+#include<Game.h>
 
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
 	Dungeon::Game game;
 	bool success = game.Initialize();

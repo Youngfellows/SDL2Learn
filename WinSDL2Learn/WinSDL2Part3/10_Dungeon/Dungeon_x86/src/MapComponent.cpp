@@ -1,12 +1,12 @@
 ﻿//! @file MapComponent.cpp
 
-#include	<GameObject.h>
-#include	<MapComponent.h>
-#include	<SDL/SDL.h>
+#include<GameObject.h>
+#include<MapComponent.h>
+#include<SDL/SDL.h>
 
 namespace Dungeon
 {
-	MapComponent::MapComponent(GameObject* gameObject):
+	MapComponent::MapComponent(GameObject *gameObject) :
 		SpriteComponent(gameObject, 0)
 	{
 		// 宽20高15的地图
@@ -33,7 +33,7 @@ namespace Dungeon
 		delete mMapArray;
 	}
 
-	void MapComponent::Draw(SDL_Renderer* renderer)
+	void MapComponent::Draw(SDL_Renderer *renderer)
 	{
 		SDL_Rect dstRect{ 0, 0, 32, 32 };
 		for (int i = 0; i < 15; i++)
@@ -51,12 +51,12 @@ namespace Dungeon
 		}
 	}
 
-	void MapComponent::SetTexture(SDL_Texture* texture, int number)
+	void MapComponent::SetTexture(SDL_Texture *texture, int number)
 	{
 		mTextures.emplace(number, texture);
 	}
 
-	int* MapComponent::GetMap()
+	int *MapComponent::GetMap()
 	{
 		return mMapArray;
 	}

@@ -3,9 +3,9 @@
 #ifndef __Dungeon_GameObject__
 #define __Dungeon_GameObject__
 
-#include	<string>
-#include	<vector>
-#include	<Math/Math.h>
+#include<string>
+#include<vector>
+#include<Math/Math.h>
 
 namespace Dungeon
 {
@@ -20,25 +20,25 @@ namespace Dungeon
 		};
 
 		//! 构造函数
-		GameObject(class Game* game);
+		GameObject(class Game *game);
 		//! 析构函数
 		virtual ~GameObject();
 
 		//! 处理输入
-		void	ProcessInput(const uint8_t* state);
+		void ProcessInput(const uint8_t *state);
 		//! 每帧更新
-		void	Update();
+		void Update();
 		//! 添加组件
-		void	AddComponent(class Component* component);
+		void AddComponent(class Component *component);
 		//! 移除组件
-		void	RemoveComponent(class Component* component);
+		void RemoveComponent(class Component *component);
 
 		//! 获取特定类型的组件，并得到该组件类型的指针
-		template<typename T> T* GetComponent()
+		template<typename T> T *GetComponent()
 		{
 			for (auto com : mComponents)
 			{
-				T* component = dynamic_cast<T*>(com);
+				T *component = dynamic_cast<T *>(com);
 				if (component != nullptr)
 				{
 					return component;
@@ -48,29 +48,29 @@ namespace Dungeon
 		}
 
 		//! game对象的get
-		Game*		GetGame() const;
+		Game *GetGame() const;
 		//! 物体状态的get和set
-		State		GetState() const;
-		void		SetState(const State state);
+		State GetState() const;
+		void SetState(const State state);
 		//! 位置的get和set
-		Vector2		GetPosition() const;
-		void		SetPosition(const Vector2& p);
+		Vector2	GetPosition() const;
+		void SetPosition(const Vector2 &p);
 		//! 缩放大小的get和set
-		Vector2		GetScale() const;
-		void		SetScale(const Vector2& s);
+		Vector2	GetScale() const;
+		void SetScale(const Vector2 &s);
 		//! 旋转的get和set
-		float		GetRotation() const;
-		void		SetRotation(float r);
+		float GetRotation() const;
+		void SetRotation(float r);
 
 	protected:
-		std::vector<class Component*>	mComponents;	//!<	组件数组
+		std::vector<class Component *> mComponents;//!<组件数组
 
 	private:
-		Game*							mGame;			//!<	Game对象
-		State							mState;			//!<	物体当前状态
-		Vector2							mPosition;		//!<	位置坐标
-		Vector2							mScale;			//!<	缩放
-		float							mRotation;		//!<	旋转
+		Game *mGame;//!<Game对象
+		State mState;//!<物体当前状态
+		Vector2	mPosition;//!<位置坐标
+		Vector2	mScale;//!<缩放
+		float mRotation;//!<旋转
 	};
 }
 

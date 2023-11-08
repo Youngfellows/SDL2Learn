@@ -1,20 +1,20 @@
 ﻿//! @file InputComponent.cpp
 
-#include	<InputComponent.h>
-#include	<MoveComponent.h>
-#include	<GameObject.h>
-#include	<SDL/SDL_scancode.h>
+#include<InputComponent.h>
+#include<MoveComponent.h>
+#include<GameObject.h>
+#include<SDL/SDL_scancode.h>
 
 namespace Dungeon
 {
-	InputComponent::InputComponent(GameObject* gameObject) :
+	InputComponent::InputComponent(GameObject *gameObject) :
 		Component(gameObject)
 	{
 	}
 
-	void InputComponent::ProcessInput(const uint8_t* state)
+	void InputComponent::ProcessInput(const uint8_t *state)
 	{
-		MoveComponent* mc = mGameObject->GetComponent<MoveComponent>();
+		MoveComponent *mc = mGameObject->GetComponent<MoveComponent>();
 		if (state[SDL_SCANCODE_W] || state[SDL_SCANCODE_UP])
 		{
 			mc->SetDir(Vector2::NY);
