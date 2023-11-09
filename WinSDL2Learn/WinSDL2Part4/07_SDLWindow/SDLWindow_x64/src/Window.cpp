@@ -9,7 +9,8 @@
 #include <algorithm>
 #include "Window.h"
 
-
+//初始化类静态成员变量
+//设置智能指针释放内存时调用的回调函数
 //Initialize the unique_ptr's deleters here
 std::unique_ptr<SDL_Window, void (*)(SDL_Window *)> Window::m_pWindow = std::unique_ptr<SDL_Window, void (*)(SDL_Window *)>(nullptr, SDL_DestroyWindow);
 std::unique_ptr<SDL_Renderer, void (*)(SDL_Renderer *)> Window::m_pRenderer = std::unique_ptr<SDL_Renderer, void (*)(SDL_Renderer *)>(nullptr, SDL_DestroyRenderer);
@@ -136,13 +137,16 @@ SDL_Texture *Window::RenderText(std::string message, std::string fontFile, SDL_C
 	return texture;
 }
 
+/*
+* 函数指针,回调函数
+*/
 void Window::HandleEvents(const std::function<void(SDL_Event &)> &cbFunction)
 {
 	m_eventQuit = false;
 	SDL_Event e;
 	while (!m_eventQuit) {
 		while (SDL_PollEvent(&e)) {
-			cbFunction(e);
+			cbFunction(e);//回调事件
 		}
 	}
 }

@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
 		Window::HandleEvents([](SDL_Event e)
 			{
 				switch (e.key.keysym.sym) {
-				case SDLK_q:
+				case SDLK_q://按下按钮q或者Esc按键,关闭窗口
 				case SDLK_ESCAPE:
 					Window::m_eventQuit = true;
 					break;
