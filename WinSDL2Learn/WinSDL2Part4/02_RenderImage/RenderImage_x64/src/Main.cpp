@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <iostream>
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 #include <cleanup.h>
 #include <res_path.h>
 
@@ -14,6 +15,8 @@
 //Screen attributes
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
+const std::string JPG_FILE_NAME = "./resources/Lisa.jpg";
+const std::string PNG_FILE_NAME = "./resources/YaYa.png";
 
 /*
 * Log an SDL error with some error message to the output stream of our choice
@@ -30,6 +33,27 @@ SDL_Texture *loadTexture(const std::string &file, SDL_Renderer *ren)
 	SDL_Texture *texture = nullptr;
 	//Load the image
 	SDL_Surface *loadedImage = SDL_LoadBMP(file.c_str());
+	//If the loading went ok, convert to texture and return the texture
+	if (loadedImage != nullptr) {
+		texture = SDL_CreateTextureFromSurface(ren, loadedImage);
+		SDL_FreeSurface(loadedImage);
+		//Make sure converting went ok too
+		if (texture == nullptr) {
+			logSDLError(std::cout, "CreateTextureFromSurface");
+		}
+	}
+	else {
+		logSDLError(std::cout, "LoadBMP");
+	}
+	return texture;
+}
+
+SDL_Texture *loadTexture2(const std::string &file, SDL_Renderer *ren)
+{
+	SDL_Texture *texture = nullptr;
+	//Load the image
+	//SDL_Surface *loadedImage = SDL_LoadBMP(file.c_str());
+	SDL_Surface *loadedImage = IMG_Load(file.c_str());
 	//If the loading went ok, convert to texture and return the texture
 	if (loadedImage != nullptr) {
 		texture = SDL_CreateTextureFromSurface(ren, loadedImage);
@@ -66,13 +90,18 @@ int main(int, char **)//无名形参 填充
 	}
 
 	//Setup our window and renderer
-	SDL_Window *window = SDL_CreateWindow("Lesson 2", 100, 100, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+	//SDL_Window *window = SDL_CreateWindow("Lesson 2", 100, 100, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+	SDL_Window *window = SDL_CreateWindow("Lesson 2",
+		SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+		SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 	if (window == nullptr) {
 		logSDLError(std::cout, "CreateWindow");
 		SDL_Quit();
 		return 1;
 	}
-	SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+
+	SDL_Renderer *renderer = SDL_CreateRenderer(window, -1,
+		SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	if (renderer == nullptr) {
 		logSDLError(std::cout, "CreateRenderer");
 		cleanup(window);
@@ -80,14 +109,20 @@ int main(int, char **)//无名形参 填充
 		return 1;
 	}
 
+	//1.加载bmp图片资源
 	//The textures we'll be using
 	//const std::string resPath = getResourcePath("02sdl_learn");
 	const std::string resPath1 = getResourcePath("resources");
 	SDL_Log("resPath1:%s", resPath1.c_str());
 	const std::string resPath = "./resources/";
 	SDL_Log("resPath:%s", resPath.c_str());
-	SDL_Texture *background = loadTexture(resPath + "background.bmp", renderer);
-	SDL_Texture *image = loadTexture(resPath + "image.bmp", renderer);
+	//SDL_Texture *background = loadTexture(resPath + "background.bmp", renderer);
+	//SDL_Texture *image = loadTexture(resPath + "image.bmp", renderer);
+
+	//2.加载jpg,png图片资源
+	SDL_Texture *background = loadTexture2(JPG_FILE_NAME, renderer);
+	SDL_Texture *image = loadTexture2(PNG_FILE_NAME, renderer);
+
 	//Make sure they both loaded ok
 	if (background == nullptr || image == nullptr) {
 		cleanup(background, image, renderer, window);
