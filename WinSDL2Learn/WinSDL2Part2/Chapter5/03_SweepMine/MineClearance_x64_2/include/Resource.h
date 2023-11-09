@@ -15,6 +15,8 @@ namespace Dungeon
 		SDL_Texture *mBackgroundTexture;//背景资源
 		SDL_Texture *mPlayerTexture;//玩家
 		SDL_Texture *mMineTexture;//雷
+		SDL_Texture *mGroundTexture;//场地
+		SDL_Texture *mWallTexture;//墙壁
 
 	public:
 		Resource();
@@ -26,6 +28,8 @@ namespace Dungeon
 		SDL_Texture *GetBackgroundTexture();
 		SDL_Texture *GetPlayerTexture();
 		SDL_Texture *GetMineTexture();
+		SDL_Texture *GetGroundTexture();
+		SDL_Texture *GetWallTexture();
 		void Unload();
 
 	private:
@@ -33,6 +37,8 @@ namespace Dungeon
 		SDL_bool LoadBackground(const char *file, SDL_Renderer *renderer);
 		SDL_bool LoadPlayer(const char *file, SDL_Renderer *renderer);
 		SDL_bool LoadMine(const char *file, SDL_Renderer *renderer);
+		SDL_bool LoadGround(const char *file, SDL_Renderer *renderer);
+		SDL_bool LoadWall(const char *file, SDL_Renderer *renderer);
 	};
 }
 #endif // !_DUNGEON_RESOURCE_H_

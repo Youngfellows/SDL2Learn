@@ -5,7 +5,8 @@ namespace Dungeon
 {
 	Resource::Resource() :
 		mCursorTexture(nullptr), mCursorSurface(nullptr), mCursor(nullptr),
-		mBackgroundTexture(nullptr), mPlayerTexture(nullptr), mMineTexture(nullptr)
+		mBackgroundTexture(nullptr), mPlayerTexture(nullptr), mMineTexture(nullptr),
+		mGroundTexture(nullptr), mWallTexture(nullptr)
 	{
 	}
 
@@ -33,6 +34,14 @@ namespace Dungeon
 		}
 		//加载雷
 		if (!LoadMine(MINE_FILE_NAME, renderer))
+		{
+			return SDL_FALSE;
+		}
+		if (!LoadGround(GROUND_FILE_NAME, renderer))
+		{
+			return SDL_FALSE;
+		}
+		if (!LoadWall(WALL_FILE_NAME, renderer))
 		{
 			return SDL_FALSE;
 		}
@@ -80,6 +89,28 @@ namespace Dungeon
 		if (!mPlayerTexture)
 		{
 			SDL_Log("Can not load player image: %s", SDL_GetError());
+			return SDL_FALSE;
+		}
+		return SDL_TRUE;
+	}
+
+	SDL_bool Resource::LoadGround(const char *file, SDL_Renderer *renderer)
+	{
+		mGroundTexture = IMG_LoadTexture(renderer, file);
+		if (!mGroundTexture)
+		{
+			SDL_Log("Can not load ground image: %s", SDL_GetError());
+			return SDL_FALSE;
+		}
+		return SDL_TRUE;
+	}
+
+	SDL_bool Resource::LoadWall(const char *file, SDL_Renderer *renderer)
+	{
+		mWallTexture = IMG_LoadTexture(renderer, file);
+		if (!mWallTexture)
+		{
+			SDL_Log("Can not load wall image: %s", SDL_GetError());
 			return SDL_FALSE;
 		}
 		return SDL_TRUE;
@@ -134,6 +165,16 @@ namespace Dungeon
 		return this->mMineTexture;
 	}
 
+	SDL_Texture *Resource::GetGroundTexture()
+	{
+		return this->mGroundTexture;
+	}
+
+	SDL_Texture *Resource::GetWallTexture()
+	{
+		return this->mWallTexture;
+	}
+
 	void Resource::Unload()
 	{
 		if (mBackgroundTexture)
@@ -165,6 +206,18 @@ namespace Dungeon
 		{
 			SDL_DestroyTexture(mMineTexture);
 			mMineTexture = nullptr;
+		}
+
+		if (mGroundTexture)
+		{
+			SDL_DestroyTexture(mGroundTexture);
+			mGroundTexture = nullptr;
+		}
+
+		if (mWallTexture)
+		{
+			SDL_DestroyTexture(mWallTexture);
+			mWallTexture = nullptr;
 		}
 	}
 }

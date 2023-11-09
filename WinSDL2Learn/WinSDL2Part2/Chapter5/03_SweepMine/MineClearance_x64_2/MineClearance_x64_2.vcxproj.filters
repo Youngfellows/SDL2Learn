@@ -42,6 +42,9 @@
     <ClInclude Include="include\Text.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="include\Ground.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Background.cpp">
@@ -69,6 +72,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\Text.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ground.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

@@ -3,13 +3,13 @@
 
 namespace Dungeon
 {
-#define WINDOW_WIDTH 800 //Window窗口宽
-#define WINDOW_HEIGHT 400 //Window窗口高
+#define WINDOW_WIDTH 900 //Window窗口宽
+#define WINDOW_HEIGHT 600 //Window窗口高
 #define FRAMERATE 60 //每1秒帧数
 #define WINDOW_TITLE "Dungeon" //Window窗口title
 
 #define START_X_POSITION 50 //绘制开始X位置
-#define START_Y_POSITION 25 //绘制开始Y位置
+#define START_Y_POSITION 50 //绘制开始Y位置
 
 #define INNER_RECT_DEST_WIDTH 50 //玩家宽
 #define INNER_RECT_DEST_HEIGHT INNER_RECT_DEST_WIDTH //玩家高
@@ -41,6 +41,17 @@ namespace Dungeon
 #define MINE_DEST_RECT_WIDTH 20 //雷宽
 #define MINE_DEST_RECT_HEIGHT MINE_DEST_RECT_WIDTH //雷高
 #define MINE_FILE_NAME "./resources/mine.bmp" //雷图片资源
+#define GROUND_FILE_NAME "./resources/ground.png" //场地图片资源
+#define WALL_FILE_NAME "./resources/wall.png" //墙图片资源
+#define GROUND_X_TILE_SIZE 15 //X方向砖块数量
+#define GROUND_Y_TILE_SIZE 10 //Y方向砖块数量
+#define WALL_X_TILE_SIZE 15 //X方向砖块数量
+#define WALL_Y_TILE_SIZE 10 //Y方向砖块数量
+
+#define WALL_START_X_POSITION 25 //绘制开始X位置
+#define WALL_START_Y_POSITION 20 //绘制开始Y位置
+#define WALL_WIDTH 750 //墙宽
+#define WALL_HEIGHT 420 //墙高
 
 #define FONT_FINE_NAME "./resources/padmaa.ttf" //字体
 #define START_TEXT "Start" //开始游戏

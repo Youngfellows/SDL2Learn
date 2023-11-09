@@ -5,6 +5,7 @@
 #include "Background.h"
 #include "Mine.h"
 #include "Text.h"
+#include "Ground.h"
 
 namespace Dungeon
 {
@@ -175,7 +176,7 @@ namespace Dungeon
 		Player *player = new Player();
 		this->mPlayer = player->Create(
 			START_X_POSITION, START_Y_POSITION, INNER_RECT_DEST_WIDTH, INNER_RECT_DEST_HEIGHT,
-			INNER_RECT_FILL_COLOR, SDL_TRUE, INNER_RECT_BORDER_COLOR, PT_SIZE_5,
+			INNER_RECT_FILL_COLOR, SDL_FALSE, INNER_RECT_BORDER_COLOR, PT_SIZE_5,
 			BACKGROUND_RECT_DEST_WIDTH, BACKGROUND_RECT_DEST_HEIGHT, SPEED);
 
 		if (!mPlayer)
@@ -237,11 +238,41 @@ namespace Dungeon
 		// 设置text文本对象
 		mine->SetTextComponents(mStartText, mMsgText);
 
+		Ground *ground = new Ground();//场地1
+		mGround1 = ground->Create(0, 0,
+			WINDOW_WIDTH, WINDOW_HEIGHT,
+			GROUND_X_TILE_SIZE, GROUND_Y_TILE_SIZE,
+			mResource->GetGroundTexture());
+		if (!mGround1)
+		{
+			return SDL_FALSE;
+		}
+
+		Ground *wall = new Ground();//场地2
+		mGround2 = wall->Create(
+			WALL_START_X_POSITION, WALL_START_Y_POSITION,
+			WALL_WIDTH, WALL_HEIGHT,
+			WALL_X_TILE_SIZE, WALL_X_TILE_SIZE,
+			mResource->GetWallTexture());
+		if (!mGround1)
+		{
+			return SDL_FALSE;
+		}
 		return SDL_TRUE;
 	}
 
 	void Game::DrawComponents()
 	{
+		if (mGround1)
+		{
+			mGround1->Draw(mResource, mRenderer);
+		}
+
+		if (mGround2)
+		{
+			mGround2->Draw(mResource, mRenderer);
+		}
+
 		if (mBackground)
 		{
 			mBackground->Draw(mResource, mRenderer);
@@ -278,6 +309,18 @@ namespace Dungeon
 	void Game::FreeComponents()
 	{
 		SDL_Log("Game:: FreeComponents");
+		if (mGround2)
+		{
+			mGround2->Destory();
+			delete mGround2;
+			mGround2 = nullptr;
+		}
+		if (mGround1)
+		{
+			mGround1->Destory();
+			delete mGround1;
+			mGround1 = nullptr;
+		}
 		if (mPlayer)
 		{
 			mPlayer->Destory();

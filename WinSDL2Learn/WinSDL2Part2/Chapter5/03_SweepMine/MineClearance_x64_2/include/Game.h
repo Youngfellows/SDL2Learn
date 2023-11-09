@@ -22,6 +22,8 @@ namespace Dungeon
 		DisplayObject *mMine;//雷
 		DisplayObject *mStartText;//开始文本
 		DisplayObject *mMsgText;//消息文本
+		DisplayObject *mGround1;//场地1
+		DisplayObject *mGround2;//场地2
 
 	public:
 		Game();

@@ -143,6 +143,7 @@
     <ClInclude Include="include\Cursor.h" />
     <ClInclude Include="include\DisplayObject.h" />
     <ClInclude Include="include\Game.h" />
+    <ClInclude Include="include\Ground.h" />
     <ClInclude Include="include\Mine.h" />
     <ClInclude Include="include\Player.h" />
     <ClInclude Include="include\Resource.h" />
@@ -153,6 +154,7 @@
     <ClCompile Include="src\Cursor.cpp" />
     <ClCompile Include="src\DisplayObject.cpp" />
     <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\Ground.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Mine.cpp" />
     <ClCompile Include="src\Player.cpp" />
