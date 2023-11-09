@@ -33,21 +33,27 @@ int  main(int argc, char *argv[])
 
 	Window::HandleEvents([&timer, white](SDL_Event e)
 		{
-
+			//SDL Event事件回调
+			//窗口关闭事件
 			if (e.type == SDL_QUIT)
 			{
 				Window::m_eventQuit = true;
 			}
 			else if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_q)
 			{
+				//按键q关闭窗口
 				Window::m_eventQuit = true;
 			}
 			else if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_RETURN)
 			{
+				//按下Enter按键开始计时器
+				SDL_Log("Down the Enter key");
 				timer.Start();
 			}
 			else if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_SPACE)
 			{
+				//按下Space空格按键
+				SDL_Log("Down the Space key");
 				if (!timer.Paused()) {
 					timer.Pause();
 				}
@@ -58,7 +64,7 @@ int  main(int argc, char *argv[])
 
 		}, [&timer, white]()
 		{
-
+			//SDL绘制回调
 			if (timer.Started()) {
 
 				Window::m_pBox.x = 0;
@@ -72,7 +78,7 @@ int  main(int argc, char *argv[])
 				ssTicks << timer.Ticks();
 				ssTicks << " ";
 				ssTicks << "ms";
-				Window::RenderText(ssTicks.str(), "./resrouces/sample.ttf",
+				Window::RenderText(ssTicks.str(), "./resources/sample.ttf",
 					white, 30);
 				ssTicks.str("");
 			}

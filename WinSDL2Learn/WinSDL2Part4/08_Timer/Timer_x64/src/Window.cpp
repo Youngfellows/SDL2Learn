@@ -9,7 +9,7 @@
 #include <algorithm>
 #include "Window.h"
 
-
+//初始化静态成员变量,智能指针的初始化
 //Initialize the unique_ptr's deleters here
 std::unique_ptr<SDL_Window, void (*)(SDL_Window *)> Window::m_pWindow = std::unique_ptr<SDL_Window, void (*)(SDL_Window *)>(nullptr, SDL_DestroyWindow);
 std::unique_ptr<SDL_Renderer, void (*)(SDL_Renderer *)> Window::m_pRenderer = std::unique_ptr<SDL_Renderer, void (*)(SDL_Renderer *)>(nullptr, SDL_DestroyRenderer);
