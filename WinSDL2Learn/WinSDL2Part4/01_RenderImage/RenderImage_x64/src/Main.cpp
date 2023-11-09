@@ -11,17 +11,23 @@
 *******************************/
 
 #define BMP_FILE_NAEM "./resources/preview2.bmp"
-#define JPG_FILE_NAEM "./resources/preview2.jpg"
+#define JPG_FILE_NAEM "./resources/Lisa.jpg"
+#define PNG_FILE_NAEM "./resources/YaYa.png"
 
 int loadBMP()
 {
+	// 初始化SDL库
 	if (SDL_Init(SDL_INIT_VIDEO))
 	{
 		std::cout << "SDL_Init Error: " << SDL_GetError() << std::endl;
 		return 1;
 	}
 
-	SDL_Window *win = SDL_CreateWindow("Hello World!", 100, 100, 640, 480, SDL_WINDOW_SHOWN);
+	// 创建Window窗口
+	//SDL_Window *win = SDL_CreateWindow("Hello World!", 100, 100, 640, 480, SDL_WINDOW_SHOWN);
+	SDL_Window *win = SDL_CreateWindow("Hello World!",
+		SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+		640, 480, SDL_WINDOW_SHOWN);
 
 	if (win == nullptr)
 	{
@@ -44,13 +50,14 @@ int loadBMP()
 
 	//std::string imagePath = BMP_FILE_NAEM;
 	std::string imagePath = JPG_FILE_NAEM;
+	//std::string imagePath = PNG_FILE_NAEM;
 	//std::string imagePath = "D:\\workspace\\vs2015\\example\\sdl_learn\\res\\01sdl_learn\\preview2.jpg";
 
 
 	//Surface 可以把它理解为一个Buffer，它是一块屏幕缓冲区。
 	//每个Window(窗口)对应一个Surface，任何View都是画在Surface上的
-	//SDL_Surface *bmp = SDL_LoadBMP(imagePath.c_str());
-	SDL_Surface *bmp = IMG_Load(imagePath.c_str());
+	//SDL_Surface *bmp = SDL_LoadBMP(imagePath.c_str());//只能加载BMP图片资源为Surface
+	SDL_Surface *bmp = IMG_Load(imagePath.c_str());//可以加载bmp、jpg、png图片资源为Surface
 	if (bmp == nullptr)
 	{
 		SDL_DestroyRenderer(ren);
@@ -76,10 +83,20 @@ int loadBMP()
 
 	SDL_RenderClear(ren);
 	//texture画上去
-	//第一个NULL是一个指向源矩形的指针，也就是说，从图像上裁剪下的一块矩形
+	//1.第一个NULL是一个指向源矩形的指针，也就是说，从图像上裁剪下的一块矩形
 	//而另一个是指向目标矩形的指针。我们将NULL传入这两个参数，
 	//是告诉SDL绘制整个源图像（第一个NULL），并把它画在屏幕上（0，0 ）的位置，并拉伸这个图像让它填满整个窗口（第二个NULL）
-	SDL_RenderCopy(ren, tex, NULL, NULL);// 
+	SDL_RenderCopy(ren, tex, NULL, NULL);
+
+	//2.从0开始截取长宽100*100的一部分显示到(100,100)位置
+	/*SDL_Rect srcRect = { 0,0,100,100 };
+	SDL_Rect destRect = { 100,100,200,200 };
+	SDL_RenderCopy(ren, tex, &srcRect, &destRect);*/
+
+	//3.绘制整个源图像（第一个NULL),显示到(100,100)的200*200位置
+	/*SDL_Rect destRect = { 100,100,200,200 };
+	SDL_RenderCopy(ren, tex, nullptr, &destRect);*/
+
 	SDL_RenderPresent(ren);// SDL_RenderPresent来更新屏幕的画面
 	SDL_Delay(5 * 1000);
 
