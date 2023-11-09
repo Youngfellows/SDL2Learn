@@ -126,11 +126,11 @@ int main(int, char **)
 			}
 			//If user presses any key
 			if (e.type == SDL_KEYDOWN) {
-				quit = true;
+				quit = true;//键盘键按下任何键退出窗口
 			}
 			//If user clicks the mouse
 			if (e.type == SDL_MOUSEBUTTONDOWN) {
-				quit = true;
+				quit = true;//按下鼠标按钮退出窗口
 			}
 		}
 		//Rendering
