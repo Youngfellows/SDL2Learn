@@ -74,7 +74,10 @@ void renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x, int y, SDL_Rect *
 	renderTexture(tex, ren, dst, clip);
 }
 
-int main(int, char **)
+/*
+* 使用:按下数字键1、2、3、4切换绘制的图片
+*/
+int main(int argc, char **argv)
 {
 	//Start up SDL and make sure it went ok
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
