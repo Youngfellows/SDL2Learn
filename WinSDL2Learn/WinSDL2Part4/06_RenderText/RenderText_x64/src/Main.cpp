@@ -133,7 +133,7 @@ int main(int, char **)
 	//We'll render the string "TTF fonts are cool!" in white
 	//Color is in RGB format
 	SDL_Color color = { 255, 255, 255, 255 };
-	SDL_Texture *image = renderText("Shiver is best aswsome", resPath + "sample.ttf", color, 64, renderer);
+	SDL_Texture *image = renderText("Shiver is best aswsome", resPath + "sample.ttf", color, 40, renderer);
 	if (image == nullptr) {
 		cleanup(image, renderer, window);
 		TTF_Quit();
@@ -155,6 +155,7 @@ int main(int, char **)
 			if (e.type == SDL_QUIT) {
 				quit = true;
 			}
+			//按下Esc按键关闭窗口
 			if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_ESCAPE) {
 				quit = true;
 			}
