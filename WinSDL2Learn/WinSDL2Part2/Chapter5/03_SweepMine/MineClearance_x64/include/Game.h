@@ -5,6 +5,7 @@
 #include "SDL2/SDL_ttf.h"
 #include "DisplayObject.h"
 #include "Resource.h"
+#include "SDL2/SDL_image.h"
 
 namespace Dungeon
 {

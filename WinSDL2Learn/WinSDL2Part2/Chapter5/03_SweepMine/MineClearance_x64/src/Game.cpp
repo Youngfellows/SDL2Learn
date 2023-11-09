@@ -30,6 +30,12 @@ namespace Dungeon
 			return false;
 		}
 
+		// 初始化SDL_image
+		if (!IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG | IMG_INIT_WEBP))
+		{
+			SDL_Log("Can not init SDL_image: %s", SDL_GetError());
+			return false;
+		}
 
 		// SDL库初始化
 		// if (SDL_Init(SDL_INIT_VIDEO))
@@ -107,6 +113,7 @@ namespace Dungeon
 		FreeComponents();
 		SDL_DestroyRenderer(mRenderer);
 		SDL_DestroyWindow(mWindow);
+		IMG_Quit();
 		SDL_Quit();
 	}
 
