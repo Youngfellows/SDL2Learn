@@ -29,11 +29,12 @@ void  fill_audio(void *udata, Uint8 *stream, int len)
 	audio_len -= len;
 }
 
+/*
+* SDL播放原始音频
+*/
 int main(int argc, char *argv[])
 {
-
 	Window::Init("Zoom and Rotate Pic");
-
 
 	//SDL_AudioSpec
 	SDL_AudioSpec wanted_spec;

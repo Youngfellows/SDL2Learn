@@ -50,7 +50,7 @@
 #include "Window.h"
 
  /*
- * SDL 图片变换
+ * SDL 图片变换: 旋转/缩放
  */
 int main(int argc, char *argv[])
 {
