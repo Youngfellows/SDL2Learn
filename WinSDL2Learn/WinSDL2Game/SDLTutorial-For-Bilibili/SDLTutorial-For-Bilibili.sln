@@ -5,6 +5,8 @@ VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SDLTutorial-For-Bilibili-x64", "SDLTutorial-For-Bilibili-x64\SDLTutorial-For-Bilibili-x64.vcxproj", "{41C4A0F2-F67B-48CF-9C87-1DF275CBE713}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RenderImage_x64", "RenderImage_x64\RenderImage_x64.vcxproj", "{FEB04B60-44D8-4BA5-B4AC-93EDA038DF0F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{41C4A0F2-F67B-48CF-9C87-1DF275CBE713}.Release|x64.Build.0 = Release|x64
 		{41C4A0F2-F67B-48CF-9C87-1DF275CBE713}.Release|x86.ActiveCfg = Release|Win32
 		{41C4A0F2-F67B-48CF-9C87-1DF275CBE713}.Release|x86.Build.0 = Release|Win32
+		{FEB04B60-44D8-4BA5-B4AC-93EDA038DF0F}.Debug|x64.ActiveCfg = Debug|x64
+		{FEB04B60-44D8-4BA5-B4AC-93EDA038DF0F}.Debug|x64.Build.0 = Debug|x64
+		{FEB04B60-44D8-4BA5-B4AC-93EDA038DF0F}.Debug|x86.ActiveCfg = Debug|Win32
+		{FEB04B60-44D8-4BA5-B4AC-93EDA038DF0F}.Debug|x86.Build.0 = Debug|Win32
+		{FEB04B60-44D8-4BA5-B4AC-93EDA038DF0F}.Release|x64.ActiveCfg = Release|x64
+		{FEB04B60-44D8-4BA5-B4AC-93EDA038DF0F}.Release|x64.Build.0 = Release|x64
+		{FEB04B60-44D8-4BA5-B4AC-93EDA038DF0F}.Release|x86.ActiveCfg = Release|Win32
+		{FEB04B60-44D8-4BA5-B4AC-93EDA038DF0F}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
