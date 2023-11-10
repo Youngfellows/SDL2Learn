@@ -2,16 +2,18 @@
 
 #include "pch.hpp"
 
-inline auto WindowDestroy = [](SDL_Window* window) {
-    SDL_DestroyWindow(window);
+inline auto WindowDestroy = [](SDL_Window *window)
+{
+	SDL_DestroyWindow(window);
 };
 
-class Window final {
+class Window final
+{
 public:
-    friend class Renderer;
+	friend class Renderer;
 
-    Window(const std::string& title, int w, int h);
+	Window(const std::string &title, int w, int h);
 
 private:
-    std::unique_ptr<SDL_Window, decltype(WindowDestroy)> window_;
+	std::unique_ptr<SDL_Window, decltype(WindowDestroy)> window_;
 };

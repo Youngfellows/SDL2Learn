@@ -9,7 +9,8 @@ constexpr SDL_Color KeyColor = { 118, 66, 138, 255 };
 
 std::unique_ptr<Context> Context::instance_ = nullptr;
 
-Map CreateRandomMap(int bombCount, int w, int h) {
+Map CreateRandomMap(int bombCount, int w, int h)
+{
 	SDL_assert(bombCount < w * h);
 
 	std::random_device d;
@@ -28,7 +29,7 @@ Map CreateRandomMap(int bombCount, int w, int h) {
 		while (!setupBomb && setupCount > 0) {
 			int x = dist1(gen);
 			int y = dist2(gen);
-			auto& tile = map.Get(x, y);
+			auto &tile = map.Get(x, y);
 			if (tile.type != Tile::Bomb) {
 				tile.type = Tile::Bomb;
 				setupBomb = true;
@@ -53,7 +54,7 @@ Map CreateRandomMap(int bombCount, int w, int h) {
 	// generate nearly mine number
 	for (int y = 0; y < h; y++) {
 		for (int x = 0; x < w; x++) {
-			auto& tile = map.Get(x, y);
+			auto &tile = map.Get(x, y);
 			if (tile.type == Tile::Bomb) {
 				continue;
 			}
@@ -78,13 +79,14 @@ Map CreateRandomMap(int bombCount, int w, int h) {
 	return map;
 }
 
-SDL_Texture* loadTexture(SDL_Renderer* renderer, const std::string& bmpFilename, const SDL_Color& keycolor) {
-	SDL_Surface* surface = SDL_LoadBMP(bmpFilename.c_str());
+SDL_Texture *loadTexture(SDL_Renderer *renderer, const std::string &bmpFilename, const SDL_Color &keycolor)
+{
+	SDL_Surface *surface = SDL_LoadBMP(bmpFilename.c_str());
 	if (!surface) {
 		SDL_LogError(SDL_LOG_CATEGORY_RESERVED1, "%s load failed", bmpFilename.c_str());
 	}
 	SDL_SetColorKey(surface, SDL_TRUE, SDL_MapRGB(surface->format, keycolor.r, keycolor.g, keycolor.b));
-	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+	SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface);
 	if (!texture) {
 		SDL_LogError(SDL_LOG_CATEGORY_RESERVED1, "texture create from %s failed", bmpFilename.c_str());
 	}
@@ -92,7 +94,7 @@ SDL_Texture* loadTexture(SDL_Renderer* renderer, const std::string& bmpFilename,
 	return texture;
 }
 
-Context::Context(Window&& window, Renderer&& renderer, Map&& map, int mineCount)
+Context::Context(Window &&window, Renderer &&renderer, Map &&map, int mineCount)
 	: numberImage(loadTexture(renderer.renderer_.get(), "resources/font.bmp", KeyColor), TextureDestroy),
 	mineImage(loadTexture(renderer.renderer_.get(), "resources/mine.bmp", KeyColor), TextureDestroy),
 	flagImage(loadTexture(renderer.renderer_.get(), "resources/flag.bmp", KeyColor), TextureDestroy),
@@ -101,12 +103,15 @@ Context::Context(Window&& window, Renderer&& renderer, Map&& map, int mineCount)
 	window(std::move(window)),
 	renderer(std::move(renderer)),
 	map(std::move(map)),
-	mineCount(mineCount) {}
+	mineCount(mineCount)
+{
+}
 
-void Context::DrawMap() {
+void Context::DrawMap()
+{
 	for (int y = 0; y < map.Height(); y++) {
 		for (int x = 0; x < map.Width(); x++) {
-			const auto& tile = map.Get(x, y);
+			const auto &tile = map.Get(x, y);
 			drawOneTile(x, y, tile);
 		}
 	}
@@ -123,7 +128,8 @@ void Context::DrawMap() {
 	}
 }
 
-void Context::drawOneTile(int x, int y, const Tile& tile) {
+void Context::drawOneTile(int x, int y, const Tile &tile)
+{
 	int tileX = x * TileLen;
 	int tileY = y * TileLen;
 	SDL_Rect rect = { tileX, tileY, TileLen, TileLen };
@@ -178,7 +184,8 @@ void Context::drawOneTile(int x, int y, const Tile& tile) {
 	}
 }
 
-void Context::HandleEvent(SDL_Event& e) {
+void Context::HandleEvent(SDL_Event &e)
+{
 	if (!state == GameState::Gaming) {
 		if (e.type == SDL_MOUSEBUTTONDOWN) {
 			map = CreateRandomMap(MineCount, WindowWidth / TileLen, WindowHeight / TileLen);
@@ -202,16 +209,18 @@ void Context::HandleEvent(SDL_Event& e) {
 	}
 }
 
-inline SDL_Point calcTileCoord(int mouseX, int mouseY) {
+inline SDL_Point calcTileCoord(int mouseX, int mouseY)
+{
 	return { mouseX / TileLen, mouseY / TileLen };
 }
 
-void floodFill(Context& ctx, Map& map, int x, int y) {
+void floodFill(Context &ctx, Map &map, int x, int y)
+{
 	if (!map.IsIn(x, y)) {
 		return;
 	}
 
-	auto& tile = map.Get(x, y);
+	auto &tile = map.Get(x, y);
 	if (!tile.isVisiable && !tile.isFlaged && tile.type != Tile::Bomb) {
 		tile.isVisiable = true;
 		ctx.nakkedCount++;
@@ -224,13 +233,14 @@ void floodFill(Context& ctx, Map& map, int x, int y) {
 	}
 }
 
-void Context::handleMouseLeftBtnDown(const SDL_MouseButtonEvent& e) {
+void Context::handleMouseLeftBtnDown(const SDL_MouseButtonEvent &e)
+{
 	auto tileCoord = calcTileCoord(e.x, e.y);
 	if (!map.IsIn(tileCoord.x, tileCoord.y)) {
 		return;
 	}
 
-	auto& tile = map.Get(tileCoord.x, tileCoord.y);
+	auto &tile = map.Get(tileCoord.x, tileCoord.y);
 	if (tile.isVisiable || tile.isFlaged) {
 		return;
 	}
@@ -238,7 +248,7 @@ void Context::handleMouseLeftBtnDown(const SDL_MouseButtonEvent& e) {
 	if (!tile.isVisiable && tile.type == Tile::Bomb) {
 		state = GameState::Explode;
 		for (int i = 0; i < map.MaxSize(); i++) {
-			auto& tile = map.GetByIndex(i);
+			auto &tile = map.GetByIndex(i);
 			tile.isVisiable = true;
 			tile.isFlaged = false;
 		}
@@ -252,13 +262,14 @@ void Context::handleMouseLeftBtnDown(const SDL_MouseButtonEvent& e) {
 	}
 }
 
-void Context::handleMouseRightBtnDown(const SDL_MouseButtonEvent& e) {
+void Context::handleMouseRightBtnDown(const SDL_MouseButtonEvent &e)
+{
 	auto tileCoord = calcTileCoord(e.x, e.y);
 	if (!map.IsIn(tileCoord.x, tileCoord.y)) {
 		return;
 	}
 
-	auto& tile = map.Get(tileCoord.x, tileCoord.y);
+	auto &tile = map.Get(tileCoord.x, tileCoord.y);
 
 	if (!tile.isVisiable) {
 		tile.isFlaged = !tile.isFlaged;
@@ -266,7 +277,8 @@ void Context::handleMouseRightBtnDown(const SDL_MouseButtonEvent& e) {
 
 }
 
-void Context::handleKeyDown(const SDL_KeyboardEvent& e) {
+void Context::handleKeyDown(const SDL_KeyboardEvent &e)
+{
 	if (e.keysym.scancode == SDL_SCANCODE_G) {
 		debugMode = !debugMode;
 	}
