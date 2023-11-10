@@ -153,11 +153,11 @@ void Window::HandleEvents(std::function<void(SDL_Event &)>cbEventFunction, std::
 	SDL_Event e;
 	while (!m_eventQuit) {
 		while (SDL_PollEvent(&e)) {
-			cbEventFunction(e);
+			cbEventFunction(e);//回调事件处理函数
 		}
 
 		if (cbRenderFunction != nullptr) {
-			cbRenderFunction();
+			cbRenderFunction();//回调渲染界面函数
 		}
 	}
 }

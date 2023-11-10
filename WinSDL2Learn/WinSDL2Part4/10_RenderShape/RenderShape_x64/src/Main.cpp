@@ -12,8 +12,10 @@ int main(int argc, char *argv[])
 	Window::Init("Draw A Rect");
 
 	int paint = 0;
+	//paint是向函数HandleEvents传递的参数
 	Window::HandleEvents([&paint](SDL_Event e)
 		{
+			//这是被回调回来的事件处理函数
 			if (e.key.keysym.sym == SDLK_1) {
 				paint = 1;
 			}
@@ -28,6 +30,7 @@ int main(int argc, char *argv[])
 			}
 		}, [&paint]()
 		{
+			//这是被回调回来的渲染界面函数
 			//Clear screen
 			SDL_SetRenderDrawColor(Window::m_pRenderer.get(), 0x00, 0x00, 0x00, 0x00);
 			Window::Clear();
