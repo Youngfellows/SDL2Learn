@@ -71,13 +71,13 @@ int refresh_video(void *opaque)
 	while (!thread_exit) {
 		SDL_Event event;
 		event.type = REFRESH_EVENT;
-		SDL_PushEvent(&event);
+		SDL_PushEvent(&event);//子线程向主线程发送刷新视频的消息
 		SDL_Delay(40);
 	}
 	thread_exit = 0;
 	//Break
 	SDL_Event event;
-	event.type = BREAK_EVENT;
+	event.type = BREAK_EVENT;//子线程向主线程发送结束事件循环的消息
 	SDL_PushEvent(&event);
 
 	return 0;
@@ -118,18 +118,21 @@ int main(int argc, char *argv[])
 
 	SDL_Rect sdlRect;
 
+	// 启动子线程并运行
 	SDL_Thread *refresh_thread = SDL_CreateThread(refresh_video, NULL, NULL);
+
 	SDL_Event event;
 	while (1) {
 		//Wait
-		SDL_WaitEvent(&event);
-		if (event.type == REFRESH_EVENT) {
+		SDL_WaitEvent(&event);//等待事件
+		if (event.type == REFRESH_EVENT) {//主线程等待子线程的刷新界面的事件
 			if (fread(buffer, 1, pixel_w * pixel_h * bpp / 8, fp) != pixel_w * pixel_h * bpp / 8) {
 				// Loop
 				fseek(fp, 0, SEEK_SET);
 				fread(buffer, 1, pixel_w * pixel_h * bpp / 8, fp);
 			}
 
+			// 把读取到的yuv视频像素数据保存到Texture中
 			SDL_UpdateTexture(sdlTexture, NULL, buffer, pixel_w);
 
 			//FIX: If window is resize
@@ -139,7 +142,7 @@ int main(int argc, char *argv[])
 			sdlRect.h = screen_h;
 
 			SDL_RenderClear(sdlRenderer);
-			SDL_RenderCopy(sdlRenderer, sdlTexture, NULL, &sdlRect);
+			SDL_RenderCopy(sdlRenderer, sdlTexture, NULL, &sdlRect);//渲染视频数据
 			SDL_RenderPresent(sdlRenderer);
 
 		}
@@ -148,9 +151,10 @@ int main(int argc, char *argv[])
 			SDL_GetWindowSize(screen, &screen_w, &screen_h);
 		}
 		else if (event.type == SDL_QUIT) {
-			thread_exit = 1;
+			thread_exit = 1;//关闭窗口,结束子线程
 		}
 		else if (event.type == BREAK_EVENT) {
+			//主线程接收到子线程发布结束事件循环的消息
 			break;
 		}
 	}
