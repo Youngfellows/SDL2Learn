@@ -1,4 +1,5 @@
 # SDL2-Game
+
 A small 2D, SDL2 Game written in C++ featuring destructive terrain, raycasts, tailphysics and more!
 
 ![bsp_img](https://i.imgur.com/bT7p3lS.jpg)
@@ -71,3 +72,9 @@ All classes concerning the boss.
 
 
 Certain elements are heavily inspired by the Supreme Jeh'Oul bossfight from Wings of Vi ([this one](https://www.youtube.com/watch?v=VD-y3-hH1do)).
+
+## 使用
+- Esc键:  结束游戏
+- 按键1:  使用激光发动攻击
+- 按键2:  使用火箭发动攻击
+- 按键3:  使用激光发动攻击

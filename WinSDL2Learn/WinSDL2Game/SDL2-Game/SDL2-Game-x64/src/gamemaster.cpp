@@ -118,10 +118,10 @@ bool InputOutputManager(boss_AI *b, player *p, terrain *o)
 		if (e.type == SDL_QUIT)	return false;
 		else if (e.type == SDL_KEYUP && e.key.keysym.sym == SDLK_ESCAPE) return false;
 		else if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_1) {
-			b->launchAttack(LASER);
+			b->launchAttack(LASER);//按键1,使用激光发动攻击
 		}
 		else if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_2) {
-			b->launchAttack(ROCKETS);
+			b->launchAttack(ROCKETS);//按键2,使用火箭发动攻击
 		}
 		else if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_3) {
 			b->spawnRockets = !b->spawnRockets;
