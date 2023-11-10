@@ -6,7 +6,7 @@
 #include <thread>
 
 /*
-* 设置定时器,延时
+* SDL实现帧动画
 */
 int main(int argc, char *argv[])
 {
@@ -39,20 +39,20 @@ int main(int argc, char *argv[])
 	Window::HandleEvents([&degrees, &flipType, &index](SDL_Event e)
 		{
 			//User requests quit
-			if (e.type == SDL_QUIT)
+			if (e.type == SDL_QUIT)//关闭窗口事件
 			{
 				Window::m_eventQuit = true;
 			}
-			else if (e.key.keysym.sym == SDLK_0) {
+			else if (e.key.keysym.sym == SDLK_0) {//按键0
 				index = 0;
 			}
-			else if (e.key.keysym.sym == SDLK_1) {
+			else if (e.key.keysym.sym == SDLK_1) {//按键1
 				index = 1;
 			}
-			else if (e.key.keysym.sym == SDLK_2) {
+			else if (e.key.keysym.sym == SDLK_2) {//按键2
 				index = 2;
 			}
-			else if (e.key.keysym.sym == SDLK_3) {
+			else if (e.key.keysym.sym == SDLK_3) {//按键3
 				index = 3;
 			}
 		}, [&degrees, &flipType, &move, &index]()

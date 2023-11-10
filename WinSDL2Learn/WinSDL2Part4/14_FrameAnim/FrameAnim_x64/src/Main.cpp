@@ -9,11 +9,13 @@
 std::mutex actionMutex;
 #include <thread>
 
+/*
+* SDL播放帧动画
+*/
 int main(int argc, char *argv[])
 {
 
 	Window::Init("Simple Animation");
-
 
 	SDL_Texture *move[4] = { nullptr };
 
@@ -75,11 +77,11 @@ int main(int argc, char *argv[])
 		{
 			std::lock_guard<std::mutex> guard(actionMutex);
 			//User requests quit
-			if (e.type == SDL_QUIT)
+			if (e.type == SDL_QUIT)//关闭窗口事件
 			{
 				Window::m_eventQuit = true;
 			}
-			else if (e.key.keysym.sym == SDLK_LEFT) {
+			else if (e.key.keysym.sym == SDLK_LEFT) {//左方向键
 
 				if (e.key.state == SDL_PRESSED) {
 					action = 1;
@@ -91,7 +93,7 @@ int main(int argc, char *argv[])
 					index = 0;
 				}
 			}
-			else if (e.key.keysym.sym == SDLK_a) {
+			else if (e.key.keysym.sym == SDLK_a) {//按键a
 				if (e.key.state == SDL_PRESSED) {
 					action = 2;
 					max = 9;
