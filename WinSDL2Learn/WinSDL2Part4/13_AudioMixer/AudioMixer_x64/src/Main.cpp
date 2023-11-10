@@ -9,6 +9,9 @@
 
 #include "Window.h"
 
+/*
+* 使用SDL_mixer播放音频
+*/
 int main(int argc, char *argv[])
 {
 	Window::Init("Zoom and Rotate Pic");
@@ -71,27 +74,27 @@ int main(int argc, char *argv[])
 			}
 			else if (e.type == SDL_KEYDOWN)
 			{
-				if (e.key.keysym.sym == SDLK_1) {
+				if (e.key.keysym.sym == SDLK_1) {//按键1
 					//Play medium sound effect
 					Mix_PlayChannel(-1, gHigh, 0);
 				}
-				else if (e.key.keysym.sym == SDLK_2) {
+				else if (e.key.keysym.sym == SDLK_2) {//按键2
 					//Play low sound effect
 					Mix_PlayChannel(-1, gMedium, 0);
 				}
-				else if (e.key.keysym.sym == SDLK_3) {
+				else if (e.key.keysym.sym == SDLK_3) {//按键3
 					//Play scratch sound effect
 					Mix_PlayChannel(-1, gLow, 0);
 				}
-				else if (e.key.keysym.sym == SDLK_4) {
+				else if (e.key.keysym.sym == SDLK_4) {//按键4
 					Mix_PlayChannel(-1, gScratch, 0);
 				}
-				else if (e.key.keysym.sym == SDLK_9) {
+				else if (e.key.keysym.sym == SDLK_9) {//按键9
 					//If there is no music playing
 					if (Mix_PlayingMusic() == 0)
 					{
 						//Play the music
-						Mix_PlayMusic(gMusic, -1);
+						Mix_PlayMusic(gMusic, -1);//播放
 					}
 					//If music is being played
 					else
@@ -100,25 +103,24 @@ int main(int argc, char *argv[])
 						if (Mix_PausedMusic() == 1)
 						{
 							//Resume the music
-							Mix_ResumeMusic();
+							Mix_ResumeMusic();//继续播放
 						}
 						//If the music is playing
 						else
 						{
 							//Pause the music
-							Mix_PauseMusic();
+							Mix_PauseMusic();//暂停播放
 						}
 					}
 				}
-				else if (e.key.keysym.sym == SDLK_0) {
+				else if (e.key.keysym.sym == SDLK_0) {//按键0
 					//Stop the music
-					Mix_HaltMusic();
+					Mix_HaltMusic();//停止播放
 				}
 
 				else if (e.key.keysym.sym == SDLK_p) {
 
 				}
-
 			}
 		}, [&pic]()
 		{
