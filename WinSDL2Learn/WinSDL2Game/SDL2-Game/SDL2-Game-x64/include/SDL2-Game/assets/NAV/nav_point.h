@@ -3,12 +3,13 @@
 
 #include "base.h"
 
-class nav_point {
-	private:
-	public:
-		Vector2 point;
-		nav_point();
-		~nav_point();
+class nav_point
+{
+private:
+public:
+	Vector2 point;
+	nav_point();
+	~nav_point();
 };
 
 

@@ -1,6 +1,7 @@
 #include "boss_Controller.h"
 
-boss_Controller::boss_Controller(GameWindow* gw, terrain* ter) : Object(gw) {
+boss_Controller::boss_Controller(GameWindow *gw, terrain *ter) : Object(gw)
+{
 	bossNavigator = new nav_graph(this);
 	this->ter = ter;
 	tailOffset.set(-100, 30);
@@ -26,39 +27,43 @@ boss_Controller::boss_Controller(GameWindow* gw, terrain* ter) : Object(gw) {
 	tailWiggleSpeed = 1;
 }
 
-boss_Controller::~boss_Controller() {
+boss_Controller::~boss_Controller()
+{
 }
 
-void boss_Controller::update() {
+void boss_Controller::update()
+{
 	this->head->setPos(pos);
 	this->head->update();
 
 	updateTail(); //update head before this
 
-	if(laserOn) updateLaser();
+	if (laserOn) updateLaser();
 
 	bossNavigator->update();
 }
 
-void boss_Controller::draw() {
+void boss_Controller::draw()
+{
 	this->tail->draw();
 	this->head->draw();
-	if(laserOn) {
+	if (laserOn) {
 		this->laser->draw();
 		laser_flare->draw();
 	}
 }
 
-void boss_Controller::updateLaser() {
-	this->laser->setPos(pos.x+laserOffset.x, pos.y+laserOffset.y);
+void boss_Controller::updateLaser()
+{
+	this->laser->setPos(pos.x + laserOffset.x, pos.y + laserOffset.y);
 	this->laser->angle = this->head->angle + 90;
 	Vector2 lookat;
 	lookat.fromAngle(laser->angle);
 	Vector2 hit = ter->raycast(laser->getPos(), lookat, 0.1f);
 	laser_flare->setPosCenter(hit);
 	laser_flare->update();
-	laser_impact->setPos(hit.x-laser_impact->getRect().w/2, hit.y-laser_impact->getRect().h+20);
-	laser_impact2->setPos(hit.x-laser_impact->getRect().w/2, hit.y-laser_impact->getRect().h+20);
+	laser_impact->setPos(hit.x - laser_impact->getRect().w / 2, hit.y - laser_impact->getRect().h + 20);
+	laser_impact2->setPos(hit.x - laser_impact->getRect().w / 2, hit.y - laser_impact->getRect().h + 20);
 	this->laser->setFromTo(laser->getPos(), hit, true);
 	this->laser->update();
 	this->laser_impact->update();
@@ -66,11 +71,12 @@ void boss_Controller::updateLaser() {
 	this->laser_flare->angle += 50;
 }
 
-void boss_Controller::updateTail() {
-	this->tail->angle = BOSS_DEFAULT_TAIL_ROTATION + tailWiggleAmplitude*BOSS_TAILWIGGLE_AMPLITUDE * sin(tailWiggleTimer.elapsedTime()*BOSS_TAILWIGGLE_SPEED*tailWiggleSpeed);
+void boss_Controller::updateTail()
+{
+	this->tail->angle = BOSS_DEFAULT_TAIL_ROTATION + tailWiggleAmplitude * BOSS_TAILWIGGLE_AMPLITUDE * sin(tailWiggleTimer.elapsedTime() * BOSS_TAILWIGGLE_SPEED * tailWiggleSpeed);
 	Vector2 headCenter;
-	headCenter.x = head->getPos().x + head->getRect().w/2;
-	headCenter.y = head->getPos().y + head->getRect().h/2;
+	headCenter.x = head->getPos().x + head->getRect().w / 2;
+	headCenter.y = head->getPos().y + head->getRect().h / 2;
 	Vector2 tmp_tailPos = tailOffset;
 	tmp_tailPos.rotate(head->angle);
 	tmp_tailPos.add(headCenter);
@@ -78,7 +84,8 @@ void boss_Controller::updateTail() {
 	this->tail->update();
 }
 
-void boss_Controller::setTailWiggle(float Amp, float Speed) {
+void boss_Controller::setTailWiggle(float Amp, float Speed)
+{
 	tailWiggleAmplitude = Amp;
 	tailWiggleSpeed = Speed;
 }

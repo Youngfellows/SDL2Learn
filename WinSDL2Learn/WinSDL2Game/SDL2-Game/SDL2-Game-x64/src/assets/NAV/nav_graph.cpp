@@ -1,6 +1,7 @@
 #include "nav_graph.h"
 
-nav_graph::nav_graph(Object* agent) {
+nav_graph::nav_graph(Object *agent)
+{
 	tl_in.set(-500, 1500);
 	tl.set(130, 700);
 	tl_out.set(130, -500);
@@ -20,36 +21,44 @@ nav_graph::nav_graph(Object* agent) {
 	location = OUT;
 }
 
-nav_graph::~nav_graph() {
+nav_graph::~nav_graph()
+{
 }
 
-void nav_graph::update() {
+void nav_graph::update()
+{
 	active->update();
 }
 
-void nav_graph::moveTo(locations loc) {
-	switch(loc) {
-	case TL : {
+void nav_graph::moveTo(locations loc)
+{
+	switch (loc) {
+	case TL:
+	{
 		traverse(&tl_enter);
 		break;
 	}
-	case TL2 : {
+	case TL2:
+	{
 		traverse(&tl_enter);
 		break;
 	}
-	case OUT : {
-		if(location==TL) traverse(&tl_exit);
-		if(location==TL2) traverse(&tl2_exit);
+	case OUT:
+	{
+		if (location == TL) traverse(&tl_exit);
+		if (location == TL2) traverse(&tl2_exit);
 	}
 	}
 	location = loc;
 }
 
-bool nav_graph::isBusy() {
+bool nav_graph::isBusy()
+{
 	return active->isBusy();
 }
 
-void nav_graph::traverse(nav_path* p) {
+void nav_graph::traverse(nav_path *p)
+{
 	p->traverse();
 	active = p;
 }

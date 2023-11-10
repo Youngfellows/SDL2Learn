@@ -3,29 +3,33 @@
 
 #include "nav_path.h"
 
-enum locations {TL, OUT, TL2};
+enum locations
+{
+	TL, OUT, TL2
+};
 
-class nav_graph {
-	private:
-		nav_path tl_enter; //bottom left to top left
-		nav_path tl_exit;
+class nav_graph
+{
+private:
+	nav_path tl_enter; //bottom left to top left
+	nav_path tl_exit;
 
-		nav_path tl2_exit; //tl2 has same entry as tl
+	nav_path tl2_exit; //tl2 has same entry as tl
 
-		Vector2 tl, tl_in, tl_out;
-		Vector2 tl2_out, tl2_out_control;
-		Vector2 tl_in_control;
+	Vector2 tl, tl_in, tl_out;
+	Vector2 tl2_out, tl2_out_control;
+	Vector2 tl_in_control;
 
-		nav_path* active;
-		locations location;
+	nav_path *active;
+	locations location;
 
-		void traverse(nav_path* p);
-	public:
-		nav_graph(Object* agent);
-		~nav_graph();
-		void moveTo(locations loc);
-		void update();
-		bool isBusy();
+	void traverse(nav_path *p);
+public:
+	nav_graph(Object *agent);
+	~nav_graph();
+	void moveTo(locations loc);
+	void update();
+	bool isBusy();
 };
 
 

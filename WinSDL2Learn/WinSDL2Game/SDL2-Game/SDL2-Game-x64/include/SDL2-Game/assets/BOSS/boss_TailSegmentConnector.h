@@ -3,12 +3,13 @@
 
 #include "base.h"
 
-class boss_TailSegmentConnector : public AdvImage {
-	private:
-	public:
-		void update(Vector2 from, Vector2 to);
-		boss_TailSegmentConnector(GameWindow* gw);
-		~boss_TailSegmentConnector();
+class boss_TailSegmentConnector : public AdvImage
+{
+private:
+public:
+	void update(Vector2 from, Vector2 to);
+	boss_TailSegmentConnector(GameWindow *gw);
+	~boss_TailSegmentConnector();
 };
 
 
