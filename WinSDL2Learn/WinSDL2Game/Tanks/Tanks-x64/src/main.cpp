@@ -11,10 +11,10 @@
 
 #include "app.h"
 
-int main( int argc, char* args[] )
+int main(int argc, char *args[])
 {
-    App app;
-    app.run();
+	App app;
+	app.run();
 
-    return 0;
+	return 0;
 }
