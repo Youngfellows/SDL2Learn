@@ -3,9 +3,11 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 #include "Window.h"
-
-
 #include <thread>
+
+/*
+* 设置定时器,延时
+*/
 int main(int argc, char *argv[])
 {
 
@@ -59,8 +61,8 @@ int main(int argc, char *argv[])
 			if (index == 3) {
 				index = 0;
 			}
-
-			Window::Draw(move[index++], Window::Box(), NULL, degrees, NULL, flipType);
+			SDL_Rect box = Window::Box();
+			Window::Draw(move[index++], box, NULL, degrees, NULL, flipType);
 			std::this_thread::sleep_for(std::chrono::milliseconds(500));
 		});
 

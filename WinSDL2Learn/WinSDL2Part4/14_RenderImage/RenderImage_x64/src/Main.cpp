@@ -7,8 +7,8 @@
 #include <mutex>
 
 std::mutex actionMutex;
-
 #include <thread>
+
 int main(int argc, char *argv[])
 {
 
@@ -103,22 +103,22 @@ int main(int argc, char *argv[])
 				}
 			}
 		}
-		, [&degrees, &flipType, &bg, &attack, &move, &stand, &action, &index, &max]()
+		, [&degrees, &flipType, &attack, &move, &stand, &action, &index, &max]()
 		{
 
 			std::lock_guard<std::mutex> guard(actionMutex);
 			if (index == max) {
 				index = 0;
 			}
-
+			SDL_Rect box = Window::Box();
 			if (action == 0) {
-				Window::Draw(stand[index++], Window::Box(), NULL, degrees, NULL, flipType);
+				Window::Draw(stand[index++], box, NULL, degrees, NULL, flipType);
 			}
 			else if (action == 1) {
-				Window::Draw(move[index++], Window::Box(), NULL, degrees, NULL, flipType);
+				Window::Draw(move[index++], box, NULL, degrees, NULL, flipType);
 			}
 			else if (action == 2) {
-				Window::Draw(attack[index++], Window::Box(), NULL, degrees, NULL, flipType);
+				Window::Draw(attack[index++], box, NULL, degrees, NULL, flipType);
 			}
 
 			std::this_thread::sleep_for(std::chrono::milliseconds(300));
