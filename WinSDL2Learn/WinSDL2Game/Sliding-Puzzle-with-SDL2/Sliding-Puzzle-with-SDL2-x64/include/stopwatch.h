@@ -1,20 +1,21 @@
 #pragma once
-#define _CRT_SECURE_NO_WARNINGS //VS÷–±ÿ–Î∂®“Â,∑Ò‘Ú±®¥Ì
+#define _CRT_SECURE_NO_WARNINGS //VS‰∏≠ÂøÖÈ°ªÂÆö‰πâ,Âê¶ÂàôÊä•Èîô
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <time.h>
 #include <iostream>
 #include "userInterface.h"
 
-class Stopwatch : public UserInterface {
-    private:
-        time_t mStartTime;
-        char mElapsedTime[80];
+class Stopwatch : public UserInterface
+{
+private:
+	time_t mStartTime;
+	char mElapsedTime[80];
 
-    public:
-        Stopwatch(const SDL_Rect& rect, const SDL_Color& colour, TTF_Font* const font, const SDL_Color& fontColour);
+public:
+	Stopwatch(const SDL_Rect &rect, const SDL_Color &colour, TTF_Font *const font, const SDL_Color &fontColour);
 
-        void start();
-        void calculateTime(SDL_Renderer* const renderer);
-        
+	void start();
+	void calculateTime(SDL_Renderer *const renderer);
+
 };
