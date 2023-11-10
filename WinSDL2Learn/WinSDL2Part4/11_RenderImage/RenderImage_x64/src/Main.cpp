@@ -49,6 +49,9 @@
 #include <SDL2/SDL_ttf.h>
 #include "Window.h"
 
+ /*
+ * SDL 图片变换
+ */
 int main(int argc, char *argv[])
 {
 
@@ -97,31 +100,31 @@ int main(int argc, char *argv[])
 				useClip = -1;
 				switch (e.key.keysym.sym)
 				{
-				case SDLK_a:
+				case SDLK_a://按键a
 					degrees -= 60;
 					break;
-				case SDLK_d:
+				case SDLK_d://按键d
 					degrees += 60;
 					break;
-				case SDLK_q:
+				case SDLK_q://按键q
 					flipType = SDL_FLIP_HORIZONTAL;
 					break;
-				case SDLK_w:
+				case SDLK_w://按键w
 					flipType = SDL_FLIP_NONE;
 					break;
-				case SDLK_e:
+				case SDLK_e://按键e
 					flipType = SDL_FLIP_VERTICAL;
 					break;
-				case SDLK_1:
+				case SDLK_1://按键1
 					useClip = 0;
 					break;
-				case SDLK_2:
+				case SDLK_2://按键2
 					useClip = 1;
 					break;
-				case SDLK_3:
+				case SDLK_3://按键3
 					useClip = 2;
 					break;
-				case SDLK_4:
+				case SDLK_4://按键4
 					useClip = 3;
 					break;
 				}
@@ -130,13 +133,13 @@ int main(int argc, char *argv[])
 		{
 
 			if (useClip == -1) {//rotate
-				Window::Draw(arrowTexture, Window::Box(), NULL, degrees, NULL, flipType);
+				SDL_Rect box = Window::Box();
+				Window::Draw(arrowTexture, box, NULL, degrees, NULL, flipType);
 			}
 			else {//zoom
-				Window::Draw(cropPic, Window::Box(), &clips[useClip], degrees, NULL, flipType);
+				SDL_Rect box = Window::Box();
+				Window::Draw(cropPic, box, &clips[useClip], degrees, NULL, flipType);
 			}
-
-
 		});
 
 	SDL_Quit();
