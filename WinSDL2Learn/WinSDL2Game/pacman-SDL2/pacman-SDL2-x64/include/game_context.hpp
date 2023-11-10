@@ -5,29 +5,40 @@
 #include "controller.hpp"
 #include "find_path.hpp"
 
-class GameContext final: public Singlton<GameContext> {
+class GameContext final : public Singlton<GameContext>
+{
 public:
-    bool ShouldClose() const { return shouldClose_; }
-    void Exit() { shouldClose_ = true; }
-    SDL_Event& GetEvent() { return event_; }
+	bool ShouldClose() const
+	{
+		return shouldClose_;
+	}
+	void Exit()
+	{
+		shouldClose_ = true;
+	}
+	SDL_Event &GetEvent()
+	{
+		return event_;
+	}
 
-    GameContext();
+	GameContext();
 
-    void HandleEvent() {
-        controller->HandleEvent(event_);
-    }
+	void HandleEvent()
+	{
+		controller->HandleEvent(event_);
+	}
 
-    std::unique_ptr<Map> gameMap;
-    std::vector<Monster> monsters;
-    std::unique_ptr<Controller> controller; 
+	std::unique_ptr<Map> gameMap;
+	std::vector<Monster> monsters;
+	std::unique_ptr<Controller> controller;
 
-    void Update();
+	void Update();
 
 private:
-    bool shouldClose_ = false;
-    SDL_Event event_;
-    int score_ = 0;
+	bool shouldClose_ = false;
+	SDL_Event event_;
+	int score_ = 0;
 
-    void dealCollideWithMap(Monster& monster);
-    void tryEatBean(const Vector2& playerPosition);
+	void dealCollideWithMap(Monster &monster);
+	void tryEatBean(const Vector2 &playerPosition);
 };

@@ -2,38 +2,50 @@
 #include "pch.hpp"
 #include "consts.hpp"
 
-struct Tile final {
-    enum class Type {
-        Emtpy = -1,
-        Wall = static_cast<int>(ImageTileType::Wall),
-        Bean = static_cast<int>(ImageTileType::Bean),
-        PowerBean = static_cast<int>(ImageTileType::PowerBean),
-        GhostDoor = static_cast<int>(ImageTileType::GhostDoor),
-    };
-    Type type = Type::Emtpy;
+struct Tile final
+{
+	enum class Type
+	{
+		Emtpy = -1,
+		Wall = static_cast<int>(ImageTileType::Wall),
+		Bean = static_cast<int>(ImageTileType::Bean),
+		PowerBean = static_cast<int>(ImageTileType::PowerBean),
+		GhostDoor = static_cast<int>(ImageTileType::GhostDoor),
+	};
+	Type type = Type::Emtpy;
 };
 
-inline bool CanWalk(Tile::Type type) {
-    return !(type == Tile::Type::Wall || type == Tile::Type::GhostDoor);
+inline bool CanWalk(Tile::Type type)
+{
+	return !(type == Tile::Type::Wall || type == Tile::Type::GhostDoor);
 }
 
-class Map final {
+class Map final
+{
 public:
-    Map(std::string_view desc, const Size& size);
+	Map(std::string_view desc, const Size &size);
 
-    const Tile& GetTile(int x, int y) const {
-        return tiles_->Get(x, y);
-    }
+	const Tile &GetTile(int x, int y) const
+	{
+		return tiles_->Get(x, y);
+	}
 
-    Tile& GetTile(int x, int y) {
-        return tiles_->Get(x, y);
-    }
+	Tile &GetTile(int x, int y)
+	{
+		return tiles_->Get(x, y);
+	}
 
-    int Width() const { return tiles_->Width(); }
-    int Height() const { return tiles_->Height(); }
+	int Width() const
+	{
+		return tiles_->Width();
+	}
+	int Height() const
+	{
+		return tiles_->Height();
+	}
 
-    void Draw();
+	void Draw();
 
 private:
-    std::unique_ptr<Matrix<Tile>> tiles_;
+	std::unique_ptr<Matrix<Tile>> tiles_;
 };
