@@ -9,9 +9,8 @@
 
 #include "Window.h"
 
-int main2()
+int main(int argc, char *argv[])
 {
-
 	Window::Init("Zoom and Rotate Pic");
 
 	bool success = true;
@@ -124,7 +123,8 @@ int main2()
 		}, [&pic]()
 		{
 			Window::Clear();
-			Window::Draw(pic, Window::Box());
+			SDL_Rect box = Window::Box();
+			Window::Draw(pic, box);
 			Window::Present();
 		});
 

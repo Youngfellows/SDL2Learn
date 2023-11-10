@@ -1,4 +1,4 @@
-﻿
+﻿#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -29,7 +29,7 @@ void  fill_audio(void *udata, Uint8 *stream, int len)
 	audio_len -= len;
 }
 
-int main()
+int main(int argc, char *argv[])
 {
 
 	Window::Init("Zoom and Rotate Pic");
