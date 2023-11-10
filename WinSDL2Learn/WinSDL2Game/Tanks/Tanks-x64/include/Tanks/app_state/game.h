@@ -1,13 +1,13 @@
 #ifndef GAME_H
 #define GAME_H
 #include "appstate.h"
-#include "../objects/object.h"
-#include "../objects/player.h"
-#include "../objects/enemy.h"
-#include "../objects/bullet.h"
-#include "../objects/brick.h"
-#include "../objects/eagle.h"
-#include "../objects/bonus.h"
+#include "Tanks/objects/object.h"
+#include "Tanks/objects/player.h"
+#include "Tanks/objects/enemy.h"
+#include "Tanks/objects/bullet.h"
+#include "Tanks/objects/brick.h"
+#include "Tanks/objects/eagle.h"
+#include "Tanks/objects/bonus.h"
 #include <vector>
 #include <string>
 

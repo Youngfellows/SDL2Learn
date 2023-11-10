@@ -1,8 +1,8 @@
-#include "app.h"
-#include "appconfig.h"
-#include "engine/engine.h"
-#include "app_state/game.h"
-#include "app_state/menu.h"
+#include "Tanks/app.h"
+#include "Tanks/appconfig.h"
+#include "Tanks/engine/engine.h"
+#include "Tanks/app_state/game.h"
+#include "Tanks/app_state/menu.h"
 
 #include <ctime>
 #include <iostream>

@@ -1,5 +1,5 @@
-#include "bullet.h"
-#include "../appconfig.h"
+#include "Tanks/objects/bullet.h"
+#include "Tanks/appconfig.h"
 
 Bullet::Bullet()
 	: Object(0, 0, ST_BULLET)

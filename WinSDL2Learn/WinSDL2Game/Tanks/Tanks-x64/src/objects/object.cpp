@@ -1,4 +1,4 @@
-#include "object.h"
+#include "Tanks/objects/object.h"
 #include <SDL2/SDL.h>
 #include <iostream>
 #include <algorithm>

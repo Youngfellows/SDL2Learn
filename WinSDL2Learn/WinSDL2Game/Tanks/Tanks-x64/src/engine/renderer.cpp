@@ -1,5 +1,5 @@
-#include "renderer.h"
-#include "../appconfig.h"
+#include "Tanks/engine/renderer.h"
+#include "Tanks/appconfig.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <iostream>

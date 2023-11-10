@@ -1,8 +1,8 @@
-#include "game.h"
-#include "../engine/engine.h"
-#include "../appconfig.h"
-#include "menu.h"
-#include "scores.h"
+#include "Tanks/app_state/game.h"
+#include "Tanks/engine/engine.h"
+#include "Tanks/appconfig.h"
+#include "Tanks/app_state/menu.h"
+#include "Tanks/app_state/scores.h"
 
 #include <SDL2/SDL.h>
 #include <stdlib.h>

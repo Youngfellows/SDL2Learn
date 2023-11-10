@@ -1,5 +1,5 @@
-#include "tank.h"
-#include "../appconfig.h"
+#include "Tanks/objects/tank.h"
+#include "Tanks/appconfig.h"
 #include <algorithm>
 
 Tank::Tank()

@@ -1,4 +1,4 @@
-#include "eagle.h"
+#include "Tanks/objects/eagle.h"
 
 Eagle::Eagle()
 	: Object(0, 0, ST_EAGLE)

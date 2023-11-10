@@ -1,4 +1,4 @@
-#include "appconfig.h"
+#include "Tanks/appconfig.h"
 
 string AppConfig::texture_path = "texture.png";
 string AppConfig::levels_path = "levels/";

@@ -1,4 +1,4 @@
-#include "spriteconfig.h"
+#include "Tanks/engine/spriteconfig.h"
 
 SpriteConfig::SpriteConfig()
 {

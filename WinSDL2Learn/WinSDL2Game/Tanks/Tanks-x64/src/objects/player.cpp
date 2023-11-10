@@ -1,5 +1,5 @@
-#include "player.h"
-#include "../appconfig.h"
+#include "Tanks/objects/player.h"
+#include "Tanks/appconfig.h"
 #include <SDL2/SDL.h>
 #include <iostream>
 

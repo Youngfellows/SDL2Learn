@@ -1,8 +1,8 @@
-#include "scores.h"
-#include "../engine/engine.h"
-#include "../appconfig.h"
-#include "game.h"
-#include "menu.h"
+#include "Tanks/app_state/scores.h"
+#include "Tanks/engine/engine.h"
+#include "Tanks/appconfig.h"
+#include "Tanks/app_state/game.h"
+#include "Tanks/app_state/menu.h"
 
 Scores::Scores()
 {

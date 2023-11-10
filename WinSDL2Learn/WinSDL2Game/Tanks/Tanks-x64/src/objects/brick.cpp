@@ -1,4 +1,4 @@
-#include "brick.h"
+#include "Tanks/objects/brick.h"
 #include <iostream>
 
 Brick::Brick()

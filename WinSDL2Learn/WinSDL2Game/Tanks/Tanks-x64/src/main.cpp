@@ -9,7 +9,7 @@
  * \a k.kaluzny141@gmail.com
 */
 
-#include "app.h"
+#include "Tanks/app.h"
 
 int main(int argc, char *args[])
 {

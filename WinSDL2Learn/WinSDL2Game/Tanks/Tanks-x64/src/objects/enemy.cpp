@@ -1,5 +1,5 @@
-#include "enemy.h"
-#include "../appconfig.h"
+#include "Tanks/objects/enemy.h"
+#include "Tanks/appconfig.h"
 #include <stdlib.h>
 #include <ctime>
 #include <iostream>
