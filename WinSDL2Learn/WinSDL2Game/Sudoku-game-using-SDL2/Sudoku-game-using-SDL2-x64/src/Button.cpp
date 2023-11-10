@@ -2,29 +2,29 @@
 
 Button::Button()
 	: mCurrentState(ButtonState::BUTTON_MOUSE_OUT),
-	  mTexture(nullptr),
-	  mButtonRect({ 0, 0, 0, 0 }),
-	  mTextureRect({0, 0, 0, 0}),
-	  mMouseOutColour({ 219, 184, 215, SDL_ALPHA_OPAQUE }), // light purple
-	  mMouseOverMotionColour({ 95, 89, 191, SDL_ALPHA_OPAQUE }),//blue
-	  mMouseDownColour({ 91, 191, 116, SDL_ALPHA_OPAQUE }), // green
-	  mMouseUpColour({ 95, 89, 191, SDL_ALPHA_OPAQUE }), // blue
-	  mSelected(false)
+	mTexture(nullptr),
+	mButtonRect({ 0, 0, 0, 0 }),
+	mTextureRect({ 0, 0, 0, 0 }),
+	mMouseOutColour({ 219, 184, 215, SDL_ALPHA_OPAQUE }), // light purple
+	mMouseOverMotionColour({ 95, 89, 191, SDL_ALPHA_OPAQUE }),//blue
+	mMouseDownColour({ 91, 191, 116, SDL_ALPHA_OPAQUE }), // green
+	mMouseUpColour({ 95, 89, 191, SDL_ALPHA_OPAQUE }), // blue
+	mSelected(false)
 {
 
 }
 
-void Button::setTexture(SDL_Texture* texture)
+void Button::setTexture(SDL_Texture *texture)
 {
 	mTexture = texture;
 }
 
-void Button::setButtonRect(const SDL_Rect& rect)
+void Button::setButtonRect(const SDL_Rect &rect)
 {
 	mButtonRect = rect;
 }
 
-void Button::setTextureRect(const SDL_Rect& rect)
+void Button::setTextureRect(const SDL_Rect &rect)
 {
 	mTextureRect = rect;
 }
@@ -75,7 +75,7 @@ bool Button::isMouseInside(const int x, const int y)
 	return inside;
 }
 
-ButtonState Button::getMouseEvent(const SDL_Event* event)
+ButtonState Button::getMouseEvent(const SDL_Event *event)
 {
 	//If mouse event happened
 	if (event->type == SDL_MOUSEMOTION || event->type == SDL_MOUSEBUTTONDOWN || event->type == SDL_MOUSEBUTTONUP)
@@ -113,12 +113,12 @@ ButtonState Button::getMouseEvent(const SDL_Event* event)
 	return mCurrentState;
 }
 
-void Button::setMouseDownColour(const SDL_Color& colour)
+void Button::setMouseDownColour(const SDL_Color &colour)
 {
 	mMouseDownColour = colour;
 }
 
-void Button::renderButton(SDL_Renderer* renderer)
+void Button::renderButton(SDL_Renderer *renderer)
 {
 	// If current button is selected
 	if (mSelected)
@@ -149,7 +149,7 @@ void Button::renderButton(SDL_Renderer* renderer)
 	SDL_RenderFillRect(renderer, &mButtonRect);
 }
 
-void Button::renderTexture(SDL_Renderer* renderer)
+void Button::renderTexture(SDL_Renderer *renderer)
 {
 	// Set rendering space
 	SDL_RenderCopy(renderer, mTexture, nullptr, &mTextureRect);

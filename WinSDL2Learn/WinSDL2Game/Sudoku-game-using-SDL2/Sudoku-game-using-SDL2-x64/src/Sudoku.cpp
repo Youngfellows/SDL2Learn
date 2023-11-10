@@ -3,13 +3,13 @@
 //----------------------------------Constructor and Destructor---------------------------------//
 Sudoku::Sudoku::Sudoku()
 	: mWindowHeight(880), mWindowWidth(720),
-	  mGridHeight(720), mGridWidth(720),
-	  mGridRows(9), mGridCols(9),
-	  mWindow(nullptr), mRenderer(nullptr), 
-	  mTotalTextures(14), mTextureCache{ nullptr },
-	  mFont(nullptr), mFontSize(mGridHeight/9),
-	  mTotalCells(81),
-	  mClearColour({ 0, 0, 0, SDL_ALPHA_OPAQUE })
+	mGridHeight(720), mGridWidth(720),
+	mGridRows(9), mGridCols(9),
+	mWindow(nullptr), mRenderer(nullptr),
+	mTotalTextures(14), mTextureCache{ nullptr },
+	mFont(nullptr), mFontSize(mGridHeight / 9),
+	mTotalCells(81),
+	mClearColour({ 0, 0, 0, SDL_ALPHA_OPAQUE })
 {
 
 }
@@ -72,10 +72,10 @@ inline int Sudoku::Sudoku::getIndex(int row, int col) const
 	return row * mGridRows + col;
 }
 
-void Sudoku::Sudoku::loadTexture(SDL_Texture*& texture, const char* text, SDL_Color& fontColour)
+void Sudoku::Sudoku::loadTexture(SDL_Texture *&texture, const char *text, SDL_Color &fontColour)
 {
 	// Create text surface
-	SDL_Surface* textSurface = TTF_RenderText_Solid(mFont, text, fontColour);
+	SDL_Surface *textSurface = TTF_RenderText_Solid(mFont, text, fontColour);
 	if (textSurface == nullptr)
 	{
 		std::cout << "Could not create TTF SDL_Surface! Error: " << TTF_GetError() << std::endl;
@@ -170,7 +170,7 @@ void Sudoku::Sudoku::createInterfaceLayout()
 	const int numberOfOtherButtons = 2;
 	mCheckButton.setTexture(mTextureCache[10]);
 	mNewButton.setTexture(mTextureCache[11]);
-	Button* otherButtons[numberOfOtherButtons] = { &mCheckButton, &mNewButton };
+	Button *otherButtons[numberOfOtherButtons] = { &mCheckButton, &mNewButton };
 
 	// Redefine button width
 	// mGridWidth = 3 * thickBorder + 9 * numberOfOtherButtons (rearrange this equation)
@@ -213,7 +213,7 @@ void Sudoku::Sudoku::generateSudoku()
 	{
 		// Set number and solution
 		mGrid[i].setNumber(generatedGrid[i]);
-		mGrid[i].setSolution(solution[i]); 
+		mGrid[i].setSolution(solution[i]);
 
 		// Set editability
 		if (generatedGrid[i] == 0)
@@ -268,7 +268,7 @@ void Sudoku::Sudoku::play()
 	generateSudoku();
 
 	// Set first current cell selected
-	Cell* currentCellSelected = &mGrid[0];
+	Cell *currentCellSelected = &mGrid[0];
 	for (int cell = 0; cell < mTotalCells; cell++)
 	{
 		if (mGrid[cell].isEditable())
@@ -332,7 +332,7 @@ void Sudoku::Sudoku::play()
 					{
 						// Set current cell selected to false
 						currentCellSelected->setSelected(false);
-						
+
 						// Set new cell selected to true
 						currentCellSelected = &mGrid[cell];
 						currentCellSelected->setSelected(true);
@@ -462,16 +462,16 @@ void Sudoku::Sudoku::play()
 		mNewButton.renderButton(mRenderer);
 		mNewButton.centerTextureRect();
 		mNewButton.renderTexture(mRenderer);
-		
+
 		// Calculate timer
 		time_t difference = time(NULL) - startTimer;
-		tm formattedTime; 
+		tm formattedTime;
 		localtime_s(&formattedTime, &difference);
 		char timer[80];
 		strftime(timer, sizeof(timer), "%H:%M:%S", &formattedTime);
 
 		// Load and render timer (TO DO: use preloaded textures to render timer)
-		SDL_Texture* timerTexture = nullptr;
+		SDL_Texture *timerTexture = nullptr;
 		SDL_Color fontColour = { 0, 0, 0, SDL_ALPHA_OPAQUE }; // black
 		loadTexture(timerTexture, timer, fontColour);
 		mTimer.setTexture(timerTexture);

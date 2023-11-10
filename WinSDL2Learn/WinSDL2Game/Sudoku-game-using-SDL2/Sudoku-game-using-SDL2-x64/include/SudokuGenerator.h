@@ -11,10 +11,10 @@ namespace Sudoku
 	{
 	private:
 		// Sudoku 1D array and must be of size 9 x 9 = 81
-		int* mGrid;
+		int *mGrid;
 
 		// Sudoku solution 1D array and must be of size 9 x 9 = 81
-		int* mGridSolution;
+		int *mGridSolution;
 
 	private:
 		// Set and get element of 1D array using row and col
@@ -32,7 +32,7 @@ namespace Sudoku
 		void fillNextRow(const int previousRow, const int nextRow, const int shifts);
 
 		// Copy this grid into grid
-		void copyGrid(int* grid) const;
+		void copyGrid(int *grid) const;
 
 		// Create a random completed Sudoku array using shuffling
 		void createCompletedSudoku();
@@ -42,7 +42,7 @@ namespace Sudoku
 		Generator();
 
 		// Generate Sudoku from completed Sudoku and return a pointer to it
-		void generate(int* grid, int* solutionGrid);
+		void generate(int *grid, int *solutionGrid);
 
 		// Display Sudoku to console (for debugging)
 		void display() const;

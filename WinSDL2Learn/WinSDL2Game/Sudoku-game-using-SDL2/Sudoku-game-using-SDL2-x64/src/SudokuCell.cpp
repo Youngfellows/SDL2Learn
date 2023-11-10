@@ -2,8 +2,8 @@
 
 Sudoku::Cell::Cell()
 	: mEditable(false),
-	  mCharNumber(' '), 
-	  mCharSolution(' ')
+	mCharNumber(' '),
+	mCharSolution(' ')
 {
 
 }
@@ -61,7 +61,7 @@ bool Sudoku::Cell::isEditable() const
 	return mEditable;
 }
 
-void Sudoku::Cell::handleKeyboardEvent(const SDL_Event* event, SDL_Texture* textureCache[])
+void Sudoku::Cell::handleKeyboardEvent(const SDL_Event *event, SDL_Texture *textureCache[])
 {
 	// Handle backspace
 	if (event->key.keysym.sym == SDLK_BACKSPACE && mCharNumber != ' ')

@@ -30,15 +30,15 @@ namespace Sudoku
 		const int mGridCols;
 
 		// Define window and renderer
-		SDL_Window* mWindow;
-		SDL_Renderer* mRenderer;
+		SDL_Window *mWindow;
+		SDL_Renderer *mRenderer;
 
 		// Texture cache to hold preloaded textures
 		int mTotalTextures;
-		SDL_Texture* mTextureCache[14];
+		SDL_Texture *mTextureCache[14];
 
 		// Define true type font paramaters
-		TTF_Font* mFont;
+		TTF_Font *mFont;
 		int mFontSize;
 
 		// Define total buttons
@@ -65,14 +65,14 @@ namespace Sudoku
 		inline int getIndex(int row, int col) const;
 
 		// Load textures using SDL true type fonts
-		void loadTexture(SDL_Texture*& texture, const char* text, SDL_Color& fontColour);
+		void loadTexture(SDL_Texture *&texture, const char *text, SDL_Color &fontColour);
 
 		// Preload textures using SDL true type fonts
 		void preloadTextures();
 
 		// Create interface layout by setting button parameters
 		void createInterfaceLayout();
-		
+
 		// Generate a Sudoku puzzle with a unique solution
 		void generateSudoku();
 

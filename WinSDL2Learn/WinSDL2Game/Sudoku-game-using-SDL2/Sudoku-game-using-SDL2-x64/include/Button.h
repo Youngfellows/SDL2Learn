@@ -18,7 +18,7 @@ private:
 	ButtonState mCurrentState;
 
 	// Define texture to display
-	SDL_Texture* mTexture;
+	SDL_Texture *mTexture;
 
 	// Top left position and dimensions of button and texture
 	SDL_Rect mButtonRect;
@@ -39,11 +39,11 @@ public:
 	Button();
 
 	// Set Texture
-	void setTexture(SDL_Texture* texture);
+	void setTexture(SDL_Texture *texture);
 
 	// Set button and texture SDL_Rect
-	void setButtonRect(const SDL_Rect& rect);
-	void setTextureRect(const SDL_Rect& rect);
+	void setButtonRect(const SDL_Rect &rect);
+	void setTextureRect(const SDL_Rect &rect);
 
 	// Center texture onto button
 	void centerTextureRect();
@@ -53,15 +53,15 @@ public:
 
 	// Check if mouse is inside button
 	bool isMouseInside(const int x, const int y);
-	
+
 	// Get mouse event
-	ButtonState getMouseEvent(const SDL_Event* event);
+	ButtonState getMouseEvent(const SDL_Event *event);
 
 	// Set mouse down colour
-	void setMouseDownColour(const SDL_Color& colour);
+	void setMouseDownColour(const SDL_Color &colour);
 
 	// Render button and texture
-	void renderButton(SDL_Renderer* renderer);
-	void renderTexture(SDL_Renderer* renderer);
+	void renderButton(SDL_Renderer *renderer);
+	void renderTexture(SDL_Renderer *renderer);
 
 };

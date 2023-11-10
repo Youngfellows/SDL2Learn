@@ -34,7 +34,7 @@ namespace Sudoku
 		bool isEditable() const;
 
 		// Handle events
-		void handleKeyboardEvent(const SDL_Event* event, SDL_Texture* textureCache[]);
+		void handleKeyboardEvent(const SDL_Event *event, SDL_Texture *textureCache[]);
 
 		// Compare number with solution
 		bool isCorrect() const;

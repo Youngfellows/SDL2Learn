@@ -2,7 +2,7 @@
 #pragma once
 #include <iostream>
 
-namespace Sudoku 
+namespace Sudoku
 {
 	// Struct for ignoring a number specified at row and col (for the Sudoku generating class)
 	struct Ignore
@@ -17,7 +17,7 @@ namespace Sudoku
 	{
 	private:
 		// Pointer to the Sudoku 1D grid and must be of size 9 x 9 = 81
-		int* mGrid;
+		int *mGrid;
 
 		// Set number to ignore and a modifier (for the Sudoku generator class)
 		bool mGenModifier;
@@ -39,7 +39,7 @@ namespace Sudoku
 		void setGenModifier(const bool input);
 
 		// Set Sudoku array (Ignore input paramaters is for the Sudoku generator class)
-		void setGrid(int* grid, const Ignore& ignoreInput = { 0, 0, 0 });
+		void setGrid(int *grid, const Ignore &ignoreInput = { 0, 0, 0 });
 
 		// Solve Sudoku with backtracking
 		bool solve();

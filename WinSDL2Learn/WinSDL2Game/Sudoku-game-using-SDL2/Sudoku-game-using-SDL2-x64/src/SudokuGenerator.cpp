@@ -76,7 +76,7 @@ void Sudoku::Generator::fillNextRow(const int previousRow, const int nextRow, co
 	}
 }
 
-void Sudoku::Generator::copyGrid(int* grid) const
+void Sudoku::Generator::copyGrid(int *grid) const
 {
 	for (int i = 0; i < 81; i++)
 	{
@@ -182,7 +182,7 @@ void Sudoku::Generator::createCompletedSudoku()
 }
 
 //--------------------------------------Public methods----------------------------------------//
-void Sudoku::Generator::generate(int* grid, int* solutionGrid)
+void Sudoku::Generator::generate(int *grid, int *solutionGrid)
 {
 	// Set the Sudoku grid and solution grid
 	mGrid = grid;

@@ -67,7 +67,7 @@ void Sudoku::Solver::setGenModifier(const bool input)
 	mGenModifier = input;
 }
 
-void Sudoku::Solver::setGrid(int* grid, const Ignore& ignoreInput)
+void Sudoku::Solver::setGrid(int *grid, const Ignore &ignoreInput)
 {
 	mNumToIgnore = ignoreInput;
 	mGrid = grid;
