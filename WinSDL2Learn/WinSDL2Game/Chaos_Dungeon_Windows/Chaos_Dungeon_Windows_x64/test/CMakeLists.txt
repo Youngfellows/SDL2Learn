@@ -1,0 +1,10 @@
+macro(AddTest testname testfile)
+    add_executable(${testname} ${testfile})
+    target_link_libraries(${testname} common)
+endmacro()
+
+AddTest(TestMath tmath.cpp)
+AddTest(TestOBBvsOBB tOBBvsOBB.cpp)
+AddTest(TestAABBvsAABB tAABBvsAABB.cpp)
+AddTest(TestAABBvsCircle tAABBvsCircle.cpp)
+AddTest(TestCirclevsCircle tCirclevsCircle.cpp)
