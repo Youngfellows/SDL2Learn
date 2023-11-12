@@ -141,31 +141,31 @@ void MainRole::control()
 	aim_dir = Director::GetInstance()->GetMousePos() - Position();
 	const float speed = 10;
 	stand();
-	if (director->KeyState(SDLK_w) == KeyState::PRESSING)
+	if (director->KeyState(SDLK_w) == PRESSING)
 	{
 		colliobj.physic_info.v.y = speed;
 		walk();
 	}
-	if (director->KeyState(SDLK_a) == KeyState::PRESSING)
+	if (director->KeyState(SDLK_a) == PRESSING)
 	{
 		colliobj.physic_info.v.x = -speed;
 		walk();
 	}
-	if (director->KeyState(SDLK_s) == KeyState::PRESSING)
+	if (director->KeyState(SDLK_s) == PRESSING)
 	{
 		colliobj.physic_info.v.y = -speed;
 		walk();
 	}
-	if (director->KeyState(SDLK_d) == KeyState::PRESSING)
+	if (director->KeyState(SDLK_d) == PRESSING)
 	{
 		colliobj.physic_info.v.x = speed;
 		walk();
 	}
-	if (director->MouseButtonState(SDL_BUTTON_RIGHT) == KeyState::PRESSED)
+	if (director->MouseButtonState(SDL_BUTTON_RIGHT) == PRESSED)
 	{
 		bomb();
 	}
-	if (director->MouseButtonState(SDL_BUTTON_LEFT) == KeyState::PRESSED)
+	if (director->MouseButtonState(SDL_BUTTON_LEFT) == PRESSED)
 		shoot();
 }
 
