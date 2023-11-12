@@ -102,16 +102,16 @@ KeyState Director::MouseButtonState(Uint8 button)
 	if (oldmousekeys[button])
 	{
 		if (mousekeys[button])
-			return KeyState::PRESSING;
+			return PRESSING;
 		else
-			return KeyState::RELEASED;
+			return RELEASED;
 	}
 	else
 	{
 		if (mousekeys[button])
-			return KeyState::PRESSED;
+			return PRESSED;
 		else
-			return KeyState::RELEASING;
+			return RELEASING;
 	}
 }
 

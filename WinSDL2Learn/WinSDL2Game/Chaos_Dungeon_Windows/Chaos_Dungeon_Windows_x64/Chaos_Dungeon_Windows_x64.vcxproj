@@ -141,6 +141,7 @@
     <ClInclude Include="include\Common\Draw.hpp" />
     <ClInclude Include="include\Common\Drawable.hpp" />
     <ClInclude Include="include\Common\HelpFunc.hpp" />
+    <ClInclude Include="include\Common\KeyState.h" />
     <ClInclude Include="include\Common\math.hpp" />
     <ClInclude Include="include\Common\Program.hpp" />
     <ClInclude Include="include\Common\Texture.hpp" />

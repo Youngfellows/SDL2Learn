@@ -6,16 +6,9 @@
 #include "Program.hpp"
 #include "math.hpp"
 #include <map>
+#include "KeyState.h"
 
 using namespace std;
-
-enum KeyState
-{
-	PRESSED,    /** 在这一帧中才按下*/
-	PRESSING,   /** 已经按下超过一帧了*/
-	RELEASED,   /** 在这一帧中才松开*/
-	RELEASING   /** 已经松开超过一帧了*/
-};
 
 class Director
 {
