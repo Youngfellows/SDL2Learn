@@ -1,0 +1,309 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\Component\AIComponent.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Component\ColliderComponent.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Component\KeyboardController.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Component\NameComponent.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Component\SpriteComponent.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Component\StatsComponent.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Component\TransformComponent.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Database\EquipmentDB.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Database\ItemDB.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Database\MonsterDB.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Database\PlayerVariableLog.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Database\QuestDB.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Database\ShopDB.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Database\SkillDB.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Login\Login.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Register\Register.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Actor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Animation.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Button.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CharacterInformation.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Collision.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Dialogue.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DialogueManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Entity.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Equipment.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Event.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Game.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Hotbar.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\HUD.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\InputBox.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Inventory.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Item.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Label.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Map.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\MapManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\MixerManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Monster.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\NPC.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Projectile.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Quest.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\QuestLog.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Ranking.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Settings.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Shop.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\TextureManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tile.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Vector2D.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Wall.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Window.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Component\AIComponent.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Component\ColliderComponent.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Component\KeyboardController.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Component\NameComponent.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Component\SpriteComponent.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Component\StatsComponent.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Component\TransformComponent.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Database\EquipmentDB.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Database\ItemDB.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Database\MonsterDB.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Database\QuestDB.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Database\ShopDB.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Database\SkillDB.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Login\Login.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Register\Register.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Actor.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Button.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CharacterInformation.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Collision.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Dialogue.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DialogueManager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entity.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Equipment.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Event.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Hotbar.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HUD.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InputBox.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Inventory.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Item.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Label.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Map.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MapManager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MixerManager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Monster.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\NPC.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Projectile.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Quest.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\QuestLog.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ranking.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Shop.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TextureManager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tile.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Vector2D.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Wall.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Window.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
