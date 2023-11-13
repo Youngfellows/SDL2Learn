@@ -459,16 +459,17 @@ bool OBBvsAABB(Manifold& m){
 bool obbcollicircle(Vec axis, Manifold& m){
     Circle* c = m.o1->GetCircle();
     OBB* obb = m.o2->GetOBB();
-
+    return true;
 }
 
 bool CirclevsOBB(Manifold& m){
-#warning "CirclevsOBB is not finish"
-
+//#warning "CirclevsOBB is not finish"
+    return true;
 }
 
 bool OBBvsCircle(Manifold& m){
-#warning "OBBvsCircle is not finish"
+//#warning "OBBvsCircle is not finish"
+return true;
 }
 
 /**
