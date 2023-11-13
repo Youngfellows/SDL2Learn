@@ -1,6 +1,6 @@
 #ifndef GAMEOBJECT_HPP
 #define GAMEOBJECT_HPP
-#include "Common/math.hpp"
+#include "math.hpp"
 #include <string>
 #include <list>
 using namespace std;
@@ -22,39 +22,38 @@ using namespace std;
         continue;\
     }
 
- /**
-  * @brief 表示ID的类型
-  */
+/**
+ * @brief 表示ID的类型
+ */
 using IDType = unsigned int;
 
-class GameObject
-{
+class GameObject{
 public:
-	static void ClearAllObject();
-	static void DeleteObject(IDType del_id);
-	GameObject();
-	virtual void Move(float dx, float dy);
-	virtual void MoveTo(float x, float y);
-	virtual Vec Position() const;
-	void Show();
-	bool IsShow() const;
-	void Hide();
-	string GetName() const;
-	virtual void DeleteSelf();
-	virtual void Update();
-	IDType GetID() const;
-	static list<unsigned int> _willdel_list;    /** 为了防止循环头文件包含而放到外部，你绝不该使用 */
-	static list<GameObject *> _objects;    /** 为了防止循环头文件包含而放到外部，你绝不该使用 */
-	static bool _delete_all;    /** 为了防止循环头文件包含而放到外部，你绝不该使用 */
+    static void ClearAllObject();
+    static void DeleteObject(IDType del_id);
+    GameObject();
+    virtual void Move(float dx, float dy);
+    virtual void MoveTo(float x, float y);
+    virtual Vec Position() const;
+    void Show();
+    bool IsShow() const;
+    void Hide();
+    string GetName() const;
+    virtual void DeleteSelf();
+    virtual void Update();
+    IDType GetID() const;
+    static list<unsigned int> _willdel_list;    /** 为了防止循环头文件包含而放到外部，你绝不该使用 */
+    static list<GameObject*> _objects;    /** 为了防止循环头文件包含而放到外部，你绝不该使用 */
+    static bool _delete_all;    /** 为了防止循环头文件包含而放到外部，你绝不该使用 */
 protected:
-	virtual void update() = 0;
-	virtual void draw() = 0;
-	string name;    /** 记录类的名称，只读的，在继承创建新类的时候必须在构造函数中改为新的名称 */
-	Vec position;
-	bool isshow;
-	IDType id;
+    virtual void update() = 0;
+    virtual void draw() = 0;
+    string name;    /** 记录类的名称，只读的，在继承创建新类的时候必须在构造函数中改为新的名称 */
+    Vec position;
+    bool isshow;
+    IDType id;
 private:
-	static IDType cur_id;
+    static IDType cur_id;
 };
 
 #endif

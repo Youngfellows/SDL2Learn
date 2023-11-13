@@ -1,20 +1,19 @@
 #ifndef MUSICREPO_HPP
 #define MUSICREPO_HPP
-#include "SDL2/SDL_mixer.h"
+#include "SDL_mixer.h"
 #include <map>
 #include <string>
 #include <iostream>
 using namespace std;
 
-class MusicRepo
-{
+class MusicRepo{
 public:
-	static void AddMusic(string key, string filename);
-	static Mix_Music *Get(string name);
-	static void RemoveMusic(string key);
-	static void Quit();
+    static void AddMusic(string key, string filename);
+    static Mix_Music* Get(string name);
+    static void RemoveMusic(string key);
+    static void Quit(); 
 private:
-	static map<string, Mix_Music *> musics;
+    static map<string, Mix_Music*> musics;
 };
 
 #endif

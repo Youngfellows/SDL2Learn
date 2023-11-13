@@ -10,24 +10,23 @@ using namespace std;
 class DamageableSprite;
 class ColliableSprite;
 
-class ColliSystem
-{
+class ColliSystem{
 public:
-	static ColliSystem *GetInstance();
-	ColliSystem() = default;
-	void Clear();
-	void ClearColliable();
-	void ClearDamageable();
-	void DeleteElem(unsigned int id);
-	void AddColliable(ColliableSprite *cs);
-	void AddDamageable(DamageableSprite *ds);
-	void AddOneUseable(OneUseWave *ow);
-	void Update();  /** 处理碰撞检测 */
+    static ColliSystem* GetInstance();
+    ColliSystem() = default;
+    void Clear();
+    void ClearColliable();
+    void ClearDamageable();
+    void DeleteElem(unsigned int id);
+    void AddColliable(ColliableSprite* cs);
+    void AddDamageable(DamageableSprite* ds);
+    void AddOneUseable(OneUseWave* ow);
+    void Update();  /** 处理碰撞检测 */
 private:
-	static ColliSystem *instance;
-	vector<DamageableSprite *> dmgSprites;
-	vector<ColliableSprite *> colliSprites;
-	vector<OneUseWave *> oneuseSprites;
+    static ColliSystem* instance;
+    vector<DamageableSprite*> dmgSprites;
+    vector<ColliableSprite*> colliSprites;
+    vector<OneUseWave*> oneuseSprites;
 };
 
 #endif

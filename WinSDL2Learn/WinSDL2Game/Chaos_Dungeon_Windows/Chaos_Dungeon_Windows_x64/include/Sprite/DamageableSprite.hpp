@@ -6,20 +6,17 @@
 /**
  * @brief 可进行碰撞检测，并且可以进行伤害计算的精灵
  */
-class DamageableSprite : public ColliableSprite
-{
+class DamageableSprite : public ColliableSprite{
 public:
-	BasicProp prop;
+    BasicProp prop;
 protected:
-	DamageableSprite()
-	{
-		name = "DamageableSprite";
-		colliobj.AttachColliType(ColliType::DAMAGEABLE);
-	}
-	void update() override
-	{
-		ColliableSprite::update();
-	}
+    DamageableSprite(){
+        name = "DamageableSprite";
+        colliobj.AttachColliType(ColliType::DAMAGEABLE);
+    }
+    void update() override{
+        ColliableSprite::update();
+    }
 };
 
 #endif

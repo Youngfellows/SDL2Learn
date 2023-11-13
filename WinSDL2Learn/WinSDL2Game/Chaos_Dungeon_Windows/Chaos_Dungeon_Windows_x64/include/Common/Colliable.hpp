@@ -2,16 +2,15 @@
 #define COLLIABLE_HPP
 #include "Collision.hpp"
 
-class Colliable
-{
+class Colliable{
 public:
-	Object &GetColliObject();
-	/**
-	 * @brief 在判断一定碰撞后，用于执行碰撞的函数
-	 */
-	virtual void Collied(Object *oth, BasicProp *prop, const Manifold *m);
+    Object& GetColliObject();
+    /**
+     * @brief 在判断一定碰撞后，用于执行碰撞的函数
+     */
+    virtual void Collied(Object* oth, BasicProp* prop, const Manifold* m);
 protected:
-	Object colliobj;
+    Object colliobj;
 };
 
 /**
@@ -22,6 +21,6 @@ protected:
  *
  * 这个函数根据Object的碰撞分类(colli_type)来进行不同的碰撞之后的操作。
  */
-void DefaultColliFunc(Manifold *m, BasicProp *prop1, BasicProp *prop2);
+void DefaultColliFunc(Manifold* m, BasicProp* prop1, BasicProp* prop2);
 
 #endif

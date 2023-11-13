@@ -1,20 +1,19 @@
 #ifndef HPBAR_HPP
 #define HPBAR_HPP
 #include "GameObject.hpp"
-#include "Common/Texture.hpp"
+#include "Texture.hpp"
 
-class HpBar : public GameObject
-{
+class HpBar : public GameObject{
 public:
-	static HpBar *GetInstance();
-	void SetHp(int hp);
+    static HpBar* GetInstance();
+    void SetHp(int hp);
 private:
-	void update() override;
-	void draw() override;
-	static HpBar *instance;
-	HpBar();
-	int hp;
-	Texture tex_hp;
+    void update() override;
+    void draw() override;
+    static HpBar* instance;
+    HpBar();
+    int hp;
+    Texture tex_hp;
 };
 
 #endif

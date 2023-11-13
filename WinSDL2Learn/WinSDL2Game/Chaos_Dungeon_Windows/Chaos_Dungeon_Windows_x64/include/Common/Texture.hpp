@@ -1,8 +1,8 @@
 #ifndef TEXTURE_HPP
 #define TEXTURE_HPP
 #include "GL/glew.h"
-#include "SDL2/SDL_image.h"
-#include "SDL2/SDL.h"
+#include "SDL_image.h"
+#include "SDL.h"
 #include "math.hpp"
 #include "Program.hpp"
 #include "Director.hpp"
@@ -12,35 +12,34 @@
 #include <iostream>
 using namespace std;
 
-class Texture : public Drawable
-{
+class Texture : public Drawable{
 public:
-	Texture();
-	Texture(const Texture &t);
-	Texture &operator=(const Texture &t);
-	Texture(string filename);
-	Texture(SDL_Surface *surface);
-	Texture Copy();
-	void Load(string filename);
-	void Load(SDL_Surface *surf);
-	size_t Refcount() const;
-	bool Valid() const;
-	int Width() const;
-	int Height() const;
-	void Width(int w);
-	void Height(int h);
-	void Scale(float sx, float sy);
-	Size Size() const;
-	void Size(float w, float h);
-	void Draw(float x, float y, float degree = 0, FlipFlag flipflag = FlipFlag::NONE) override;
-	~Texture();
+    Texture();
+    Texture(const Texture& t);
+    Texture& operator=(const Texture& t);
+    Texture(string filename);
+    Texture(SDL_Surface* surface);
+    Texture Copy();
+    void Load(string filename);
+    void Load(SDL_Surface* surf);
+    size_t Refcount() const;
+    bool Valid() const;
+    int Width() const;
+    int Height() const;
+    void Width(int w);
+    void Height(int h);
+    void Scale(float sx, float sy);
+    Size Size() const;
+    void Size(float w, float h);
+    void Draw(float x, float y, float degree = 0, FlipFlag flipflag = FlipFlag::NONE) override;
+    ~Texture();
 private:
-	void configTexture();
-	void gainSurface();
-	void releaseSurface();
-	GLuint texid;
-	SDL_Surface *surface;
-	struct Size size;
+    void configTexture();
+    void gainSurface();
+    void releaseSurface();
+    GLuint texid;
+    SDL_Surface* surface;
+    struct Size size;
 };
 
 #endif
