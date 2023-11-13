@@ -9,6 +9,7 @@ namespace setting
 	{
 		ScreenWidth = 800, ScreenHeight = 800, HalfScreen = 400
 	};
+
 	enum GameField
 	{
 		MaxFieldX = 10, MaxFieldY = 20
