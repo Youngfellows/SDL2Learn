@@ -66,7 +66,7 @@ void Director::EventHandle(){
         mousekeys[event.button.button] = false;
 }
 
-KeyState Director::KeyState(SDL_Keycode keycode){
+KeyState Director::Key_State(SDL_Keycode keycode){
     //if key not press
     if(keys.find(keycode)==keys.end() || !keys[keycode]){
         if(oldkeys.find(keycode)==keys.end() || !oldkeys[keycode])

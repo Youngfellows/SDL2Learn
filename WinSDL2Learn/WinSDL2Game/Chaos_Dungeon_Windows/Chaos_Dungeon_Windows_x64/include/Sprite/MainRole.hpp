@@ -9,6 +9,8 @@
 #include "StaticTexture.hpp"
 #include "HpBar.hpp"
 #include "Bomb.hpp"
+#include "Director.hpp"
+
 using namespace std;
 
 /**

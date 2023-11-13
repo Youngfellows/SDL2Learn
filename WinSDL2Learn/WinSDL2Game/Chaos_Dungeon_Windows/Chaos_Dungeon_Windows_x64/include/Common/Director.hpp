@@ -28,7 +28,7 @@ public:
     int WindowHeight();
     void EventHandle();
     void SizeAdapt(int neww, int newh);
-    enum KeyState KeyState(SDL_Keycode keycode);
+    enum KeyState Key_State(SDL_Keycode keycode);
     enum KeyState MouseButtonState(Uint8 button);
     Vec GetMousePos() const;
     void Exit();
