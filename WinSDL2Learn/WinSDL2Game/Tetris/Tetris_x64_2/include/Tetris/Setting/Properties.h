@@ -3,16 +3,17 @@
 
 namespace setting
 {
-	const char *WINDOW_NAME = "Simple Tetris";
-
 	enum Screen
 	{
-		ScreenWidth = 800, ScreenHeight = 800, HalfScreen = 400
+		ScreenWidth = 800,
+		ScreenHeight = 800,
+		HalfScreen = 400
 	};
 
 	enum GameField
 	{
-		MaxFieldX = 10, MaxFieldY = 20
+		MaxFieldX = 10,
+		MaxFieldY = 20
 	};
 }
 

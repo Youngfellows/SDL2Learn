@@ -42,10 +42,10 @@ namespace component
 		 */
 		virtual void render(SDL_Renderer *renderer) = 0;
 
-		virtual /**
+		/**
 		 * @return int scaling based on screen
 		 */
-			int getObjectScale()
+		virtual int getObjectScale()
 		{
 			return setting::HalfScreen / 10;
 		}

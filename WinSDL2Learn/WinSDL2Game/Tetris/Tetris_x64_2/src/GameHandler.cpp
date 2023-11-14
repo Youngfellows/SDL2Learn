@@ -4,21 +4,18 @@
 #include "Util/Generator.h"
 #include "Setting/Properties.h"
 #include "Model/FigureType.h"
-#include "Component/Figure.cpp"
-#include "Component/Board.cpp"
-#include "Component/Score.cpp"
-#include "Input.cpp"
+#include "Component/Figure.h"
+#include "Component/Board.h"
+#include "Component/Score.h"
+#include "Input.h"
 
 using namespace util;
 using namespace setting;
 using namespace component;
 using namespace model;
 
-/**
- * Public methods
- */
 
- // Constructor
+// Constructor
 engine::GameHandler::GameHandler() :
 	gameSpeed_(SDL_GetTicks()),
 	currentFigure_(Figure{ FigureType(generateRandom(FigureType::I, FigureType::Z)) })

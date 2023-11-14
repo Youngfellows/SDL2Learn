@@ -15,6 +15,8 @@ namespace engine
 	class GameHandler
 	{
 	private:
+		const char *WINDOW_NAME = "Simple Tetris";
+
 		SDL_Window *sdlWindow_;
 		SDL_Renderer *sdlRenderer_;
 

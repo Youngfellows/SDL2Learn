@@ -18,15 +18,6 @@
     <ClInclude Include="include\Tetris\Component\AbstractVisualObject.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="include\Tetris\Component\Board.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Tetris\Component\Figure.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Tetris\Component\Score.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="include\Tetris\Model\Color.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -37,6 +28,15 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="include\Tetris\Setting\Properties.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tetris\Component\Board.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tetris\Component\Figure.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tetris\Component\Score.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="include\Tetris\Util\Generator.h">
@@ -50,13 +50,13 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Component\Board.cpp">
+    <ClCompile Include="src\Component\Score.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\Component\Figure.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\Component\Score.cpp">
+    <ClCompile Include="src\Component\Board.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\GameHandler.cpp">

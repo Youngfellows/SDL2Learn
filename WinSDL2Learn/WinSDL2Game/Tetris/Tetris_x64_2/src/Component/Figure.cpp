@@ -4,12 +4,7 @@ using namespace setting;
 using namespace component;
 using namespace model;
 
-
-/**
- * Public methods
- */
-
- // constructor
+// constructor
 Figure::Figure(FigureType type) :
 	type_(type), cX_((MaxFieldX >> 1) - 2), cY_(0), angle_(0)
 {

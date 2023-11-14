@@ -1,5 +1,5 @@
 #include <iostream>
-#include "GameHandler.cpp"
+#include "GameHandler.h"
 
 using namespace std;
 using namespace engine;

@@ -14,6 +14,7 @@ namespace engine
 	private:
 		// SDL wait event timeout
 		static const int EVENT_TIMEOUT = 250;
+
 	public:
 		/**
 		 * @param fig

@@ -1,11 +1,10 @@
-#include <SDL2/SDL_types.h>
-
 #ifndef SIMPLETETRIS_COLOR_H
 #define SIMPLETETRIS_COLOR_H
 
+#include <SDL2/SDL_types.h>
+
 namespace model
 {
-
 	/**
 	 * SDL Color object
 	 */
