@@ -20,7 +20,7 @@ include/*
 bass24-linux
 bassmidi24-linux
 build
-game
+#game
 hades
 kys-c++
 .vscode

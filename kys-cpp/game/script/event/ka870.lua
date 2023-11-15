@@ -1,0 +1,5 @@
+ModifyEvent(-2, -2, -1, -1, -1, -1, -1, 2468, 2468, 2468, -2, -2, -2);
+AddItem(171, 50);
+AddItem(186, 2);
+AddMorality(-1);
+exit();

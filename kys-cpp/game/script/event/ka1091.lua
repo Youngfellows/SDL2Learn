@@ -1,0 +1,16 @@
+Talk("兄弟近來如何？", 118, 0);
+if AskJoin () == true then goto label0 end;
+    Talk("托楊兄的福，一切還好．", 0, 1);
+    exit();
+::label0::
+    Talk("近日旅途有些不順，此次前來是想請楊兄加入，助我一臂之力．", 0, 1);
+    if TeamIsFull() == false then goto label1 end;
+        Talk("你的隊伍已滿，我無法加入．", 118, 0);
+        exit();
+::label1::
+        Talk("那有什麼問題，別的沒有，就是有”一臂”．", 118, 0);
+        DarkScence();
+        ModifyEvent(-2, -2, 0, -1, -1, -1, -1, -1, -1, -1, -1, -2, -2);
+        LightScence();
+        Join(58);
+exit();

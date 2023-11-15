@@ -1,0 +1,21 @@
+if InTeam(37) == true then goto label0 end;
+    exit();
+::label0::
+    AddItemWithoutHint(207, -1);
+    Talk("丁典被凌退思害死了，沒想到凌退思這麼狠，在自己女兒墓碑上涂毒。", 37, 0);
+    PlayAnimation(-1, 6704, 6714);
+    PlayAnimation(-1, 6704, 6714);
+    PlayAnimation(-1, 6716, 6742);
+    PlayAnimation(-1, 6716, 6742);
+    PlayAnimation(-1, 6716, 6742);
+    PlayAnimation(-1, 6716, 6742);
+    DarkScence();
+    ModifyEvent(-2, -2, -2, -2, -1, -1, -1, 6698, 6698, 6698, -2, -2, -2);
+    PlayAnimation(-1, 6702, 6702);
+    LightScence();
+    Talk("凌小姐，今日我把丁典大哥跟你合葬，打擾了 。", 0, 0);
+    Talk("對了，兄弟，丁典兄弟生前希望能跟凌小姐合葬，我們去凌小姐的墓園前。", 37, 0);
+    Talk("丁典好手段，最危險的地方就是最安全的地方，咱們快去拿唐詩經選．", 0, 0);
+    ModifyEvent(-2, 3, 0, -2, -1, -1, 1207, -2, -2, -2, -2, -2, -2);
+    ModifyEvent(-2, 4, 0, -2, -1, -1, 1207, -2, -2, -2, -2, -2, -2);
+exit();
