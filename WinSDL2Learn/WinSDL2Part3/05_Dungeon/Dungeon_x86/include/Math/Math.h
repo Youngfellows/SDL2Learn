@@ -14,12 +14,12 @@ namespace Dungeon
 		Vector2();
 		Vector2(float X, float Y);
 
-		static const Vector2 Zero;		//!<	(0 , 0)
-		static const Vector2 One;		//!<	(1 , 1)
-		static const Vector2 X;			//!<	(1 , 0)
-		static const Vector2 Y;			//!<	(0 , 1)
-		static const Vector2 NX;		//!<	(-1, 0)
-		static const Vector2 NY;		//!<	(0 ,-1)
+		static const Vector2 Zero;//!<(0 , 0)
+		static const Vector2 One;//!<(1 , 1)
+		static const Vector2 X;//!<(1 , 0)
+		static const Vector2 Y;//!<(0 , 1)
+		static const Vector2 NX;//!<(-1, 0)
+		static const Vector2 NY;//!<(0 ,-1)
 
 		//! 向量加法
 		friend Vector2 operator+(const Vector2 &a, const Vector2 &b);
