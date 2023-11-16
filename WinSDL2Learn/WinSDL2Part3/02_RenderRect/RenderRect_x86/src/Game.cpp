@@ -1,7 +1,5 @@
-﻿//! @file Game.cpp
-
-#include	<SDL/SDL.h>
-#include	<Game.h>
+﻿#include<Game.h>
+#include "Setting.h"
 
 namespace Dungeon
 {
@@ -23,7 +21,9 @@ namespace Dungeon
 		}
 
 		// 窗口初始化
-		mWindow = SDL_CreateWindow("Dungeon", 400, 200, 640, 480, 0);
+		mWindow = SDL_CreateWindow(Dungeon::Window::WINDOW_TITLE,
+			SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+			Window::WINDOW_WIDTH, Window::WINDOW_HEIGHT, 0);
 		if (!mWindow)
 		{
 			SDL_Log("窗口初始化失败: %s", SDL_GetError());
@@ -91,6 +91,15 @@ namespace Dungeon
 		// 设置渲染器颜色（白）
 		SDL_SetRenderDrawColor(mRenderer, 255, 255, 255, 255);
 
+		// 绘制矩形
+		DrawRect();
+
+		// 交换缓冲区
+		SDL_RenderPresent(mRenderer);
+	}
+
+	void Game::DrawRect()
+	{
 		// 设置长方形的坐标以及宽高
 		SDL_Rect rect;
 		rect.x = 200;
@@ -99,8 +108,5 @@ namespace Dungeon
 		rect.h = 80;
 		// 绘制长方形
 		SDL_RenderFillRect(mRenderer, &rect);
-
-		// 交换缓冲区
-		SDL_RenderPresent(mRenderer);
 	}
 }
