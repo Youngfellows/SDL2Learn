@@ -1,17 +1,24 @@
-﻿//! @file Game.h
-
-#ifndef __Dungeon_Game__
+﻿#ifndef __Dungeon_Game__
 #define __Dungeon_Game__
 
-#include<string>
-#include<vector>
-#include<iostream>
-#include<algorithm>
+#include <string>
+#include <vector>
+#include <iostream>
+#include <algorithm>
 
 namespace Dungeon
 {
 	class Game
 	{
+	private:
+		std::vector<class GameObject *> mGameObjects;//!<游戏物体容器
+		std::vector<class GameObject *> mPendingObjects;//!<等待状态的游戏物体容器
+		struct SDL_Window *mWindow;//!<窗口
+		struct SDL_Renderer *mRenderer;//!<渲染器
+		bool mIsRunning;//!<运行状态
+		bool mIsUpdating;//!<是否在更新状态
+		struct SDL_Texture *mTexture;//!<图片
+
 	public:
 		//!	构造函数
 		Game();
@@ -42,16 +49,6 @@ namespace Dungeon
 		void UnloadData();
 		//!	加载贴图
 		void LoadTexture(const std::string fileName);
-
-		std::vector<class GameObject *> mGameObjects;//!<游戏物体容器
-		std::vector<class GameObject *> mPendingObjects;//!<等待状态的游戏物体容器
-
-		struct SDL_Window *mWindow;//!<窗口
-		struct SDL_Renderer *mRenderer;//!<渲染器
-		bool mIsRunning;//!<运行状态
-		bool mIsUpdating;//!<是否在更新状态
-
-		struct SDL_Texture *mTexture;//!<图片
 	};
 }
 

@@ -27,6 +27,9 @@
     <ClInclude Include="include\Math\Math.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="include\Setting.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Component.cpp">

@@ -1,9 +1,8 @@
-﻿//! @file Game.cpp
-
-#include<SDL/SDL.h>
-#include<SDL/SDL_image.h>
-#include<Game.h>
-#include<GameObject.h>
+﻿#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <Game.h>
+#include <GameObject.h>
+#include "Setting.h"
 
 namespace Dungeon
 {
@@ -27,7 +26,11 @@ namespace Dungeon
 		}
 
 		// 窗口初始化
-		mWindow = SDL_CreateWindow("Dungeon", 400, 200, 640, 480, 0);
+		//mWindow = SDL_CreateWindow("Dungeon", 400, 200, 640, 480, 0);
+		mWindow = SDL_CreateWindow(Window::WINDOW_TITLE,
+			SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+			Window::WINDOW_WIDTH, Window::WINDOW_HEIGHT,
+			0);
 		if (!mWindow)
 		{
 			SDL_Log("Failed to create window: %s", SDL_GetError());
@@ -191,7 +194,7 @@ namespace Dungeon
 
 	void Game::LoadData()
 	{
-		LoadTexture("sprites/yajyuu.jpg");
+		LoadTexture(Dungeon::Resources::JPG_YAYA_FILE_NAME);
 	}
 
 	void Game::UnloadData()
