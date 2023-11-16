@@ -1,8 +1,5 @@
-﻿//! @file Game.cpp
-
-#include	<SDL/SDL.h>
-#include	<SDL/SDL_image.h>
-#include	<Game.h>
+﻿#include<Game.h>
+#include "Setting.h"
 
 namespace Dungeon
 {
@@ -25,7 +22,11 @@ namespace Dungeon
 		}
 
 		// 窗口初始化
-		mWindow = SDL_CreateWindow("Dungeon", 400, 200, 640, 480, 0);
+		//mWindow = SDL_CreateWindow("Dungeon", 400, 200, 640, 480, 0);
+		mWindow = SDL_CreateWindow(Window::WINDOW_TITLE,
+			SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+			Window::WINDOW_WIDTH, Window::WINDOW_HEIGHT,
+			0);
 		if (!mWindow)
 		{
 			SDL_Log("Failed to create window: %s", SDL_GetError());
@@ -103,26 +104,39 @@ namespace Dungeon
 		// 清除缓冲区
 		SDL_RenderClear(mRenderer);
 
-		int textureW;
-		int textureH;
-		// 获取贴图的宽和高
-		SDL_QueryTexture(mTexture, nullptr, nullptr, &textureW, &textureH);
-
-		// 截取原图片（这里是完整截取）
-		SDL_Rect imageRect{ 0, 0, textureW, textureH };
-		// 图片目的地
-		SDL_Rect dstRect{ 130, 50, textureW, textureH };
-		//SDL_Rect dstRect{ 130, 50, 100, 100 };
-		// 将截取好的图片拷贝并填充至目的地的长方形中
-		SDL_RenderCopy(mRenderer, mTexture, &imageRect, &dstRect);
+		// 绘制图片
+		DrawImage();
 
 		// 交换缓冲区
 		SDL_RenderPresent(mRenderer);
 	}
 
+	void Game::DrawImage()
+	{
+		// 获取贴图的宽和高
+		int textureW;
+		int textureH;
+		SDL_QueryTexture(mTexture, nullptr, nullptr, &textureW, &textureH);
+
+		// 截取原图片（这里是完整截取）,如果图片太大,显示会超出Window窗口
+		SDL_Rect imageRect{ 0, 0, textureW, textureH };
+
+		// 截取图片,从左上角(100,100)开始截取150*200
+		//SDL_Rect imageRect{ 100, 100, 150, 200 };
+
+		// 图片目的地
+		SDL_Rect dstRect{ 50, 50, 150, 200 };//显示为150*200
+		//SDL_Rect dstRect{ 50, 50, textureW, textureH };//原图显示
+
+		// 将截取好的图片拷贝并填充至目的地的长方形中
+		SDL_RenderCopy(mRenderer, mTexture, &imageRect, &dstRect);//显示截取的部分
+
+		//SDL_RenderCopy(mRenderer, mTexture, nullptr, &dstRect);//完全显示,会缩放
+	}
+
 	void Game::LoadData()
 	{
-		LoadTexture("sprites/yajyuu.jpg");
+		LoadTexture(Dungeon::Resources::JPG_YAYA_FILE_NAME);
 	}
 
 	void Game::UnloadData()

@@ -3,43 +3,47 @@
 #ifndef __Dungeon_Game__
 #define __Dungeon_Game__
 
-#include	<string>
+#include<string>
+#include "SDL2/SDL.h"
+#include "SDL2/SDL_image.h"
 
 namespace Dungeon
 {
 	class Game
 	{
+	private:
+		SDL_Window *mWindow;//!<窗口
+		SDL_Renderer *mRenderer;//!<渲染器
+		bool mIsRunning;//!<运行状态
+		SDL_Texture *mTexture;//!<图片
+
 	public:
 		//!	构造函数
 		Game();
 
 		//!	初始化
-		bool	Initialize();
+		bool Initialize();
 		//!	主循环
-		void	Loop();
+		void Loop();
 		//!	游戏结束
-		void	Shutdown();
+		void Shutdown();
 
 	private:
 		//!	处理事件
-		void	Event();
+		void Event();
 		//!	更新各种状态
-		void	Update();
+		void Update();
 		//!	渲染
-		void	Draw();
+		void Draw();
 
 		//! 加载数据
-		void	LoadData();
+		void LoadData();
 		//!	释放数据
-		void	UnloadData();
+		void UnloadData();
 		//!	加载贴图
-		void	LoadTexture(const std::string fileName);
-
-		class SDL_Window *mWindow;		//!<	窗口
-		class SDL_Renderer *mRenderer;		//!<	渲染器
-		bool				mIsRunning;		//!<	运行状态
-
-		class SDL_Texture *mTexture;		//!<	图片
+		void LoadTexture(const std::string fileName);
+		//! 绘制图片
+		void DrawImage();
 	};
 }
 
