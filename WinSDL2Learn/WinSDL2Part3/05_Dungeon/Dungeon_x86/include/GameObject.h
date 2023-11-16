@@ -3,9 +3,9 @@
 #ifndef __Dungeon_GameObject__
 #define __Dungeon_GameObject__
 
-#include<string>
-#include<vector>
-#include<Math/Math.h>
+#include <string>
+#include <vector>
+#include <Math/Math.h>
 
 
 namespace Dungeon
