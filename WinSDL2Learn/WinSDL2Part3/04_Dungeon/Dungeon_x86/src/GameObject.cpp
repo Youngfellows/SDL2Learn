@@ -1,8 +1,6 @@
-﻿//! @file GameObject.cpp
-
-#include<GameObject.h>
-#include<Game.h>
-#include<Component.h>
+﻿#include <GameObject.h>
+#include <Game.h>
+#include <Component.h>
 
 namespace Dungeon
 {

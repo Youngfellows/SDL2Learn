@@ -3,8 +3,8 @@
 #ifndef __Dungeon_GameObject__
 #define __Dungeon_GameObject__
 
-#include<string>
-#include<vector>
+#include <string>
+#include <vector>
 
 namespace Dungeon
 {
@@ -18,6 +18,14 @@ namespace Dungeon
 			EDead
 		};
 
+	protected:
+		std::vector<class Component *>	mComponents;//!<组件数组
+
+	private:
+		class Game *mGame;//!<Game对象
+		State mState;//!<物体当前状态
+
+	public:
 		//! 构造函数
 		GameObject(class Game *game);
 		//! 析构函数
@@ -33,13 +41,6 @@ namespace Dungeon
 		//! 物体状态的get和set
 		State GetState() const;
 		void SetState(State state);
-
-	protected:
-		std::vector<class Component *>	mComponents;//!<组件数组
-
-	private:
-		class Game *mGame;//!<Game对象
-		State mState;//!<物体当前状态
 	};
 }
 
