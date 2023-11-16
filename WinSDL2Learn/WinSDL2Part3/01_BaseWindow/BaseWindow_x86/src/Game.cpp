@@ -1,7 +1,5 @@
-﻿//! @file Game.cpp
-
-#include	<SDL/SDL.h>
-#include	<Game.h>
+﻿#include<Game.h>
+#include "Setting.h"
 
 namespace Dungeon
 {
@@ -22,7 +20,11 @@ namespace Dungeon
 		}
 
 		// 窗口初始化
-		mWindow = SDL_CreateWindow("Dungeon", 400, 200, 600, 480, 0);
+		mWindow = SDL_CreateWindow(WINDOW_TITLE,
+			//400, 200,
+			SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+			WINDOW_WIDTH, WINDOW_HEIGHT,
+			0);
 		if (!mWindow)
 		{
 			SDL_Log("窗口初始化失败: %s", SDL_GetError());

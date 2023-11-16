@@ -3,31 +3,34 @@
 #ifndef __Dungeon_Game__
 #define __Dungeon_Game__
 
+#include "SDL2/SDL.h"
+
 namespace Dungeon
 {
 	class Game
 	{
+	private:
+		SDL_Window *mWindow;//!<窗口
+		bool mIsRunning;//!<运行状态
+
 	public:
 		//!	构造函数
 		Game();
 
 		//!	初始化
-		bool	Initialize();
+		bool Initialize();
 		//!	主循环
-		void	Loop();
+		void Loop();
 		//!	游戏结束
-		void	Shutdown();
+		void Shutdown();
 
 	private:
 		//!	处理事件
-		void	Event();
+		void Event();
 		//!	更新各种状态
-		void	Update();
+		void Update();
 		//!	渲染
-		void	Draw();
-
-		class SDL_Window *mWindow;		//!<	窗口
-		bool				mIsRunning;		//!<	运行状态
+		void Draw();
 	};
 }
 
