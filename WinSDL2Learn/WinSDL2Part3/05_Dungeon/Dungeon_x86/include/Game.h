@@ -49,6 +49,8 @@ namespace Dungeon
 		void UnloadData();
 		//!	加载贴图
 		void LoadTexture(const std::string fileName);
+		//! 绘制图片
+		void DrawImage();
 	};
 }
 

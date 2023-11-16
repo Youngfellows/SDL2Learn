@@ -176,6 +176,15 @@ namespace Dungeon
 		// 清除缓冲区
 		SDL_RenderClear(mRenderer);
 
+		// 绘制图片
+		DrawImage();
+
+		// 交换缓冲区
+		SDL_RenderPresent(mRenderer);
+	}
+
+	void Game::DrawImage()
+	{
 		int textureW;
 		int textureH;
 		// 获取贴图的宽和高
@@ -187,9 +196,6 @@ namespace Dungeon
 		SDL_Rect dstRect{ 130, 50, textureW, textureH };
 		// 将截取好的图片拷贝并填充至目的地的长方形中
 		SDL_RenderCopy(mRenderer, mTexture, &imageRect, &dstRect);
-
-		// 交换缓冲区
-		SDL_RenderPresent(mRenderer);
 	}
 
 	void Game::LoadData()
