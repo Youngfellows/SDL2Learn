@@ -17,10 +17,26 @@ github：https://github.com/scarsty/kys-cpp
 ## 如何编译
 
 Windows下建议先安装vcpkg，并在vcpkg目录中执行：
+
+- 使用国内镜像安装vcpkg
+
+```html
+https://gitee.com/mirrors/vcpkg
+git clone https://gitee.com/mirrors/vcpkg.git
+```
+
+- x64
+
 ```bat
 .\vcpkg install sdl2:x64-windows sdl2-image:x64-windows sdl2-ttf:x64-windows sdl2-mixer:x64-windows lua:x64-windows opencc:x64-windows sqlite3:x64-windows libiconv:x64-windows asio:x64-windows picosha2:x64-windows yaml-cpp:x64-windows libzip:x64-windows
 ```
+- x86
+```bat
+.\vcpkg install sdl2:x86-windows sdl2-image:x86-windows sdl2-ttf:x86-windows sdl2-mixer:x86-windows lua:x86-windows opencc:x86-windows sqlite3:x86-windows libiconv:x86-windows asio:x86-windows picosha2:x86-windows yaml-cpp:x86-windows libzip:x86-windows
+```
+
 建议执行：
+
 ```bat
 .\vcpkg.exe integrate install
 ```
