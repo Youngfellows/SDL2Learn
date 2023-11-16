@@ -1,4 +1,4 @@
-#ifndef  _DUNGEON_SETTING_H_
+#ifndef _DUNGEON_SETTING_H_
 #define _DUNGEON_SETTING_H_
 
 #include <string>
