@@ -9,6 +9,7 @@ namespace Dungeon
 	{
 		SpriteComponent *sprite = new SpriteComponent(this, 100);
 		sprite->SetTexture(GetGame()->GetTexture("player"));
+		//sprite->SetTexture(GetGame()->GetTexture(Dungeon::Role::PLAYER));
 		SetPosition(Vector2(288, 240));
 	}
 }

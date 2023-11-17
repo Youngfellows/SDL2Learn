@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <Math/Math.h>
+//#include "Setting.h"
 
 namespace Dungeon
 {
