@@ -3,7 +3,6 @@
 #include <Game.h>
 #include <Player.h>
 #include <SpriteComponent.h>
-#include "Setting.h"
 
 namespace Dungeon
 {
@@ -28,7 +27,7 @@ namespace Dungeon
 
 		// 窗口初始化
 		//mWindow = SDL_CreateWindow("Dungeon", 400, 200, 640, 480, 0);
-		mWindow = SDL_CreateWindow(Dungeon::Window::WINDOW_TITLE,
+		mWindow = SDL_CreateWindow(WINDOW_TITLE,
 			SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 			Dungeon::Window::WINDOW_WIDTH, Dungeon::Window::WINDOW_HEIGHT,
 			0);

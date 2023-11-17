@@ -6,6 +6,7 @@
 #include <unordered_map>
 #include <iostream>
 #include <algorithm>
+#include "Setting.h"
 
 //先声明结构体对象
 struct SDL_Window;

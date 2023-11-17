@@ -5,11 +5,12 @@
 
 namespace Dungeon
 {
+#define	WINDOW_TITLE "Dungeon"
+
 	namespace Window
 	{
 		const int WINDOW_WIDTH = 600;//窗口宽
 		const int WINDOW_HEIGHT = 600;//窗口高
-		const char *WINDOW_TITLE = "Dungeon";
 	}
 
 	namespace Resources
