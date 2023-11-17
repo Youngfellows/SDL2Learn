@@ -1,14 +1,15 @@
-﻿//! @file GameObject.h
-
-#ifndef __Dungeon_GameObject__
+﻿#ifndef __Dungeon_GameObject__
 #define __Dungeon_GameObject__
 
-#include<string>
-#include<vector>
-#include<Math/Math.h>
+#include <string>
+#include <vector>
+#include <Math/Math.h>
 
 namespace Dungeon
 {
+	/*
+	* 游戏对象
+	*/
 	class GameObject
 	{
 	public:
@@ -19,6 +20,17 @@ namespace Dungeon
 			EDead
 		};
 
+	protected:
+		std::vector<class Component *>	mComponents;//!<组件数组
+
+	private:
+		class Game *mGame;//!<Game对象
+		State mState;//!<物体当前状态
+		Vector2	mPosition;//!<位置坐标
+		Vector2	mScale;//!<缩放
+		float mRotation;//!<旋转
+
+	public:
 		//! 构造函数
 		GameObject(class Game *game);
 		//! 析构函数
@@ -59,16 +71,6 @@ namespace Dungeon
 		//! 旋转的get和set
 		float GetRotation() const;
 		void SetRotation(float r);
-
-	protected:
-		std::vector<class Component *>	mComponents;//!<组件数组
-
-	private:
-		Game *mGame;//!<Game对象
-		State mState;//!<物体当前状态
-		Vector2	mPosition;//!<位置坐标
-		Vector2	mScale;//!<缩放
-		float mRotation;//!<旋转
 	};
 }
 

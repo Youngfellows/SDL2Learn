@@ -1,10 +1,9 @@
-﻿//! @file Game.cpp
-
-#include<SDL/SDL.h>
-#include<SDL/SDL_image.h>
-#include<Game.h>
-#include<Player.h>
-#include<SpriteComponent.h>
+﻿#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <Game.h>
+#include <Player.h>
+#include <SpriteComponent.h>
+#include "Setting.h"
 
 namespace Dungeon
 {
@@ -28,7 +27,11 @@ namespace Dungeon
 		}
 
 		// 窗口初始化
-		mWindow = SDL_CreateWindow("Dungeon", 400, 200, 640, 480, 0);
+		//mWindow = SDL_CreateWindow("Dungeon", 400, 200, 640, 480, 0);
+		mWindow = SDL_CreateWindow(Dungeon::Window::WINDOW_TITLE,
+			SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+			Dungeon::Window::WINDOW_WIDTH, Dungeon::Window::WINDOW_HEIGHT,
+			0);
 		if (!mWindow)
 		{
 			SDL_Log("Failed to create window: %s", SDL_GetError());
@@ -218,7 +221,7 @@ namespace Dungeon
 
 	void Game::LoadData()
 	{
-		LoadTexture("sprites/chrA07.png", "player");
+		LoadTexture(Dungeon::Resources::PNG_CHARA07_FILE_NAME, Dungeon::Role::PLAYER);
 
 		mPlayer = new Player(this);
 	}

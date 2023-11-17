@@ -1,8 +1,6 @@
-//! @file Player.h
-
-#include<Player.h>
-#include<SpriteComponent.h>
-#include<Game.h>
+#include <Player.h>
+#include <SpriteComponent.h>
+#include <Game.h>
 
 namespace Dungeon
 {

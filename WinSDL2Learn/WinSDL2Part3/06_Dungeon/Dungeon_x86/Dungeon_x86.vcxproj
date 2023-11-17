@@ -137,6 +137,7 @@
     <ClInclude Include="include\GameObject.h" />
     <ClInclude Include="include\Math\Math.h" />
     <ClInclude Include="include\Player.h" />
+    <ClInclude Include="include\Setting.h" />
     <ClInclude Include="include\SpriteComponent.h" />
   </ItemGroup>
   <ItemGroup>

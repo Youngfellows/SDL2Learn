@@ -1,6 +1,4 @@
-//! @file Math.cpp
-
-#include<Math/Math.h>
+#include <Math/Math.h>
 
 namespace Dungeon
 {
