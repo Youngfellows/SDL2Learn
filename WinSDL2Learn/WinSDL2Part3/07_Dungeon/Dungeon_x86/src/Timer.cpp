@@ -1,5 +1,3 @@
-//! @file Timer.cpp
-
 #include<Timer.h>
 
 namespace Dungeon

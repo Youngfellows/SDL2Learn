@@ -1,9 +1,7 @@
-﻿//! @file MoveComponent.h
-
-#ifndef __Dungeon_MoveComponent__
+﻿#ifndef __Dungeon_MoveComponent__
 #define __Dungeon_MoveComponent__
 
-#include<Component.h>
+#include <Component.h>
 
 namespace Dungeon
 {
