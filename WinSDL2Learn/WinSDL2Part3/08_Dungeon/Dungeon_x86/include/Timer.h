@@ -1,6 +1,4 @@
-﻿//! @file Timer.h
-
-#ifndef __Dungeon_Timer__
+﻿#ifndef __Dungeon_Timer__
 #define __Dungeon_Timer__
 
 namespace Dungeon

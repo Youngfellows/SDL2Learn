@@ -1,13 +1,11 @@
-﻿//! @file Game.h
-
-#ifndef __Dungeon_Game__
+﻿#ifndef __Dungeon_Game__
 #define __Dungeon_Game__
 
-#include<string>
-#include<vector>
-#include<unordered_map>
-#include<iostream>
-#include<algorithm>
+#include <string>
+#include <vector>
+#include <unordered_map>
+#include <iostream>
+#include <algorithm>
 
 struct SDL_Window;
 struct SDL_Renderer;
@@ -21,6 +19,20 @@ namespace Dungeon
 
 	class Game
 	{
+	private:
+		std::vector<GameObject *> mGameObjects;	//!<游戏物体容器
+		std::vector<GameObject *> mPendingObjects;//!<等待状态的游戏物体容器
+		std::vector<SpriteComponent *> mSprites;//!<存放精灵的容器
+
+		std::unordered_map<std::string, SDL_Texture *> mTextures;//!<存放贴图的容器
+
+		SDL_Window *mWindow;//!<窗口
+		SDL_Renderer *mRenderer;//!<渲染器
+		bool mIsRunning;//!<运行状态
+		bool mIsUpdating;//!<是否在更新状态
+
+		Player *mPlayer;//!<玩家角色
+
 	public:
 		//!	构造函数
 		Game();
@@ -59,19 +71,6 @@ namespace Dungeon
 		void UnloadData();
 		//!	加载贴图并重命名
 		void LoadTexture(const std::string &fileName, const std::string &newName);
-
-		std::vector<GameObject *> mGameObjects;	//!<游戏物体容器
-		std::vector<GameObject *> mPendingObjects;//!<等待状态的游戏物体容器
-		std::vector<SpriteComponent *> mSprites;//!<存放精灵的容器
-
-		std::unordered_map<std::string, SDL_Texture *> mTextures;//!<存放贴图的容器
-
-		SDL_Window *mWindow;//!<窗口
-		SDL_Renderer *mRenderer;//!<渲染器
-		bool mIsRunning;//!<运行状态
-		bool mIsUpdating;//!<是否在更新状态
-
-		Player *mPlayer;//!<玩家角色
 	};
 }
 

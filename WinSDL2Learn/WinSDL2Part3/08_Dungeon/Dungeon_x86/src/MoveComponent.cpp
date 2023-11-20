@@ -1,8 +1,6 @@
-﻿//! @file MoveComponent.cpp
-
-#include<GameObject.h>
-#include<MoveComponent.h>
-#include<Timer.h>
+﻿#include <GameObject.h>
+#include <MoveComponent.h>
+#include <Timer.h>
 
 namespace Dungeon
 {

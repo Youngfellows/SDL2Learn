@@ -1,9 +1,8 @@
-﻿//! @file SpriteComponent.h
-
-#ifndef __Dungeon_SpriteComponent__
+﻿#ifndef __Dungeon_SpriteComponent__
 #define __Dungeon_SpriteComponent__
 
-#include<Component.h>
+#include <Component.h>
+#include <Component.h>
 
 struct SDL_Texture;
 struct SDL_Renderer;
@@ -14,6 +13,12 @@ namespace Dungeon
 
 	class SpriteComponent : public Component
 	{
+	protected:
+		SDL_Texture *mTexture;//!<贴图		
+		int	mDrawOrder;//!<绘制顺序
+		int	mTexWidth;//!<贴图宽
+		int	mTexHeight;//!<贴图高
+
 	public:
 		//! 构造函数
 		SpriteComponent(GameObject *gameObject, int drawOrder);
@@ -32,12 +37,6 @@ namespace Dungeon
 		//! 绘制顺序的get和set
 		int	GetDrawOrder() const;
 		void SetDrawOrder(int order);
-
-	protected:
-		SDL_Texture *mTexture;//!<贴图		
-		int	mDrawOrder;//!<绘制顺序
-		int	mTexWidth;//!<贴图宽
-		int	mTexHeight;//!<贴图高
 	};
 }
 
