@@ -1,10 +1,8 @@
-﻿//! @file MapComponent.h
-
-#ifndef __Dungeon_MapComponent__
+﻿#ifndef __Dungeon_MapComponent__
 #define __Dungeon_MapComponent__
 
-#include<SpriteComponent.h>
-#include<unordered_map>
+#include <SpriteComponent.h>
+#include <unordered_map>
 
 namespace Dungeon
 {

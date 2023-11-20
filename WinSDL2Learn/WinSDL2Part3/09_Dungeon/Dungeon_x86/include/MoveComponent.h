@@ -1,10 +1,8 @@
-﻿//! @file MoveComponent.h
-
-#ifndef __Dungeon_MoveComponent__
+﻿#ifndef __Dungeon_MoveComponent__
 #define __Dungeon_MoveComponent__
 
-#include<Component.h>
-#include<Math/Math.h>
+#include <Component.h>
+#include <Math/Math.h>
 
 namespace Dungeon
 {

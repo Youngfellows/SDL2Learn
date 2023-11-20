@@ -141,6 +141,7 @@
     <ClInclude Include="include\Math\Math.h" />
     <ClInclude Include="include\MoveComponent.h" />
     <ClInclude Include="include\Player.h" />
+    <ClInclude Include="include\Setting.h" />
     <ClInclude Include="include\SpriteComponent.h" />
     <ClInclude Include="include\Timer.h" />
   </ItemGroup>

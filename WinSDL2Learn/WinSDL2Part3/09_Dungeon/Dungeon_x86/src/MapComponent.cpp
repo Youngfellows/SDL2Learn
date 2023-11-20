@@ -1,8 +1,6 @@
-﻿//! @file MapComponent.cpp
-
-#include<GameObject.h>
-#include<MapComponent.h>
-#include<SDL/SDL.h>
+﻿#include <GameObject.h>
+#include <MapComponent.h>
+#include <SDL2/SDL.h>
 
 namespace Dungeon
 {

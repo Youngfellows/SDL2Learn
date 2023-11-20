@@ -1,9 +1,7 @@
-﻿//! @file Dungeon.h
-
-#ifndef __Dungeon_Dungeon__
+﻿#ifndef __Dungeon_Dungeon__
 #define __Dungeon_Dungeon__
 
-#include<GameObject.h>
+#include <GameObject.h>
 
 namespace Dungeon
 {
