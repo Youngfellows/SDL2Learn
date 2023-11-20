@@ -12,6 +12,13 @@ namespace Dungeon
 	{
 	}
 
+	/*
+	* 改变组件的方向
+	*	向左: A/左方向键
+	*	向右: D/右方向键
+	*	向上: W/上方向键
+	*	向下: S/下方向键
+	*/
 	void InputComponent::ProcessInput(const uint8_t *state)
 	{
 		MoveComponent *mc = mGameObject->GetComponent<MoveComponent>();
