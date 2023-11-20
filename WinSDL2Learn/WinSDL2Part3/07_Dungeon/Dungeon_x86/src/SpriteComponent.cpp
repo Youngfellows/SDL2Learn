@@ -1,7 +1,7 @@
 ﻿#include <SpriteComponent.h>
 #include <GameObject.h>
 #include <Game.h>
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 
 namespace Dungeon
 {
