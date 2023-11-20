@@ -1,10 +1,8 @@
-﻿//! @file Component.h
-
-#ifndef __Dungeon_Component__
+﻿#ifndef __Dungeon_Component__
 #define __Dungeon_Component__
 
-#include<string>
-#include<vector>
+#include <string>
+#include <vector>
 
 namespace Dungeon
 {

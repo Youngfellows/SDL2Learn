@@ -1,9 +1,7 @@
-﻿//! @file SpriteComponent.h
-
-#ifndef __Dungeon_SpriteComponent__
+﻿#ifndef __Dungeon_SpriteComponent__
 #define __Dungeon_SpriteComponent__
 
-#include<Component.h>
+#include <Component.h>
 
 struct SDL_Texture;
 struct SDL_Renderer;

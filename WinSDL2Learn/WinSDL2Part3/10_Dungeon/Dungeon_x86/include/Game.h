@@ -1,13 +1,11 @@
-﻿//! @file Game.h
-
-#ifndef __Dungeon_Game__
+﻿#ifndef __Dungeon_Game__
 #define __Dungeon_Game__
 
-#include<string>
-#include<vector>
-#include<unordered_map>
-#include<iostream>
-#include<algorithm>
+#include <string>
+#include <vector>
+#include <unordered_map>
+#include <iostream>
+#include <algorithm>
 
 struct SDL_Window;
 struct SDL_Renderer;

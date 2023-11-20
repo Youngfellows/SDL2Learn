@@ -1,9 +1,7 @@
-﻿//! @file InputComponent.h
-
-#ifndef __Dungeon_InputComponent__
+﻿#ifndef __Dungeon_InputComponent__
 #define __Dungeon_InputComponent__
 
-#include<Component.h>
+#include <Component.h>
 
 namespace Dungeon
 {

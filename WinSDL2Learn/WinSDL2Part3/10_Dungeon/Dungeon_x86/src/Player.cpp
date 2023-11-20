@@ -1,10 +1,9 @@
-//! @file Player.cpp
-
-#include<Player.h>
-#include<SpriteComponent.h>
-#include<MoveComponent.h>
-#include<InputComponent.h>
-#include<Game.h>
+#include <Player.h>
+#include <SpriteComponent.h>
+#include <MoveComponent.h>
+#include <InputComponent.h>
+#include <Game.h>
+#include "Setting.h"
 
 namespace Dungeon
 {
@@ -12,7 +11,8 @@ namespace Dungeon
 		GameObject(game)
 	{
 		SpriteComponent *sprite = new SpriteComponent(this, 100);
-		sprite->SetTexture(GetGame()->GetTexture("player"));
+		//sprite->SetTexture(GetGame()->GetTexture("player"));
+		sprite->SetTexture(GetGame()->GetTexture(Role::PLAYER));
 		SetPosition(Vector2(288, 224));
 		MoveComponent *moveComponent = new MoveComponent(this);
 		InputComponent *inputComponent = new InputComponent(this);

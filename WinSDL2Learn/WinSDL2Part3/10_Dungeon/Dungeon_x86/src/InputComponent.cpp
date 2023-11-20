@@ -1,9 +1,7 @@
-﻿//! @file InputComponent.cpp
-
-#include<InputComponent.h>
-#include<MoveComponent.h>
-#include<GameObject.h>
-#include<SDL/SDL_scancode.h>
+﻿#include <InputComponent.h>
+#include <MoveComponent.h>
+#include <GameObject.h>
+#include <SDL2/SDL_scancode.h>
 
 namespace Dungeon
 {

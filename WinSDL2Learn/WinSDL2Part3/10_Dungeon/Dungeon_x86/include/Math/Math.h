@@ -1,6 +1,4 @@
-﻿//! @file Math.h
-
-#ifndef __Dungeon_Math__
+﻿#ifndef __Dungeon_Math__
 #define __Dungeon_Math__
 
 namespace Dungeon
